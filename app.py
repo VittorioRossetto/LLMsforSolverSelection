@@ -17,6 +17,7 @@ def index():
     selected_problem = None
     prompt_type = 'full'
     prompt_text = None
+    selected_model = request.form.get('model', GEMINI_MODELS[0][0])
 
     if request.method == 'POST':
         selected_problem = request.form.get('problem')
@@ -33,7 +34,7 @@ def index():
 
         solver_prompt = SOLVER_PROMPT_NAME_ONLY if prompt_type == 'name' else SOLVER_PROMPT
         prompt_text = f"Description:\n{description}\n\nMiniZinc model:\n{script}\n\n{solver_prompt}"
-        response_text = query_gemini(prompt_text)
+        response_text = query_gemini(prompt_text, model_name=selected_model)
 
         # Optional: compare Gemini’s prediction with MiniZinc top 3
         if prompt_type == 'name' and selected_problem and selected_problem in problems:
@@ -44,7 +45,9 @@ def index():
                            response=response_text,
                            selected_problem=selected_problem,
                            prompt_type=prompt_type,
-                           prompt_text=prompt_text)
+                           prompt_text=prompt_text,
+                           gemini_models=GEMINI_MODELS,
+                           selected_model=selected_model)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,10 +1,18 @@
 import os
 import json
 import requests
+from google import genai
 
 # ---------- Configuration ----------
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
+GEMINI_MODELS = [
+    ("gemini-2.5-flash", "Gemini 2.5 Flash"),
+    ("gemini-2.5-pro", "Gemini 2.5 Pro"),
+    ("gemini-2.5-flash-lite", "Gemini 2.5 Flash Lite"),
+    ("gemini-2.0-flash", "Gemini 2.0 Flash"),
+    ("gemini-2.0-flash-lite", "Gemini 2.0 Flash Lite")
+]
 
 # ---------- Prompts ----------
 SOLVER_PROMPT = """The goal is to determine which constraint programming solver would be best suited for this problem, considering the following options:
@@ -31,6 +39,13 @@ Answer only with the name of the 3 best solvers, separated by comma and nothing 
 def load_problems(json_path: str):
     with open(json_path, "r") as f:
         return json.load(f)
+    
+
+def get_model_label(model_id):
+    for mid, label in GEMINI_MODELS:
+        if mid == model_id:
+            return label
+    return model_id
 
 def get_problem_script(problem_entry: dict):
     """Reads the MiniZinc model content, even if it's a file path."""
@@ -43,18 +58,14 @@ def get_problem_script(problem_entry: dict):
             return f"[Error reading {script}: {e}]"
     return script
 
-def query_gemini(prompt_text: str):
-    """Sends prompt to Gemini and returns the response text."""
-    payload = {
-        "contents": [{"parts": [{"text": prompt_text}]}]
-    }
-    response = requests.post(
-        f"{GEMINI_URL}?key={GEMINI_API_KEY}",
-        json=payload,
-        headers={'Content-Type': 'application/json'}
+def query_gemini(prompt_text: str, model_name: str = "gemini-2.5-flash"):
+    """Sends prompt to Gemini using the selected model and returns the response text."""
+    client = genai.Client()
+    response = client.models.generate_content(
+        model=model_name,
+        contents=prompt_text
     )
-    data = response.json()
-    return data.get('candidates', [{}])[0].get('content', {}).get('parts', [{}])[0].get('text', str(data))
+    return getattr(response, "text", str(response))
 
 def evaluate_response(selected_problem: str, response_text: str, problems: dict):
     """Evaluates Gemini's response against the known top 3 solvers."""

@@ -46,6 +46,15 @@
     <h2 class="mb-4 text-primary">Solver Recommendation</h2>
 
     <form method="post" class="mb-4" id="solver-form">
+      <!-- Gemini Model Selection -->
+      <div class="mb-3">
+        <label class="form-label fw-bold">Gemini Model:</label>
+        <select name="model" class="form-select mb-2">
+          {% for mid, label in gemini_models %}
+            <option value="{{ mid }}" {% if selected_model == mid %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
       <!-- Prompt Type -->
       <div class="mb-3">
         <label class="form-label fw-bold">Prompt Type:</label><br>
