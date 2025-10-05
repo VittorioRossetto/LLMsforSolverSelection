@@ -1,7 +1,10 @@
 import os
+from dotenv import load_dotenv
+load_dotenv()
 import json
 import requests
 from google import genai
+from groq import Groq
 
 # ---------- Configuration ----------
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -13,6 +16,24 @@ GEMINI_MODELS = [
     ("gemini-2.0-flash", "Gemini 2.0 Flash"),
     ("gemini-2.0-flash-lite", "Gemini 2.0 Flash Lite")
 ]
+
+# ---------- Groq Model Support ----------
+def load_groq_models(json_path="grok_models.json"):
+    """Loads Groq models from a JSON file and returns a list of (id, label) tuples."""
+    try:
+        with open(json_path, "r") as f:
+            data = json.load(f)
+        models = []
+        for entry in data.get("data", []):
+            model_id = entry.get("id")
+            label = model_id if model_id else "Unknown Model"
+            models.append((model_id, label))
+        return models
+    except Exception as e:
+        print(f"Error loading Groq models: {e}")
+        return []
+
+GROQ_MODELS = load_groq_models()
 
 # ---------- Prompts ----------
 SOLVER_PROMPT = """The goal is to determine which constraint programming solver would be best suited for this problem, considering the following options:
@@ -37,11 +58,13 @@ Answer only with the name of the 3 best solvers, separated by comma and nothing 
 
 # ---------- Utility Functions ----------
 def load_problems(json_path: str):
+    """Reads the json file containing problem descriptions."""
     with open(json_path, "r") as f:
         return json.load(f)
     
 
 def get_model_label(model_id):
+    """Returns the readable label for a given model ID."""
     for mid, label in GEMINI_MODELS:
         if mid == model_id:
             return label
@@ -67,18 +90,33 @@ def query_gemini(prompt_text: str, model_name: str = "gemini-2.5-flash"):
     )
     return getattr(response, "text", str(response))
 
+def get_groq_model_label(model_id):
+    for mid, label in GROQ_MODELS:
+        if mid == model_id:
+            return label
+    return model_id
+
+def query_groq(prompt_text: str, model_name: str = "llama-3-70b-versatile"):
+    """Sends prompt to Groq using the selected model and returns the response text."""
+    client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+    chat_completion = client.chat.completions.create(
+        messages=[{"role": "user", "content": prompt_text}],
+        model=model_name
+    )
+    return chat_completion.choices[0].message.content
+
 def evaluate_response(selected_problem: str, response_text: str, problems: dict):
     """Evaluates Gemini's response against the known top 3 solvers."""
     challenge_top3 = problems[selected_problem].get('top3_solvers', [])
-    gemini_top3 = [s.strip() for s in response_text.split(',') if s.strip()]
+    llm_top3 = [s.strip() for s in response_text.split(',') if s.strip()]
     
-    order_match = gemini_top3 == challenge_top3
-    order_match_count = sum(g == c for g, c in zip(gemini_top3, challenge_top3))
-    unordered_match_count = len(set(gemini_top3) & set(challenge_top3))
+    order_match = llm_top3 == challenge_top3
+    order_match_count = sum(g == c for g, c in zip(llm_top3, challenge_top3))
+    unordered_match_count = len(set(llm_top3) & set(challenge_top3))
     
     match_info = (
         f"<b>MiniZinc Challenge Top 3:</b> {', '.join(challenge_top3)}<br>"
-        f"<b>Gemini Top 3:</b> {', '.join(gemini_top3)}<br>"
+        f"<b>LLM's Top 3:</b> {', '.join(llm_top3)}<br>"
         f"<b>Exact order matches:</b> {order_match_count} / 3<br>"
         f"<b>Unordered matches:</b> {unordered_match_count} / 3"
     )

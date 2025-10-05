@@ -46,12 +46,29 @@
     <h2 class="mb-4 text-primary">Solver Recommendation</h2>
 
     <form method="post" class="mb-4" id="solver-form">
-      <!-- Gemini Model Selection -->
+      <!-- Provider Selection -->
       <div class="mb-3">
+        <label class="form-label fw-bold">Model Provider:</label>
+        <select name="provider" class="form-select mb-2" id="provider-select" onchange="toggleModelDropdown()">
+          <option value="gemini" {% if selected_provider == 'gemini' %}selected{% endif %}>Gemini</option>
+          <option value="groq" {% if selected_provider == 'groq' %}selected{% endif %}>Groq</option>
+        </select>
+      </div>
+      <!-- Gemini Model Selection -->
+      <div class="mb-3" id="gemini-model-group" {% if selected_provider != 'gemini' %}style="display:none;"{% endif %}>
         <label class="form-label fw-bold">Gemini Model:</label>
         <select name="model" class="form-select mb-2">
           {% for mid, label in gemini_models %}
-            <option value="{{ mid }}" {% if selected_model == mid %}selected{% endif %}>{{ label }}</option>
+            <option value="{{ mid }}" {% if selected_model == mid and selected_provider == 'gemini' %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <!-- Groq Model Selection -->
+      <div class="mb-3" id="groq-model-group" {% if selected_provider != 'groq' %}style="display:none;"{% endif %}>
+        <label class="form-label fw-bold">Groq Model:</label>
+        <select name="model" class="form-select mb-2">
+          {% for mid, label in groq_models %}
+            <option value="{{ mid }}" {% if selected_model == mid and selected_provider == 'groq' %}selected{% endif %}>{{ label }}</option>
           {% endfor %}
         </select>
       </div>
@@ -101,11 +118,11 @@
     <div class="card shadow-sm">
       <div class="card-body">
         <h5 class="card-title text-success">
-          LLM Response for <b>{{ selected_problem if selected_problem else 'Custom Problem' }}</b>
+          Response from <b>{{ selected_model }}</b> for <b>{{ selected_problem if selected_problem else 'Custom Problem' }}</b>
         </h5>
         <div class="card-text mt-3">{{ response | markdown | safe }}</div>
         <hr>
-        <h6 class="text-muted">Prompt Sent to LLM:</h6>
+        <h6 class="text-muted">Prompt Sent to <b>{{ selected_model }}</b>:</h6>
         <pre>{{ prompt_text }}</pre>
       </div>
     </div>
@@ -121,14 +138,36 @@
   <!-- Bootstrap JS (for buttons/animations) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Loading spinner logic -->
+  <!-- Loading spinner logic and provider/model toggle -->
   <script>
-    const form = document.getElementById('solver-form');
-    const overlay = document.getElementById('loading-overlay');
+  const form = document.getElementById('solver-form');
+  const overlay = document.getElementById('loading-overlay');
+  const providerSelect = document.getElementById('provider-select');
+  const geminiGroup = document.getElementById('gemini-model-group');
+  const groqGroup = document.getElementById('groq-model-group');
+  const geminiSelect = geminiGroup.querySelector('select');
+  const groqSelect = groqGroup.querySelector('select');
 
-    form.addEventListener('submit', () => {
-      overlay.style.display = 'flex';
-    });
-  </script>
+  form.addEventListener('submit', () => {
+    overlay.style.display = 'flex';
+  });
+
+  function toggleModelDropdown() {
+    if (providerSelect.value === 'gemini') {
+      geminiGroup.style.display = '';
+      groqGroup.style.display = 'none';
+      geminiSelect.disabled = false;
+      groqSelect.disabled = true;
+    } else {
+      geminiGroup.style.display = 'none';
+      groqGroup.style.display = '';
+      geminiSelect.disabled = true;
+      groqSelect.disabled = false;
+    }
+  }
+
+  // On page load, ensure correct dropdown is shown and enabled/disabled
+  toggleModelDropdown();
+</script>
 </body>
 </html>

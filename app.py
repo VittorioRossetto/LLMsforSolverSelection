@@ -1,7 +1,10 @@
 from flask import Flask, request, render_template
+import logging
 import markdown as md
 from utils import *
 
+# Setup logging
+logging.basicConfig(level=logging.INFO)
 app = Flask(__name__)
 # Markdown filter for Jinja2
 @app.template_filter('markdown')
@@ -17,9 +20,25 @@ def index():
     selected_problem = None
     prompt_type = 'full'
     prompt_text = None
-    selected_model = request.form.get('model', GEMINI_MODELS[0][0])
+    selected_provider = 'gemini'
+    selected_model = GEMINI_MODELS[0][0]
 
     if request.method == 'POST':
+        logging.info(f"Raw form data: {dict(request.form)}")
+        selected_provider = request.form.get('provider', 'gemini')
+        # Get model from the correct dropdown
+        model_from_form = request.form.get('model')
+        logging.info(f"Model from form: {model_from_form}")
+        if selected_provider == 'gemini':
+            selected_model = model_from_form if model_from_form in [m[0] for m in GEMINI_MODELS] else GEMINI_MODELS[0][0]
+        elif selected_provider == 'groq':
+            selected_model = model_from_form if model_from_form in [m[0] for m in GROQ_MODELS] else GROQ_MODELS[0][0]
+        else:
+            selected_model = GEMINI_MODELS[0][0]
+
+        logging.info(f"Provider selected: {selected_provider}")
+        logging.info(f"Model selected: {selected_model}")
+
         selected_problem = request.form.get('problem')
         prompt_type = request.form.get('prompt_type', 'full')
         custom_description = request.form.get('custom_description', '').strip()
@@ -34,12 +53,23 @@ def index():
 
         solver_prompt = SOLVER_PROMPT_NAME_ONLY if prompt_type == 'name' else SOLVER_PROMPT
         prompt_text = f"Description:\n{description}\n\nMiniZinc model:\n{script}\n\n{solver_prompt}"
-        response_text = query_gemini(prompt_text, model_name=selected_model)
+
+        if selected_provider == 'gemini':
+            response_text = query_gemini(prompt_text, model_name=selected_model)
+        elif selected_provider == 'groq':
+            response_text = query_groq(prompt_text, model_name=selected_model)
+        else:
+            response_text = f"[Unknown provider: {selected_provider}]"
 
         # Optional: compare Gemini’s prediction with MiniZinc top 3
         if prompt_type == 'name' and selected_problem and selected_problem in problems:
             response_text = evaluate_response(selected_problem, response_text, problems)
-            
+
+    else:
+        logging.info("GET request: Initial state")
+        logging.info(f"Provider default: {selected_provider}")
+        logging.info(f"Model default: {selected_model}")
+
     return render_template('index.html',
                            problems=problems,
                            response=response_text,
@@ -47,7 +77,9 @@ def index():
                            prompt_type=prompt_type,
                            prompt_text=prompt_text,
                            gemini_models=GEMINI_MODELS,
-                           selected_model=selected_model)
+                           groq_models=GROQ_MODELS,
+                           selected_model=selected_model,
+                           selected_provider=selected_provider)
 
 if __name__ == '__main__':
     app.run(debug=True)
