@@ -27,14 +27,7 @@ def index():
         logging.info(f"Raw form data: {dict(request.form)}")
         selected_provider = request.form.get('provider', 'gemini')
         # Get model from the correct dropdown
-        model_from_form = request.form.get('model')
-        logging.info(f"Model from form: {model_from_form}")
-        if selected_provider == 'gemini':
-            selected_model = model_from_form if model_from_form in [m[0] for m in GEMINI_MODELS] else GEMINI_MODELS[0][0]
-        elif selected_provider == 'groq':
-            selected_model = model_from_form if model_from_form in [m[0] for m in GROQ_MODELS] else GROQ_MODELS[0][0]
-        else:
-            selected_model = GEMINI_MODELS[0][0]
+        selected_model = request.form.get('model')
 
         logging.info(f"Provider selected: {selected_provider}")
         logging.info(f"Model selected: {selected_model}")

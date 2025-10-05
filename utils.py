@@ -121,8 +121,12 @@ def evaluate_response(selected_problem: str, response_text: str, problems: dict)
         f"<b>Unordered matches:</b> {unordered_match_count} / 3"
     )
     if order_match:
-        match_info += "<br><b>Order is correct!</b>"
-    else:
+        match_info += "<br><b>Suggestion is correct!</b>"
+    elif not order_match and unordered_match_count == 3:
         match_info += "<br><b>Order is incorrect.</b>"
-    
+    elif unordered_match_count > 0 and unordered_match_count < 3:
+        match_info += "<br><b>Suggestion is partially correct.</b>"
+    else:
+        match_info += "<br><b>No matches found, incorrect suggestion.</b>"
+
     return match_info
