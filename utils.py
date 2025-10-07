@@ -5,6 +5,7 @@ import json
 import requests
 from google import genai
 from groq import Groq
+import re
 
 # ---------- Configuration ----------
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -54,7 +55,7 @@ SOLVER_PROMPT_NAME_ONLY = """The goal is to determine which constraint programmi
 - HiGHS
 - COIN-BC
 
-Answer only with the name of the 3 best solvers, separated by comma and nothing else."""
+Answer only with the name of the 3 best solvers inside square brackets separated by comma and nothing else."""
 
 # ---------- Utility Functions ----------
 def load_problems(json_path: str):
@@ -108,9 +109,18 @@ def query_groq(prompt_text: str, model_name: str = "llama-3-70b-versatile"):
 def evaluate_response(selected_problem: str, response_text: str, problems: dict):
     """Evaluates Gemini's response against the known top 3 solvers."""
     challenge_top3 = problems[selected_problem].get('top3_solvers', [])
-    llm_top3 = [s.strip() for s in response_text.split(',') if s.strip()]
-    
+    # Extract the top 3 solvers from the response, which is expected in the format [s1,s2,s3]
+    match = re.search(r"\[([^\]]+)\]", response_text)
+    if match:
+        llm_top3 = [s.strip() for s in match.group(1).split(',')]
+    else:
+        llm_top3 = []
+    # log the extracted top 3 for debugging
+    print(f"LLM Top 3: {llm_top3}")
+    print(f"Challenge Top 3: {challenge_top3}")
+
     order_match = llm_top3 == challenge_top3
+    
     order_match_count = sum(g == c for g, c in zip(llm_top3, challenge_top3))
     unordered_match_count = len(set(llm_top3) & set(challenge_top3))
     
