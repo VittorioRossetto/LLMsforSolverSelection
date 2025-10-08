@@ -116,6 +116,7 @@ def evaluate_response(selected_problem: str, response_text: str, problems: dict)
     else:
         llm_top3 = []
     # log the extracted top 3 for debugging
+    print(f"LLM Response: {response_text}")
     print(f"LLM Top 3: {llm_top3}")
     print(f"Challenge Top 3: {challenge_top3}")
 

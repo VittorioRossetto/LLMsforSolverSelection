@@ -1,0 +1,1361 @@
+{
+  "gemini": {
+    "gemini-2.5-flash": {
+      "atsp": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "black-hole": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "carpet-cutting": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "cgt": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "EchoSched": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "fbd1": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "groupsplitter": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "gt-sort": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "hitori": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "ihtc-2024-kletzander": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "ihtc-2024-marte": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "is": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "mondoku": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "products-and-shelves": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "proteindesign12": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "skill-allocation": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "stripboard": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "tower": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "tsptw": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "work-task-variation": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ]
+    },
+    "gemini-2.5-pro": {
+      "atsp": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ]
+    },
+    "gemini-2.5-flash-lite": {
+      "atsp": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "black-hole": [
+        "Gecode",
+        "OR-Tools CP-SAT",
+        "Chuffed"
+      ],
+      "carpet-cutting": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "cgt": [
+        "Gecode",
+        "OR-Tools CP-SAT",
+        "Chuffed"
+      ],
+      "EchoSched": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "fbd1": [
+        "Gecode",
+        "OR-Tools CP-SAT",
+        "Chuffed"
+      ],
+      "groupsplitter": [
+        "Gecode",
+        "OR-Tools CP-SAT",
+        "Chuffed"
+      ],
+      "gt-sort": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "hitori": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "ihtc-2024-kletzander": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "ihtc-2024-marte": [
+        "Gecode",
+        "OR-Tools CP-SAT",
+        "Chuffed"
+      ],
+      "is": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "mondoku": [
+        "Gecode",
+        "OR-Tools CP-SAT",
+        "Chuffed"
+      ],
+      "products-and-shelves": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "proteindesign12": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "skill-allocation": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ]
+    },
+    "gemini-2.0-flash": {
+      "atsp": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "black-hole": [
+        "Gecode",
+        "OR-Tools CP-SAT",
+        "Chuffed"
+      ],
+      "carpet-cutting": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "cgt": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "EchoSched": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "fbd1": [
+        "Gecode",
+        "OR-Tools CP-SAT",
+        "Chuffed"
+      ],
+      "groupsplitter": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "gt-sort": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "hitori": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "ihtc-2024-kletzander": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "ihtc-2024-marte": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "is": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "mondoku": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "products-and-shelves": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "proteindesign12": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ]
+    },
+    "gemini-2.0-flash-lite": {
+      "atsp": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "black-hole": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "carpet-cutting": [
+        "Gecode",
+        "OR-Tools CP-SAT",
+        "Chuffed"
+      ],
+      "cgt": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "EchoSched": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "fbd1": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "groupsplitter": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "gt-sort": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "hitori": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "ihtc-2024-kletzander": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "ihtc-2024-marte": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "is": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "mondoku": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "products-and-shelves": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "proteindesign12": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "skill-allocation": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "stripboard": [
+        "Gecode",
+        "OR-Tools CP-SAT",
+        "Chuffed"
+      ],
+      "tower": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "tsptw": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "work-task-variation": [
+        "Gecode",
+        "OR-Tools CP-SAT",
+        "Chuffed"
+      ]
+    }
+  },
+  "groq": {
+    "moonshotai/kimi-k2-instruct-0905": {
+      "atsp": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "black-hole": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "carpet-cutting": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "cgt": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "EchoSched": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "fbd1": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "groupsplitter": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "gt-sort": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "hitori": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "ihtc-2024-kletzander": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "ihtc-2024-marte": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "is": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "mondoku": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "products-and-shelves": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "proteindesign12": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "skill-allocation": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "stripboard": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "tower": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "tsptw": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "work-task-variation": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ]
+    },
+    "deepseek-r1-distill-llama-70b": {
+      "atsp": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "black-hole": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "carpet-cutting": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "cgt": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "EchoSched": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "fbd1": [
+        "i"
+      ],
+      "groupsplitter": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "gt-sort": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "hitori": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "ihtc-2024-kletzander": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ]
+    },
+    "moonshotai/kimi-k2-instruct": {
+      "atsp": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "black-hole": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "carpet-cutting": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "cgt": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "EchoSched": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "fbd1": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "groupsplitter": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "gt-sort": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "hitori": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "ihtc-2024-kletzander": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "ihtc-2024-marte": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "is": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "mondoku": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "products-and-shelves": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "proteindesign12": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "skill-allocation": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "stripboard": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "tower": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "tsptw": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "work-task-variation": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ]
+    },
+    "groq/compound": {
+      "atsp": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ]
+    },
+    "meta-llama/llama-4-maverick-17b-128e-instruct": {
+      "atsp": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "G Page Page Page Page Page Page info was truncated dueBrowser"
+      ],
+      "black-hole": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "carpet-cutting": [
+        "G Pagecek is odd enough",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "cgt": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "EchoSched": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "fbd1": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "groupsplitter": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "gt-sort": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "hitori": [
+        "Gecode",
+        "Ch coordin Page era",
+        "OR-Tools CP-SAT"
+      ],
+      "ihtc-2024-kletzander": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-S Page not found"
+      ]
+    },
+    "qwen/qwen3-32b": {
+      "atsp": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "black-hole": [
+        "Gecode",
+        "OR-Tools CP-SAT",
+        "Chuffed"
+      ],
+      "carpet-cutting": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "cgt": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "EchoSched": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "fbd1": [
+        "Gecode",
+        "OR-Tools CP-SAT",
+        "Chuffed"
+      ],
+      "groupsplitter": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "gt-sort": [
+        "1",
+        ".."
+      ],
+      "hitori": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "ihtc-2024-kletzander": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ]
+    },
+    "meta-llama/llama-4-scout-17b-16e-instruct": {
+      "atsp": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "black-hole": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "carpet-cutting": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "cgt": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "EchoSched": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "fbd1": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "groupsplitter": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "gt-sort": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "hitori": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "ihtc-2024-kletzander": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "ihtc-2024-marte": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "is": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "mondoku": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "products-and-shelves": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "proteindesign12": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "skill-allocation": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "stripboard": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "tower": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "tsptw": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "work-task-variation": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ]
+    },
+    "meta-llama/llama-guard-4-12b": {
+      "atsp": [],
+      "black-hole": [],
+      "carpet-cutting": [],
+      "cgt": [],
+      "EchoSched": [],
+      "fbd1": [],
+      "groupsplitter": [],
+      "gt-sort": [],
+      "hitori": [],
+      "ihtc-2024-kletzander": [],
+      "ihtc-2024-marte": [],
+      "is": [],
+      "mondoku": [],
+      "products-and-shelves": [],
+      "proteindesign12": [],
+      "skill-allocation": [],
+      "stripboard": [],
+      "tower": [],
+      "tsptw": [],
+      "work-task-variation": []
+    },
+    "llama-3.1-8b-instant": {
+      "atsp": [
+        "OR-Tools CP-SAT",
+        "HiGHS",
+        "COIN-BC"
+      ],
+      "black-hole": [
+        "Gecode",
+        "OR-Tools CP-SAT",
+        "Chuffed"
+      ],
+      "carpet-cutting": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "cgt": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "EchoSched": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "fbd1": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "groupsplitter": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "gt-sort": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "hitori": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "ihtc-2024-kletzander": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ]
+    },
+    "allam-2-7b": {
+      "atsp": [
+        "line_setsize();\n 9 115\nmin(total_job_moulds[i",
+        "k",
+        "l",
+        "h::{array1() search["
+      ]
+    },
+    "openai/gpt-oss-20b": {
+      "atsp": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "black-hole": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "carpet-cutting": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "cgt": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "EchoSched": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "fbd1": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "groupsplitter": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "gt-sort": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "hitori": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "ihtc-2024-kletzander": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "ihtc-2024-marte": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "is": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "mondoku": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "products-and-shelves": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "proteindesign12": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "skill-allocation": [
+        "OR-Tools CP-SAT",
+        "Gecode",
+        "Chuffed"
+      ],
+      "stripboard": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "tower": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "tsptw": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "work-task-variation": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ]
+    },
+    "gemma2-9b-it": {
+      "atsp": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "black-hole": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "carpet-cutting": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "cgt": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "EchoSched": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "fbd1": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "groupsplitter": [
+        "Gecode",
+        "OR-Tools CP-SAT",
+        "Chuffed"
+      ],
+      "gt-sort": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "hitori": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "ihtc-2024-kletzander": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "ihtc-2024-marte": [],
+      "is": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools",
+        "HiGHS"
+      ],
+      "mondoku": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "products-and-shelves": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "proteindesign12": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "skill-allocation": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "stripboard": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "tower": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "tsptw": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "work-task-variation": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ]
+    },
+    "groq/compound-mini": {
+      "atsp": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "black-hole": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "carpet-cutting": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "cgt": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "EchoSched": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "fbd1": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ]
+    },
+    "openai/gpt-oss-120b": {
+      "atsp": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "black-hole": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "carpet-cutting": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "cgt": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "EchoSched": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "fbd1": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "groupsplitter": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "gt-sort": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "hitori": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP\u2011SAT"
+      ],
+      "ihtc-2024-kletzander": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "ihtc-2024-marte": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "is": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "mondoku": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "products-and-shelves": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "proteindesign12": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "skill-allocation": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "stripboard": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "tower": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "tsptw": [
+        "Chuffed",
+        "OR-Tools CP-SAT",
+        "Gecode"
+      ],
+      "work-task-variation": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ]
+    },
+    "llama-3.3-70b-versatile": {
+      "atsp": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "black-hole": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "carpet-cutting": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "cgt": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "EchoSched": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "fbd1": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "groupsplitter": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "gt-sort": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "hitori": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "ihtc-2024-kletzander": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "ihtc-2024-marte": [
+        "Gecode",
+        "Chuffed",
+        "OR-Tools CP-SAT"
+      ],
+      "is": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "mondoku": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "products-and-shelves": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "proteindesign12": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "skill-allocation": [
+        "OR-Tools CP-SAT",
+        "Chuffed",
+        "Gecode"
+      ],
+      "stripboard": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "tower": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "tsptw": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ],
+      "work-task-variation": [
+        "Chuffed",
+        "Gecode",
+        "OR-Tools CP-SAT"
+      ]
+    }
+  }
+}
