@@ -34,8 +34,10 @@ def index():
 
         selected_problem = request.form.get('problem')
         prompt_type = request.form.get('prompt_type', 'full')
+
         custom_description = request.form.get('custom_description', '').strip()
         custom_model = request.form.get('custom_model', '').strip()
+        include_description = request.form.get('include_description') == 'yes'
 
         if custom_description and custom_model:
             description, script = custom_description, custom_model
@@ -45,7 +47,10 @@ def index():
             script = get_problem_script(prob)
 
         solver_prompt = SOLVER_PROMPT_NAME_ONLY if prompt_type == 'name' else SOLVER_PROMPT
-        prompt_text = f"Description:\n{description}\n\nMiniZinc model:\n{script}\n\n{solver_prompt}"
+        if include_description:
+            prompt_text = f"Description:\n{description}\n\nMiniZinc model:\n{script}\n\n{solver_prompt}"
+        else:
+            prompt_text = f"MiniZinc model:\n{script}\n\n{solver_prompt}"
 
         if selected_provider == 'gemini':
             response_text = query_gemini(prompt_text, model_name=selected_model)

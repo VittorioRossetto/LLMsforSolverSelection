@@ -72,7 +72,7 @@
           {% endfor %}
         </select>
       </div>
-      <!-- Prompt Type -->
+      <!-- Prompt Type and Description Switch -->
       <div class="mb-3">
         <label class="form-label fw-bold">Prompt Type:</label><br>
         <div class="form-check form-check-inline">
@@ -84,6 +84,10 @@
           <input class="form-check-input" type="radio" name="prompt_type" value="name"
                  {% if prompt_type == 'name' %}checked{% endif %}>
           <label class="form-check-label">Solver Name Only</label>
+        </div>
+        <div class="form-check form-switch ms-4">
+          <input class="form-check-input" type="checkbox" id="include_description" name="include_description" value="yes" {% if request.form.include_description == 'yes' %}checked{% endif %}>
+          <label class="form-check-label" for="include_description">Include Problem Description</label>
         </div>
       </div>
 
