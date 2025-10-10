@@ -3,6 +3,10 @@ import time
 import re
 from utils import *
 
+# NON TESTABLE MODELS: playai-tts, playai-tts-arabic, whisper-large-v3, deepseek-r1-distill-llama-70b, gemini-2.0-flash-lite, gemma2-9b-it, whisper-large-v3-turbo
+# IGNORE DUE TO LIMITED REQUESTS: meta-llama/llama-prompt-guard-2-22m, meta-llama/llama-prompt-guard-2-86m
+# VERY LIMITED: allam-2-7b
+
 # Load all problems
 dataset_path = "mznc2025_probs/problems_with_descriptions.json"
 problems = load_problems(dataset_path)
@@ -67,7 +71,9 @@ for provider, models, query_func in [
 
             prompt = f"\n\nMiniZinc model:\n{script}\n\n{SOLVER_PROMPT_NAME_ONLY}"
 
+
             retry_count = 0
+            skip_problem = False
             while True:
                 try:
                     response = query_func(prompt, model_name=model_id)
@@ -77,12 +83,20 @@ for provider, models, query_func in [
                     print(f"  ERROR for model {model_id} on problem {prob_key}: {err_text}")
 
                     should_retry, delay, is_503_like = handle_api_error(e)
+                    is_413 = "413" in err_text or "request too large" in err_text.lower() or "context_length" in err_text.lower()
+                    retry_count += 1 if should_retry else 0
+
+                    # If 503/unavailable/overloaded, skip model after 3 tries
+                    if is_503_like and retry_count > 3:
+                        print(f"503 error persisted after 3 retries — skipping model {model_id}.")
+                        skip_model = True
+                        break
+                    # If 413/request too large, skip this problem after 3 tries
+                    if is_413 and retry_count > 3:
+                        print(f"413 error (request too large) persisted after 3 retries — skipping problem {prob_key} for model {model_id}.")
+                        skip_problem = True
+                        break
                     if should_retry:
-                        retry_count += 1
-                        if is_503_like and retry_count > 3:
-                            print(f"503 error persisted after 3 retries — skipping model {model_id}.")
-                            skip_model = True
-                            break
                         print(f"  → Retrying {prob_key} (attempt {retry_count}) after {delay:.1f}s...")
                         time.sleep(delay)
                         continue  # retry same problem
@@ -93,6 +107,10 @@ for provider, models, query_func in [
 
             if skip_model:
                 break  # skip rest of problems for this model
+            if skip_problem:
+                print(f"  Skipped problem {prob_key} for model {model_id} due to persistent 413 error.")
+                i += 1
+                continue
 
             # Parse solver names
             match = re.search(r"\[([^\]]+)\]", response)
