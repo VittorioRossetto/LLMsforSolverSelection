@@ -8,7 +8,7 @@ from utils import *
 # VERY LIMITED: allam-2-7b
 
 # Load all problems
-dataset_path = "mznc2025_probs/problems_with_descriptions.json"
+dataset_path = "../mznc2025_probs/problems_with_descriptions.json"
 problems = load_problems(dataset_path)
 
 results = {}
