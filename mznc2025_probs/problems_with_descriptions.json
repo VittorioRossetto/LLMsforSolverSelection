@@ -2,101 +2,121 @@
   "atsp": {
     "description": "Scheduling and resource allocation problem involving moulds, colors, and production jobs. The goal is to minimize makespan, tardiness, and waste while respecting compatibility and demand constraints.",
     "script": "./mznc2025_probs/atsp/atsp.mzn",
+    "script_commented": "./mznc2025_probs/atsp/atsp_commented.mzn",
     "top3_solvers": ["OR-Tools CP-SAT","COIN-BC", "Gecode"]
   },
   "black-hole": {
     "description": "A constraint model for solving the Black Hole Patience solitaire game. Cards must be arranged so that the sequence follows game rules using global constraints.",
     "script": "./mznc2025_probs/black-hole/black-hole.mzn",
+    "script_commented": "./mznc2025_probs/black-hole/black-hole_commented.mzn",
     "top3_solvers": ["Chuffed","OR-Tools CP-SAT", "Gecode"]
   },
   "carpet-cutting": {
     "description": "Optimizes cutting shapes from a carpet roll to minimize wasted material. Models length usage and layout constraints.",
     "script": "./mznc2025_probs/carpet-cutting/cc_base.mzn",
+    "script_commented": "./mznc2025_probs/carpet-cutting/cc_base_commented.mzn",
     "top3_solvers": ["OR-Tools CP-SAT", "Chuffed", "HiGHS"]
   },
   "cgt": {
     "description": "Optimizes taxation outcomes under the Australian Capital Gains Tax system. Decides buy/sell strategies for stocks to minimize tax liability.",
     "script": "./mznc2025_probs/cgt/cgt.mzn",
+    "script_commented": "./mznc2025_probs/cgt/cgt_commented.mzn",
     "top3_solvers": ["OR-Tools CP-SAT", "Gecode", "Chuffed"]
   },
   "EchoSched": {
     "description": "A job-shop scheduling problem with precedence and energy constraints. The objective balances makespan and energy consumption across machines.",
     "script": "./mznc2025_probs/EchoSched/JSP0.mzn",
+    "script_commented": "./mznc2025_probs/EchoSched/JSP0_commented.mzn",
     "top3_solvers": ["OR-Tools CP-SAT","Chuffed", "HiGHS"]
   },
   "fbd1": {
     "description": "Designs foldover balanced designs (FBD1) used in experimental design. Finds minimal design sizes with strictly increasing factor allocations.",
     "script": "./mznc2025_probs/fbd1/FBD1.mzn",
+    "script_commented": "./mznc2025_probs/fbd1/FBD1_commented.mzn",
     "top3_solvers": ["Gecode", "OR-Tools CP-SAT", "Chuffed"]
   },
   "groupsplitter": {
     "description": "Splits people into subgroups for sequential activities (cinema, restaurant). Matches preferences to recommend groupings that maximize satisfaction.",
     "script": "./mznc2025_probs/groupsplitter/group.mzn",
+    "script_commented": "./mznc2025_probs/groupsplitter/group_commented.mzn",
     "top3_solvers": ["OR-Tools CP-SAT", "Chuffed", "Gecode"]
   },
   "gt-sort": {
     "description": "Sorting and selection optimization with layered set variables. Tests constraints over sorted values with tunable parameters.",
     "script": "./mznc2025_probs/gt-sort/gt-sort.mzn",
+    "script_commented": "./mznc2025_probs/gt-sort/gt-sort_commented.mzn",
     "top3_solvers": ["Gecode", "Chuffed", "OR-Tools CP-SAT"]
   },
   "hitori": {
     "description": "A solver for the Hitori puzzle. Fills squares in a grid under rules preventing duplicate numbers in rows/columns and enforcing connectivity.",
     "script": "./mznc2025_probs/hitori/hitori.mzn",
+    "script_commented": "./mznc2025_probs/hitori/hitori_commented.mzn",
     "top3_solvers": ["Chuffed", "OR-Tools CP-SAT", "HiGHS"]
   },
   "ihtc-2024-kletzander": {
     "description": "Integrated Healthcare Timetabling model. Assigns patients to rooms and schedules surgeries while handling incompatibilities, stays, and resource limits.",
     "script": "./mznc2025_probs/ihtc-2024-kletzander/model4_opt.mzn",
+    "script_commented": "./mznc2025_probs/ihtc-2024-kletzander/model4_opt_commented.mzn",
     "top3_solvers": ["OR-Tools CP-SAT", "Chuffed", "Gecode"]
   },
   "ihtc-2024-marte": {
     "description": "Another Integrated Healthcare Timetabling competition model. Uses cumulative and packing constraints to assign shifts, rooms, and workloads.",
     "script": "./mznc2025_probs/ihtc-2024-marte/model.mzn",
+    "script_commented": "./mznc2025_probs/ihtc-2024-marte/model_commented.mzn",
     "top3_solvers": ["OR-Tools CP-SAT","Gecode", "Chuffed"]
   },
   "is": {
     "description": "Instruction scheduling problem from compiler optimization. Assigns operations to processor resources while respecting dependencies and execution frequencies.",
     "script": "./mznc2025_probs/is/model.mzn",
+    "script_commented": "./mznc2025_probs/is/model_commented.mzn",
     "top3_solvers": ["Gecode", "OR-Tools CP-SAT", "Chuffed"]
   },
   "mondoku": {
     "description": "Solver for Mondoku, a generative art/puzzle variant of Sudoku. Ensures each row/column uses all colors but only within specific groups, balancing frequency of colors.",
     "script": "./mznc2025_probs/mondoku/mondoku-gcc-model-balance.mzn",
+    "script_commented": "./mznc2025_probs/mondoku/mondoku-gcc-model-balance_commented.mzn",
     "top3_solvers": ["Gecode", "Chuffed", "OR-Tools CP-SAT"]
   },
   "products-and-shelves": {
     "description": "3D bin-packing problem for warehouse shelving. Places products on shelves to minimize the number of shelves used, without rotations.",
     "script": "./mznc2025_probs/products-and-shelves/products-and-shelves.mzn",
+    "script_commented": "./mznc2025_probs/products-and-shelves/products-and-shelves_commented.mzn",
     "top3_solvers": ["Chuffed", "OR-Tools CP-SAT", "HiGHS"]
   },
   "proteindesign12": {
     "description": "Weighted Constraint Satisfaction Problem (WCSP) for protein design. Assigns amino acids to positions to minimize cost functions defined over binary interactions.",
     "script": "./mznc2025_probs/proteindesign12/wcsp.mzn",
+    "script_commented": "./mznc2025_probs/proteindesign12/wcsp_commented.mzn",
     "top3_solvers": ["OR-Tools CP-SAT", "Gecode", "Chuffed"]
   },
   "skill-allocation": {
     "description": "Assigns engineers to jobs while allowing skill training. Considers job/skill matching, location, and training budget constraints.",
     "script": "./mznc2025_probs/skill-allocation/skill-allocation_only.mzn",
+    "script_commented": "./mznc2025_probs/skill-allocation/skill-allocation_only_commented.mzn",
     "top3_solvers": ["OR-Tools CP-SAT", "Chuffed", "HiGHS"]
   },
   "stripboard": {
     "description": "Layout optimization for electronic components on a stripboard. Places components and routes connections to minimize board size.",
     "script": "./mznc2025_probs/stripboard/stripboard.mzn",
+    "script_commented": "./mznc2025_probs/stripboard/stripboard_commented.mzn",
     "top3_solvers": ["OR-Tools CP-SAT", "Chuffed", "Gecode"]
   },
   "tower": {
     "description": "Optimizes cell tower power levels and handset assignments. Ensures minimum signal strength and capacity limits while minimizing interference.",
     "script": "./mznc2025_probs/tower/tower.mzn",
+    "script_commented": "./mznc2025_probs/tower/tower_commented.mzn",
     "top3_solvers": ["Chuffed", "OR-Tools CP-SAT", "Gecode"]
   },
   "tsptw": {
     "description": "Traveling Salesman Problem with Time Windows (TSPTW). Finds a feasible route respecting earliest and latest service times at each location.",
     "script": "./mznc2025_probs/tsptw/tsptw.mzn",
+    "script_commented": "./mznc2025_probs/tsptw/tsptw_commented.mzn",
     "top3_solvers": ["OR-Tools CP-SAT", "Gecode", "Chuffed"]
   },
   "work-task-variation": {
     "description": "Schedules tasks across resources while minimizing workload variation. Balances activities and resources for fairness.",
     "script": "./mznc2025_probs/work-task-variation/work-task-variation.mzn",
+    "script_commented": "./mznc2025_probs/work-task-variation/work-task-variation_commented.mzn",
     "top3_solvers": ["OR-Tools CP-SAT", "Gecode", "Chuffed"]
   }
 }

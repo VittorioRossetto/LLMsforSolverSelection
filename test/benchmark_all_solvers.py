@@ -2,20 +2,34 @@ import json
 import time
 import re
 import argparse
+import sys
+sys.path.insert(1, '../')
+
 from utils import *
 
-# NON TESTABLE MODELS: playai-tts, playai-tts-arabic, whisper-large-v3, deepseek-r1-distill-llama-70b, gemini-2.0-flash-lite, gemma2-9b-it, whisper-large-v3-turbo
-# IGNORE DUE TO LIMITED REQUESTS: meta-llama/llama-prompt-guard-2-22m, meta-llama/llama-prompt-guard-2-86m
-# VERY LIMITED: allam-2-7b
+
+# Models to skip automatically
+NON_TESTABLE_MODELS = [
+    'playai-tts', 'playai-tts-arabic', 'whisper-large-v3', 'deepseek-r1-distill-llama-70b',
+    'gemini-2.0-flash-lite', 'gemma2-9b-it', 'whisper-large-v3-turbo'
+]
+IGNORED_MODELS = [
+    'meta-llama/llama-prompt-guard-2-22m', 'meta-llama/llama-prompt-guard-2-86m'
+]
+VERY_LIMITED_MODELS = ['allam-2-7b']
 
 
 # --- Argument parsing for solver set selection ---
 # Use '--solver-set minizinc' (default) for MiniZinc Challenge solvers
 # Use '--solver-set all' for the full solver list
+
 parser = argparse.ArgumentParser(description="Benchmark LLM solver recommendations on MiniZinc problems.")
 parser.add_argument('--solver-set', choices=['minizinc', 'all'], default='minizinc',
                     help="Which solver set to use in the prompt: 'minizinc' (default) or 'all'.")
+parser.add_argument('--script-version', choices=['uncommented', 'commented'], default='uncommented',
+                    help="Which script version to use: 'uncommented' (default) or 'commented'.")
 args = parser.parse_args()
+
 
 if args.solver_set == 'all':
     solver_list = ALL_SOLVERS
@@ -23,6 +37,8 @@ if args.solver_set == 'all':
 else:
     solver_list = MINIZINC_SOLVERS
     print("Using MINIZINC_SOLVERS set for prompt.")
+
+print(f"Using script version: {args.script_version}")
 
 # Load all problems
 dataset_path = "../mznc2025_probs/problems_with_descriptions.json"
@@ -65,7 +81,12 @@ for provider, models, query_func in [
     ("gemini", GEMINI_MODELS, query_gemini),
     ("groq", GROQ_MODELS, query_groq),
 ]:
+
     for model_id, model_label in models:
+        # Skip non-testable and ignored models
+        if model_id in NON_TESTABLE_MODELS or model_id in IGNORED_MODELS:
+            print(f"Skipping model {model_id} (non-testable or ignored).")
+            continue
         print(f"\nTesting provider={provider}, model={model_id}")
         skip_model = False
         results.setdefault(provider, {}).setdefault(model_id, {})
@@ -75,17 +96,22 @@ for provider, models, query_func in [
         while i < len(prob_keys):
             prob_key = prob_keys[i]
             prob = problems[prob_key]
-            # description = prob.get('description', '')
-            script = prob.get('script', '')
+
+            # Select script version
+            if args.script_version == 'commented':
+                script_path = prob.get('script_commented', '')
+            else:
+                script_path = prob.get('script', '')
 
             # Read file if path is given
-            if script.startswith('./'):
+            if script_path.startswith('./'):
                 try:
-                    with open(script[2:], 'r') as sf:
+                    with open(script_path[2:], 'r') as sf:
                         script = sf.read()
                 except Exception as e:
-                    script = f"[Error reading {script}: {e}]"
-
+                    script = f"[Error reading {script_path}: {e}]"
+            else:
+                script = script_path
 
             # Use get_solver_prompt to build the prompt for the selected solver set
             solver_prompt = get_solver_prompt(solver_list, name_only=True)
@@ -148,7 +174,7 @@ for provider, models, query_func in [
             continue
 
 # Save results with filename depending on solver set
-result_filename = f"solver_benchmark_results_{args.solver_set}.json"
+result_filename = f"LLMsuggestions_{args.solver_set}.json"
 with open(result_filename, "w") as f:
     json.dump(results, f, indent=2)
 

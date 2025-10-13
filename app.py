@@ -15,6 +15,7 @@ def markdown_filter(text):
 problems = load_problems("mznc2025_probs/problems_with_descriptions.json")
 
 @app.route('/', methods=['GET', 'POST'])
+
 def index():
     response_text = None
     selected_problem = None
@@ -23,6 +24,7 @@ def index():
     selected_provider = 'gemini'
     selected_model = GEMINI_MODELS[0][0]
     solver_option = 'minizinc'  # default
+    script_version = 'uncommented'  # default
 
     if request.method == 'POST':
         logging.info(f"Raw form data: {dict(request.form)}")
@@ -33,6 +35,7 @@ def index():
         selected_problem = request.form.get('problem')
         prompt_type = request.form.get('prompt_type', 'full')
         solver_option = request.form.get('solver_option', 'minizinc')
+        script_version = request.form.get('script_version', 'uncommented')
         custom_description = request.form.get('custom_description', '').strip()
         custom_model = request.form.get('custom_model', '').strip()
         include_description = request.form.get('include_description') == 'yes'
@@ -42,7 +45,20 @@ def index():
         else:
             prob = problems.get(selected_problem, {})
             description = prob.get('description', '')
-            script = get_problem_script(prob)
+            # Choose which script to use
+            if script_version == 'commented':
+                script_path = prob.get('script_commented', '')
+            else:
+                script_path = prob.get('script', '')
+            # Use get_problem_script logic but with explicit path
+            if script_path.startswith('./'):
+                try:
+                    with open(script_path[2:], 'r') as sf:
+                        script = sf.read()
+                except Exception as e:
+                    script = f"[Error reading {script_path}: {e}]"
+            else:
+                script = script_path
 
         # Choose solver list
         if solver_option == 'all':
@@ -81,7 +97,8 @@ def index():
                            groq_models=GROQ_MODELS,
                            selected_model=selected_model,
                            selected_provider=selected_provider,
-                           solver_option=solver_option)
+                           solver_option=solver_option,
+                           script_version=script_version)
 
 if __name__ == '__main__':
     app.run(debug=True)
