@@ -22,19 +22,17 @@ def index():
     prompt_text = None
     selected_provider = 'gemini'
     selected_model = GEMINI_MODELS[0][0]
+    solver_option = 'minizinc'  # default
 
     if request.method == 'POST':
         logging.info(f"Raw form data: {dict(request.form)}")
         selected_provider = request.form.get('provider', 'gemini')
-        # Get model from the correct dropdown
         selected_model = request.form.get('model')
-
         logging.info(f"Provider selected: {selected_provider}")
         logging.info(f"Model selected: {selected_model}")
-
         selected_problem = request.form.get('problem')
         prompt_type = request.form.get('prompt_type', 'full')
-
+        solver_option = request.form.get('solver_option', 'minizinc')
         custom_description = request.form.get('custom_description', '').strip()
         custom_model = request.form.get('custom_model', '').strip()
         include_description = request.form.get('include_description') == 'yes'
@@ -46,7 +44,13 @@ def index():
             description = prob.get('description', '')
             script = get_problem_script(prob)
 
-        solver_prompt = SOLVER_PROMPT_NAME_ONLY if prompt_type == 'name' else SOLVER_PROMPT
+        # Choose solver list
+        if solver_option == 'all':
+            solver_list = ALL_SOLVERS
+        else:
+            solver_list = MINIZINC_SOLVERS
+        solver_prompt = get_solver_prompt(solver_list, name_only=(prompt_type == 'name'))
+
         if include_description:
             prompt_text = f"Description:\n{description}\n\nMiniZinc model:\n{script}\n\n{solver_prompt}"
         else:
@@ -59,7 +63,6 @@ def index():
         else:
             response_text = f"[Unknown provider: {selected_provider}]"
 
-        # Optional: compare Gemini’s prediction with MiniZinc top 3
         if prompt_type == 'name' and selected_problem and selected_problem in problems:
             response_text = evaluate_response(selected_problem, response_text, problems)
 
@@ -77,7 +80,8 @@ def index():
                            gemini_models=GEMINI_MODELS,
                            groq_models=GROQ_MODELS,
                            selected_model=selected_model,
-                           selected_provider=selected_provider)
+                           selected_provider=selected_provider,
+                           solver_option=solver_option)
 
 if __name__ == '__main__':
     app.run(debug=True)

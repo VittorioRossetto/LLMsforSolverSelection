@@ -1,11 +1,28 @@
 import json
 import time
 import re
+import argparse
 from utils import *
 
 # NON TESTABLE MODELS: playai-tts, playai-tts-arabic, whisper-large-v3, deepseek-r1-distill-llama-70b, gemini-2.0-flash-lite, gemma2-9b-it, whisper-large-v3-turbo
 # IGNORE DUE TO LIMITED REQUESTS: meta-llama/llama-prompt-guard-2-22m, meta-llama/llama-prompt-guard-2-86m
 # VERY LIMITED: allam-2-7b
+
+
+# --- Argument parsing for solver set selection ---
+# Use '--solver-set minizinc' (default) for MiniZinc Challenge solvers
+# Use '--solver-set all' for the full solver list
+parser = argparse.ArgumentParser(description="Benchmark LLM solver recommendations on MiniZinc problems.")
+parser.add_argument('--solver-set', choices=['minizinc', 'all'], default='minizinc',
+                    help="Which solver set to use in the prompt: 'minizinc' (default) or 'all'.")
+args = parser.parse_args()
+
+if args.solver_set == 'all':
+    solver_list = ALL_SOLVERS
+    print("Using ALL_SOLVERS set for prompt.")
+else:
+    solver_list = MINIZINC_SOLVERS
+    print("Using MINIZINC_SOLVERS set for prompt.")
 
 # Load all problems
 dataset_path = "../mznc2025_probs/problems_with_descriptions.json"
@@ -69,7 +86,10 @@ for provider, models, query_func in [
                 except Exception as e:
                     script = f"[Error reading {script}: {e}]"
 
-            prompt = f"\n\nMiniZinc model:\n{script}\n\n{SOLVER_PROMPT_NAME_ONLY}"
+
+            # Use get_solver_prompt to build the prompt for the selected solver set
+            solver_prompt = get_solver_prompt(solver_list, name_only=True)
+            prompt = f"\n\nMiniZinc model:\n{script}\n\n{solver_prompt}"
 
 
             retry_count = 0
@@ -127,8 +147,9 @@ for provider, models, query_func in [
             print(f"Skipping remaining problems for model {model_id} ({provider}) due to persistent errors.")
             continue
 
-# Save results
-with open("solver_benchmark_results.json", "w") as f:
+# Save results with filename depending on solver set
+result_filename = f"solver_benchmark_results_{args.solver_set}.json"
+with open(result_filename, "w") as f:
     json.dump(results, f, indent=2)
 
-print("Done. Results saved to solver_benchmark_results.json")
+print(f"Done. Results saved to {result_filename}")

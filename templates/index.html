@@ -72,7 +72,7 @@
           {% endfor %}
         </select>
       </div>
-      <!-- Prompt Type and Description Switch -->
+      <!-- Prompt Type, Description Switch, and Solver Set -->
       <div class="mb-3">
         <label class="form-label fw-bold">Prompt Type:</label><br>
         <div class="form-check form-check-inline">
@@ -88,6 +88,13 @@
         <div class="form-check form-switch ms-4">
           <input class="form-check-input" type="checkbox" id="include_description" name="include_description" value="yes" {% if request.form.include_description == 'yes' %}checked{% endif %}>
           <label class="form-check-label" for="include_description">Include Problem Description</label>
+        </div>
+        <div class="mt-3">
+          <label class="form-label fw-bold">Solver Set:</label>
+          <select name="solver_option" class="form-select" style="max-width: 350px; display: inline-block;">
+            <option value="minizinc" {% if solver_option == 'minizinc' %}selected{% endif %}>MiniZinc Challenge Solvers Only</option>
+            <option value="all" {% if solver_option == 'all' %}selected{% endif %}>All Solvers</option>
+          </select>
         </div>
       </div>
 

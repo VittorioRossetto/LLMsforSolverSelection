@@ -37,25 +37,41 @@ def load_groq_models(json_path="grok_models.json"):
 GROQ_MODELS = load_groq_models()
 
 # ---------- Prompts ----------
-SOLVER_PROMPT = """The goal is to determine which constraint programming solver would be best suited for this problem, considering the following options:
 
-- Gecode
-- Chuffed
-- Google OR-Tools CP-SAT
-- HiGHS
-- COIN-OR CBC
+# ---------- Solver Options ----------
+ALL_SOLVERS = [
+    "atlantis-free", "cbc-free", "cbc-par", "choco-solver__cp_-fd", "choco-solver__cp_-free", "choco-solver__cp_-par",
+    "choco-solver__cp-sat_-fd", "choco-solver__cp-sat_-free", "choco-solver__cp-sat_-par", "chuffed-fd", "chuffed-free",
+    "cp_optimizer-free", "cp_optimizer-par", "cplex-free", "cplex-par", "gecode-fd", "gecode-par", "gecode_dexter-open",
+    "gurobi-free", "gurobi-par", "highs-free", "highs-par", "huub-fd", "huub-free", "izplus-free", "izplus-par",
+    "jacop-fd", "jacop-free", "or-tools_cp-sat-fd", "or-tools_cp-sat-free", "or-tools_cp-sat-par", "or-tools_cp-sat_ls-free",
+    "or-tools_cp-sat_ls-par", "picatsat-free", "pumpkin-fd", "pumpkin-free", "scip-free", "scip-par", "sicstus_prolog-fd",
+    "sicstus_prolog-free", "yuck-free", "yuck-par"
+]
+MINIZINC_SOLVERS = [
+    "Gecode", "Chuffed", "Google OR-Tools CP-SAT", "HiGHS", "COIN-OR CBC"
+]
 
-Please analyze the model and recommend the best solver for this problem, explaining your reasoning."""
-
-SOLVER_PROMPT_NAME_ONLY = """The goal is to determine which constraint programming solver would be best suited for this problem, considering the following options:
-
-- Gecode
-- Chuffed
-- OR-Tools CP-SAT
-- HiGHS
-- COIN-BC
-
-Answer only with the name of the 3 best solvers inside square brackets separated by comma and nothing else."""
+def get_solver_prompt(solver_list=None, name_only=False):
+    """
+    Returns a prompt string for the given solver list.
+    If name_only is True, restricts output to names in brackets.
+    """
+    if solver_list is None:
+        solver_list = MINIZINC_SOLVERS
+    solver_lines = '\n'.join(f"- {s}" for s in solver_list)
+    if name_only:
+        return (
+            f"The goal is to determine which constraint programming solver would be best suited for this problem, considering the following options:\n\n"
+            f"{solver_lines}\n\n"
+            "Answer only with the name of the 3 best solvers inside square brackets separated by comma and nothing else."
+        )
+    else:
+        return (
+            f"The goal is to determine which constraint programming solver would be best suited for this problem, considering the following options:\n\n"
+            f"{solver_lines}\n\n"
+            "Please analyze the model and recommend the best solver for this problem, explaining your reasoning."
+        )
 
 # ---------- Utility Functions ----------
 def load_problems(json_path: str):
