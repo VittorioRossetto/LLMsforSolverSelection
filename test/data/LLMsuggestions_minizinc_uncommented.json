@@ -2,328 +2,328 @@
   "gemini": {
     "gemini-2.5-flash": {
       "atsp": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed",
         "Gecode"
       ],
       "black-hole": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "carpet-cutting": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed",
         "Gecode"
       ],
       "cgt": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "EchoSched": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed",
         "Gecode"
       ],
       "fbd1": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed",
         "Gecode"
       ],
       "groupsplitter": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed",
         "Gecode"
       ],
       "gt-sort": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed",
         "Gecode"
       ],
       "hitori": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-kletzander": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-marte": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed",
         "Gecode"
       ],
       "is": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "mondoku": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "products-and-shelves": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed",
         "Gecode"
       ],
       "proteindesign12": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed",
         "Gecode"
       ],
       "skill-allocation": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "stripboard": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "tower": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "tsptw": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "work-task-variation": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ]
     },
     "gemini-2.5-pro": {
       "atsp": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed",
         "Gecode"
       ],
       "black-hole": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "cgt": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed",
         "Gecode"
       ],
       "fbd1": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed",
         "Gecode"
       ]
     },
     "gemini-2.5-flash-lite": {
       "atsp": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "black-hole": [
         "Gecode",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed"
       ],
       "carpet-cutting": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "cgt": [
         "Gecode",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed"
       ],
       "EchoSched": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "fbd1": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "groupsplitter": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "gt-sort": [
         "Gecode",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed"
       ],
       "hitori": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "ihtc-2024-kletzander": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "ihtc-2024-marte": [
         "Gecode",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed"
       ],
       "is": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "mondoku": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "products-and-shelves": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "proteindesign12": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "skill-allocation": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "stripboard": [
         "Gecode",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed"
       ],
       "tower": [
         "Gecode",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed"
       ],
       "tsptw": [
         "Gecode",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed"
       ],
       "work-task-variation": [
         "Gecode",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed"
       ]
     },
     "gemini-2.0-flash": {
       "atsp": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "black-hole": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "carpet-cutting": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "cgt": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "EchoSched": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "fbd1": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "groupsplitter": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "gt-sort": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "hitori": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "ihtc-2024-kletzander": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed",
         "Gecode"
       ],
       "ihtc-2024-marte": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed",
         "Gecode"
       ],
       "is": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "mondoku": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "products-and-shelves": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "proteindesign12": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "skill-allocation": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed",
         "Gecode"
       ],
       "stripboard": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "tower": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "tsptw": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "work-task-variation": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ]
@@ -334,509 +334,509 @@
       "atsp": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "black-hole": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "carpet-cutting": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "cgt": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "EchoSched": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "fbd1": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "groupsplitter": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "gt-sort": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "hitori": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-kletzander": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-marte": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "is": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "mondoku": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "products-and-shelves": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "proteindesign12": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "skill-allocation": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "stripboard": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "tower": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "tsptw": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "work-task-variation": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ]
     },
     "moonshotai/kimi-k2-instruct": {
       "atsp": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "black-hole": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "carpet-cutting": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "cgt": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "EchoSched": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "fbd1": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "groupsplitter": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "gt-sort": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "hitori": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-kletzander": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-marte": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "is": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "mondoku": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "products-and-shelves": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "proteindesign12": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "skill-allocation": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "stripboard": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "tower": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "tsptw": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "work-task-variation": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ]
     },
     "groq/compound": {
       "atsp": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "black-hole": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "carpet-cutting": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "cgt": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "EchoSched": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "fbd1": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "groupsplitter": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "gt-sort": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "hitori": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-kletzander": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-marte": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "is": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "mondoku": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "products-and-shelves": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "proteindesign12": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "skill-allocation": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "stripboard": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "tower": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "tsptw": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "work-task-variation": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ]
     },
     "meta-llama/llama-4-maverick-17b-128e-instruct": {
       "atsp": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "black-hole": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "carpet-cutting": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "cgt": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "EchoSched": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "fbd1": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "groupsplitter": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "gt-sort": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "hitori": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-kletzander": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-marte": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "is": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "mondoku": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "products-and-shelves": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "proteindesign12": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "skill-allocation": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "stripboard": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "tower": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "tsptw": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "work-task-variation": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ]
     },
     "qwen/qwen3-32b": {
       "atsp": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "black-hole": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "carpet-cutting": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "cgt": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "EchoSched": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "fbd1": [
         "Gecode",
         "Chuffed",
-        "\"Google OR-Tools CP-SAT\""
+        "\"OR-Tools CP-SAT\""
       ],
       "groupsplitter": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "gt-sort": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "hitori": [
         "Gecode",
         "Chuffed",
-        "\"Google OR-Tools CP-SAT\""
+        "\"OR-Tools CP-SAT\""
       ],
       "ihtc-2024-kletzander": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-marte": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "is": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "mondoku": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "products-and-shelves": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "proteindesign12": [
         "Gecode",
         "Chuffed",
-        "\"Google OR-Tools CP-SAT\""
+        "\"OR-Tools CP-SAT\""
       ],
       "skill-allocation": [
         "Gecode",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed"
       ],
       "stripboard": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "tower": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "tsptw": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "work-task-variation": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ]
     },
@@ -844,102 +844,102 @@
       "atsp": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "black-hole": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "carpet-cutting": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "cgt": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "EchoSched": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "fbd1": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "groupsplitter": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "gt-sort": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "hitori": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-kletzander": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-marte": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "is": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "mondoku": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "products-and-shelves": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "proteindesign12": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "skill-allocation": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "stripboard": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "tower": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "tsptw": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "work-task-variation": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ]
     },
     "meta-llama/llama-guard-4-12b": {
@@ -968,100 +968,100 @@
       "atsp": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "black-hole": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "carpet-cutting": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "cgt": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "EchoSched": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "fbd1": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "groupsplitter": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "gt-sort": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed",
         "Gecode"
       ],
       "hitori": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "ihtc-2024-kletzander": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "ihtc-2024-marte": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "is": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "mondoku": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "products-and-shelves": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "proteindesign12": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "skill-allocation": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "stripboard": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "tower": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "tsptw": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "work-task-variation": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ]
@@ -1069,7 +1069,7 @@
     "allam-2-7b": {
       "atsp": [],
       "black-hole": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "HiGHS"
       ],
@@ -1081,33 +1081,33 @@
       "cgt": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "EchoSched": [],
       "fbd1": [
-        "COIN-OR CBC",
+        "COIN-BC",
         "Gecode",
         "HiGHS"
       ],
       "groupsplitter": [
         "Gecode",
         "HiGHS",
-        "COIN-OR CBC"
+        "COIN-BC"
       ],
       "gt-sort": [
         "Gecode",
         "HiGHS",
-        "COIN-OR CBC"
+        "COIN-BC"
       ],
       "hitori": [
         "HiGHS",
-        "COIN-OR CBC",
+        "COIN-BC",
         "Gecode"
       ],
       "ihtc-2024-kletzander": [
         "Gecode",
         "HiGHS",
-        "COIN-OR CBC"
+        "COIN-BC"
       ],
       "ihtc-2024-marte": [
         "Gecode",
@@ -1120,19 +1120,19 @@
       "proteindesign12": [
         "Gecode",
         "HiGHS",
-        "COIN-OR CBC"
+        "COIN-BC"
       ],
       "skill-allocation": [],
       "stripboard": [
         "Gecode",
         "HiGHS",
-        "COIN-OR CBC"
+        "COIN-BC"
       ],
       "tower": [],
       "tsptw": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "HiGHS",
-        "COIN-OR CBC"
+        "COIN-BC"
       ],
       "work-task-variation": []
     },
@@ -1140,22 +1140,22 @@
       "atsp": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "black-hole": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "carpet-cutting": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "cgt": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "EchoSched": [
         "OR-Tools CP-SAT",
@@ -1165,12 +1165,12 @@
       "fbd1": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "groupsplitter": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "gt-sort": [
         "CP-SAT",
@@ -1180,22 +1180,22 @@
       "hitori": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-kletzander": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-marte": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "is": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "mondoku": [
         "Gecode",
@@ -1205,12 +1205,12 @@
       "products-and-shelves": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "proteindesign12": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "skill-allocation": [
         "OR-Tools CP-SAT",
@@ -1220,7 +1220,7 @@
       "stripboard": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "tower": [
         "Gecode",
@@ -1228,127 +1228,127 @@
         "CP-SAT"
       ],
       "tsptw": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode",
         "Chuffed"
       ],
       "work-task-variation": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ]
     },
     "groq/compound-mini": {
       "atsp": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "black-hole": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "carpet-cutting": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "cgt": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "EchoSched": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "fbd1": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "groupsplitter": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "gt-sort": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "hitori": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-kletzander": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-marte": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "is": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "mondoku": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "products-and-shelves": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "proteindesign12": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "skill-allocation": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "stripboard": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "tower": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "tsptw": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "work-task-variation": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ]
     },
     "openai/gpt-oss-120b": {
       "atsp": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "black-hole": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "carpet-cutting": [
@@ -1359,189 +1359,189 @@
       "cgt": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "EchoSched": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "fbd1": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "groupsplitter": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "gt-sort": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "hitori": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-kletzander": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "ihtc-2024-marte": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "is": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "mondoku": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "products-and-shelves": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "proteindesign12": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "skill-allocation": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "stripboard": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "tower": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "tsptw": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "work-task-variation": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ]
     },
     "llama-3.3-70b-versatile": {
       "atsp": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed",
         "Gecode"
       ],
       "black-hole": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "carpet-cutting": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "cgt": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "EchoSched": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "fbd1": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "groupsplitter": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "gt-sort": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "hitori": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-kletzander": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "ihtc-2024-marte": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "is": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "mondoku": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "products-and-shelves": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "proteindesign12": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "skill-allocation": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "stripboard": [
         "Chuffed",
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Gecode"
       ],
       "tower": [
-        "Google OR-Tools CP-SAT",
+        "OR-Tools CP-SAT",
         "Chuffed",
         "Gecode"
       ],
       "tsptw": [
         "Gecode",
         "Chuffed",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ],
       "work-task-variation": [
         "Chuffed",
         "Gecode",
-        "Google OR-Tools CP-SAT"
+        "OR-Tools CP-SAT"
       ]
     }
   }

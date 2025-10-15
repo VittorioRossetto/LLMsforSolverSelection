@@ -1,0 +1,402 @@
+{
+  "EchoSched": [
+    {
+      "solver": "or-tools_cp-sat-par",
+      "score": 192.65,
+      "score_incomplete": 160.0,
+      "score_area": 141174.67
+    },
+    {
+      "solver": "gurobi-par",
+      "score": 190.7,
+      "score_incomplete": 160.0,
+      "score_area": 198272.09
+    },
+    {
+      "solver": "or-tools_cp-sat-free",
+      "score": 188.89,
+      "score_incomplete": 160.0,
+      "score_area": 257210.31
+    }
+  ],
+  "atsp": [
+    {
+      "solver": "gurobi-par",
+      "score": 187.58,
+      "score_incomplete": 166.5,
+      "score_area": 614717.47
+    },
+    {
+      "solver": "gurobi-free",
+      "score": 187.56,
+      "score_incomplete": 169.5,
+      "score_area": 644046.81
+    },
+    {
+      "solver": "or-tools_cp-sat-par",
+      "score": 179.34,
+      "score_incomplete": 169.5,
+      "score_area": 755739.7
+    }
+  ],
+  "black-hole (SAT x5)": [
+    {
+      "solver": "chuffed-free",
+      "score": 198.37,
+      "score_incomplete": 198.37,
+      "score_area": 3346.0
+    },
+    {
+      "solver": "izplus-par",
+      "score": 191.66,
+      "score_incomplete": 191.66,
+      "score_area": 31720.0
+    },
+    {
+      "solver": "choco-solver__cp_-par",
+      "score": 178.54,
+      "score_incomplete": 178.54,
+      "score_area": 9519.0
+    }
+  ],
+  "carpet-cutting": [
+    {
+      "solver": "huub-free",
+      "score": 196.23,
+      "score_incomplete": 154.5,
+      "score_area": 318448.9
+    },
+    {
+      "solver": "or-tools_cp-sat-par",
+      "score": 193.64,
+      "score_incomplete": 155.0,
+      "score_area": 315279.77
+    },
+    {
+      "solver": "chuffed-free",
+      "score": 189.99,
+      "score_incomplete": 152.5,
+      "score_area": 362776.34
+    }
+  ],
+  "cgt": [
+    {
+      "solver": "gurobi-par",
+      "score": 202.64,
+      "score_incomplete": 181.5,
+      "score_area": 144032.11
+    },
+    {
+      "solver": "cplex-par",
+      "score": 193.88,
+      "score_incomplete": 181.5,
+      "score_area": 878323.91
+    },
+    {
+      "solver": "gurobi-free",
+      "score": 192.13,
+      "score_incomplete": 181.5,
+      "score_area": 980360.01
+    }
+  ],
+  "fbd1": [
+    {
+      "solver": "gecode-par",
+      "score": 188.52,
+      "score_incomplete": 140.5,
+      "score_area": 390944.56
+    },
+    {
+      "solver": "cp_optimizer-par",
+      "score": 172.96,
+      "score_incomplete": 140.5,
+      "score_area": 620550.27
+    },
+    {
+      "solver": "gecode-fd",
+      "score": 170.43,
+      "score_incomplete": 140.5,
+      "score_area": 638714.94
+    }
+  ],
+  "groupsplitter (MAX x5)": [
+    {
+      "solver": "or-tools_cp-sat-par",
+      "score": 194.78,
+      "score_incomplete": 190.5,
+      "score_area": 995386.18
+    },
+    {
+      "solver": "chuffed-free",
+      "score": 194.47,
+      "score_incomplete": 188.0,
+      "score_area": 1091358.69
+    },
+    {
+      "solver": "or-tools_cp-sat-free",
+      "score": 192.81,
+      "score_incomplete": 190.5,
+      "score_area": 1143607.77
+    }
+  ],
+  "gt-sort": [
+    {
+      "solver": "gecode_dexter-open",
+      "score": 178.95,
+      "score_incomplete": 177.0,
+      "score_area": 852534.63
+    },
+    {
+      "solver": "jacop-free",
+      "score": 136.3,
+      "score_incomplete": 130.5,
+      "score_area": 2540425.84
+    },
+    {
+      "solver": "huub-free",
+      "score": 110.36,
+      "score_incomplete": 95.0,
+      "score_area": 3335622.06
+    }
+  ],
+  "hitori (MAX x5)": [
+    {
+      "solver": "or-tools_cp-sat-par",
+      "score": 193.73,
+      "score_incomplete": 171.0,
+      "score_area": 425108.18
+    },
+    {
+      "solver": "picatsat-free",
+      "score": 193.18,
+      "score_incomplete": 168.5,
+      "score_area": 920266.29
+    },
+    {
+      "solver": "chuffed-free",
+      "score": 191.49,
+      "score_incomplete": 168.5,
+      "score_area": 706000.85
+    }
+  ],
+  "ihtc-2024-kletzander": [
+    {
+      "solver": "or-tools_cp-sat-par",
+      "score": 203.28,
+      "score_incomplete": 197.0,
+      "score_area": 1073705.4
+    },
+    {
+      "solver": "izplus-par",
+      "score": 189.0,
+      "score_incomplete": 191.5,
+      "score_area": 1748881.49
+    },
+    {
+      "solver": "or-tools_cp-sat-free",
+      "score": 188.5,
+      "score_incomplete": 191.0,
+      "score_area": 1694361.26
+    }
+  ],
+  "ihtc-2024-marte": [
+    {
+      "solver": "yuck-par",
+      "score": 204.0,
+      "score_incomplete": 204.0,
+      "score_area": 1856464.23
+    },
+    {
+      "solver": "yuck-free",
+      "score": 199.5,
+      "score_incomplete": 199.5,
+      "score_area": 1976201.74
+    },
+    {
+      "solver": "or-tools_cp-sat-par",
+      "score": 198.0,
+      "score_incomplete": 198.0,
+      "score_area": 3010823.7
+    }
+  ],
+  "is": [
+    {
+      "solver": "cplex-par",
+      "score": 157.34,
+      "score_incomplete": 113.0,
+      "score_area": 5033.23
+    },
+    {
+      "solver": "gecode-fd",
+      "score": 157.34,
+      "score_incomplete": 113.0,
+      "score_area": 3559.99
+    },
+    {
+      "solver": "gurobi-par",
+      "score": 157.34,
+      "score_incomplete": 113.0,
+      "score_area": 4849.43
+    }
+  ],
+  "mondoku": [
+    {
+      "solver": "gecode-fd",
+      "score": 186.01,
+      "score_incomplete": 153.5,
+      "score_area": 342796.31
+    },
+    {
+      "solver": "huub-free",
+      "score": 182.77,
+      "score_incomplete": 153.5,
+      "score_area": 132489.53
+    },
+    {
+      "solver": "gecode-par",
+      "score": 176.61,
+      "score_incomplete": 153.5,
+      "score_area": 418551.11
+    }
+  ],
+  "products-and-shelves": [
+    {
+      "solver": "huub-free",
+      "score": 195.29,
+      "score_incomplete": 153.5,
+      "score_area": 86826.34
+    },
+    {
+      "solver": "huub-fd",
+      "score": 190.8,
+      "score_incomplete": 153.5,
+      "score_area": 308439.61
+    },
+    {
+      "solver": "chuffed-free",
+      "score": 182.78,
+      "score_incomplete": 153.5,
+      "score_area": 211188.41
+    }
+  ],
+  "proteindesign12": [
+    {
+      "solver": "or-tools_cp-sat-par",
+      "score": 194.8,
+      "score_incomplete": 179.5,
+      "score_area": 993200.55
+    },
+    {
+      "solver": "gecode-par",
+      "score": 177.74,
+      "score_incomplete": 166.5,
+      "score_area": 964027.72
+    },
+    {
+      "solver": "huub-free",
+      "score": 174.63,
+      "score_incomplete": 169.5,
+      "score_area": 1024016.12
+    }
+  ],
+  "skill-allocation": [
+    {
+      "solver": "gurobi-par",
+      "score": 189.16,
+      "score_incomplete": 155.5,
+      "score_area": 438637.82
+    },
+    {
+      "solver": "gurobi-free",
+      "score": 187.0,
+      "score_incomplete": 155.5,
+      "score_area": 464667.18
+    },
+    {
+      "solver": "or-tools_cp-sat-par",
+      "score": 171.56,
+      "score_incomplete": 155.5,
+      "score_area": 591501.6
+    }
+  ],
+  "stripboard": [
+    {
+      "solver": "or-tools_cp-sat-free",
+      "score": 177.48,
+      "score_incomplete": 148.5,
+      "score_area": 337510.71
+    },
+    {
+      "solver": "cp_optimizer-free",
+      "score": 174.98,
+      "score_incomplete": 147.0,
+      "score_area": 827707.89
+    },
+    {
+      "solver": "chuffed-free",
+      "score": 172.34,
+      "score_incomplete": 147.0,
+      "score_area": 948563.87
+    }
+  ],
+  "tower (MAX x5)": [
+    {
+      "solver": "cp_optimizer-free",
+      "score": 194.13,
+      "score_incomplete": 161.5,
+      "score_area": 349409.92
+    },
+    {
+      "solver": "chuffed-free",
+      "score": 186.46,
+      "score_incomplete": 158.0,
+      "score_area": 528712.47
+    },
+    {
+      "solver": "or-tools_cp-sat-free",
+      "score": 184.94,
+      "score_incomplete": 155.0,
+      "score_area": 636763.74
+    }
+  ],
+  "tsptw": [
+    {
+      "solver": "choco-solver__cp_-par",
+      "score": 183.94,
+      "score_incomplete": 156.5,
+      "score_area": 828746.64
+    },
+    {
+      "solver": "choco-solver__cp-sat_-par",
+      "score": 183.94,
+      "score_incomplete": 156.5,
+      "score_area": 1071217.08
+    },
+    {
+      "solver": "or-tools_cp-sat-par",
+      "score": 160.45,
+      "score_incomplete": 124.0,
+      "score_area": 1299308.0
+    }
+  ],
+  "work-task-variation": [
+    {
+      "solver": "or-tools_cp-sat-par",
+      "score": 204.55,
+      "score_incomplete": 203.0,
+      "score_area": 395191.68
+    },
+    {
+      "solver": "choco-solver__cp-sat_-free",
+      "score": 191.0,
+      "score_incomplete": 195.5,
+      "score_area": 1727755.31
+    },
+    {
+      "solver": "or-tools_cp-sat_ls-par",
+      "score": 188.5,
+      "score_incomplete": 193.0,
+      "score_area": 1985256.15
+    }
+  ]
+}

@@ -3,8 +3,7 @@
     "description": "Scheduling and resource allocation problem involving moulds, colors, and production jobs. The goal is to minimize makespan, tardiness, and waste while respecting compatibility and demand constraints.",
     "script": "./mznc2025_probs/atsp/atsp.mzn",
     "script_commented": "./mznc2025_probs/atsp/atsp_commented.mzn",
-    "top3_solvers": ["OR-Tools CP-SAT","COIN-BC", "Gecode"],
-    "top3_all": ["","COIN-BC", "Gecode"]
+    "top3_solvers": ["OR-Tools CP-SAT","COIN-BC", "Gecode"]
   },
   "black-hole": {
     "description": "A constraint model for solving the Black Hole Patience solitaire game. Cards must be arranged so that the sequence follows game rules using global constraints.",
