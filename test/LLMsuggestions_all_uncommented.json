@@ -1,0 +1,1614 @@
+{
+  "gemini": {
+    "gemini-2.5-flash": {
+      "atsp": [
+        "or-tools_cp-sat_ls-par",
+        "gurobi-par",
+        "cp_optimizer-par"
+      ],
+      "black-hole": [
+        "or-tools_cp-sat-free",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "carpet-cutting": [
+        "gurobi-par",
+        "cplex-par",
+        "or-tools_cp-sat-par"
+      ],
+      "cgt": [
+        "or-tools_cp-sat-free",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "EchoSched": [
+        "cp_optimizer-free",
+        "or-tools_cp-sat-free",
+        "chuffed-free"
+      ],
+      "fbd1": [
+        "or-tools_cp-sat-free",
+        "chuffed-fd",
+        "cp_optimizer-free"
+      ],
+      "groupsplitter": [
+        "or-tools_cp-sat-free",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "gt-sort": [
+        "or-tools_cp-sat-free",
+        "chuffed-fd",
+        "choco-solver__cp-sat_-free"
+      ],
+      "hitori": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "ihtc-2024-kletzander": [
+        "or-tools_cp-sat-free",
+        "chuffed-fd",
+        "cp_optimizer-free"
+      ],
+      "ihtc-2024-marte": [
+        "or-tools_cp-sat-free",
+        "cp_optimizer-free",
+        "chuffed-fd"
+      ],
+      "is": [
+        "chuffed-fd",
+        "cp_optimizer-free",
+        "or-tools_cp-sat-free"
+      ],
+      "mondoku": [
+        "or-tools_cp-sat-free",
+        "chuffed-free",
+        "gecode-fd"
+      ],
+      "products-and-shelves": [
+        "or-tools_cp-sat-free",
+        "choco-solver__cp-sat_-free",
+        "cp_optimizer-free"
+      ],
+      "proteindesign12": [
+        "or-tools_cp-sat-free",
+        "chuffed-fd",
+        "cp_optimizer-free"
+      ],
+      "skill-allocation": [
+        "or-tools_cp-sat-free",
+        "chuffed-free",
+        "gecode-fd"
+      ],
+      "stripboard": [
+        "or-tools_cp-sat-free",
+        "cp_optimizer-free",
+        "gurobi-free"
+      ],
+      "tower": [
+        "or-tools_cp-sat-free",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "tsptw": [
+        "or-tools_cp-sat-par",
+        "cp_optimizer-par",
+        "chuffed-fd"
+      ],
+      "work-task-variation": [
+        "or-tools_cp-sat-free",
+        "chuffed-fd",
+        "cp_optimizer-free"
+      ]
+    },
+    "gemini-2.5-pro": {
+      "atsp": [
+        "cp_optimizer-par",
+        "or-tools_cp-sat-par",
+        "gurobi-par"
+      ],
+      "black-hole": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "carpet-cutting": [
+        "chuffed-fd",
+        "cp_optimizer-par",
+        "or-tools_cp-sat-par"
+      ],
+      "cgt": [
+        "or-tools_cp-sat-par",
+        "cp_optimizer-par",
+        "chuffed-free"
+      ],
+      "EchoSched": [
+        "cp_optimizer-par",
+        "or-tools_cp-sat-par",
+        "chuffed-fd"
+      ],
+      "fbd1": [
+        "or-tools_cp-sat-par",
+        "cp_optimizer-par",
+        "chuffed-free"
+      ],
+      "groupsplitter": [
+        "chuffed-free",
+        "cp_optimizer-par",
+        "or-tools_cp-sat-par"
+      ],
+      "gt-sort": [
+        "or-tools_cp-sat-free",
+        "chuffed-free",
+        "picatsat-free"
+      ],
+      "hitori": [
+        "or-tools_cp-sat-par",
+        "cp_optimizer-par",
+        "chuffed-fd"
+      ],
+      "ihtc-2024-kletzander": [
+        "or-tools_cp-sat-par",
+        "cp_optimizer-par",
+        "izplus-par"
+      ],
+      "ihtc-2024-marte": [
+        "chuffed-fd",
+        "cp_optimizer-par",
+        "or-tools_cp_sat-par"
+      ],
+      "is": [
+        "gurobi-par",
+        "or-tools_cp-sat-par",
+        "scip-par"
+      ],
+      "mondoku": [
+        "or-tools_cp-sat-par",
+        "cp_optimizer-par",
+        "chuffed-fd"
+      ],
+      "products-and-shelves": [
+        "or-tools_cp-sat-par",
+        "chuffed-free",
+        "cp_optimizer-par"
+      ],
+      "proteindesign12": [
+        "or-tools_cp-sat-par",
+        "cp_optimizer-par",
+        "chuffed-fd"
+      ],
+      "skill-allocation": [
+        "or-tools_cp-sat-par",
+        "cp_optimizer-par",
+        "chuffed-fd"
+      ],
+      "stripboard": [
+        "or-tools_cp-sat-par",
+        "cp_optimizer-par",
+        "chuffed-fd"
+      ],
+      "tower": [
+        "or-tools_cp-sat-par",
+        "cp_optimizer-par",
+        "chuffed-fd"
+      ]
+    },
+    "gemini-2.5-flash-lite": {
+      "atsp": [
+        "or-tools_cp-sat-fd",
+        "cp_optimizer-free",
+        "cplex-free"
+      ],
+      "black-hole": [
+        "or-tools_cp-sat-fd",
+        "gecode-fd",
+        "choco-solver__cp_-fd"
+      ],
+      "carpet-cutting": [
+        "or-tools_cp-sat-fd",
+        "gecode-fd",
+        "choco-solver__cp_-fd"
+      ],
+      "cgt": [
+        "or-tools_cp-sat-fd",
+        "cp_optimizer-free",
+        "chuffed-fd"
+      ],
+      "EchoSched": [
+        "cp_optimizer-par",
+        "or-tools_cp-sat-par",
+        "gecode-par"
+      ],
+      "fbd1": [
+        "or-tools_cp-sat-fd",
+        "cp_optimizer-par",
+        "chuffed-fd"
+      ],
+      "groupsplitter": [
+        "or-tools_cp-sat-fd",
+        "cp_optimizer-free",
+        "chuffed-fd"
+      ],
+      "gt-sort": [
+        "or-tools_cp-sat-fd",
+        "choco-solver__cp-sat_-fd",
+        "cp_optimizer-free"
+      ],
+      "hitori": [
+        "or-tools_cp-sat-fd",
+        "cp_optimizer-free",
+        "gecode-fd"
+      ],
+      "ihtc-2024-kletzander": [
+        "or-tools_cp-sat-fd",
+        "cp_optimizer-par",
+        "gecode-fd"
+      ],
+      "ihtc-2024-marte": [
+        "or-tools_cp-sat-fd",
+        "cp_optimizer-free",
+        "gecode-fd"
+      ],
+      "is": [
+        "or-tools_cp-sat-fd",
+        "cp_optimizer-free",
+        "chuffed-fd"
+      ],
+      "mondoku": [
+        "or-tools_cp-sat-fd",
+        "cp_optimizer-free",
+        "choco-solver__cp-sat_-fd"
+      ],
+      "products-and-shelves": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "proteindesign12": [
+        "or-tools_cp-sat-par",
+        "cp_optimizer-par",
+        "gecode-par"
+      ],
+      "skill-allocation": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "stripboard": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "tower": [
+        "or-tools_cp-sat-fd",
+        "cp_optimizer-free",
+        "chuffed-fd"
+      ],
+      "tsptw": [
+        "or-tools_cp-sat-fd",
+        "cp_optimizer-free",
+        "chuffed-fd"
+      ],
+      "work-task-variation": [
+        "choco-solver__cp-sat_-fd",
+        "or-tools_cp-sat-fd",
+        "cp_optimizer-free"
+      ]
+    },
+    "gemini-2.0-flash": {
+      "atsp": [
+        "cp_optimizer-par",
+        "or-tools_cp-sat-par",
+        "cplex-par"
+      ],
+      "black-hole": [
+        "or-tools_cp-sat-free",
+        "choco-solver__cp-sat_-free",
+        "gecode-fd"
+      ],
+      "carpet-cutting": [
+        "cp_optimizer-par",
+        "or-tools_cp-sat-par",
+        "gecode-par"
+      ],
+      "cgt": [
+        "or-tools_cp-sat-free",
+        "chuffed-free",
+        "gecode-fd"
+      ],
+      "EchoSched": [
+        "Errno 2"
+      ],
+      "fbd1": [
+        "Errno 2"
+      ],
+      "groupsplitter": [
+        "cp_optimizer-par",
+        "or-tools_cp-sat-par",
+        "chuffed-fd"
+      ],
+      "gt-sort": [],
+      "hitori": [
+        "or-tools_cp-sat-free",
+        "choco-solver__cp-sat_-free",
+        "gecode-fd"
+      ],
+      "ihtc-2024-kletzander": [
+        "or-tools_cp-sat-par",
+        "cp_optimizer-par",
+        "choco-solver__cp-sat_-par"
+      ],
+      "ihtc-2024-marte": [
+        "or-tools_cp-sat-par",
+        "cp_optimizer-par",
+        "gecode-par"
+      ],
+      "is": [
+        "or-tools_cp-sat-free",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "mondoku": [
+        "or-tools_cp-sat-free",
+        "cp_optimizer-free",
+        "chuffed-free"
+      ],
+      "products-and-shelves": [
+        "or-tools_cp-sat-free",
+        "chuffed-free",
+        "cp_optimizer-free"
+      ],
+      "proteindesign12": [
+        "cp_optimizer-par",
+        "or-tools_cp-sat-par",
+        "scip-par"
+      ],
+      "skill-allocation": [
+        "cp_optimizer-par",
+        "or-tools_cp-sat-par",
+        "gecode-par"
+      ],
+      "stripboard": [
+        "or-tools_cp-sat-free",
+        "choco-solver__cp_-free",
+        "gecode-fd"
+      ],
+      "tower": [
+        "or-tools_cp-sat-free",
+        "cp_optimizer-free",
+        "chuffed-fd"
+      ],
+      "tsptw": [
+        "cp_optimizer-free",
+        "or-tools_cp-sat-free",
+        "chuffed-free"
+      ],
+      "work-task-variation": [
+        "cp_optimizer-par",
+        "or-tools_cp-sat-par",
+        "gecode-par"
+      ]
+    }
+  },
+  "groq": {
+    "moonshotai/kimi-k2-instruct-0905": {
+      "atsp": [
+        "or-tools_cp-sat-par",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "black-hole": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "carpet-cutting": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "cgt": [
+        "chuffed-free",
+        "or-tools_cp-sat-free",
+        "gecode-fd"
+      ],
+      "EchoSched": [
+        "or-tools_cp-sat-par",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "fbd1": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "groupsplitter": [
+        "choco-solver__cp-sat_-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "gt-sort": [
+        "choco-solver__cp-sat_-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "hitori": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "ihtc-2024-kletzander": [
+        "choco-solver__cp-sat_-par",
+        "or-tools_cp-sat-par",
+        "gecode-fd"
+      ],
+      "ihtc-2024-marte": [
+        "choco-solver__cp-sat_-par",
+        "or-tools_cp-sat-par",
+        "gecode-par"
+      ],
+      "is": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "mondoku": [
+        "choco-solver__cp-sat_-par",
+        "or-tools_cp-sat-par",
+        "gecode-par"
+      ],
+      "products-and-shelves": [
+        "or-tools_cp-sat-par",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "proteindesign12": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "skill-allocation": [
+        "or-tools_cp-sat-par",
+        "chuffed-par",
+        "gecode-par"
+      ],
+      "stripboard": [
+        "choco-solver__cp-sat_-par",
+        "or-tools_cp-sat-par",
+        "gecode-par"
+      ],
+      "tower": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "tsptw": [
+        "or-tools_cp-sat-par",
+        "chuffed-fd",
+        "gecode-par"
+      ],
+      "work-task-variation": [
+        "or-tools_cp-sat-par",
+        "chuffed-fd",
+        "gecode-fd"
+      ]
+    },
+    "moonshotai/kimi-k2-instruct": {
+      "atsp": [
+        "or-tools_cp-sat-par",
+        "chuffed-fd",
+        "gecode-par"
+      ],
+      "black-hole": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "carpet-cutting": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "cgt": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "EchoSched": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "fbd1": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "groupsplitter": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "gt-sort": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "hitori": [
+        "choco-solver__cp-sat_-fd",
+        "or-tools_cp-sat-fd",
+        "chuffed-fd"
+      ],
+      "ihtc-2024-kletzander": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "ihtc-2024-marte": [
+        "choco-solver__cp-sat_-par",
+        "or-tools_cp-sat-par",
+        "chuffed-fd"
+      ],
+      "is": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "mondoku": [
+        "or-tools_cp-sat-par",
+        "chuffed-par",
+        "gecode-par"
+      ],
+      "products-and-shelves": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "proteindesign12": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "skill-allocation": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "stripboard": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "tower": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "tsptw": [
+        "or-tools_cp-sat-par",
+        "chuffed-fd",
+        "gecode-par"
+      ],
+      "work-task-variation": [
+        "or-tools_cp-sat-par",
+        "chuffed-fd",
+        "gecode-fd"
+      ]
+    },
+    "groq/compound": {
+      "atsp": [
+        "gecode-fd",
+        "chuffed-fd",
+        "scip-free"
+      ],
+      "black-hole": [
+        "gecode-fd",
+        "chuffed-fd",
+        "cp_optimizer-free"
+      ],
+      "carpet-cutting": [
+        "gurobi-free",
+        "cplex-free",
+        "gecode-fd"
+      ],
+      "cgt": [
+        "gecode-fd",
+        "chuffed-fd",
+        "scip-free"
+      ],
+      "EchoSched": [
+        "gecode-fd",
+        "chuffed-fd",
+        "cp_optimizer-free"
+      ],
+      "fbd1": [
+        "gecode-fd",
+        "chuffed-fd",
+        "cp_optimizer-free"
+      ],
+      "groupsplitter": [
+        "gecode-fd",
+        "choco-solver__cp_-fd",
+        "cp_optimizer-free"
+      ],
+      "gt-sort": [
+        "gecode-fd",
+        "chuffed-fd",
+        "choco-solver__cp_-fd"
+      ],
+      "hitori": [
+        "gecode-fd",
+        "gecode-par",
+        "choco-solver__cp_-fd"
+      ],
+      "ihtc-2024-kletzander": [
+        "gecode-fd",
+        "chuffed-fd",
+        "cp_optimizer-free"
+      ],
+      "ihtc-2024-marte": [
+        "gurobi-free",
+        "cplex-free",
+        "or-tools_cp-sat-free"
+      ],
+      "is": [
+        "gecode-fd",
+        "gurobi-free",
+        "chuffed-fd"
+      ],
+      "mondoku": [
+        "gecode-fd",
+        "chuffed-fd",
+        "scip-free"
+      ],
+      "products-and-shelves": [
+        "gecode-fd",
+        "chuffed-fd",
+        "scip-free"
+      ],
+      "proteindesign12": [
+        "gurobi-par",
+        "cp_optimizer-par",
+        "chuffed-fd"
+      ],
+      "skill-allocation": [
+        "gecode-fd",
+        "choco-solver__cp_-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "stripboard": [
+        "gecode-fd",
+        "chuffed-fd",
+        "scip-free"
+      ],
+      "tower": [
+        "gecode-fd",
+        "chuffed-fd",
+        "scip-free"
+      ],
+      "tsptw": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "work-task-variation": [
+        "scip-free",
+        "gurobi-free",
+        "cplex-free"
+      ]
+    },
+    "meta-llama/llama-4-maverick-17b-128e-instruct": {
+      "atsp": [
+        "or-tools_cp-sat-free",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "black-hole": [
+        "chuffed-fd",
+        "choco-solver__cp-sat_-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "carpet-cutting": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "cgt": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "EchoSched": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "choco-solver__cp-sat_-fd"
+      ],
+      "fbd1": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "groupsplitter": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "gt-sort": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "hitori": [
+        "chuffed-fd",
+        "choco-solver__cp-sat-fd",
+        "gecode-fd"
+      ],
+      "ihtc-2024-kletzander": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "choco-solver__cp-sat_-fd"
+      ],
+      "ihtc-2024-marte": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "is": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "mondoku": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "products-and-shelves": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "proteindesign12": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "choco-solver__cp-sat_-fd"
+      ],
+      "skill-allocation": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "stripboard": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "tower": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "tsptw": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "choco-solver__cp-sat_-fd"
+      ],
+      "work-task-variation": [
+        "gecode-fd",
+        "chuffed-fd",
+        "or-tools_cp-sat-fd"
+      ]
+    },
+    "qwen/qwen3-32b": {
+      "atsp": [
+        "gecode-fd",
+        "chuffed-fd",
+        "choco-solver__cp-sat_-fd"
+      ],
+      "black-hole": [
+        "or-tools_cp-sat-fd",
+        "gecode-fd",
+        "chuffed-fd"
+      ],
+      "carpet-cutting": [
+        "gecode-fd",
+        "cp_optimizer-free",
+        "chuffed-fd"
+      ],
+      "cgt": [
+        "Chuffed-free",
+        "gecode-fd",
+        "or-tools_cp-sat-free"
+      ],
+      "EchoSched": [
+        "cp_optimizer-par",
+        "or-tools_cp-sat-par",
+        "chuffed-fd"
+      ],
+      "fbd1": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "groupsplitter": [
+        "choco-solver__cp-sat_-par",
+        "gecode-par",
+        "or-tools_cp-sat-par"
+      ],
+      "gt-sort": [
+        "gecode-fd",
+        "chuffed-free",
+        "or-tools_cp-sat-fd"
+      ],
+      "hitori": [
+        "gecode-fd",
+        "choco-solver__cp_-fd",
+        "chuffed-fd"
+      ],
+      "ihtc-2024-kletzander": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "ihtc-2024-marte": [
+        "cp_optimizer-par",
+        "or-tools_cp-sat-par",
+        "gecode-fd"
+      ],
+      "is": [
+        "cp_optimizer-free",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "mondoku": [
+        "or-tools_cp-sat-fd",
+        "gecode-fd",
+        "chuffed-free"
+      ],
+      "products-and-shelves": [
+        "or-tools_cp-sat-free",
+        "chuffed-free",
+        "gecode-fd"
+      ],
+      "proteindesign12": [
+        "or-tools_cp-sat-par",
+        "chuffed-fd",
+        "choco-solver__cp-sat_-par"
+      ],
+      "skill-allocation": [
+        "cp_optimizer-free",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "stripboard": [
+        "gecode-fd",
+        "chuffed-fd",
+        "cp_optimizer-free"
+      ],
+      "tower": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "tsptw": [
+        "cp_optimizer-par",
+        "or-tools_cp-sat-par",
+        "gecode-fd"
+      ],
+      "work-task-variation": [
+        "or-tools_cp-sat-fd",
+        "cp_optimizer-par",
+        "gecode-fd"
+      ]
+    },
+    "meta-llama/llama-4-scout-17b-16e-instruct": {
+      "atsp": [
+        "gecode-fd",
+        "chuffed-fd",
+        "choco-solver__cp_-fd"
+      ],
+      "black-hole": [
+        "gecode-fd",
+        "chuffed-fd",
+        "jacop-fd"
+      ],
+      "carpet-cutting": [
+        "gecode-fd",
+        "chuffed-fd",
+        "choco-solver__cp_-fd"
+      ],
+      "cgt": [
+        "gecode-fd",
+        "chuffed-fd",
+        "scip-free"
+      ],
+      "EchoSched": [
+        "gecode-fd",
+        "chuffed-fd",
+        "jacop-fd"
+      ],
+      "fbd1": [
+        "gecode-fd",
+        "chuffed-fd",
+        "jacop-fd"
+      ],
+      "groupsplitter": [
+        "gecode-fd",
+        "choco-solver__cp_-fd",
+        "chuffed-fd"
+      ],
+      "gt-sort": [
+        "gecode-fd",
+        "choco-solver__cp_-fd",
+        "chuffed-fd"
+      ],
+      "hitori": [
+        "gecode-fd",
+        "chuffed-fd",
+        "jacop-fd"
+      ],
+      "ihtc-2024-kletzander": [
+        "gecode-fd",
+        "choco-solver__cp_-fd",
+        "chuffed-fd"
+      ],
+      "ihtc-2024-marte": [
+        "gecode-fd",
+        "chuffed-fd",
+        "cp_optimizer-free"
+      ],
+      "is": [
+        "gecode-fd",
+        "chuffed-fd",
+        "jacop-fd"
+      ],
+      "mondoku": [
+        "gecode-fd",
+        "chuffed-fd",
+        "choco-solver__cp_-fd"
+      ],
+      "products-and-shelves": [
+        "gecode-fd",
+        "chuffed-fd",
+        "jacop-fd"
+      ],
+      "proteindesign12": [
+        "gecode-fd",
+        "chuffed-fd",
+        "jacop-fd"
+      ],
+      "skill-allocation": [
+        "**gecode-fd",
+        "chuffed-fd",
+        "choco-solver__cp_-fd**"
+      ],
+      "stripboard": [
+        "gecode-fd",
+        "chuffed-fd",
+        "jacop-fd"
+      ],
+      "tower": [
+        "gecode-fd",
+        "chuffed-fd",
+        "jacop-fd"
+      ],
+      "tsptw": [
+        "gecode-fd",
+        "chuffed-fd",
+        "gecode-par"
+      ],
+      "work-task-variation": [
+        "gecode-fd",
+        "chuffed-fd",
+        "jacop-fd"
+      ]
+    },
+    "meta-llama/llama-guard-4-12b": {
+      "atsp": [],
+      "black-hole": [],
+      "carpet-cutting": [],
+      "cgt": [],
+      "EchoSched": [],
+      "fbd1": [],
+      "groupsplitter": [],
+      "gt-sort": [],
+      "hitori": [],
+      "ihtc-2024-kletzander": [],
+      "ihtc-2024-marte": [],
+      "is": [],
+      "mondoku": [],
+      "products-and-shelves": [],
+      "proteindesign12": [],
+      "skill-allocation": [],
+      "stripboard": [],
+      "tower": [],
+      "tsptw": [],
+      "work-task-variation": []
+    },
+    "llama-3.1-8b-instant": {
+      "atsp": [
+        "scip-par",
+        "gecode-par",
+        "or-tools_cp-sat-par"
+      ],
+      "black-hole": [
+        "scip-par",
+        "gecode-par",
+        "cplex-par"
+      ],
+      "carpet-cutting": [
+        "scip-par",
+        "gecode-par",
+        "or-tools_cp-sat-par"
+      ],
+      "cgt": [
+        "cplex-par",
+        "scip-par",
+        "gecode-par"
+      ],
+      "EchoSched": [
+        "cpx-par",
+        "glp_par",
+        "yuck-par"
+      ],
+      "fbd1": [
+        "scip-par",
+        "picatsat-free",
+        "or-tools_cp-sat-par"
+      ],
+      "groupsplitter": [
+        "scip-par",
+        "gecode-par",
+        "cp_optimizer-par"
+      ],
+      "gt-sort": [
+        "chuffed-free",
+        "chuffed-fd",
+        "scip-free"
+      ],
+      "hitori": [
+        "cplex-par",
+        "scip-par",
+        "gecode-par"
+      ],
+      "ihtc-2024-kletzander": [
+        "scip-par",
+        "gecode-par",
+        "cplex-par"
+      ],
+      "ihtc-2024-marte": [
+        "gurobi-par",
+        "scip-par",
+        "cplex-par"
+      ],
+      "is": [
+        "scip-par",
+        "gecode-par",
+        "cplex-par"
+      ],
+      "mondoku": [
+        "scip-par",
+        "cbc-par",
+        "gecode-par"
+      ],
+      "products-and-shelves": [
+        "cplex-par",
+        "scip-par",
+        "gurobi-par"
+      ],
+      "proteindesign12": [
+        "or-tools_cp-sat-par",
+        "scip-par",
+        "gecode-par"
+      ],
+      "skill-allocation": [
+        "scip-par",
+        "cplex-par",
+        "cplex-free"
+      ],
+      "stripboard": [
+        "choco-solver__cp-sat-par",
+        "scip-free",
+        "gecode-fd"
+      ],
+      "tower": [
+        "cplex-par",
+        "scip-par",
+        "gurobi-par"
+      ],
+      "tsptw": [
+        "choco-solver__cp_-par",
+        "cp_optimizer-par",
+        "scip-par"
+      ],
+      "work-task-variation": [
+        "cplex-par",
+        "scip-par",
+        "gurobi-par"
+      ]
+    },
+    "allam-2-7b": {
+      "atsp": [
+        "scip-free",
+        "scip-par",
+        "icp-sat-par"
+      ],
+      "black-hole": [
+        "cp_optimizer-par",
+        "hls_csp_free",
+        "or-tools_cp-sat_ls-free"
+      ],
+      "carpet-cutting": [],
+      "cgt": [
+        "cp_optimizer-free",
+        "scip-free",
+        "huub-free"
+      ],
+      "EchoSched": [],
+      "fbd1": [
+        "ccl",
+        "zinc",
+        "yuck"
+      ],
+      "groupsplitter": [
+        "scip-free",
+        "or-tools_cp-sat-par",
+        "scip-par"
+      ],
+      "gt-sort": [],
+      "hitori": [
+        "chuffed-free",
+        "cplex-free",
+        "scip-free"
+      ],
+      "ihtc-2024-kletzander": [
+        "scip-free",
+        "scip-par",
+        "or-tools_cp-sat_ls-free"
+      ],
+      "ihtc-2024-marte": [
+        "scip-free",
+        "highs-free",
+        "pumpkin-free"
+      ],
+      "is": [
+        "glpk",
+        "gurobi",
+        "scip"
+      ],
+      "mondoku": [],
+      "products-and-shelves": [],
+      "proteindesign12": [
+        "C",
+        "E",
+        "I"
+      ],
+      "skill-allocation": [
+        "cp_optimizer-free",
+        "chuffed-free",
+        "scip-free"
+      ],
+      "stripboard": [
+        "cp_optimizer-par",
+        "scip-par",
+        "gecode_dexter-open"
+      ],
+      "tower": [
+        "atlantis-par",
+        "scip-free",
+        "sicstus_prolog-par"
+      ],
+      "tsptw": [],
+      "work-task-variation": []
+    },
+    "openai/gpt-oss-20b": {
+      "atsp": [
+        "gurobi-free",
+        "cplex-free",
+        "scip-free"
+      ],
+      "black-hole": [
+        "or-tools_cp-sat-par",
+        "chuffed-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "carpet-cutting": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "cgt": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "choco-solver__cp_-fd"
+      ],
+      "EchoSched": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "fbd1": [
+        "or-tools_cp-sat-par",
+        "chuffed-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "groupsplitter": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "gt-sort": [
+        "or-tools_cp-sat-fd",
+        "gecode-fd",
+        "choco-solver__cp_-fd"
+      ],
+      "hitori": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "ihtc-2024-kletzander": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "gurobi-free"
+      ],
+      "ihtc-2024-marte": [
+        "or-tools_cp-sat-fd",
+        "gecode-fd",
+        "chuffed-fd"
+      ],
+      "is": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "mondoku": [
+        "or-tools_cp-sat-fd",
+        "or-tools_cp-sat-free",
+        "or-tools_cp-sat-par"
+      ],
+      "products-and-shelves": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "cp_optimizer-free"
+      ],
+      "proteindesign12": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "choco-solver__cp-sat_-fd"
+      ],
+      "skill-allocation": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "or-tools_cp-sat-free"
+      ],
+      "stripboard": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "choco-solver__cp-sat_-fd"
+      ],
+      "tower": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "tsptw": [
+        "or-tools_cp-sat-par",
+        "choco-solver__cp-sat-par",
+        "scip-par"
+      ],
+      "work-task-variation": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "gecode-fd"
+      ]
+    },
+    "groq/compound-mini": {
+      "atsp": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "black-hole": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "carpet-cutting": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "cp_optimizer-free"
+      ],
+      "cgt": [
+        "chuffed-fd",
+        "or-tools_cp-sat-free",
+        "gecode-par"
+      ],
+      "EchoSched": [
+        "cp_optimizer-free",
+        "or-tools_cp-sat-free",
+        "chuffed-fd"
+      ],
+      "fbd1": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "groupsplitter": [
+        "chuffed-fd",
+        "gecode-par",
+        "or-tools_cp-sat-par"
+      ],
+      "gt-sort": [
+        "chuffed-fd",
+        "gecode-par",
+        "or-tools_cp-sat-par"
+      ],
+      "hitori": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "ihtc-2024-kletzander": [
+        "chuffed-free",
+        "or-tools_cp-sat-free",
+        "gecode-par"
+      ],
+      "ihtc-2024-marte": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "is": [
+        "chuffed-fd",
+        "gecode-par",
+        "or-tools_cp-sat-par"
+      ],
+      "mondoku": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "products-and-shelves": [
+        "or-tools_cp-sat-par",
+        "chuffed-fd",
+        "gecode-par"
+      ],
+      "proteindesign12": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "skill-allocation": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "stripboard": [
+        "chuffed-fd",
+        "or-tools_cp-sat-par",
+        "gecode-par"
+      ],
+      "tower": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "tsptw": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "cp_optimizer-free"
+      ],
+      "work-task-variation": [
+        "chuffed-fd",
+        "or-tools_cp-sat-par",
+        "cp_optimizer-par"
+      ]
+    },
+    "openai/gpt-oss-120b": {
+      "atsp": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "black-hole": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "carpet-cutting": [
+        "or-tools_cp-sat-free",
+        "chuffed-free",
+        "gecode-par"
+      ],
+      "cgt": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "EchoSched": [
+        "or-tools_cp-sat-free",
+        "cp_optimizer-free",
+        "chuffed-free"
+      ],
+      "fbd1": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "groupsplitter": [
+        "chuffed-free",
+        "or-tools_cp-sat-free",
+        "gecode-par"
+      ],
+      "gt-sort": [
+        "chuffed-fd",
+        "gecode-par",
+        "or-tools_cp-sat-par"
+      ],
+      "hitori": [
+        "chuffed-fd",
+        "gecode-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "ihtc-2024-kletzander": [
+        "chuffed-fd",
+        "or-tools_cp-sat-free",
+        "gecode-fd"
+      ],
+      "ihtc-2024-marte": [
+        "chuffed-fd",
+        "or-tools_cp-sat-free",
+        "gecode-fd"
+      ],
+      "is": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "mondoku": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "products-and-shelves": [
+        "chuffed-fd",
+        "gecode-par",
+        "or-tools_cp-sat-free"
+      ],
+      "proteindesign12": [
+        "chuffed-fd",
+        "or-tools_cp-sat-free",
+        "gecode-fd"
+      ],
+      "skill-allocation": [
+        "chuffed-free",
+        "or-tools_cp-sat-free",
+        "gecode-fd"
+      ],
+      "stripboard": [
+        "chuffed-fd",
+        "or-tools_cp-sat-fd",
+        "gecode-fd"
+      ],
+      "tower": [
+        "chuffed-fd",
+        "gecode-par",
+        "or-tools_cp-sat-free"
+      ],
+      "tsptw": [
+        "or-tools_cp-sat-par",
+        "cp_optimizer-par",
+        "chuffed-fd"
+      ],
+      "work-task-variation": [
+        "chuffed-fd",
+        "or-tools_cp-sat-par",
+        "gecode-par"
+      ]
+    },
+    "llama-3.3-70b-versatile": {
+      "atsp": [
+        "gecode-par",
+        "chuffed-fd",
+        "or-tools_cp-sat-par"
+      ],
+      "black-hole": [
+        "gecode-par",
+        "chuffed-fd",
+        "or-tools_cp-sat-par"
+      ],
+      "carpet-cutting": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "cgt": [
+        "gecode-par",
+        "chuffed-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "EchoSched": [
+        "gecode-par",
+        "chuffed-par",
+        "or-tools_cp-sat-par"
+      ],
+      "fbd1": [
+        "gecode-par",
+        "chuffed-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "groupsplitter": [
+        "gecode-par",
+        "chuffed-par",
+        "or-tools_cp-sat-par"
+      ],
+      "gt-sort": [
+        "gecode-par",
+        "chuffed-fd",
+        "or-tools_cp-sat-par"
+      ],
+      "hitori": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "gecode-fd"
+      ],
+      "ihtc-2024-kletzander": [
+        "gecode-par",
+        "chuffed-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "ihtc-2024-marte": [
+        "gecode-par",
+        "chuffed-par",
+        "or-tools_cp-sat-par"
+      ],
+      "is": [
+        "or-tools_cp-sat-par",
+        "chuffed-fd",
+        "gecode-par"
+      ],
+      "mondoku": [
+        "gecode-par",
+        "chuffed-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "products-and-shelves": [
+        "gecode-par",
+        "chuffed-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "proteindesign12": [
+        "gecode-fd",
+        "chuffed-fd",
+        "or-tools_cp-sat-fd"
+      ],
+      "skill-allocation": [
+        "gecode-par",
+        "chuffed-fd",
+        "choco-solver__cp_-par"
+      ],
+      "stripboard": [
+        "gecode-par",
+        "chuffed-fd",
+        "or-tools_cp-sat-par"
+      ],
+      "tower": [
+        "gecode-par",
+        "chuffed-par",
+        "or-tools_cp-sat-par"
+      ],
+      "tsptw": [
+        "or-tools_cp-sat-fd",
+        "or-tools_cp-sat-par",
+        "chuffed-fd"
+      ],
+      "work-task-variation": [
+        "or-tools_cp-sat-fd",
+        "chuffed-fd",
+        "gecode-fd"
+      ]
+    }
+  }
+}

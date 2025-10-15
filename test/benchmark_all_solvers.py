@@ -174,7 +174,7 @@ for provider, models, query_func in [
             continue
 
 # Save results with filename depending on solver set
-result_filename = f"LLMsuggestions_{args.solver_set}.json"
+result_filename = f"LLMsuggestions_{args.solver_set}_{args.script_version}.json"
 with open(result_filename, "w") as f:
     json.dump(results, f, indent=2)
 
