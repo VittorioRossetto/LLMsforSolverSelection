@@ -79,8 +79,8 @@
   },
   "products-and-shelves": {
     "description": "3D bin-packing problem for warehouse shelving. Places products on shelves to minimize the number of shelves used, without rotations.",
-    "script": "./mznc2025_probs/products-and-shelves/products-and-shelves.mzn",
-    "script_commented": "./mznc2025_probs/products-and-shelves/products-and-shelves_commented.mzn",
+    "script": "./mznc2025_probs/products-and-shelves/product-and-shelves.mzn",
+    "script_commented": "./mznc2025_probs/products-and-shelves/product-and-shelves_commented.mzn",
     "top3_solvers": ["Chuffed", "OR-Tools CP-SAT", "HiGHS"]
   },
   "proteindesign12": {
