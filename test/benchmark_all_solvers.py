@@ -113,14 +113,34 @@ for provider, models, query_func in [
             else:
                 script_path = prob.get('script', '')
 
-            # If script_path points to a file under ./mznc2025_probs/<problem>/..., look for .dzn files in the same folder
+            # Find the full .mzn script path and gather .dzn instance files in that directory.
             instance_files = []
-            if script_path.startswith('./'):
-                # resolve path relative to repo root (script lives in test/)
-                rel_path = script_path[2:]
-                repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-                full_script_path = os.path.join(repo_root, rel_path)
-                # read the base mzn script
+
+            def find_full_script(script_path):
+                """Return absolute path to the .mzn script if found, else None."""
+                # candidate 1: path relative to repo root (handles './mznc2025_probs/...')
+                if script_path.startswith('./'):
+                    rel_path = script_path[2:]
+                    candidate = os.path.join(repo_root, rel_path)
+                    if os.path.exists(candidate):
+                        return candidate
+                # candidate 2: absolute path
+                if os.path.isabs(script_path) and os.path.exists(script_path):
+                    return script_path
+                # candidate 3: path relative to repo root directly
+                candidate = os.path.join(repo_root, script_path)
+                if os.path.exists(candidate):
+                    return candidate
+                # candidate 4: search for the basename under mznc2025_probs
+                basename = os.path.basename(script_path)
+                search_root = os.path.join(repo_root, 'mznc2025_probs')
+                for root, dirs, files in os.walk(search_root):
+                    if basename in files:
+                        return os.path.join(root, basename)
+                return None
+
+            full_script_path = find_full_script(script_path)
+            if full_script_path:
                 try:
                     with open(full_script_path, 'r') as sf:
                         script = sf.read()
@@ -130,28 +150,11 @@ for provider, models, query_func in [
                 script_dir = os.path.dirname(full_script_path)
                 if os.path.isdir(script_dir):
                     for fname in os.listdir(script_dir):
-                        if fname.endswith('.dzn'):
+                        if fname.lower().endswith('.dzn') or fname.lower().endswith('.json'):
                             instance_files.append(os.path.join(script_dir, fname))
             else:
-                # non-relative path (may be absolute or relative to repo root)
-                # try absolute first, then relative to repo root
-                if os.path.isabs(script_path) and os.path.exists(script_path):
-                    script = script_path
-                    script_dir = os.path.dirname(script_path)
-                else:
-                    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-                    candidate = os.path.join(repo_root, script_path)
-                    if os.path.exists(candidate):
-                        script = candidate
-                        script_dir = os.path.dirname(candidate)
-                    else:
-                        script = script_path
-                        script_dir = os.path.dirname(script_path)
-
-                if os.path.isdir(script_dir):
-                    for fname in os.listdir(script_dir):
-                        if fname.endswith('.dzn'):
-                            instance_files.append(os.path.join(script_dir, fname))
+                # fallback: use script_path as-is (may be inline or unreachable)
+                script = script_path
 
             # If no instance files found, run once with no instance (use None marker)
             if not instance_files:
@@ -174,10 +177,10 @@ for provider, models, query_func in [
                 solver_prompt = get_solver_prompt(solver_list, name_only=True)
 
                 if instance_content:
-                    prompt = f"\n\nMiniZinc model:\n{script}\n\nMiniZinc data (.dzn):\n{instance_content}\n\n{solver_prompt}"
+                    prompt = f"\n\nMiniZinc model:\n{script}\n\nMiniZinc data:\n{instance_content}\n\n{solver_prompt}"
                 else:
                     prompt = f"\n\nMiniZinc model:\n{script}\n\n{solver_prompt}"
-
+                
                 retry_count = 0
                 skip_problem = False
                 while True:
