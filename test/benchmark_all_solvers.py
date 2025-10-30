@@ -1,9 +1,13 @@
 import json
 import time
 import re
+import os
 import argparse
 import sys
-sys.path.insert(1, '../')
+
+# Ensure repo root is on sys.path so imports work when running from test/
+repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(1, repo_root)
 
 from utils import *
 
@@ -24,8 +28,8 @@ VERY_LIMITED_MODELS = ['allam-2-7b']
 # Use '--solver-set all' for the full solver list
 
 parser = argparse.ArgumentParser(description="Benchmark LLM solver recommendations on MiniZinc problems.")
-parser.add_argument('--solver-set', choices=['minizinc', 'all'], default='minizinc',
-                    help="Which solver set to use in the prompt: 'minizinc' (default) or 'all'.")
+parser.add_argument('--solver-set', choices=['minizinc', 'all', 'free'], default='minizinc',
+                    help="Which solver set to use in the prompt: 'minizinc' (default) or 'all', 'free'.")
 parser.add_argument('--script-version', choices=['uncommented', 'commented'], default='uncommented',
                     help="Which script version to use: 'uncommented' (default) or 'commented'.")
 args = parser.parse_args()
@@ -34,14 +38,20 @@ args = parser.parse_args()
 if args.solver_set == 'all':
     solver_list = ALL_SOLVERS
     print("Using ALL_SOLVERS set for prompt.")
+elif args.solver_set == 'free':
+    solver_list = FREE_SOLVERS
+    print("Using FREE_SOLVERS set for prompt.")
 else:
     solver_list = MINIZINC_SOLVERS
     print("Using MINIZINC_SOLVERS set for prompt.")
 
 print(f"Using script version: {args.script_version}")
 
-# Load all problems
-dataset_path = "../mznc2025_probs/problems_with_descriptions.json"
+# Repository root (allow running from inside `test/`)
+repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
+# Load all problems (use absolute path so script can be run from any cwd)
+dataset_path = os.path.join(repo_root, "mznc2025_probs", "problems_with_descriptions.json")
 problems = load_problems(dataset_path)
 
 results = {}
@@ -103,70 +113,126 @@ for provider, models, query_func in [
             else:
                 script_path = prob.get('script', '')
 
-            # Read file if path is given
+            # If script_path points to a file under ./mznc2025_probs/<problem>/..., look for .dzn files in the same folder
+            instance_files = []
             if script_path.startswith('./'):
+                # resolve path relative to repo root (script lives in test/)
+                rel_path = script_path[2:]
+                repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+                full_script_path = os.path.join(repo_root, rel_path)
+                # read the base mzn script
                 try:
-                    with open(script_path[2:], 'r') as sf:
+                    with open(full_script_path, 'r') as sf:
                         script = sf.read()
                 except Exception as e:
-                    script = f"[Error reading {script_path}: {e}]"
+                    script = f"[Error reading {full_script_path}: {e}]"
+
+                script_dir = os.path.dirname(full_script_path)
+                if os.path.isdir(script_dir):
+                    for fname in os.listdir(script_dir):
+                        if fname.endswith('.dzn'):
+                            instance_files.append(os.path.join(script_dir, fname))
             else:
-                script = script_path
-
-            # Use get_solver_prompt to build the prompt for the selected solver set
-            solver_prompt = get_solver_prompt(solver_list, name_only=True)
-            prompt = f"\n\nMiniZinc model:\n{script}\n\n{solver_prompt}"
-
-
-            retry_count = 0
-            skip_problem = False
-            while True:
-                try:
-                    response = query_func(prompt, model_name=model_id)
-                    break  # success → exit retry loop
-                except Exception as e:
-                    err_text = str(e)
-                    print(f"  ERROR for model {model_id} on problem {prob_key}: {err_text}")
-
-                    should_retry, delay, is_503_like = handle_api_error(e)
-                    is_413 = "413" in err_text or "request too large" in err_text.lower() or "context_length" in err_text.lower()
-                    retry_count += 1 if should_retry else 0
-
-                    # If 503/unavailable/overloaded, skip model after 3 tries
-                    if is_503_like and retry_count > 3:
-                        print(f"503 error persisted after 3 retries — skipping model {model_id}.")
-                        skip_model = True
-                        break
-                    # If 413/request too large, skip this problem after 3 tries
-                    if is_413 and retry_count > 3:
-                        print(f"413 error (request too large) persisted after 3 retries — skipping problem {prob_key} for model {model_id}.")
-                        skip_problem = True
-                        break
-                    if should_retry:
-                        print(f"  → Retrying {prob_key} (attempt {retry_count}) after {delay:.1f}s...")
-                        time.sleep(delay)
-                        continue  # retry same problem
+                # non-relative path (may be absolute or relative to repo root)
+                # try absolute first, then relative to repo root
+                if os.path.isabs(script_path) and os.path.exists(script_path):
+                    script = script_path
+                    script_dir = os.path.dirname(script_path)
+                else:
+                    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+                    candidate = os.path.join(repo_root, script_path)
+                    if os.path.exists(candidate):
+                        script = candidate
+                        script_dir = os.path.dirname(candidate)
                     else:
-                        print(f"  Skipping model {model_id} for provider {provider} due to non-retryable error.")
-                        skip_model = True
-                        break
+                        script = script_path
+                        script_dir = os.path.dirname(script_path)
 
-            if skip_model:
-                break  # skip rest of problems for this model
-            if skip_problem:
-                print(f"  Skipped problem {prob_key} for model {model_id} due to persistent 413 error.")
-                i += 1
-                continue
+                if os.path.isdir(script_dir):
+                    for fname in os.listdir(script_dir):
+                        if fname.endswith('.dzn'):
+                            instance_files.append(os.path.join(script_dir, fname))
 
-            # Parse solver names
-            match = re.search(r"\[([^\]]+)\]", response)
-            llm_top3 = [s.strip() for s in match.group(1).split(',')] if match else []
+            # If no instance files found, run once with no instance (use None marker)
+            if not instance_files:
+                instance_files = [None]
 
-            results[provider][model_id][prob_key] = llm_top3
-            print(f"  {prob_key}: {llm_top3}")
+            # For each instance (or single None), build prompt and query
+            for inst in instance_files:
+                inst_label = os.path.basename(inst) if inst else 'base'
 
-            # Small delay between requests
-            time.sleep(1)
+                # If there is an instance file, read its content and include in the prompt
+                instance_content = ''
+                if inst:
+                    try:
+                        with open(inst, 'r') as inf:
+                            instance_content = inf.read()
+                    except Exception as e:
+                        instance_content = f"[Error reading instance {inst}: {e}]"
+
+                # Use get_solver_prompt to build the prompt for the selected solver set
+                solver_prompt = get_solver_prompt(solver_list, name_only=True)
+
+                if instance_content:
+                    prompt = f"\n\nMiniZinc model:\n{script}\n\nMiniZinc data (.dzn):\n{instance_content}\n\n{solver_prompt}"
+                else:
+                    prompt = f"\n\nMiniZinc model:\n{script}\n\n{solver_prompt}"
+
+                retry_count = 0
+                skip_problem = False
+                while True:
+                    try:
+                        start_time = time.time()
+                        response = query_func(prompt, model_name=model_id)
+                        duration = time.time() - start_time
+                        break  # success → exit retry loop
+                    except Exception as e:
+                        err_text = str(e)
+                        print(f"  ERROR for model {model_id} on problem {prob_key} (instance={inst_label}): {err_text}")
+
+                        should_retry, delay, is_503_like = handle_api_error(e)
+                        is_413 = "413" in err_text or "request too large" in err_text.lower() or "context_length" in err_text.lower()
+                        retry_count += 1 if should_retry else 0
+
+                        # If 503/unavailable/overloaded, skip model after 3 tries
+                        if is_503_like and retry_count > 3:
+                            print(f"503 error persisted after 3 retries — skipping model {model_id}.")
+                            skip_model = True
+                            break
+                        # If 413/request too large, skip this problem/instance after 3 tries
+                        if is_413 and retry_count > 3:
+                            print(f"413 error (request too large) persisted after 3 retries — skipping problem {prob_key} instance {inst_label} for model {model_id}.")
+                            skip_problem = True
+                            break
+                        if should_retry:
+                            print(f"  → Retrying {prob_key} (instance={inst_label}) (attempt {retry_count}) after {delay:.1f}s...")
+                            time.sleep(delay)
+                            continue  # retry same problem/instance
+                        else:
+                            print(f"  Skipping model {model_id} for provider {provider} due to non-retryable error.")
+                            skip_model = True
+                            break
+
+                if skip_model:
+                    break  # skip rest of problems for this model
+                if skip_problem:
+                    print(f"  Skipped problem {prob_key} instance {inst_label} for model {model_id} due to persistent 413 error.")
+                    continue
+
+                # Parse solver names
+                match = re.search(r"\[([^\]]+)\]", response)
+                llm_top3 = [s.strip() for s in match.group(1).split(',')] if match else []
+
+                # Store per-instance results including last-response time (seconds)
+                results[provider][model_id].setdefault(prob_key, {})[inst_label] = {
+                    'top3': llm_top3,
+                    'time_seconds': round(duration, 3) if 'duration' in locals() else None
+                }
+                print(f"  {prob_key} (instance={inst_label}): {llm_top3} (time={results[provider][model_id][prob_key][inst_label]['time_seconds']}s)")
+
+                # Small delay between requests
+                time.sleep(1)
+
             i += 1  # next problem
 
         if skip_model:
