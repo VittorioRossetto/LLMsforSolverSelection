@@ -18,19 +18,25 @@ NON_TESTABLE_MODELS = [
     'gemini-2.0-flash-lite', 'gemma2-9b-it', 'whisper-large-v3-turbo'
 ]
 IGNORED_MODELS = [
-    'meta-llama/llama-prompt-guard-2-22m', 'meta-llama/llama-prompt-guard-2-86m'
+    'meta-llama/llama-prompt-guard-2-22m', 'meta-llama/llama-prompt-guard-2-86m',
 ]
+
+TOP_MODELS = ['gemini-2.5-flash-lite', 'gemini-2.5-flash', 'moonshotai/kimi-k2-instruct', 'moonshotai/kimi-k2-instruct-0905', 'openai/gpt-oss-120b']
 
 # --- Argument parsing ---
 parser = argparse.ArgumentParser(description="Benchmark LLM solver recommendations on MiniZinc problems.")
-parser.add_argument('--solver-set', choices=['minizinc', 'all', 'free'], default='minizinc',
-                    help="Solver set: 'minizinc' (default), 'all', or 'free'.")
+parser.add_argument('--solver-set', choices=['minizinc', 'all', 'free'], default='free',
+                    help="Solver set: 'minizinc', 'all', or 'free' (default).")
 parser.add_argument('--script-version', choices=['uncommented', 'commented'], default='uncommented',
                     help="MiniZinc script version to use.")
-parser.add_argument('--max-workers-models', type=int, default=4,
-                    help="Number of models to query in parallel (default=4).")
-parser.add_argument('--max-workers-instances', type=int, default=5,
-                    help="Number of concurrent instance queries per model (default=5).")
+parser.add_argument('--max-workers-models', type=int, default=5,
+                    help="Number of models to query in parallel (default=5).")
+parser.add_argument('--max-workers-instances', type=int, default=1,
+                    help="Number of concurrent instance queries per model (default=1).")
+parser.add_argument('--top-only', action='store_true', default=False,
+                    help="If set, only query models listed in TOP_MODELS.")
+parser.add_argument('--dry-run', action='store_true', default=False,
+                    help="If set, print planned models and instance counts and exit without querying LLMs.")
 args = parser.parse_args()
 
 # --- Solver set selection ---
@@ -47,6 +53,8 @@ else:
 print(f"Script version: {args.script_version}")
 print(f"Parallel model workers: {args.max_workers_models}")
 print(f"Parallel instance workers: {args.max_workers_instances}")
+if args.top_only:
+    print("Filtering to TOP_MODELS only.")
 
 # --- Load problems ---
 repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -195,7 +203,59 @@ for provider, models, query_func in [
     ("groq", GROQ_MODELS, query_groq),
 ]:
     for model_id, model_label in models:
+        # If top-only requested, skip models not in TOP_MODELS
+        if args.top_only and model_id not in TOP_MODELS:
+            continue
         all_models.append((provider, model_id, model_label, query_func))
+
+# --- Verbose listing: print which models will be queried ---
+print(f"\nPlanned models to query (count={len(all_models)}):")
+for prov, mid, mlabel, _ in all_models:
+    print(f" - {prov}: {mid} ({mlabel})")
+if not all_models:
+    print("Warning: no models selected. Check --top-only or the model lists in utils.py.")
+
+if args.dry_run:
+    # Compute instance filenames per problem (independent of model)
+    problem_instances = {}
+    total_instances = 0
+    for prob_key, prob in problems.items():
+        script_path = prob.get('script_commented' if args.script_version == 'commented' else 'script', '')
+        full_script_path = find_full_script(script_path)
+        inst_names = []
+        if full_script_path:
+            try:
+                script_dir = os.path.dirname(full_script_path)
+                for fname in sorted(os.listdir(script_dir)):
+                    if fname.lower().endswith(('.dzn', '.json')):
+                        inst_names.append(fname)
+            except Exception:
+                inst_names = []
+        # if no instance files found, use a placeholder 'base'
+        if not inst_names:
+            inst_names = ['base']
+        problem_instances[prob_key] = inst_names
+        total_instances += len(inst_names)
+
+    print(f"\nDry-run summary:")
+    print(f" - problems discovered: {len(problem_instances)}")
+    print(f" - total instances (per problem instances summed): {total_instances}")
+    per_model_tasks = total_instances
+    print(f" - tasks per model: {per_model_tasks}")
+    print(f" - models selected: {len(all_models)}")
+    print(f" - total tasks if executed: {per_model_tasks * len(all_models)}")
+
+    # show a short sample of problems with their instance names
+    print('\nSample problem instance names (first 20 problems):')
+    for i, (p, names) in enumerate(sorted(problem_instances.items())):
+        if i >= 20:
+            break
+        sample_names = ', '.join(names[:20])
+        more = '...' if len(names) > 20 else ''
+        print(f"  {p}: {len(names)} instances -> [{sample_names}]{more}")
+
+    print('\nDry-run complete — no LLM queries were made. Remove --dry-run to execute.')
+    sys.exit(0)
 
 results = {}
 with ThreadPoolExecutor(max_workers=args.max_workers_models) as model_executor, \

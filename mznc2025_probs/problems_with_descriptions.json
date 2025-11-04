@@ -91,8 +91,8 @@
   },
   "skill-allocation": {
     "description": "Assigns engineers to jobs while allowing skill training. Considers job/skill matching, location, and training budget constraints.",
-    "script": "./mznc2025_probs/skill-allocation/skill-allocation_only.mzn",
-    "script_commented": "./mznc2025_probs/skill-allocation/skill-allocation_only_commented.mzn",
+    "script": "./mznc2025_probs/skill-allocation/skill_allocation_only.mzn",
+    "script_commented": "./mznc2025_probs/skill-allocation/skill_allocation_only_commented.mzn",
     "top3_solvers": ["OR-Tools CP-SAT", "Chuffed", "HiGHS"]
   },
   "stripboard": {
