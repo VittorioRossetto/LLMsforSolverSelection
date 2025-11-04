@@ -77,6 +77,80 @@ def handle_api_error(e):
     return should_retry, delay, is_503_like
 
 
+def load_model_contexts(grok_json_path=os.path.join(repo_root, 'grok_models.json')):
+    """Loads model context window info from grok_models.json if available.
+    Returns a dict mapping model_id -> context_window (int tokens).
+    """
+    contexts = {}
+    try:
+        if os.path.exists(grok_json_path):
+            with open(grok_json_path, 'r') as gf:
+                data = json.load(gf)
+            for entry in data.get('data', []):
+                mid = entry.get('id')
+                cw = entry.get('context_window')
+                if mid and cw:
+                    contexts[mid] = int(cw)
+    except Exception:
+        pass
+    return contexts
+
+
+def estimate_tokens(text: str) -> int:
+    """Conservative token estimate: use characters/4 heuristic.
+
+    This is an approximation to avoid importing provider-specific tokenizers.
+    """
+    if not text:
+        return 0
+    # count characters (not bytes) and use 4 chars ~= 1 token heuristic
+    return max(1, int(len(text) / 4))
+
+
+def truncate_script_to_budget(script: str, allowed_tokens: int):
+    """Truncate the script to approximately allowed_tokens.
+
+    Returns (new_script, was_truncated).
+    """
+    if allowed_tokens <= 0:
+        return ("% [Model script removed due to token limits]\n", True)
+
+    # quick check
+    current_tokens = estimate_tokens(script)
+    if current_tokens <= allowed_tokens:
+        return script, False
+    # still too large: truncate by characters using heuristic (4 chars per token)
+    allowed_chars = max(20, allowed_tokens * 4)
+    truncated = script[:allowed_chars]
+    # ensure we end on a newline and add a clear truncation marker as a comment
+    truncated = truncated.rstrip() + "\n% [TRUNCATED: script shortened to fit model context]\n"
+    return truncated, True
+
+
+# Load model context windows once
+MODEL_CONTEXTS = load_model_contexts()
+
+
+def get_allowed_total_tokens_for_model(model_id, model_label, fallback_budget=250000, safety_margin=256):
+    """Return allowed total tokens for a model after applying safety margin.
+
+    Uses MODEL_CONTEXTS (loaded from grok_models.json) when available. The
+    fallback_budget is tuned lower than before to be conservative for general use.
+    Returns (allowed_total_tokens, resolved_model_budget).
+    """
+    model_budget = MODEL_CONTEXTS.get(model_id, None)
+    if model_budget is None and model_label:
+        # best-effort match by label substring
+        for mid, cw in MODEL_CONTEXTS.items():
+            if model_label.lower() in mid.lower():
+                model_budget = cw
+                break
+    if model_budget is None:
+        model_budget = int(fallback_budget)
+    allowed = max(0, int(model_budget) - int(safety_margin))
+    return allowed, int(model_budget)
+
+
 def run_single_query(provider, model_id, prob_key, inst_label, prompt, query_func):
     """Executes one LLM query with retry handling."""
     retry_count = 0
@@ -158,6 +232,9 @@ def process_model(provider, model_id, model_label, query_func):
     total_tasks = len(problem_instance_pairs)
     if total_tasks == 0:
         return provider, model_id, {}
+    # Determine model context budget (tokens). Use grok_models.json when available,
+    # otherwise fall back to a tuned conservative default. Uses helper for consistency.
+    allowed_total_tokens, model_budget = get_allowed_total_tokens_for_model(model_id, model_label)
 
     with ThreadPoolExecutor(max_workers=args.max_workers_instances) as executor, \
          tqdm(total=total_tasks, desc=f"{provider}/{model_id}", leave=False) as pbar:
@@ -174,10 +251,30 @@ def process_model(provider, model_id, model_label, query_func):
                     instance_content = f"[Error reading {inst}: {e}]"
 
             solver_prompt = get_solver_prompt(solver_list, name_only=True)
-            prompt = f"\n\nMiniZinc model:\n{script}\n\n"
+
+            # Estimate tokens for non-script parts (instance data + solver prompt)
+            non_script_text = "\n\n"
+            if instance_content:
+                non_script_text += f"MiniZinc data:\n{instance_content}\n\n"
+            non_script_text += solver_prompt
+            non_script_tokens = estimate_tokens(non_script_text)
+
+            # Compute allowed tokens for the script portion and truncate if needed
+            allowed_script_tokens = allowed_total_tokens - non_script_tokens
+            if allowed_script_tokens < 0:
+                allowed_script_tokens = 0
+
+            safe_script, was_truncated = truncate_script_to_budget(script, allowed_script_tokens)
+            if was_truncated:
+                # add a short marker to the prompt explaining truncation
+                trunc_note = "% [Model script truncated to fit model context window]\n"
+            else:
+                trunc_note = ""
+
+            prompt = f"\n\nMiniZinc model:\n{safe_script}\n\n"
             if instance_content:
                 prompt += f"MiniZinc data:\n{instance_content}\n\n"
-            prompt += solver_prompt
+            prompt += trunc_note + solver_prompt
 
             futures[executor.submit(run_single_query, provider, model_id, prob_key, inst_label, prompt, query_func)] = (prob_key, inst_label)
 
@@ -255,6 +352,72 @@ if args.dry_run:
         print(f"  {p}: {len(names)} instances -> [{sample_names}]{more}")
 
     print('\nDry-run complete — no LLM queries were made. Remove --dry-run to execute.')
+    # --- Dry-run truncation diagnostic: simulate truncation per selected model ---
+    print('\nDry-run truncation diagnostic: simulating which tasks would be truncated')
+    trunc_examples_to_show = 5
+    for prov, mid, mlabel, _ in all_models:
+        allowed_total_tokens, model_budget = get_allowed_total_tokens_for_model(mid, mlabel)
+        truncated_tasks = []
+        # iterate problems and their instance names
+        for prob_key, inst_names in sorted(problem_instances.items()):
+            # find script content for this problem
+            prob = problems.get(prob_key, {})
+            script_path = prob.get('script_commented' if args.script_version == 'commented' else 'script', '')
+            full_script_path = find_full_script(script_path)
+            if full_script_path and os.path.exists(full_script_path):
+                try:
+                    with open(full_script_path, 'r') as sf:
+                        script_text = sf.read()
+                except Exception:
+                    script_text = ''
+            else:
+                script_text = script_path
+
+            for inst_name in inst_names:
+                # read instance content when available
+                instance_content = ''
+                if inst_name != 'base':
+                    inst_path = None
+                    if full_script_path:
+                        inst_path = os.path.join(os.path.dirname(full_script_path), inst_name)
+                    else:
+                        # fallback: try to find the file in mznc2025_probs
+                        inst_path = None
+                    if inst_path and os.path.exists(inst_path):
+                        try:
+                            with open(inst_path, 'r') as inf:
+                                instance_content = inf.read()
+                        except Exception:
+                            instance_content = ''
+
+                solver_prompt = get_solver_prompt(solver_list, name_only=True)
+                non_script_text = "\n\n"
+                if instance_content:
+                    non_script_text += f"MiniZinc data:\n{instance_content}\n\n"
+                non_script_text += solver_prompt
+                non_script_tokens = estimate_tokens(non_script_text)
+                allowed_script_tokens = allowed_total_tokens - non_script_tokens
+                if allowed_script_tokens < 0:
+                    allowed_script_tokens = 0
+
+                orig_script_tokens = estimate_tokens(script_text)
+                # determine if truncation would occur
+                _, was_truncated = truncate_script_to_budget(script_text, allowed_script_tokens)
+                if was_truncated:
+                    truncated_tasks.append((prob_key, inst_name, orig_script_tokens, non_script_tokens, allowed_script_tokens))
+                # small optimization: if truncated tasks grows large, keep scanning but only store first N
+                if len(truncated_tasks) > 200:
+                    # avoid unbounded memory use on pathological repos
+                    break
+        if not truncated_tasks:
+            print(f" - {prov}:{mid} -> no truncation predicted (model budget={model_budget} tokens)")
+        else:
+            print(f" - {prov}:{mid} -> {len(truncated_tasks)} tasks would be truncated (model budget={model_budget} tokens). Examples:")
+            for ex in truncated_tasks[:trunc_examples_to_show]:
+                pk, iname, orig_toks, non_script_toks, allowed_toks = ex
+                print(f"    {pk}/{iname}: script_tokens~{orig_toks}, non_script_tokens~{non_script_toks}, allowed_script_tokens~{allowed_toks}")
+
+    print('\nDry-run complete — no LLM queries were made. Remove --dry-run to execute.')
     sys.exit(0)
 
 results = {}
@@ -270,7 +433,7 @@ with ThreadPoolExecutor(max_workers=args.max_workers_models) as model_executor, 
         global_bar.update(1)
 
 # --- Save results ---
-output_file = f"LLMsuggestions_{args.solver_set}_{args.script_version}.json"
+output_file = f"LLMsuggestions_{args.solver_set}_{args.script_version}_{args.top_only}.json"
 with open(output_file, "w") as f:
     json.dump(results, f, indent=2)
 
