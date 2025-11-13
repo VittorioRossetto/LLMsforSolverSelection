@@ -1,0 +1,26 @@
+{
+  "STOCK": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+  ],
+  "trades":   "trades": [{
+      "date": 0, "trade": "Buy", "stock": "A", "units": 10, "price": 9523
+    }, {
+      "date": 0, "trade": "Buy", "stock": "B", "units": 9, "price": 10174
+    }, {
+      "date": 0, "trade": "Buy", "stock": "C", "units": 9, "price": 10559
+    }, {
+      "date": 0, "trade": "Buy", "stock": "D", "units": 11, "price": 8466
+    }, {
+      "date": 0, "trade": "Buy", "stock": "E", "units": 12, "price": 8058
+    }, {
+      "date": 0, "trade": "Buy", "stock": "F", "units": 8, "price": 11839
+    }] // array too long to display, dimensions: (620)
+
+}

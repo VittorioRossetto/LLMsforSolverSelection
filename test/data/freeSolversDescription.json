@@ -1,0 +1,22 @@
+{
+  "atlantis-free": "A free constraint-based optimization and SAT solver that targets combinatorial problems, offering hybrid modeling and efficient search strategies across diverse domains.",
+  "cbc-free": "COIN-OR Branch-and-Cut (CBC) is an open-source MILP solver specializing in integer and linear optimization, widely used as a robust and lightweight alternative to commercial engines.",
+  "choco-solver__cp_-free": "A free configuration of Choco Solver, a Java-based constraint programming toolkit supporting finite domain constraints and offering customizable search strategies for discrete optimization.",
+  "choco-solver__cp_-par": "A parallel configuration of Choco Solver that exploits multi-threaded search, improving runtimes on hard combinatorial problems while retaining its flexible Java modeling interface.",
+  "choco-solver__cp-sat_-free": "A Choco Solver mode that integrates CP with SAT-style reasoning to handle complex and hybrid combinatorial models more efficiently in a free configuration.",
+  "chuffed-free": "A free, high-performance CP solver leveraging Lazy Clause Generation to combine SAT-like learning with traditional CP techniques, especially suited for rich scheduling and routing tasks.",
+  "cp_optimizer-free": "A free edition of IBM CP Optimizer, a powerful constraint programming solver tailored for scheduling, planning, and sequencing, providing strong propagation and heuristic search.",
+  "cplex-free": "A no-cost version of IBM CPLEX, a top-tier solver supporting LP, MILP, and QP, known for fast branch-and-bound, presolve, and cutting-plane methods; commonly used in academia.",
+  "gurobi-free": "A free (typically academic) version of Gurobi, a leading commercial solver for LP, MILP, QP, and more, recognized for state-of-the-art performance, parallelization, and tuning tools.",
+  "highs-free": "An open-source suite for LP, MILP, and QP that includes simplex and interior-point methods; designed to be lightweight, modern, and easy to integrate into scientific workflows.",
+  "huub-free": "A free constraint programming solver supporting expressive modeling and modern search heuristics, positioned for practical combinatorial decision and scheduling tasks.",
+  "izplus-free": "A free solver from the MiniZinc ecosystem that blends constraint and logic programming; supports expressive modeling and integrates cleanly with MiniZinc workflows.",
+  "jacop-free": "JaCoP is an open-source Java CP solver providing advanced propagators and search heuristics, especially popular in education and prototyping of discrete decision models.",
+  "or-tools_cp-sat-free": "A free solver from Google OR-Tools implementing CP-SAT, combining SAT learning with MILP-style reasoning to efficiently solve large-scale scheduling and routing models.",
+  "or-tools_cp-sat_ls-free": "A variant of OR-Tools CP-SAT with local-search and metaheuristic enhancements, suited for large or highly-structured combinatorial optimization models.",
+  "picatsat-free": "A free SAT/CP-hybrid solver integrated with the Picat language, enabling concise modeling with logic, tabling, and pattern-based constructs for combinatorial tasks.",
+  "pumpkin-free": "A free SAT and Max-SAT solver aimed at optimization-centric Boolean reasoning, providing clause learning and heuristics suitable for decision and cost-based models.",
+  "scip-free": "A free solver that unifies mixed-integer programming and constraint programming with nonlinear extensions; known for strong presolve, cutting planes, and flexibility.",
+  "sicstus_prolog-free": "A free edition of SICStus Prolog that blends Prolog with constraint logic programming capabilities, enabling expressive models for combinatorial reasoning and inference.",
+  "yuck-free": "A free constraint-based solver employing heuristics and local search to tackle combinatorial, optimization, and scheduling problems with concise modeling constructs."
+}

@@ -1,0 +1,4 @@
+n = 11;
+clue = clue = [| 11,  8, 10,  2,  4,  5,  2,  6,  6,  3,  3
+ | 11... ]; // array too long to display, dimensions: (111)
+

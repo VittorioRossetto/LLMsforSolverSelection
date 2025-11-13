@@ -1,0 +1,4208 @@
+{
+  "gemini": {
+    "gemini-2.5-flash-lite": {
+      "atsp": {
+        "instance14_0p25": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 2.176
+        },
+        "instance11_0p25": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 1.853
+        },
+        "instance1_0p05": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 1.448
+        },
+        "instance4_0p15": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 1.934
+        },
+        "instance20_0p35": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 4.9
+        }
+      },
+      "black-hole": {
+        "layout_14": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 10.943
+        },
+        "layout_27": {
+          "top3": [
+            "choco-solver__cp_-free",
+            "chuffed-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 1.392
+        },
+        "layout_17": {
+          "top3": [
+            "choco-solver__cp_-par",
+            "chuffed-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 1.245
+        },
+        "layout_25": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 1.827
+        },
+        "layout_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-par",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 1.021
+        }
+      },
+      "carpet-cutting": {
+        "cc_rnd_8_1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-par"
+          ],
+          "time_seconds": 1.466
+        },
+        "cc_rnd_12_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 1.167
+        },
+        "cc_rnd_16_1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 1.125
+        },
+        "cc_rnd_4_4": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-par",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.993
+        },
+        "cc_rnd_8_2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.919
+        }
+      },
+      "cgt": {
+        "cgt_5_h27_r0.05_s0.8_0": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 3.862
+        },
+        "cgt_3_h39_r0.05_s1_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 1.048
+        },
+        "cgt_12_h27_r0.05_s0.5_3": {
+          "top3": [
+            "choco-solver__cp_-par",
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 0.82
+        },
+        "cgt_8_h16_r0.05_s0.5_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 1.115
+        },
+        "cgt_3_h39_r0.05_s0.5_0": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 1.284
+        }
+      },
+      "EchoSched": {
+        "15-15-0-1_3": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 1.235
+        },
+        "12-12-0-1_7": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 1.02
+        },
+        "13-14-0-2_6": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.797
+        },
+        "14-10-0-2_1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.942
+        },
+        "14-10-0-2_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 0.757
+        }
+      },
+      "fbd1": {
+        "FBDk04": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 10.611
+        },
+        "FBDk06": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.617
+        },
+        "FBDk08": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-par",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.572
+        },
+        "FBDk07": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.666
+        },
+        "FBDk09": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.745
+        }
+      },
+      "groupsplitter": {
+        "u12g2pref0": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 5.301
+        },
+        "u12g2pref2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-par"
+          ],
+          "time_seconds": 1.297
+        },
+        "u15g5pref1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-par",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.832
+        },
+        "u15g1pref2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-par"
+          ],
+          "time_seconds": 0.928
+        },
+        "u15g3pref0": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-par"
+          ],
+          "time_seconds": 0.997
+        }
+      },
+      "gt-sort": {
+        "n9_ub10_50.0_BEST": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.776
+        },
+        "n13_ub20_50.0_BEST": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.872
+        },
+        "n7_ub20_75.0_BEST": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.954
+        },
+        "n9_ub10_75.0_BEST": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 1.083
+        },
+        "n9_ub30_35.0_BEST": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.76
+        }
+      },
+      "hitori": {
+        "h11-1": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-par"
+          ],
+          "time_seconds": 0.788
+        },
+        "h5-1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 0.756
+        },
+        "h15-1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.863
+        },
+        "h20-2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 11.14
+        },
+        "h14-1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 0.881
+        }
+      },
+      "ihtc-2024-kletzander": {
+        "test05": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 0.893
+        },
+        "test03": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-par"
+          ],
+          "time_seconds": 1.264
+        },
+        "i09": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-par",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 5.147
+        },
+        "i02": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 1.202
+        },
+        "i07": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-par",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 1.024
+        }
+      },
+      "ihtc-2024-marte": {
+        "i14": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 1.639
+        },
+        "i06": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-par"
+          ],
+          "time_seconds": 5.325
+        },
+        "i01": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 1.454
+        },
+        "i11": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 1.817
+        },
+        "i03": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-par",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 3.691
+        }
+      },
+      "is": {
+        "BnMUR3YMRk": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-par"
+          ],
+          "time_seconds": 1.224
+        },
+        "avdoaYnfXq": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 1.267
+        },
+        "1vERFuvviS": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 1.19
+        },
+        "9aGFgDaHX7": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 8.514
+        },
+        "vWQp9idqMs": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 0.919
+        }
+      },
+      "mondoku": {
+        "12-12-8": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 0.962
+        },
+        "20-18-9": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 0.756
+        },
+        "14-14-8": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 0.705
+        },
+        "8-8-4": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 0.846
+        },
+        "10-10-6": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.591
+        }
+      },
+      "products-and-shelves": {
+        "ps-25-03": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 1.054
+        },
+        "ps-25-01": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 5.309
+        },
+        "ps-50-06": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 1.225
+        },
+        "ps-50-09": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 0.875
+        },
+        "toy": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 0.697
+        }
+      },
+      "proteindesign12": {
+        "1HZ5.12p.19aa.usingEref_self": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 0.905
+        },
+        "2TRX.11p.8aa.usingEref_self_x": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-par"
+          ],
+          "time_seconds": 0.944
+        },
+        "1UBI.13p.9aa.usingEref_self_x": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.736
+        },
+        "1UBI.13p.19aa.usingEref_self": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 3.055
+        },
+        "1HZ5.12p.9aa.usingEref_self": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.855
+        }
+      },
+      "skill-allocation": {
+        "skill_allocation_mzn_3m_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-par",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.854
+        },
+        "skill_allocation_mzn_2w_2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 3.161
+        },
+        "skill_allocation_mzn_5d_1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 1.019
+        },
+        "skill_allocation_mzn_2m_2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 1.145
+        },
+        "skill_allocation_mzn_1m_2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 0.923
+        }
+      },
+      "stripboard": {
+        "stripboard_w20_h15_l12_c6_n12": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.896
+        },
+        "stripboard_w15_h10_l12_c6_n12": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-par",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 1.016
+        },
+        "stripboard_w20_h15_l7_c6_n24": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 1.732
+        },
+        "stripboard_w10_h10_l12_c4_n24": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 0.997
+        },
+        "stripboard_w20_h15_l4_c4_n24": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.919
+        }
+      },
+      "tower": {
+        "tower_070_070_30_100-02": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-par",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.869
+        },
+        "tower_070_070_15_070-08": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.966
+        },
+        "tower_070_070_15_070-02": {
+          "top3": [
+            "\"or-tools_cp-sat-free\"",
+            "\"cp_optimizer-free\"",
+            "\"choco-solver__cp_-par\""
+          ],
+          "time_seconds": 1.095
+        },
+        "tower_500_500_50_300-05": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-par",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 5.431
+        },
+        "tower_050_050_10_050-03": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 3.071
+        }
+      },
+      "tsptw": {
+        "n20w140.005": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.965
+        },
+        "n20w180.004": {
+          "top3": [
+            "choco-solver__cp_-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 1.056
+        },
+        "n100w120.003": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-par",
+            "chuffed-free"
+          ],
+          "time_seconds": 1.15
+        },
+        "n80w180.003": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.766
+        },
+        "n20w160.001": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.79
+        }
+      },
+      "work-task-variation": {
+        "generated-seed-10-length-12-open-10-workers-12-block-5": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.775
+        },
+        "generated-seed-1-length-16-open-14-workers-12-block-15": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.672
+        },
+        "generated-seed-4-length-14-open-12-workers-12-block-15": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.724
+        },
+        "generated-seed-8-length-12-open-10-workers-10-block-15": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-par"
+          ],
+          "time_seconds": 0.717
+        },
+        "generated-seed-3-length-10-open-8-workers-12-block-15": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.871
+        }
+      }
+    },
+    "gemini-2.5-flash": {
+      "atsp": {
+        "instance14_0p25": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 15.072
+        },
+        "instance11_0p25": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 25.466
+        },
+        "instance1_0p05": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 17.563
+        },
+        "instance4_0p15": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 13.136
+        },
+        "instance20_0p35": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 13.103
+        }
+      },
+      "black-hole": {
+        "layout_14": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 15.284
+        },
+        "layout_27": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 11.12
+        },
+        "layout_17": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 14.888
+        },
+        "layout_25": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 18.012
+        },
+        "layout_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 16.26
+        }
+      },
+      "carpet-cutting": {
+        "cc_rnd_8_1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 17.843
+        },
+        "cc_rnd_12_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 14.383
+        },
+        "cc_rnd_16_1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 16.621
+        },
+        "cc_rnd_4_4": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 19.735
+        },
+        "cc_rnd_8_2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 16.787
+        }
+      },
+      "cgt": {
+        "cgt_5_h27_r0.05_s0.8_0": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 11.998
+        },
+        "cgt_3_h39_r0.05_s1_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 16.727
+        },
+        "cgt_12_h27_r0.05_s0.5_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 16.811
+        },
+        "cgt_8_h16_r0.05_s0.5_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 16.314
+        },
+        "cgt_3_h39_r0.05_s0.5_0": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 19.313
+        }
+      },
+      "EchoSched": {
+        "15-15-0-1_3": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 14.088
+        },
+        "12-12-0-1_7": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 17.519
+        },
+        "13-14-0-2_6": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 19.711
+        },
+        "14-10-0-2_1": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 15.104
+        },
+        "14-10-0-2_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 16.208
+        }
+      },
+      "fbd1": {
+        "FBDk04": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 14.523
+        },
+        "FBDk06": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "pumpkin-free"
+          ],
+          "time_seconds": 17.407
+        },
+        "FBDk08": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 10.798
+        },
+        "FBDk07": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 12.286
+        },
+        "FBDk09": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 16.032
+        }
+      },
+      "groupsplitter": {
+        "u12g2pref0": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 16.59
+        },
+        "u12g2pref2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "pumpkin-free"
+          ],
+          "time_seconds": 20.429
+        },
+        "u15g5pref1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 12.388
+        },
+        "u15g1pref2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "scip-free"
+          ],
+          "time_seconds": 19.831
+        },
+        "u15g3pref0": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 18.611
+        }
+      },
+      "gt-sort": {
+        "n9_ub10_50.0_BEST": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp_-par"
+          ],
+          "time_seconds": 24.19
+        },
+        "n13_ub20_50.0_BEST": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 19.984
+        },
+        "n7_ub20_75.0_BEST": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 19.972
+        },
+        "n9_ub10_75.0_BEST": {
+          "top3": [
+            "choco-solver__cp_-free",
+            "jacop-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 24.978
+        },
+        "n9_ub30_35.0_BEST": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 24.368
+        }
+      },
+      "hitori": {
+        "h11-1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 16.043
+        },
+        "h5-1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 17.549
+        },
+        "h15-1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 18.231
+        },
+        "h20-2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 17.745
+        },
+        "h14-1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 22.103
+        }
+      },
+      "ihtc-2024-kletzander": {
+        "test05": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 28.484
+        },
+        "test03": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 43.871
+        },
+        "i09": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 26.876
+        },
+        "i02": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 36.228
+        },
+        "i07": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 37.254
+        }
+      },
+      "ihtc-2024-marte": {
+        "i14": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 22.039
+        },
+        "i06": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 14.896
+        },
+        "i01": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 17.804
+        },
+        "i11": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 16.475
+        },
+        "i03": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 13.816
+        }
+      },
+      "is": {
+        "BnMUR3YMRk": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 11.602
+        },
+        "avdoaYnfXq": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 16.124
+        },
+        "1vERFuvviS": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 18.974
+        },
+        "9aGFgDaHX7": {
+          "top3": [],
+          "time_seconds": 23.585
+        },
+        "vWQp9idqMs": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 19.271
+        }
+      },
+      "mondoku": {
+        "12-12-8": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 18.883
+        },
+        "20-18-9": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 20.798
+        },
+        "14-14-8": {
+          "top3": [],
+          "time_seconds": 17.614
+        },
+        "8-8-4": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 18.432
+        },
+        "10-10-6": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 18.434
+        }
+      },
+      "products-and-shelves": {
+        "ps-25-03": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 14.579
+        },
+        "ps-25-01": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 14.308
+        },
+        "ps-50-06": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 13.301
+        },
+        "ps-50-09": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 11.668
+        },
+        "toy": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 13.304
+        }
+      },
+      "proteindesign12": {
+        "1HZ5.12p.19aa.usingEref_self": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 14.116
+        },
+        "2TRX.11p.8aa.usingEref_self_x": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 16.003
+        },
+        "1UBI.13p.9aa.usingEref_self_x": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 21.043
+        },
+        "1UBI.13p.19aa.usingEref_self": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 15.532
+        },
+        "1HZ5.12p.9aa.usingEref_self": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 17.919
+        }
+      },
+      "skill-allocation": {
+        "skill_allocation_mzn_3m_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 15.762
+        },
+        "skill_allocation_mzn_2w_2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 14.333
+        },
+        "skill_allocation_mzn_5d_1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 16.587
+        },
+        "skill_allocation_mzn_2m_2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 15.998
+        },
+        "skill_allocation_mzn_1m_2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 15.759
+        }
+      },
+      "stripboard": {
+        "stripboard_w20_h15_l12_c6_n12": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 13.396
+        },
+        "stripboard_w15_h10_l12_c6_n12": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 14.897
+        },
+        "stripboard_w20_h15_l7_c6_n24": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 18.543
+        },
+        "stripboard_w10_h10_l12_c4_n24": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 17.679
+        },
+        "stripboard_w20_h15_l4_c4_n24": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 18.927
+        }
+      },
+      "tower": {
+        "tower_070_070_30_100-02": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 15.853
+        },
+        "tower_070_070_15_070-08": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 28.078
+        },
+        "tower_070_070_15_070-02": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "pumpkin-free"
+          ],
+          "time_seconds": 20.272
+        },
+        "tower_500_500_50_300-05": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 17.671
+        },
+        "tower_050_050_10_050-03": {
+          "top3": [
+            "\"or-tools_cp-sat-free\"",
+            "\"cp_optimizer-free\"",
+            "\"choco-solver__cp-sat_-free\""
+          ],
+          "time_seconds": 18.011
+        }
+      },
+      "tsptw": {
+        "n20w140.005": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 15.932
+        },
+        "n20w180.004": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 9.692
+        },
+        "n100w120.003": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 10.301
+        },
+        "n80w180.003": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 10.524
+        },
+        "n20w160.001": {
+          "top3": [
+            "cp_optimizer-free",
+            "chuffed-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 14.545
+        }
+      },
+      "work-task-variation": {
+        "generated-seed-10-length-12-open-10-workers-12-block-5": {
+          "top3": [
+            "\"cp_optimizer-free\"",
+            "\"or-tools_cp-sat-free\"",
+            "\"chuffed-free\""
+          ],
+          "time_seconds": 15.353
+        },
+        "generated-seed-1-length-16-open-14-workers-12-block-15": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 15.249
+        },
+        "generated-seed-4-length-14-open-12-workers-12-block-15": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 17.272
+        },
+        "generated-seed-8-length-12-open-10-workers-10-block-15": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 11.103
+        },
+        "generated-seed-3-length-10-open-8-workers-12-block-15": {
+          "top3": [
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 15.974
+        }
+      }
+    }
+  },
+  "groq": {
+    "moonshotai/kimi-k2-instruct": {
+      "atsp": {
+        "instance14_0p25": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 1.044
+        },
+        "instance11_0p25": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "or-tools_cp-sat_ls-free"
+          ],
+          "time_seconds": 0.736
+        },
+        "instance1_0p05": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 1.01
+        },
+        "instance4_0p15": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "or-tools_cp-sat_ls-free"
+          ],
+          "time_seconds": 0.68
+        },
+        "instance20_0p35": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 0.66
+        }
+      },
+      "black-hole": {
+        "layout_14": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "huub-free"
+          ],
+          "time_seconds": 0.606
+        },
+        "layout_27": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "jacop-free"
+          ],
+          "time_seconds": 0.59
+        },
+        "layout_17": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "jacop-free"
+          ],
+          "time_seconds": 1.071
+        },
+        "layout_25": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 0.566
+        },
+        "layout_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "jacop-free"
+          ],
+          "time_seconds": 0.477
+        }
+      },
+      "carpet-cutting": {
+        "cc_rnd_8_1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 0.724
+        },
+        "cc_rnd_12_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 15.449
+        },
+        "cc_rnd_16_1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 0.842
+        },
+        "cc_rnd_4_4": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 5.189
+        },
+        "cc_rnd_8_2": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 7.689
+        }
+      },
+      "cgt": {
+        "cgt_5_h27_r0.05_s0.8_0": {
+          "top3": [
+            "choco-solver__cp_-par",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.932
+        },
+        "cgt_3_h39_r0.05_s1_3": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.669
+        },
+        "cgt_12_h27_r0.05_s0.5_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.802
+        },
+        "cgt_8_h16_r0.05_s0.5_3": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 4.832
+        },
+        "cgt_3_h39_r0.05_s0.5_0": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 3.7
+        }
+      },
+      "EchoSched": {
+        "15-15-0-1_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 1.119
+        },
+        "12-12-0-1_7": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 3.059
+        },
+        "13-14-0-2_6": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 0.703
+        },
+        "14-10-0-2_1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 4.853
+        },
+        "14-10-0-2_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 7.229
+        }
+      },
+      "fbd1": {
+        "FBDk04": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "jacop-free"
+          ],
+          "time_seconds": 0.536
+        },
+        "FBDk06": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.554
+        },
+        "FBDk08": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 0.56
+        },
+        "FBDk07": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 0.629
+        },
+        "FBDk09": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.583
+        }
+      },
+      "groupsplitter": {
+        "u12g2pref0": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 15.449
+        },
+        "u12g2pref2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 16.897
+        },
+        "u15g5pref1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 6.822
+        },
+        "u15g1pref2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 0.689
+        },
+        "u15g3pref0": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 10.179
+        }
+      },
+      "gt-sort": {
+        "n9_ub10_50.0_BEST": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.609
+        },
+        "n13_ub20_50.0_BEST": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.582
+        },
+        "n7_ub20_75.0_BEST": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 0.691
+        },
+        "n9_ub10_75.0_BEST": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 5.076
+        },
+        "n9_ub30_35.0_BEST": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 1.944
+        }
+      },
+      "hitori": {
+        "h11-1": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 6.26
+        },
+        "h5-1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 1.678
+        },
+        "h15-1": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 1.683
+        },
+        "h20-2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 11.145
+        },
+        "h14-1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 0.625
+        }
+      },
+      "ihtc-2024-kletzander": {
+        "test05": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 0.769
+        },
+        "test03": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 14.841
+        },
+        "i09": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "or-tools_cp-sat_ls-free"
+          ],
+          "time_seconds": 6.292
+        },
+        "i02": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 9.834
+        },
+        "i07": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "or-tools_cp-sat_ls-free"
+          ],
+          "time_seconds": 6.054
+        }
+      },
+      "ihtc-2024-marte": {
+        "i14": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "or-tools_cp-sat_ls-free"
+          ],
+          "time_seconds": 17.206
+        },
+        "i06": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 35.431
+        },
+        "i01": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 8.913
+        },
+        "i11": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 0.739
+        },
+        "i03": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.688
+        }
+      },
+      "is": {
+        "BnMUR3YMRk": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.946
+        },
+        "avdoaYnfXq": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 24.182
+        },
+        "1vERFuvviS": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 17.368
+        },
+        "9aGFgDaHX7": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "or-tools_cp-sat_ls-free"
+          ],
+          "time_seconds": 4.404
+        },
+        "vWQp9idqMs": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 17.498
+        }
+      },
+      "mondoku": {
+        "12-12-8": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "huub-free"
+          ],
+          "time_seconds": 0.578
+        },
+        "20-18-9": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 0.487
+        },
+        "14-14-8": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "jacop-free"
+          ],
+          "time_seconds": 0.498
+        },
+        "8-8-4": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "jacop-free"
+          ],
+          "time_seconds": 0.567
+        },
+        "10-10-6": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "huub-free"
+          ],
+          "time_seconds": 0.482
+        }
+      },
+      "products-and-shelves": {
+        "ps-25-03": {
+          "top3": [
+            "choco-solver__cp_-free",
+            "chuffed-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 0.547
+        },
+        "ps-25-01": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "sicstus_prolog-free"
+          ],
+          "time_seconds": 0.563
+        },
+        "ps-50-06": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.588
+        },
+        "ps-50-09": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 5.61
+        },
+        "toy": {
+          "top3": [
+            "choco-solver__cp_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.603
+        }
+      },
+      "proteindesign12": {
+        "1HZ5.12p.19aa.usingEref_self": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.723
+        },
+        "2TRX.11p.8aa.usingEref_self_x": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 0.682
+        },
+        "1UBI.13p.9aa.usingEref_self_x": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 5.845
+        },
+        "1UBI.13p.19aa.usingEref_self": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 9.413
+        },
+        "1HZ5.12p.9aa.usingEref_self": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 11.529
+        }
+      },
+      "skill-allocation": {
+        "skill_allocation_mzn_3m_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 2.334
+        },
+        "skill_allocation_mzn_2w_2": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 9.902
+        },
+        "skill_allocation_mzn_5d_1": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.814
+        },
+        "skill_allocation_mzn_2m_2": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "or-tools_cp-sat_ls-free"
+          ],
+          "time_seconds": 3.798
+        },
+        "skill_allocation_mzn_1m_2": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "or-tools_cp-sat_ls-free"
+          ],
+          "time_seconds": 0.766
+        }
+      },
+      "stripboard": {
+        "stripboard_w20_h15_l12_c6_n12": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 11.054
+        },
+        "stripboard_w15_h10_l12_c6_n12": {
+          "top3": [
+            "choco-solver__cp_-par",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 14.294
+        },
+        "stripboard_w20_h15_l7_c6_n24": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 0.643
+        },
+        "stripboard_w10_h10_l12_c4_n24": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "or-tools_cp-sat_ls-free"
+          ],
+          "time_seconds": 0.589
+        },
+        "stripboard_w20_h15_l4_c4_n24": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 0.557
+        }
+      },
+      "tower": {
+        "tower_070_070_30_100-02": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 0.645
+        },
+        "tower_070_070_15_070-08": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 0.515
+        },
+        "tower_070_070_15_070-02": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 0.971
+        },
+        "tower_500_500_50_300-05": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 4.341
+        },
+        "tower_050_050_10_050-03": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 1.333
+        }
+      },
+      "tsptw": {
+        "n20w140.005": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 1.127
+        },
+        "n20w180.004": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 1.386
+        },
+        "n100w120.003": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "or-tools_cp-sat_ls-free"
+          ],
+          "time_seconds": 1.0
+        },
+        "n80w180.003": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 4.581
+        },
+        "n20w160.001": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 3.979
+        }
+      },
+      "work-task-variation": {
+        "generated-seed-10-length-12-open-10-workers-12-block-5": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 7.197
+        },
+        "generated-seed-1-length-16-open-14-workers-12-block-15": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 7.979
+        },
+        "generated-seed-4-length-14-open-12-workers-12-block-15": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 3.813
+        },
+        "generated-seed-8-length-12-open-10-workers-10-block-15": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 4.439
+        },
+        "generated-seed-3-length-10-open-8-workers-12-block-15": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 5.325
+        }
+      }
+    },
+    "moonshotai/kimi-k2-instruct-0905": {
+      "atsp": {
+        "instance14_0p25": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 1.044
+        },
+        "instance11_0p25": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 0.525
+        },
+        "instance1_0p05": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 1.21
+        },
+        "instance4_0p15": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "or-tools_cp-sat_ls-free"
+          ],
+          "time_seconds": 0.704
+        },
+        "instance20_0p35": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 0.638
+        }
+      },
+      "black-hole": {
+        "layout_14": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 0.646
+        },
+        "layout_27": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "or-tools_cp-sat_ls-free"
+          ],
+          "time_seconds": 0.576
+        },
+        "layout_17": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "jacop-free"
+          ],
+          "time_seconds": 0.489
+        },
+        "layout_25": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 0.605
+        },
+        "layout_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.601
+        }
+      },
+      "carpet-cutting": {
+        "cc_rnd_8_1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 0.773
+        },
+        "cc_rnd_12_3": {
+          "top3": [
+            "choco-solver__cp_-par",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 17.647
+        },
+        "cc_rnd_16_1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 5.003
+        },
+        "cc_rnd_4_4": {
+          "top3": [
+            "choco-solver__cp_-par",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 6.88
+        },
+        "cc_rnd_8_2": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 2.795
+        }
+      },
+      "cgt": {
+        "cgt_5_h27_r0.05_s0.8_0": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.56
+        },
+        "cgt_3_h39_r0.05_s1_3": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.596
+        },
+        "cgt_12_h27_r0.05_s0.5_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 2.755
+        },
+        "cgt_8_h16_r0.05_s0.5_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cplex-free"
+          ],
+          "time_seconds": 0.531
+        },
+        "cgt_3_h39_r0.05_s0.5_0": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 0.641
+        }
+      },
+      "EchoSched": {
+        "15-15-0-1_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 0.617
+        },
+        "12-12-0-1_7": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.661
+        },
+        "13-14-0-2_6": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 0.576
+        },
+        "14-10-0-2_1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 5.854
+        },
+        "14-10-0-2_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 5.889
+        }
+      },
+      "fbd1": {
+        "FBDk04": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 1.758
+        },
+        "FBDk06": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 3.709
+        },
+        "FBDk08": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 4.353
+        },
+        "FBDk07": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 3.214
+        },
+        "FBDk09": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 0.921
+        }
+      },
+      "groupsplitter": {
+        "u12g2pref0": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 17.185
+        },
+        "u12g2pref2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 14.149
+        },
+        "u15g5pref1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 1.031
+        },
+        "u15g1pref2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 10.026
+        },
+        "u15g3pref0": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 4.839
+        }
+      },
+      "gt-sort": {
+        "n9_ub10_50.0_BEST": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 0.559
+        },
+        "n13_ub20_50.0_BEST": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 4.97
+        },
+        "n7_ub20_75.0_BEST": {
+          "top3": [
+            "choco-solver__cp_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.626
+        },
+        "n9_ub10_75.0_BEST": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.653
+        },
+        "n9_ub30_35.0_BEST": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "jacop-free"
+          ],
+          "time_seconds": 0.981
+        }
+      },
+      "hitori": {
+        "h11-1": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.72
+        },
+        "h5-1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "jacop-free"
+          ],
+          "time_seconds": 0.544
+        },
+        "h15-1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 3.092
+        },
+        "h20-2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "jaCoP-free"
+          ],
+          "time_seconds": 14.976
+        },
+        "h14-1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 0.687
+        }
+      },
+      "ihtc-2024-kletzander": {
+        "test05": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 4.829
+        },
+        "test03": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 1.05
+        },
+        "i09": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 22.296
+        },
+        "i02": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 1.025
+        },
+        "i07": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "huub-free"
+          ],
+          "time_seconds": 7.308
+        }
+      },
+      "ihtc-2024-marte": {
+        "i14": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 33.742
+        },
+        "i06": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.689
+        },
+        "i01": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 3.313
+        },
+        "i11": {
+          "top3": [
+            "choco-solver__cp_-par",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 4.506
+        },
+        "i03": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 7.17
+        }
+      },
+      "is": {
+        "BnMUR3YMRk": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 27.727
+        },
+        "avdoaYnfXq": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 30.03
+        },
+        "1vERFuvviS": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 1.223
+        },
+        "9aGFgDaHX7": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 10.853
+        },
+        "vWQp9idqMs": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 5.694
+        }
+      },
+      "mondoku": {
+        "12-12-8": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "huub-free"
+          ],
+          "time_seconds": 0.859
+        },
+        "20-18-9": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.83
+        },
+        "14-14-8": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "jacop-free"
+          ],
+          "time_seconds": 1.014
+        },
+        "8-8-4": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 1.891
+        },
+        "10-10-6": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 0.54
+        }
+      },
+      "products-and-shelves": {
+        "ps-25-03": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.765
+        },
+        "ps-25-01": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "huub-free"
+          ],
+          "time_seconds": 0.638
+        },
+        "ps-50-06": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 7.012
+        },
+        "ps-50-09": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "huub-free"
+          ],
+          "time_seconds": 1.994
+        },
+        "toy": {
+          "top3": [
+            "choco-solver__cp_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 1.633
+        }
+      },
+      "proteindesign12": {
+        "1HZ5.12p.19aa.usingEref_self": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 7.422
+        },
+        "2TRX.11p.8aa.usingEref_self_x": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 0.573
+        },
+        "1UBI.13p.9aa.usingEref_self_x": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "or-tools_cp-sat_ls-free"
+          ],
+          "time_seconds": 1.805
+        },
+        "1UBI.13p.19aa.usingEref_self": {
+          "top3": [
+            "choco-solver__cp_-par",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 15.354
+        },
+        "1HZ5.12p.9aa.usingEref_self": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 0.768
+        }
+      },
+      "skill-allocation": {
+        "skill_allocation_mzn_3m_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 1.152
+        },
+        "skill_allocation_mzn_2w_2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 2.733
+        },
+        "skill_allocation_mzn_5d_1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "huub-free"
+          ],
+          "time_seconds": 4.072
+        },
+        "skill_allocation_mzn_2m_2": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gecode-free"
+          ],
+          "time_seconds": 4.328
+        },
+        "skill_allocation_mzn_1m_2": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "huub-free"
+          ],
+          "time_seconds": 3.937
+        }
+      },
+      "stripboard": {
+        "stripboard_w20_h15_l12_c6_n12": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 10.21
+        },
+        "stripboard_w15_h10_l12_c6_n12": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 15.557
+        },
+        "stripboard_w20_h15_l7_c6_n24": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 10.343
+        },
+        "stripboard_w10_h10_l12_c4_n24": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 2.676
+        },
+        "stripboard_w20_h15_l4_c4_n24": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 6.788
+        }
+      },
+      "tower": {
+        "tower_070_070_30_100-02": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 1.384
+        },
+        "tower_070_070_15_070-08": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 10.266
+        },
+        "tower_070_070_15_070-02": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "jacop-free"
+          ],
+          "time_seconds": 10.002
+        },
+        "tower_500_500_50_300-05": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 11.198
+        },
+        "tower_050_050_10_050-03": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 4.992
+        }
+      },
+      "tsptw": {
+        "n20w140.005": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "choco-solver__cp-sat_-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 1.167
+        },
+        "n20w180.004": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 1.002
+        },
+        "n100w120.003": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 2.55
+        },
+        "n80w180.003": {
+          "top3": [
+            "choco-solver__cp-sat_-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 5.134
+        },
+        "n20w160.001": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 2.868
+        }
+      },
+      "work-task-variation": {
+        "generated-seed-10-length-12-open-10-workers-12-block-5": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 6.868
+        },
+        "generated-seed-1-length-16-open-14-workers-12-block-15": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 9.139
+        },
+        "generated-seed-4-length-14-open-12-workers-12-block-15": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "huub-free"
+          ],
+          "time_seconds": 3.107
+        },
+        "generated-seed-8-length-12-open-10-workers-10-block-15": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "gurobi-free"
+          ],
+          "time_seconds": 0.994
+        },
+        "generated-seed-3-length-10-open-8-workers-12-block-15": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 4.981
+        }
+      }
+    },
+    "openai/gpt-oss-120b": {
+      "atsp": {
+        "instance14_0p25": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 1.059
+        },
+        "instance11_0p25": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 1.36
+        },
+        "instance1_0p05": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 0.778
+        },
+        "instance4_0p15": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 0.807
+        },
+        "instance20_0p35": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 1.822
+        }
+      },
+      "black-hole": {
+        "layout_14": {
+          "top3": [
+            "chuffed-free",
+            "picatsat-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 0.698
+        },
+        "layout_27": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 0.801
+        },
+        "layout_17": {
+          "top3": [
+            "chuffed-free",
+            "picatsat-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 4.982
+        },
+        "layout_25": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 10.694
+        },
+        "layout_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 1.228
+        }
+      },
+      "carpet-cutting": {
+        "cc_rnd_8_1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 21.617
+        },
+        "cc_rnd_12_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 26.92
+        },
+        "cc_rnd_16_1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 23.755
+        },
+        "cc_rnd_4_4": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 26.564
+        },
+        "cc_rnd_8_2": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 7.648
+        }
+      },
+      "cgt": {
+        "cgt_5_h27_r0.05_s0.8_0": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 16.899
+        },
+        "cgt_3_h39_r0.05_s1_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 4.561
+        },
+        "cgt_12_h27_r0.05_s0.5_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 4.196
+        },
+        "cgt_8_h16_r0.05_s0.5_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 11.813
+        },
+        "cgt_3_h39_r0.05_s0.5_0": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 4.358
+        }
+      },
+      "EchoSched": {
+        "15-15-0-1_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 6.193
+        },
+        "12-12-0-1_7": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 15.225
+        },
+        "13-14-0-2_6": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 4.191
+        },
+        "14-10-0-2_1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 11.628
+        },
+        "14-10-0-2_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 10.215
+        }
+      },
+      "fbd1": {
+        "FBDk04": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 4.513
+        },
+        "FBDk06": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 6.544
+        },
+        "FBDk08": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 5.737
+        },
+        "FBDk07": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 8.55
+        },
+        "FBDk09": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 2.049
+        }
+      },
+      "groupsplitter": {
+        "u12g2pref0": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 23.306
+        },
+        "u12g2pref2": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 23.543
+        },
+        "u15g5pref1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 9.941
+        },
+        "u15g1pref2": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 22.538
+        },
+        "u15g3pref0": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 25.388
+        }
+      },
+      "gt-sort": {
+        "n9_ub10_50.0_BEST": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "yuck-free"
+          ],
+          "time_seconds": 1.39
+        },
+        "n13_ub20_50.0_BEST": {
+          "top3": [
+            "chuffed-free",
+            "yuck-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 1.144
+        },
+        "n7_ub20_75.0_BEST": {
+          "top3": [
+            "cp_optimizer-free",
+            "chuffed-free",
+            "scip-free"
+          ],
+          "time_seconds": 10.72
+        },
+        "n9_ub10_75.0_BEST": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "jacop-free"
+          ],
+          "time_seconds": 8.264
+        },
+        "n9_ub30_35.0_BEST": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "jacop-free"
+          ],
+          "time_seconds": 8.777
+        }
+      },
+      "hitori": {
+        "h11-1": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 15.419
+        },
+        "h5-1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 16.124
+        },
+        "h15-1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 11.268
+        },
+        "h20-2": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 16.175
+        },
+        "h14-1": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 1.241
+        }
+      },
+      "ihtc-2024-kletzander": {
+        "test05": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 12.487
+        },
+        "test03": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 24.577
+        },
+        "i09": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 26.53
+        },
+        "i02": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 13.139
+        },
+        "i07": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 33.544
+        }
+      },
+      "ihtc-2024-marte": {
+        "i14": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 32.505
+        },
+        "i06": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 51.574
+        },
+        "i01": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 3.496
+        },
+        "i11": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 44.431
+        },
+        "i03": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 45.641
+        }
+      },
+      "is": {
+        "BnMUR3YMRk": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 2.907
+        },
+        "avdoaYnfXq": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 38.662
+        },
+        "1vERFuvviS": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 21.263
+        },
+        "9aGFgDaHX7": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 31.66
+        },
+        "vWQp9idqMs": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 21.696
+        }
+      },
+      "mondoku": {
+        "12-12-8": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 10.653
+        },
+        "20-18-9": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 3.139
+        },
+        "14-14-8": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 8.44
+        },
+        "8-8-4": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 2.084
+        },
+        "10-10-6": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 8.314
+        }
+      },
+      "products-and-shelves": {
+        "ps-25-03": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 6.476
+        },
+        "ps-25-01": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 9.12
+        },
+        "ps-50-06": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 5.051
+        },
+        "ps-50-09": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 10.642
+        },
+        "toy": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 9.816
+        }
+      },
+      "proteindesign12": {
+        "1HZ5.12p.19aa.usingEref_self": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 11.42
+        },
+        "2TRX.11p.8aa.usingEref_self_x": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 21.146
+        },
+        "1UBI.13p.9aa.usingEref_self_x": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 13.944
+        },
+        "1UBI.13p.19aa.usingEref_self": {
+          "top3": [
+            "chuffed-free",
+            "picatsat-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 12.397
+        },
+        "1HZ5.12p.9aa.usingEref_self": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 19.996
+        }
+      },
+      "skill-allocation": {
+        "skill_allocation_mzn_3m_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 1.093
+        },
+        "skill_allocation_mzn_2w_2": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 12.784
+        },
+        "skill_allocation_mzn_5d_1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 8.193
+        },
+        "skill_allocation_mzn_2m_2": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 12.295
+        },
+        "skill_allocation_mzn_1m_2": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 8.406
+        }
+      },
+      "stripboard": {
+        "stripboard_w20_h15_l12_c6_n12": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "yuck-free"
+          ],
+          "time_seconds": 19.243
+        },
+        "stripboard_w15_h10_l12_c6_n12": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 20.723
+        },
+        "stripboard_w20_h15_l7_c6_n24": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 21.361
+        },
+        "stripboard_w10_h10_l12_c4_n24": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 21.355
+        },
+        "stripboard_w20_h15_l4_c4_n24": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 8.521
+        }
+      },
+      "tower": {
+        "tower_070_070_30_100-02": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 15.286
+        },
+        "tower_070_070_15_070-08": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 13.721
+        },
+        "tower_070_070_15_070-02": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 14.572
+        },
+        "tower_500_500_50_300-05": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 16.556
+        },
+        "tower_050_050_10_050-03": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 6.468
+        }
+      },
+      "tsptw": {
+        "n20w140.005": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 2.137
+        },
+        "n20w180.004": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 12.699
+        },
+        "n100w120.003": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 5.37
+        },
+        "n80w180.003": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 8.234
+        },
+        "n20w160.001": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 6.186
+        }
+      },
+      "work-task-variation": {
+        "generated-seed-10-length-12-open-10-workers-12-block-5": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 12.875
+        },
+        "generated-seed-1-length-16-open-14-workers-12-block-15": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 12.407
+        },
+        "generated-seed-4-length-14-open-12-workers-12-block-15": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 6.488
+        },
+        "generated-seed-8-length-12-open-10-workers-10-block-15": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 12.434
+        },
+        "generated-seed-3-length-10-open-8-workers-12-block-15": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 6.256
+        }
+      }
+    }
+  }
+}

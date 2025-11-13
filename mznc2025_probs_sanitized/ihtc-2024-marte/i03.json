@@ -1,0 +1,93 @@
+{
+  "age_groups": [
+    "infant",
+    "adult",
+    "elderly"
+  ],
+  "days": 14,
+  "genders": [
+    "A",
+    "B"
+  ],
+  "nurses":   "nurses": [
+    {
+      "id": "n00",
+      "index": 1,
+      ... ], // array too long to display, dimensions: (40)
+
+  "occupants":   "occupants": [
+    {
+      "age_group": "elderly",
+      "gender... ], // array too long to display, dimensions: (24)
+
+  "operating_theaters":   "operating_theaters": [
+    {
+      "availability": [
+        720,
+      ... ], // array too long to display, dimensions: (6)
+
+  "patients":   "patients":   "patients":   "patients": [{
+      "age_group": "adult", "gender": "B", "id":... ], // array too long to display, dimensions: (30)
+ // array too long to display, dimensions: (585)
+
+  "rooms": [
+    {
+      "capacity": 3,
+      "id": "r0",
+      "index": 1
+    },
+    {
+      "capacity": 4,
+      "id": "r1",
+      "index": 2
+    },
+    {
+      "capacity": 2,
+      "id": "r2",
+      "index": 3
+    },
+    {
+      "capacity": 3,
+      "id": "r3",
+      "index": 4
+    }
+  ],
+  "shift_types": [
+    "early",
+    "late",
+    "night"
+  ],
+  "skill_levels": 3,
+  "surgeons": [
+    {
+      "id": "s0",
+      "index": 1,
+      "max_surgery_time": [
+        0,
+        480,
+        360,
+        480,
+        0,
+        0,
+        0,
+        360,
+        480,
+        360,
+        0,
+        480,
+        0,
+        480
+      ]
+    }
+  ],
+  "weights": {
+    "continuity_of_care": 5,
+    "nurse_eccessive_workload": 5,
+    "open_operating_theater": 50,
+    "patient_delay": 15,
+    "room_mixed_age": 5,
+    "room_nurse_skill": 5,
+    "surgeon_transfer": 1,
+    "unscheduled_optional": 400
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "age_groups": [
+    "infant",
+    "adult",
+    "elderly"
+  ],
+  "days": 21,
+  "genders": [
+    "A",
+    "B"
+  ],
+  "nurses":   "nurses":   "nurses":   "nurses": [{
+      "id": "n000", "index": 1, "skill_level": 2... ], // array too long to display, dimensions: (30)
+ // array too long to display, dimensions: (64)
+
+  "occupants":   "occupants": [
+    {
+      "age_group": "elderly",
+      "gender... ], // array too long to display, dimensions: (96)
+
+  "operating_theaters":   "operating_theaters": [
+    {
+      "availability": [
+        0,
+        ... ], // array too long to display, dimensions: (6)
+
+  "patients":   "patients":   "patients":   "patients": [{
+      "age_group": "elderly", "gender": "B", "id... ], // array too long to display, dimensions: (30)
+ // array too long to display, dimensions: (1365)
+
+  "rooms": [
+    {
+      "capacity": 2,
+      "id": "r0",
+      "index": 1
+    },
+    {
+      "capacity": 2,
+      "id": "r1",
+      "index": 2
+    },
+    {
+      "capacity": 3,
+      "id": "r2",
+      "index": 3
+    },
+    {
+      "capacity": 2,
+      "id": "r3",
+      "index": 4
+    },
+    {
+      "capacity": 4,
+      "id": "r4",
+      "index": 5
+    },
+    {
+      "capacity": 4,
+      "id": "r5",
+      "index": 6
+    },
+    {
+      "capacity": 3,
+      "id": "r6",
+      "index": 7
+    }
+  ],
+  "shift_types": [
+    "early",
+    "late",
+    "night"
+  ],
+  "skill_levels": 3,
+  "surgeons": [
+    {
+      "id": "s0",
+      "index": 1,
+      "max_surgery_time": [
+        0,
+        600,
+        360,
+        480,
+        0,
+        0,
+        600,
+        360,
+        480,
+        480,
+        0,
+        0,
+        0,
+        360,
+        600,
+        360,
+        480,
+        0,
+        360,
+        480,
+        0
+      ]
+    }
+  ],
+  "weights": {
+    "continuity_of_care": 1,
+    "nurse_eccessive_workload": 5,
+    "open_operating_theater": 20,
+    "patient_delay": 5,
+    "room_mixed_age": 1,
+    "room_nurse_skill": 1,
+    "surgeon_transfer": 10,
+    "unscheduled_optional": 150
+  }
+}

@@ -6,11 +6,23 @@ import argparse
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm  # progress bars
+import logging
 
 # --- Setup imports ---
 repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, repo_root)
 from utils import *
+
+# --- Logging setup ---
+logger = logging.getLogger('benchmark_parallel')
+logger.setLevel(logging.INFO)
+_log_formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+_log_file = os.path.join(repo_root, 'benchmark_parallel.log')
+fh = logging.FileHandler(_log_file)
+fh.setFormatter(_log_formatter)
+logger.addHandler(fh)
+# avoid printing to console
+logger.propagate = False
 
 # --- Constants ---
 NON_TESTABLE_MODELS = [
@@ -37,6 +49,8 @@ parser.add_argument('--top-only', action='store_true', default=False,
                     help="If set, only query models listed in TOP_MODELS.")
 parser.add_argument('--dry-run', action='store_true', default=False,
                     help="If set, print planned models and instance counts and exit without querying LLMs.")
+parser.add_argument('--include-problem-desc', action='store_true', default=False,
+                    help="If set, include the problem description (from problems_with_descriptions.json) at the start of each prompt.")
 args = parser.parse_args()
 
 # --- Solver set selection ---
@@ -58,7 +72,7 @@ if args.top_only:
 
 # --- Load problems ---
 repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-dataset_path = os.path.join(repo_root, "mznc2025_probs", "problems_with_descriptions.json")
+dataset_path = os.path.join(repo_root, "mznc2025_probs_sanitized", "problems_with_descriptions.json")
 problems = load_problems(dataset_path)
 results = {}
 
@@ -92,7 +106,7 @@ def load_model_contexts(grok_json_path=os.path.join(repo_root, 'grok_models.json
                 if mid and cw:
                     contexts[mid] = int(cw)
     except Exception:
-        pass
+        logger.exception(f"Failed to load model contexts from {grok_json_path}")
     return contexts
 
 
@@ -164,6 +178,12 @@ def run_single_query(provider, model_id, prob_key, inst_label, prompt, query_fun
             return (prob_key, inst_label, llm_top3, round(duration, 3), None)
         except Exception as e:
             err_text = str(e)
+            # log the exception with context
+            try:
+                logger.exception(f"Error during query: provider={provider} model={model_id} problem={prob_key} instance={inst_label} error={err_text}")
+            except Exception:
+                # best-effort logging; do not break on logger issues
+                pass
             should_retry, delay, is_503_like = handle_api_error(e)
             retry_count += 1 if should_retry else 0
             if is_503_like and retry_count > 3:
@@ -189,7 +209,7 @@ def find_full_script(script_path):
     if os.path.exists(candidate):
         return candidate
     basename = os.path.basename(script_path)
-    search_root = os.path.join(repo_root, 'mznc2025_probs')
+    search_root = os.path.join(repo_root, 'mznc2025_probs_sanitized')
     for root, _, files in os.walk(search_root):
         if basename in files:
             return os.path.join(root, basename)
@@ -216,6 +236,7 @@ def process_model(provider, model_id, model_label, query_func):
                     script = f.read()
             except Exception as e:
                 script = f"[Error reading {full_script_path}: {e}]"
+                logger.exception(f"Error reading script file {full_script_path} for problem {prob_key}: {e}")
             script_dir = os.path.dirname(full_script_path)
             for fname in os.listdir(script_dir):
                 if fname.lower().endswith(('.dzn', '.json')):
@@ -241,7 +262,10 @@ def process_model(provider, model_id, model_label, query_func):
 
         futures = {}
         for prob_key, inst, script in problem_instance_pairs:
-            inst_label = os.path.basename(inst) if inst else 'base'
+            if inst:
+                inst_label = os.path.splitext(os.path.basename(inst))[0]
+            else:
+                inst_label = 'base'
             instance_content = ''
             if inst:
                 try:
@@ -249,11 +273,17 @@ def process_model(provider, model_id, model_label, query_func):
                         instance_content = f.read()
                 except Exception as e:
                     instance_content = f"[Error reading {inst}: {e}]"
+                    logger.exception(f"Error reading instance file {inst} for problem {prob_key}: {e}")
 
             solver_prompt = get_solver_prompt(solver_list, name_only=True)
 
-            # Estimate tokens for non-script parts (instance data + solver prompt)
+            # Estimate tokens for non-script parts (problem description + instance data + solver prompt)
             non_script_text = "\n\n"
+            if args.include_problem_desc:
+                prob_meta = problems.get(prob_key, {})
+                prob_desc = prob_meta.get('description', '')
+                if prob_desc:
+                    non_script_text += f"Problem description:\n{prob_desc}\n\n"
             if instance_content:
                 non_script_text += f"MiniZinc data:\n{instance_content}\n\n"
             non_script_text += solver_prompt
@@ -272,6 +302,12 @@ def process_model(provider, model_id, model_label, query_func):
                 trunc_note = ""
 
             prompt = f"\n\nMiniZinc model:\n{safe_script}\n\n"
+            # Optionally include the problem description (short) at the top of the prompt
+            if args.include_problem_desc:
+                prob_meta = problems.get(prob_key, {})
+                prob_desc = prob_meta.get('description', '')
+                if prob_desc:
+                    prompt = f"Problem description:\n{prob_desc}\n\n" + prompt
             if instance_content:
                 prompt += f"MiniZinc data:\n{instance_content}\n\n"
             prompt += trunc_note + solver_prompt
@@ -381,7 +417,7 @@ if args.dry_run:
                     if full_script_path:
                         inst_path = os.path.join(os.path.dirname(full_script_path), inst_name)
                     else:
-                        # fallback: try to find the file in mznc2025_probs
+                        # fallback: try to find the file in mznc2025_probs_sanitized
                         inst_path = None
                     if inst_path and os.path.exists(inst_path):
                         try:
@@ -433,8 +469,19 @@ with ThreadPoolExecutor(max_workers=args.max_workers_models) as model_executor, 
         global_bar.update(1)
 
 # --- Save results ---
-output_file = f"LLMsuggestions_{args.solver_set}_{args.script_version}_{args.top_only}.json"
+# build output filename with optional flags
+_suffix_parts = []
+if args.top_only:
+    _suffix_parts.append("top")
+if args.include_problem_desc:
+    _suffix_parts.append("desc")
+_suffix = ("_" + "_".join(_suffix_parts)) if _suffix_parts else ""
+output_file = f"LLMsuggestions_{args.solver_set}_{args.script_version}{_suffix}.json"
 with open(output_file, "w") as f:
-    json.dump(results, f, indent=2)
+    try:
+        json.dump(results, f, indent=2)
+    except Exception as e:
+        logger.exception(f"Failed to write results file {output_file}: {e}")
+        raise
 
 print(f"\nDone! Results saved to {output_file}")

@@ -51,7 +51,7 @@ ALL_SOLVERS = [
 FREE_SOLVERS = [
     "atlantis-free", "cbc-free", "choco-solver__cp_-free", "choco-solver__cp_-par", "choco-solver__cp-sat_-free", "chuffed-free",
     "cp_optimizer-free", "cplex-free","gurobi-free", "highs-free", "huub-free", "izplus-free", "jacop-free", "or-tools_cp-sat-free", 
-    "or-tools_cp-sat_ls-free", "picatsat-free", "pumpkin-free", "scip-free", "sicstus_prolog-free", "yuck-free",
+    "or-tools_cp-sat_ls-free", "picatsat-free", "pumpkin-free", "scip-free", "sicstus_prolog-free", "yuck-free"
 ]
 MINIZINC_SOLVERS = [
     "Gecode", "Chuffed", "Google OR-Tools CP-SAT", "HiGHS", "COIN-OR CBC"

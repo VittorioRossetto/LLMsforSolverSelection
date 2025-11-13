@@ -1,0 +1,22 @@
+Resources = {R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12};
+
+Activities = {T, S, W, o, b};
+
+slots = 144;
+
+fixed =
+fixed = [| R1: None, None, None, None, <>, <>, <>, <>, <>, <>, <>, <>, <>, <>, <>, <>, <>, <>, A(o), <>, <>, <>, <>, <>, <>, <>, <>, <>, A(b), A(o)]; // array too long to display, dimensions: (1717)
+
+
+requirements =
+requirements = [| T: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2]; // array too long to display, dimensions: (716)
+
+
+activity_run_cost = array2d(Activities, SlotsAndZero,
+activity_run_cost = [| T: 0, 300, 200, 100, 6, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 6, 8, 10, 12, 100, 200, 300, 400, 500, 600, 700, 800, 900] // array too long to display, dimensions: (721)
+);
+
+activity_frequency_cost = array2d(Activities, SlotsAndZero,
+activity_frequency_cost = [| T: 0, 52, 0, 0, 0, 0, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54] // array too long to display, dimensions: (721)
+);
+
