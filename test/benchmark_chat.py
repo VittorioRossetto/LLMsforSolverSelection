@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-"""Benchmark script that packs multiple instance prompts into chat-style conversations.
+"""
+Benchmark script that packs multiple instance prompts into chat-style conversations.
 
 This script follows the existing benchmarking logic but groups multiple instance
 prompts into a single chat conversation that starts with a solver-description
@@ -11,10 +11,8 @@ The script is conservative: it will attempt to call the provider's query functio
 with a `messages=` parameter (chat-style). If the provider wrapper does not
 support chat messages, it will fall back to joining the messages into a single
 string prompt and calling the non-chat API.
-
-This file is intentionally self-contained and does not modify the existing
-`test/benchmark_parallel.py` behaviour. Use it when you want chat-style batching.
 """
+
 import os
 import sys
 import json
@@ -81,7 +79,8 @@ def pack_instances_into_chats(solver_desc_text, common_instruction, script_text,
     returns: list of chats, where each chat is list of messages (dicts with role/content)
     """
     chats = []
-    base_non_script = estimate_tokens(solver_desc_text) + estimate_tokens(common_instruction)
+    # include the model script once per chat in the system message; account for its tokens
+    base_non_script = estimate_tokens(solver_desc_text) + estimate_tokens(common_instruction) + estimate_tokens(script_text)
     cur = []
     cur_tokens = base_non_script
     for inst_label, content in instances:
@@ -90,7 +89,16 @@ def pack_instances_into_chats(solver_desc_text, common_instruction, script_text,
         # if adding would exceed allowed_total_tokens, flush
         if cur and (cur_tokens + inst_tokens > allowed_total_tokens):
             # build messages for cur
-            msgs = [{'role': 'system', 'content': solver_desc_text},]
+            # keep solver descriptions and the model as two separate system messages
+            msgs = [
+                {'role': 'system', 'content': solver_desc_text},
+            ]
+            if script_text:
+                model_msg = {
+                    'role': 'system',
+                    'content': "MiniZinc model:\n" + script_text + "\n"
+                }
+                msgs.append(model_msg)
             for c_label, c_content in cur:
                 msgs.append({'role': 'user', 'content': f"Instance: {c_label}\nMiniZinc data:\n{c_content}\n\n{common_instruction}"})
             chats.append(msgs)
@@ -101,7 +109,11 @@ def pack_instances_into_chats(solver_desc_text, common_instruction, script_text,
             cur_tokens += inst_tokens
 
     if cur:
-        msgs = [{'role': 'system', 'content': solver_desc_text},]
+        msgs = [
+            {'role': 'system', 'content': solver_desc_text},
+        ]
+        if script_text:
+            msgs.append({'role': 'system', 'content': "MiniZinc model:\n" + script_text + "\n"})
         for c_label, c_content in cur:
             msgs.append({'role': 'user', 'content': f"Instance: {c_label}\nMiniZinc data:\n{c_content}\n\n{common_instruction}"})
         chats.append(msgs)
@@ -178,6 +190,16 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
         # show a few samples
         for i, (pk, msgs) in enumerate(all_chats[:10]):
             print(f"  sample {i+1}: problem={pk}, messages={len(msgs)}")
+        # print an example chat (safe-truncated) to help debugging prompt packing
+        if all_chats:
+            ex_pk, ex_msgs = all_chats[0]
+            print("\nExample chat messages (first chat):")
+            for m in ex_msgs:
+                content = m.get('content','')
+                # show at most 2000 chars per message to keep dry-run readable
+                snippet = content if len(content) <= 10000 else content[:10000] + '\n...[truncated]'
+                print(f"--- role: {m.get('role')} ---\n{snippet}\n")
+            print(f"(Example corresponds to problem: {ex_pk})\n")
         return provider, model_id, {}
 
     chats_results = {}
@@ -237,7 +259,8 @@ def main(argv=None):
     parser.add_argument('--max-workers-instances', type=int, default=1,
                         help='Number of concurrent chat sends per model (default=1)')
     parser.add_argument('--top-only', action='store_true', help='If set, only run models listed in TOP_MODELS')
-    parser.add_argument('--solver-desc-file', default=None)
+    parser.add_argument('--solver-desc-file', default='/test/data/freeSolversDescription.json',
+                        help='Path to JSON file with solver descriptions (default: test/data/freeSolversDescription.json)')
     args = parser.parse_args(argv)
 
     models = []
