@@ -21,12 +21,10 @@ set of int: demands = 1..num_demands;
 int: num_lines;
 set of int: lines = 1..num_lines;
 array[moulds] of int: available_moulds;
-array[moulds] of set of int: demanded_colors_for_mould = [
+array[moulds] of set of int: demanded_colors_for_mould = array[moulds] of set of int: demanded_colors_for_mould = [
                                                   {c | c in colors where
-                                                    exists(d in demands)(demand_color[d] = c
-                                                                         /\ demand_mould[d] = m)
-                                                  }
-                                                | m in moulds];
+      ... ]; // array too long to display, dimensions: (1)
+
 array[programs] of int: slots_per_program;
 array[0..num_programs] of int: slots_per_program_0 = array1d(0..num_programs, [0] ++ slots_per_program);
 array[programs] of int: cycle_time_for_program;
@@ -38,12 +36,9 @@ array[demands] of int: demand_qty;
 array[demands] of int: demand_duedate;
 array[demands] of colors: demand_color;
 array[demands] of moulds: demand_mould;
-array[demands] of set of int: compatible_demands = [
-                                                    {d2 | d2 in demands where  demand_duedate[d2] <= demand_duedate[d]
-                                                                               /\ demand_mould[d2] = demand_mould[d]
-                                                                               /\ demand_color[d2] = demand_color[d]
-                                                    }
-                                                    | d in demands];
+array[demands] of set of int: compatible_demands = array[demands] of set of int: compatible_demands = [
+                                                    {d2 | d2 in demands where  ... ]; // array too long to display, dimensions: (1)
+
 array[jobs] of var 0..num_programs: job_program;
 set of int: cycle_set = min_cycles_per_job..max_cycles_per_job;
 array[jobs] of var cycle_set: job_length;

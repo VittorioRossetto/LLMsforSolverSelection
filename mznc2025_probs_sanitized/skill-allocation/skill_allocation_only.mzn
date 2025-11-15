@@ -57,13 +57,10 @@ constraint objective == sum(e in ENGS, t in TRAINING)(
    new_skills[e,t] > 0
 );
 solve
-::seq_search( [
-    int_search([new_skills[e,t] | t in TRAINING, e in ENGS],input_order, indomain_min, complete),
-    int_search([allocations[i] | i in JOBS],input_order, indomain_min, complete),
-])
+::seq_search( constraint objective = = [
+    int_search([new_skills[e,t] | t in TRAINING, e in ENGS],input_order, indoma... ] // array too long to display, dimensions: (8)
+)
 minimize objective;
-output [
+output constraint objective = = [
 	"allocations = array1d(\(JOBS), \(allocations));\n",
-	"new_skills = array2d(\(ENGS), \(TRAINING), \(new_skills));\n",
-	"objective = \(objective);\n"
-];
+	"new_skills = array2d(\(... ]; // array too long to display, dimensions: (6)

@@ -17,9 +17,9 @@ array [RmRecs, Ori] of int: rm_rec_os_y;
 array [Rooms] of int: rm_area =
     [ sum(j in rm_rec_ids[i])(rm_rec_len[j] * rm_rec_wid[j]) | i in Rooms ];
 array [Rooms] of int: rm_sort =
-    [ 1 + sum(j in Rooms where j != i /\ rm_area[j] > rm_area[i])(1)
-        + sum(j in Rooms where j < i /\ rm_area[j] = rm_area[i])(1)
-    | i in Rooms ];
+    array [Rooms] of int: rm_sort = [ 1 + sum(j in Rooms where j != i /\ rm_area[j] > rm_area[i])(1)
+        + sum(j ... ]; // array too long to display, dimensions: (1)
+
 int: n_st;
 set of int: Stairs = 1..n_st;
 array [Stairs] of int: st_len;
@@ -30,8 +30,9 @@ array [Stairs] of int: st_max_breaks;
 array [Stairs] of int: st_rec_id_offset =
     [ sum(j in Stairs where j < i)(st_no_steps[j]) | i in Stairs ];
 array [Stairs] of set of int: st_rec_ids =
-    [(st_rec_id_offset[i] + 1)..(st_rec_id_offset[i] + st_no_steps[i])
-    | i in Stairs ];
+    array [Stairs] of set of int: st_rec_ids = [(st_rec_id_offset[i] + 1)..(st_rec_id_offset[i] + st_no_steps[i])
+    | i in Sta... ]; // array too long to display, dimensions: (1)
+
 int: n_st_rec = sum(i in Stairs)(st_no_steps[i]);
 set of int: StRecs = 1..n_st_rec;
 array [StRecs] of int: st_rec_len =
@@ -58,11 +59,13 @@ array [Rooms] of var bool: rm_ori_0_or_90;
 array [RmRecs] of var DomX: rm_rec_x;
 array [RmRecs] of var DomY: rm_rec_y;
 array [RmRecs] of var MinRmRecSize..MaxRmRecSize: rm_rec_vlen =
-    [ rm_rec_wid[i] + (rm_rec_len[i] - rm_rec_wid[i]) * bool2int(rm_ori_0_or_180[j])
-    | i in RmRecs, j in Rooms where i in rm_rec_ids[j] ];
+    array [RmRecs] of var MinRmRecSize..MaxRmRecSize: rm_rec_vlen = [ rm_rec_wid[i] + (rm_rec_len[i] - rm_rec_wid[i]) * bool2int(rm_ori_0_or_180[j])
+... ]; // array too long to display, dimensions: (2)
+
 array [RmRecs] of var MinRmRecSize..MaxRmRecSize: rm_rec_vwid =
-    [ rm_rec_len[i] + (rm_rec_wid[i] - rm_rec_len[i]) * bool2int(rm_ori_0_or_180[j])
-    | i in RmRecs, j in Rooms where i in rm_rec_ids[j] ];
+    array [RmRecs] of var MinRmRecSize..MaxRmRecSize: rm_rec_vwid = [ rm_rec_len[i] + (rm_rec_wid[i] - rm_rec_len[i]) * bool2int(rm_ori_0_or_180[j])
+... ]; // array too long to display, dimensions: (2)
+
 array [StRecs] of var DomX: st_rec_x;
 array [StRecs] of var DomY: st_rec_y;
 constraint
@@ -171,19 +174,12 @@ ann: fix_yx = int_search(
         ++ [ [st_rec_x[i], st_rec_y[i]][p] | i in StRecs, p in 1..2],
         input_order, indomain_min, complete );
 ann: fix_rl = int_search([objective], input_order, indomain_min, complete);
-ann: search1 = seq_search([
+ann: search1 = seq_search(ann: search1 = [
         fix_ori_0_or_180,
         fix_ori_0_or_90,
         fix_yx,
-        fix_rl
-    ]);
-output [
+        fix_... ] // array too long to display, dimensions: (4)
+);
+output ann: search1 = [
     "rm_vori   = ", show(rm_vori), ";\n",
-    "rm_x      = ", show(rm_x), ";\n",
-    "rm_y      = ", show(rm_y), ";\n",
-    "rm_rec_x  = ", show(rm_rec_x), ";\n",
-    "rm_rec_y  = ", show(rm_rec_y), ";\n",
-    "st_rec_x  = ", show(st_rec_x), ";\n",
-    "st_rec_y  = ", show(st_rec_y), ";\n",
-    "objective = ", show(objective), ";\n"
-];
+    "rm_x      = ", show(rm_x), ";\n"... ]; // array too long to display, dimensions: (24)

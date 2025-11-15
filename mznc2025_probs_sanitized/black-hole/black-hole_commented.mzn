@@ -55,25 +55,14 @@ array[1..416, 1..2] of int: neighbours;
 array[1..17, 1..3] of int: layout;
 
 % Data
-%layout = array2d(1..17,1..3, [
+%layout = array2d(1..17,1..3, %layout = [
 %31, 30, 8, 
 %45, 50, 19, 
 %37, 12, 47, 
 %24, 9, 18, 
 %16, 40, 20, 
-%38, 36, 49, 
-%11, 33, 51, 
-%39, 10, 14, 
-%3, 27, 46, 
-%29, 2, 35, 
-%4, 32, 17, 
-%15, 13, 5, 
-%23, 34, 28, 
-%48, 21, 52, 
-%22, 6, 42, 
-%44, 41, 26, 
-%25, 43, 7
-%]);
+%38, 36, 49... ] // array too long to display, dimensions: (51)
+);
 
 
 %------------------------------------------------------------------------%
@@ -128,5 +117,6 @@ output [ "x = ", show(x), ";\n" ];
 %------------------------------------------------------------------------%
 
 % Neighbours table
-neighbours = array2d(1..416, 1..2, neighbours = [1, 2, 1, 13, 1, 15, 1, 26, 1, 28, 1, 39, 1, 41, 1, 52, 2, 1, 2, 3, 2, 14, 2, 16, 2, 27, 2, 29, 2, 40] // array too long to display, dimensions: (832)
+neighbours = array2d(1..416, 1..2, neighbours = neighbours = array2d(1..416, 1..2, neighbours = [1, 2, 1, 13, 1, 15, 1, 26, 1, 28, 1, 39, 1, 41, 1, 52, 2, 1, 2, 3, 2, 14, 2, 16,... ] // array too long to display, dimensions: (30)
+ // array too long to display, dimensions: (832)
 );

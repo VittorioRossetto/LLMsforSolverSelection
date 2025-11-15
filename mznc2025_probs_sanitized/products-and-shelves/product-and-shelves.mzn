@@ -42,14 +42,15 @@ constraint symmetry_breaking_constraint(
 	forall(s in Shelf, p in Product) (
 		let {
 			any: coord =
-			  [ (d, i): item_shelve_placement[i, s, d]
-			  | i in Item where product[i] == p, d in Dimension];
+			  			any: coord = [ (d, i): item_shelve_placement[i, s, d]
+			  | i in Item where product[i] == p, ... ]; // array too long to display, dimensions: (3)
+
 		} in lex_chain_lesseq(coord)
 	)
 );
 var int: objective :: output = enum2int(last_loaded_shelf);
-solve :: seq_search([
+solve :: seq_search(var int: objective :: output = [
 			int_search(item_shelve_size, first_fail, indomain_min, complete),
-			int_search(item_shelve_placement, first_fail, indomain_min, complete)
-		])
+			int_sea... ] // array too long to display, dimensions: (8)
+)
 minimize objective;

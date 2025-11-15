@@ -42,7 +42,7 @@ include "global_cardinality_low_up.mzn";
 array [TOWER] of var bool: overloaded = [ sum (h in HANDSET) (demand[h] * (tower[h] == t)) > capacity[t] | t in TOWER ];
 array[HANDSET] of var int: connection_quality = [not overloaded[tower[h]] | h in HANDSET];
 var int: objective = sum(connection_quality);
-solve ::seq_search([
+solve ::seq_search(var int: objective = [
   int_search(tower, first_fail, indomain_min),
-  int_search(power, first_fail, indomain_min)
-  ]) maximize objective;
+  int_search(power, first_fail, ... ] // array too long to display, dimensions: (6)
+) maximize objective;

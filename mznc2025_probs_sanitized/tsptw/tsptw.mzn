@@ -18,7 +18,7 @@ constraint forall (l in Locations) (
     arrival[l] = departurePred[l] + durToPred[l]);
 constraint circuit(pred) :: domain;
 constraint forall (l in Locations) (departure[l] <= late[l]);
-solve :: seq_search([int_search(pred, first_fail, indomain_min),
-                     int_search([arrival[l] | l in arg_sort(early)],
-                                input_order, indomain_min)])
+solve :: seq_search(constraint forall (l in Locations) (departure[l] < = [int_search(pred, first_fail, indomain_min),
+                     int_search([arr... ] // array too long to display, dimensions: (6)
+)
          minimize objective;

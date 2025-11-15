@@ -2,66 +2,30 @@
   "max_w": 20,
   "max_h": 15,
   "max_links": 7,
-  "COMPONENT": [
+  "COMPONENT":   "COMPONENT": [
     "COMPONENT_0",
     "COMPONENT_1",
     "COMPONENT_2",
     "COMPONENT_3",
-    "COMPONENT_4",
-    "COMPONENT_5"
-  ],
-  "PIN": [
+   ... ], // array too long to display, dimensions: (6)
+
+  "PIN":   "PIN": [
     "PIN_0_0",
     "PIN_0_1",
     "PIN_1_0",
     "PIN_1_1",
     "PIN_2_0",
-    "PIN_2_1",
-    "PIN_2_2",
-    "PIN_2_3",
-    "PIN_2_4",
-    "PIN_2_5",
-    "PIN_2_6",
-    "PIN_2_7",
-    "PIN_3_0",
-    "PIN_3_1",
-    "PIN_4_0",
-    "PIN_4_1",
-    "PIN_5_0",
-    "PIN_5_1",
-    "PIN_5_2",
-    "PIN_5_3",
-    "PIN_5_4",
-    "PIN_5_5",
-    "PIN_5_6",
-    "PIN_5_7"
-  ],
-  "NET": [
+    ... ], // array too long to display, dimensions: (24)
+
+  "NET":   "NET": [
     "NET_0",
     "NET_1",
     "NET_2",
     "NET_3",
     "NET_4",
     "NET_5",
-    "NET_6",
-    "NET_7",
-    "NET_8",
-    "NET_9",
-    "NET_10",
-    "NET_11",
-    "NET_12",
-    "NET_13",
-    "NET_14",
-    "NET_15",
-    "NET_16",
-    "NET_17",
-    "NET_18",
-    "NET_19",
-    "NET_20",
-    "NET_21",
-    "NET_22",
-    "NET_23"
-  ],
+ ... ], // array too long to display, dimensions: (24)
+
   "footprint_w": [
     4,
     3,

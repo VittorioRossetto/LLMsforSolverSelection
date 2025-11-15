@@ -93,18 +93,16 @@ constraint let {
 
 % Component pin pad placement
 constraint forall (c in COMPONENT, p in pins[c]) (let {
-  array [ORIENTATION] of var int: px = [
+  array [ORIENTATION] of var int: px =   array [ORIENTATION] of var int: px = [
     Upright: pin_dx[p] - 1,
     Clockwise: footprint_h[c] - pin_dy[p],
-    UpsideDown: footprint_w[c] - pin_dx[p],
-    Anticlockwise: pin_dy[p] - 1
-  ];
-  array [ORIENTATION] of var int: py = [
+    Upsi... ]; // array too long to display, dimensions: (4)
+
+  array [ORIENTATION] of var int: py =   array [ORIENTATION] of var int: py = [
     Upright: pin_dy[p] - 1,
     Clockwise: pin_dx[p] - 1,
-    UpsideDown: footprint_h[c] - pin_dy[p],
-    Anticlockwise: footprint_w[c] - pin_dx[p]
-  ];
+    UpsideDown: footp... ]; // array too long to display, dimensions: (4)
+
 } in pad_x[Pin(p)] = component_x[c] + px[component_orientation[c]] /\
      pad_y[Pin(p)] = component_y[c] + py[component_orientation[c]]);
 
@@ -162,8 +160,10 @@ var 1..max_w: board_w;
 var 1..max_h: board_h;
 var int: objective = board_w * board_h;
 solve :: seq_search(
-  [int_search([component_orientation[c], component_x[c], component_y[c]], input_order, indomain_median) | c in reverse(sort_by(COMPONENT, [footprint_w[c] * footprint_h[c] | c in COMPONENT]))] ++
-  [int_search([link_x[l], link_y[l], link_length[l]], input_order, indomain_median) | l in LINKS] ++
+  var int: objective = [int_search([component_orientation[c], component_x[c], component_y[c]], input_ord... ] // array too long to display, dimensions: (4)
+ ++
+  var int: objective = [int_search([link_x[l], link_y[l], link_length[l]], input_order, indomain_median)... ] // array too long to display, dimensions: (3)
+ ++
   [int_search(parent, input_order, indomain_median)]
 ) minimize objective;
 

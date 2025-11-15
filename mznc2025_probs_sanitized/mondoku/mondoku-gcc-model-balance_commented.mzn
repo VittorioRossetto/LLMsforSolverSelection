@@ -44,19 +44,17 @@ array[Width, Height] of var Colors: puzzle;
 
 % Derived variables, has the value at the start of a group only, other values are 0
 % First is for groups across the board
-array[Width, Height] of var {0} union Colors: across = array2d(Width, Height, [ 
+array[Width, Height] of var {0} union Colors: across = array2d(Width, Height, array[Width, Height] of var {0} union Colors: across = [ 
     if puzzle[w-1,h] default 0 != puzzle[w,h] then
         puzzle[w, h]
-    else
-        0
-    endif | w in Width, h in Height]);
+    el... ] // array too long to display, dimensions: (2)
+);
 % Swcond is for groups down the board
-array[Width, Height] of var {0} union Colors: down = array2d(Width, Height, [ 
+array[Width, Height] of var {0} union Colors: down = array2d(Width, Height, array[Width, Height] of var {0} union Colors: down = [ 
     if puzzle[w,h-1] default 0 != puzzle[w,h] then
         puzzle[w, h]
-    else
-        0
-    endif | w in Width, h in Height]);
+    el... ] // array too long to display, dimensions: (2)
+);
 
 
 %
@@ -86,24 +84,16 @@ constraint forall(w in Width) (
 %
 
 % For each row, the difference between the max and min number of occurences for all colors
-array[int] of var int: diff_across = [
+array[int] of var int: diff_across = array[int] of var int: diff_across = [
     let {
-        array[int] of var int: occurences = global_cardinality(puzzle[.., h], set2array(Colors));
-        var int: minimum = min(occurences);
-        var int: maximum = max(occurences);
-    } in
-    maximum - minimum
-  | h in Height];
+        array[int] of var int: occurences = global_cardinality(puzzle... ]; // array too long to display, dimensions: (2)
+
 
 % For each column, the difference between the max and min number of occurences for all colors
-array[int] of var int: diff_down = [
+array[int] of var int: diff_down = array[int] of var int: diff_down = [
     let {
-        array[int] of var int: occurences = global_cardinality(puzzle[w, ..], set2array(Colors));
-        var int: minimum = min(occurences);
-        var int: maximum = max(occurences);
-    } in
-    maximum - minimum
-  | w in Width];
+        array[int] of var int: occurences = global_cardinality(puzzle... ]; // array too long to display, dimensions: (2)
+
   
   
 % Symmetry breaking, the colors are interchangable

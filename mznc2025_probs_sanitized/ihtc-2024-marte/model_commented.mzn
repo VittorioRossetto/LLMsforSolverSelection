@@ -172,18 +172,21 @@ function Surgeon: surgeon(Patient: patient) =
 
 function bool: nurse_is_scheduled(Nurse: nurse, DAYS: d, SHIFTS: s) =
   length(
-    [working_shift |
+    function bool: nurse_is_scheduled(Nurse: nurse, DAYS: d, SHIFTS: s) = [working_shift |
      working_shift in nurse.working_shifts
-     where working_shift.day == d /\ working_shift.shift == shift_types[s]]
+     where working_sh... ] // array too long to display, dimensions: (1)
+
   ) == 1;
 
 function int: nurse_capacity(Nurse: nurse, DAYS: d, SHIFTS: s) =
-  [working_shift.max_load |
+  function int: nurse_capacity(Nurse: nurse, DAYS: d, SHIFTS: s) = [working_shift.max_load |
    working_shift in nurse.working_shifts
-   where working_shift.day == d /\ working_shift.shift == shift_types[s]][1];
+   where worki... ] // array too long to display, dimensions: (1)
+[1];
 
 array[NURSES] of int: max_nurse_capacities =
-  [max([nurse_capacity(nurse, d, s) | d in DAYS, s in SHIFTS where nurse_is_scheduled(nurse, d, s)]) | nurse in nurses];
+  array[NURSES] of int: max_nurse_capacities = [max([nurse_capacity(nurse, d, s) | d in DAYS, s in SHIFTS where nurse_is_schedul... ]; // array too long to display, dimensions: (1)
+
 
 function bool: nurse_is_scheduled_with_reduced_capacity(NURSES: n, DAYS: d, SHIFTS: s) =
   nurse_is_scheduled(nurses[n], d, s) /\ nurse_capacity(nurses[n], d, s) < max_nurse_capacities[n];
@@ -251,13 +254,12 @@ constraint forall(g in GENDERS, gender = genders[g])(
   }
   in bin_packing_load(
     [gender_counts[r, d, g] | r in ROOMS, d in XXDAYS],
-    [(room(occupant).index - 1) * card(XXDAYS) + i |
-     occupant in occupant_subset,
-     i in 1..occupant.length_of_stay] ++
-    [(room_assignments[p] - 1) * card(XXDAYS) + (admission_days[p] - 1) + i |
-     patient in patient_subset,
-     p = patient.index,
-     i in 1..patient.length_of_stay],
+          [patient | patient in patients where patient.gender = = [(room(occupant).index - 1) * card(XXDAYS) + i |
+     occupant in occupant_subset... ] // array too long to display, dimensions: (2)
+ ++
+          [patient | patient in patients where patient.gender = = [(room_assignments[p] - 1) * card(XXDAYS) + (admission_days[p] - 1) + i |
+     pa... ], // array too long to display, dimensions: (3)
+
     [1 | occupant in occupant_subset, i in 1..occupant.length_of_stay] ++
     [1 | patient in patient_subset, i in 1..patient.length_of_stay]
   )
@@ -304,9 +306,10 @@ constraint forall(surgeon in surgeons)(
     [1 | patient in patient_subset] ++
     [1 | d in DAYS where surgeon.max_surgery_time[d] < max_demand],
     [patient.surgery_duration | patient in patient_subset] ++
-    [max_demand - surgeon.max_surgery_time[d] |
+        int: max_demand = [max_demand - surgeon.max_surgery_time[d] |
      d in DAYS
-     where surgeon.max_surgery_time[d] < max_demand],
+     where surgeon.max... ], // array too long to display, dimensions: (1)
+
     max_demand
   )
 );
@@ -350,9 +353,9 @@ constraint let {
     admission_days ++ [d | ot in OPERATING_THEATERS, d in DAYS],
     [1 | p in PATIENTS] ++ [1 | ot in OPERATING_THEATERS, d in DAYS],
     [patient.surgery_duration | patient in patients] ++
-    [max_demand - operating_theater.availability[d] |
-    operating_theater in operating_theaters,
-    d in DAYS],
+        int: max_demand = [max_demand - operating_theater.availability[d] |
+    operating_theater in operat... ], // array too long to display, dimensions: (2)
+
     ot_assignments ++ [ot | ot in OPERATING_THEATERS, d in DAYS],
     [max_demand | operating_theater in operating_theaters],
   );
@@ -401,13 +404,12 @@ constraint forall(a in AGE_GROUPS)(
   }
   in bin_packing_load(
     [room_occupations[r, d, a] | r in ROOMS, d in XXDAYS],
-    [(room(occupant).index - 1) * card(XXDAYS) + i |
-     occupant in occupant_subset,
-     i in 1..occupant.length_of_stay] ++
-    [(room_assignments[p] - 1) * card(XXDAYS) + (admission_days[p] - 1) + i |
-     patient in patient_subset,
-     p = patient.index,
-     i in 1..patient.length_of_stay],
+          [patient | patient in patients where patient.age_group = = [(room(occupant).index - 1) * card(XXDAYS) + i |
+     occupant in occupant_subset... ] // array too long to display, dimensions: (2)
+ ++
+          [patient | patient in patients where patient.age_group = = [(room_assignments[p] - 1) * card(XXDAYS) + (admission_days[p] - 1) + i |
+     pa... ], // array too long to display, dimensions: (3)
+
     [1 | occupant in occupant_subset, i in 1..occupant.length_of_stay] ++
     [1 | patient in patient_subset, i in 1..patient.length_of_stay]
   )
@@ -471,17 +473,12 @@ array[ROOMS, XXDAYS, SHIFTS, 1..max(SKILL_LEVELS)] of var 0..total_length_of_sta
 constraint forall(l in SKILL_LEVELS where l > 0)(
   bin_packing_load(
     [skill_level_requirements[r, d, s, l] | r in ROOMS, d in XXDAYS, s in SHIFTS],
-    [(room(occupant).index - 1) * (card(XXDAYS) * card(SHIFTS)) + i |
-     occupant in occupants,
-     i in index_set(occupant.skill_level_required)
-     where occupant.skill_level_required[i] == l] ++
-    [(room_assignments[p] - 1) * (card(XXDAYS) * card(SHIFTS)) +
-     (admission_days[p] - 1) * card(SHIFTS) +
-     i |
-     patient in patients,
-     p  = patient.index,
-     i in index_set(patient.skill_level_required)
-     where patient.skill_level_required[i] == l],
+      if card(AGE_GROUPS) = = [(room(occupant).index - 1) * (card(XXDAYS) * card(SHIFTS)) + i |
+     occupant i... ] // array too long to display, dimensions: (2)
+ ++
+         where occupant.skill_level_required[i] = = [(room_assignments[p] - 1) * (card(XXDAYS) * card(SHIFTS)) +
+     (admission_days... ], // array too long to display, dimensions: (3)
+
     [1 | occupant in occupants, r in occupant.skill_level_required where r == l] ++
     [1 | patient in patients, r in patient.skill_level_required where r == l]
   )
@@ -509,17 +506,17 @@ var int: total_discontinuity_of_care = (
   sum(occupant in occupants)(
     nvalue(
       [NO_NURSE_ASSIGNMENT] ++
-      [nurse_assignments[room(occupant).index, min(DAYS) + d - 1, s] |
-       d in 1..occupant.length_of_stay,
-       s in SHIFTS]
+      var int: total_discontinuity_of_care = [nurse_assignments[room(occupant).index, min(DAYS) + d - 1, s] |
+       d in 1..o... ] // array too long to display, dimensions: (2)
+
     )
   ) +
   sum(patient in patients, p = patient.index)(
     nvalue(
       [NO_NURSE_ASSIGNMENT] ++
-      [nurse_assignments[room_assignments[p], admission_days[p] + i - 1, s] |
-       i in 1..patient.length_of_stay,
-       s in SHIFTS]
+        sum(patient in patients, p = [nurse_assignments[room_assignments[p], admission_days[p] + i - 1, s] |
+       i ... ] // array too long to display, dimensions: (2)
+
     )
   ) -
   (card(OCCUPANTS) + card(PATIENTS)));
@@ -536,13 +533,11 @@ array[ROOMS, XXDAYS, SHIFTS] of var ROOM_WORKLOAD: room_workloads;
 
 constraint bin_packing_load(
   array1d(room_workloads),
-  [(room(occupant).index - 1) * (card(XXDAYS) * card(SHIFTS)) + i |
-   occupant in occupants,
-   i in index_set(occupant.workload_produced)] ++
-  [(room_assignments[p] - 1) * (card(XXDAYS) * card(SHIFTS)) + (admission_days[p] - 1) * card(SHIFTS) + i |
-   patient in patients,
-   p = patient.index,
-   i in index_set(patient.workload_produced)],
+  set of int: ROOM_WORKLOAD = [(room(occupant).index - 1) * (card(XXDAYS) * card(SHIFTS)) + i |
+   occupant in ... ] // array too long to display, dimensions: (2)
+ ++
+  set of int: ROOM_WORKLOAD = [(room_assignments[p] - 1) * (card(XXDAYS) * card(SHIFTS)) + (admission_days[p] -... ], // array too long to display, dimensions: (3)
+
   [workload | occupant in occupants, workload in occupant.workload_produced] ++
   [workload | patient in patients, workload in patient.workload_produced]
 );
@@ -592,7 +587,8 @@ var int: surgeon_transfer = sum(surgeon in surgeons, d in DAYS where surgeon.max
     0,
     nvalue(
       [NO_OT_ASSIGNMENT] ++
-      [ot_assignment_matrix[p, d]| p in PATIENTS where patients[p].surgeon_id == surgeon.id]
+      var int: surgeon_transfer = [ot_assignment_matrix[p, d]| p in PATIENTS where patients[p].surgeon_id == surgeo... ] // array too long to display, dimensions: (1)
+
     ) - 2
   )
 );
@@ -614,27 +610,22 @@ var int: unscheduled_patients = sum(p in PATIENTS)(admission_days[p] > max(DAYS)
 
 %% Objective
 
-var int: objective = sum([
+var int: objective = sum(var int: objective = [
   weights.room_mixed_age * total_age_group_differences,
-  weights.nurse_eccessive_workload * total_excess_nurse_workload,
-  weights.room_nurse_skill * total_skill_level_deviation,
-  weights.continuity_of_care *  total_discontinuity_of_care,
-  weights.open_operating_theater * total_opened_ots,
-  weights.surgeon_transfer * surgeon_transfer,
-  weights.patient_delay * total_admission_delay,
-  weights.unscheduled_optional * unscheduled_patients
-]);
+  weights.nurse_eccessi... ] // array too long to display, dimensions: (8)
+);
 
 % solve
 %   :: warm_start(
 %       admission_days,
-%       [if patients[p].mandatory then patients[p].surgery_release_day else days + 1 endif | p in PATIENTS])
+%       var int: objective = [if patients[p].mandatory then patients[p].surgery_release_day else days + 1 endi... ] // array too long to display, dimensions: (1)
+)
 %   minimize objective;
 
-solve :: seq_search([
+solve :: seq_search(var int: objective = [
   int_search(nurse_assignments, first_fail, indomain_min),
-  int_search(admission_days ++ room_assignments ++ ot_assignments, first_fail, indomain_min)
-]) minimize objective;
+  int_search(admissi... ] // array too long to display, dimensions: (6)
+) minimize objective;
 
 output var int: objective = [
   showJSON(

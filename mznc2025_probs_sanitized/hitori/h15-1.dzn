@@ -1,6 +1,6 @@
 n = 15;
-clue = clue = [| 10, 12, 15, 14, 11, 13, 1, 9, 1, 4, 7, 3, 6, 2, 5
- |  8, 15, 12, 13, 1, 2, 6, 4, 5, 7, 12, 9, 15, 3, 7
- | 15, 14]; // array too long to display, dimensions: (211)
+clue = clue = clue = clue = [| 10, 12, 15, 14, 11, 13, 1, 9, 1, 4, 7, 3, 6, 2, 5
+ |  8, 15, 12, 13, 1, 2, 6, ... ]; // array too long to display, dimensions: (30)
+ // array too long to display, dimensions: (211)
 
 

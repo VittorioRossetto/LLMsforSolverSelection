@@ -5,21 +5,28 @@ min_group_size = 2;
 startAfter = 108;
 max_wait = 6;
 eta = 9;
-preferences1 = preferences1 = [|0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // array too long to display, dimensions: (23389)
+preferences1 = preferences1 = preferences1 = preferences1 = [|0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0... ]; // array too long to display, dimensions: (30)
+ // array too long to display, dimensions: (23389)
 
-preferences2 = preferences2 = [|0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // array too long to display, dimensions: (204817)
+preferences2 = preferences2 = preferences2 = preferences2 = [|0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0... ]; // array too long to display, dimensions: (30)
+ // array too long to display, dimensions: (204817)
 
 activity1_ids = 1..1950;
 activity2_ids = 1..17069;
 cell_ids = 1..317;
-oid1 = oid1 = [262637, 262638, 262639, 262640, 262641, 262642, 262643, 262644, 262645, 262646, 262647, 262648, 262649, 262650, 262651, 262652, 262653, 262654, 262655, 262656, 262657, 262658, 262659, 262660, 262661, 262662, 262663, 262664, 262665, 262666]; // array too long to display, dimensions: (1950)
+oid1 = oid1 = oid1 = oid1 = [262637, 262638, 262639, 262640, 262641, 262642, 262643, 262644, 262645, 262646, ... ]; // array too long to display, dimensions: (30)
+ // array too long to display, dimensions: (1950)
 
-oid2 = oid2 = [1, 2, 2, 3, 3, 3, 5, 5, 6, 6, 7, 7, 8, 8, 9, 10, 10, 11, 11, 12, 13, 13, 14, 15, 15, 16, 17, 18, 18, 19]; // array too long to display, dimensions: (17069)
+oid2 = oid2 = oid2 = oid2 = [1, 2, 2, 3, 3, 3, 5, 5, 6, 6, 7, 7, 8, 8, 9, 10, 10, 11, 11, 12, 13, 13, 14, 15,... ]; // array too long to display, dimensions: (30)
+ // array too long to display, dimensions: (17069)
 
 time_slot_ids = 1..288;
-activities1 = activities1 = [|168, 195, 27, 40, 4|249, 274, 25, 40, 4|204, 224, 20, 40, 4|225, 247, 22, 40, 4|246, 272, 26, 40, 4|225, 243, 18, 40, 4|252, 270, 18, 40, 4|170, 196]; // array too long to display, dimensions: (7801)
+activities1 = activities1 = activities1 = activities1 = [|168, 195, 27, 40, 4|249, 274, 25, 40, 4|204, 224, 20, 40, 4|225, 247, 22, 40, 4... ]; // array too long to display, dimensions: (30)
+ // array too long to display, dimensions: (7801)
 
-activities2 = activities2 = [|222, 276, 18, 63, 5|144, 174, 18, 224, 5|228, 270, 18, 224, 5|84, 126, 18, 148, 5|144, 168, 18, 148, 5|228, 264, 18, 148, 5|84, 174, 18, 9, 5|228, 270]; // array too long to display, dimensions: (68277)
+activities2 = activities2 = activities2 = activities2 = [|222, 276, 18, 63, 5|144, 174, 18, 224, 5|228, 270, 18, 224, 5|84, 126, 18, 148,... ]; // array too long to display, dimensions: (30)
+ // array too long to display, dimensions: (68277)
 
-distances = distances = [|1, 4, 8, 7, 9, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 9, 7, 2, 4, 5, 5, 5, 4, 3, 3, 3]; // array too long to display, dimensions: (100173)
+distances = distances = distances = distances = [|1, 4, 8, 7, 9, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 9, 7, 2, 4, 5, 5, 5, 4... ]; // array too long to display, dimensions: (30)
+ // array too long to display, dimensions: (100173)
 

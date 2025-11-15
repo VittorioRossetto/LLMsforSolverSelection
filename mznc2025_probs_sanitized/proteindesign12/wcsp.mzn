@@ -23,12 +23,10 @@ array[1..num_constraints1] of var 0..max_costs1: ocosts1;
 array[1..num_constraints2] of var 0..max_costs2: ocosts2;
 var 0..(top-1): objective;
 solve
-	:: seq_search([
+	:: seq_search(	:: [
 		int_search(p, first_fail, indomain_min, complete),
-		int_search(ocosts1, first_fail, indomain_min, complete),
-		int_search(ocosts2, first_fail, indomain_min, complete),
-		int_search([objective], input_order, indomain_min, complete)
-	])
+		int_search(ocosts1, firs... ] // array too long to display, dimensions: (16)
+)
 	minimize objective;
 constraint
    	objective = sum(j in 1..num_constraints1)( ocosts1[j] )
@@ -56,9 +54,7 @@ constraint
 		)
    	);
 output
-[
+   	objective = [
     "p = \(p);\n",
     "ocosts1 = \(ocosts1);\n",
-    "ocosts2 = \(ocosts2);\n",
-    "objective = \(objective);\n"
-];
+    "ocosts2 = \(ocosts2);\n"... ]; // array too long to display, dimensions: (4)

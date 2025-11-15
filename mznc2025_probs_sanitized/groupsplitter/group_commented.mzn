@@ -68,11 +68,14 @@ array[activity2_ids,1..6] of int: activities2_data = array2d(activity2_ids,1..6,
 
 % Configure datalist for table constraint
 array[1..max(user_ids)*max(activity1_ids),1..3] of int: preferences1_data = array2d(1..max(user_ids)*max(activity1_ids),1..3,
-  [ if k=1 then i else if k=2 then j else preferences1[i,j] endif endif | i in user_ids, j in activity1_ids, k in 1..3 ]); 
+  array[1..max(user_ids)*max(activity1_ids),1..3] of int: preferences1_data = [ if k=1 then i else if k=2 then j else preferences1[i,j] endif endif | i in user... ] // array too long to display, dimensions: (3)
+); 
 array[1..max(user_ids)*max(activity2_ids),1..3] of int: preferences2_data = array2d(1..max(user_ids)*max(activity2_ids),1..3,
-  [ if k=1 then i else if k=2 then j else preferences2[i,j] endif endif | i in user_ids, j in activity2_ids, k in 1..3 ]);  
+  array[1..max(user_ids)*max(activity2_ids),1..3] of int: preferences2_data = [ if k=1 then i else if k=2 then j else preferences2[i,j] endif endif | i in user... ] // array too long to display, dimensions: (3)
+);  
 array[1..max(cell_ids)*max(cell_ids),1..3] of int: distances_data = array2d(1..max(cell_ids)*max(cell_ids),1..3,
-  [ if k=1 then i else if k=2 then j else distances[i,j] endif endif | i in cell_ids, j in cell_ids, k in 1..3 ]); 
+  array[1..max(cell_ids)*max(cell_ids),1..3] of int: distances_data = [ if k=1 then i else if k=2 then j else distances[i,j] endif endif | i in cell_id... ] // array too long to display, dimensions: (3)
+); 
 
 
 
@@ -141,10 +144,12 @@ constraint forall(i in group_ids) (
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 constraint forall(i in user_ids) (
-   table( [ user_act_map1[i], activity_available_from1[i], user_end_map1[i], user_duration_map1[i], user_cell_map1[i], user_pub_rating_map1[i] ], activities1_data) );
+   table(   [ if k=1 then i else if k = [ user_act_map1[i], activity_available_from1[i], user_end_map1[i], user_duration_... ], // array too long to display, dimensions: (6)
+ activities1_data) );
 
 constraint forall(i in user_ids) (
-   table( [ user_act_map2[i], activity_available_from2[i], user_end_map2[i], user_duration_map2[i], user_cell_map2[i], user_pub_rating_map2[i] ], activities2_data) );
+   table(   [ if k=1 then i else if k = [ user_act_map2[i], activity_available_from2[i], user_end_map2[i], user_duration_... ], // array too long to display, dimensions: (6)
+ activities2_data) );
   
 constraint forall(i in user_ids) (
   table( [ i, user_act_map1[i], user_weight_map1[i] ], preferences1_data));

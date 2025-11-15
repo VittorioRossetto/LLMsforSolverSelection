@@ -44,9 +44,9 @@ constraint forall(c in COL)
                         (not filled[r,c] \/ not  filled[r+1,c]));
 int: digits = ceil(log(10,n+1));
 string: block = concat([ "#" | i in 1..digits]);
-output [ if fix(x[r,c]) = 0 then block else show_int(digits,x[r,c]) endif ++
-         if c = n then "\n" else "," endif
-       | r in ROW, c in COL ];
+output string: block = [ if fix(x[r,c]) = 0 then block else show_int(digits,x[r,c]) endif ++
+         if... ]; // array too long to display, dimensions: (4)
+
 output ["obj = \(obj);\n"];
 output ["nofilled = \(sum(filled));\n"];
 include "globals.mzn";
@@ -54,22 +54,17 @@ set of int: NODE = 1..n*n;
 array[int] of NODE: from =
     [ (r-1)*n + c | r in ROW, c in COL, j in 1..(c<n)+(r<n) ];
 array[int] of NODE: to =
-    [ if (c<n) /\ (r<n) then
+    array[int] of NODE: to = [ if (c<n) /\ (r<n) then
          if j = 1 then (r-1)*n + c+1
-         else r*n+c endif
-      elseif c<n then
-         (r-1)*n + c+1
-      else
-         r*n+c
-      endif
-    | r in ROW, c in COL, j in 1..(c<n)+(r<n) ];
+         else r*n+c... ]; // array too long to display, dimensions: (3)
+
 set of int: EDGE = index_set(from);
 ROW: toROW(NODE: i) = (i-1) div n + 1;
 COL: toCOL(NODE: i) = (i-1) mod n + 1;
 array[EDGE] of var bool: edge =
-   [ not filled[toROW(from[e]),toCOL(from[e])]
-     /\ not filled[toROW(to[e]),toCOL(to[e])]
-   | e in EDGE ];
+   array[EDGE] of var bool: edge = [ not filled[toROW(from[e]),toCOL(from[e])]
+     /\ not filled[toROW(to[e]),toCOL... ]; // array too long to display, dimensions: (1)
+
 constraint connected(from,to,[ not filled[r,c] | r in ROW, c in COL ],edge);
 test connected(
   array [$$E] of $$N: from,

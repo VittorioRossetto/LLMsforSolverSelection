@@ -6,18 +6,9 @@
     "D",
     "E"
   ],
-  "trades":   "trades": [{
+  "trades":   "trades":   "trades":   "trades": [{
       "date": 0, "trade": "Buy", "stock": "A", "units": 10, "price": 10230
-    }, {
-      "date": 0, "trade": "Buy", "stock": "B", "units": 9, "price": 11550
-    }, {
-      "date": 0, "trade": "Buy", "stock": "C", "units": 10, "price": 10163
-    }, {
-      "date": 0, "trade": "Buy", "stock": "D", "units": 11, "price": 8852
-    }, {
-      "date": 0, "trade": "Buy", "stock": "E", "units": 11, "price": 9173
-    }, {
-      "date": 1, "trade": "Buy", "stock": "A", "units": 2, "price": 10447
-    }] // array too long to display, dimensions: (680)
+   ... ] // array too long to display, dimensions: (30)
+ // array too long to display, dimensions: (680)
 
 }

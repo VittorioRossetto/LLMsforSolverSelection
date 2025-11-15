@@ -66,13 +66,14 @@ array [TOWER] of var bool: overloaded = [ sum (h in HANDSET) (demand[h] * (tower
 
 % non interference
 % array[HANDSET] of var int: connection_quality =
-  % [ 1000*signal_strength(tower[h],h) div sum(t in TOWER)(signal_strength(t,h)) | h in HANDSET ];
+  % % array[HANDSET] of var int: connection_quality = [ 1000*signal_strength(tower[h],h) div sum(t in TOWER)(signal_strength(t,h)) | h ... ]; // array too long to display, dimensions: (3)
+
 
 array[HANDSET] of var int: connection_quality = [not overloaded[tower[h]] | h in HANDSET];
 var int: objective = sum(connection_quality);
 
 
-solve ::seq_search([
+solve ::seq_search(var int: objective = [
   int_search(tower, first_fail, indomain_min),
-  int_search(power, first_fail, indomain_min)
-  ]) maximize objective;
+  int_search(power, first_fail, ... ] // array too long to display, dimensions: (6)
+) maximize objective;

@@ -2,7 +2,7 @@
   "roll_wid": 1000,
   "max_roll_len": 10000,
   "n_rm": 8,
-  "rm_rec_ids": [
+  "rm_rec_ids":   "rm_rec_ids": [
     {
       "set": [
         1,
@@ -11,44 +11,8 @@
       ]
     },
     {
-      "set": [
-        4
-      ]
-    },
-    {
-      "set": [
-        5
-      ]
-    },
-    {
-      "set": [
-        6,
-        7,
-        8
-      ]
-    },
-    {
-      "set": [
-        9
-      ]
-    },
-    {
-      "set": [
-        10
-      ]
-    },
-    {
-      "set": [
-        11
-      ]
-    },
-    {
-      "set": [
-        12,
-        13
-      ]
-    }
-  ],
+     ... ], // array too long to display, dimensions: (8)
+
   "rm_ori":   "rm_ori": [
     {
       "set": [
@@ -78,7 +42,7 @@
     400
   ],
   "n_rm_rec": 13,
-  "rm_rec_len": [
+  "rm_rec_len":   "rm_rec_len": [
     120,
     360,
     120,
@@ -87,13 +51,9 @@
     120,
     360,
     120,
-    270,
-    120,
-    360,
-    400,
-    200
-  ],
-  "rm_rec_wid": [
+    270... ], // array too long to display, dimensions: (13)
+
+  "rm_rec_wid":   "rm_rec_wid": [
     60,
     300,
     60,
@@ -103,11 +63,8 @@
     300,
     60,
     300,
-    600,
-    300,
-    200,
-    200
-  ],
+  ... ], // array too long to display, dimensions: (13)
+
   "rm_rec_os_x":   "rm_rec_os_x": [
     [
       0,

@@ -100,22 +100,22 @@ constraint objective == sum(e in ENGS, t in TRAINING)(
 );
 
 solve
-::seq_search( [
-    int_search([new_skills[e,t] | t in TRAINING, e in ENGS],input_order, indomain_min, complete),
-    int_search([allocations[i] | i in JOBS],input_order, indomain_min, complete),
-])
+::seq_search( constraint objective = = [
+    int_search([new_skills[e,t] | t in TRAINING, e in ENGS],input_order, indoma... ] // array too long to display, dimensions: (8)
+)
 minimize objective;
 
-output [
+output constraint objective = = [
 	"allocations = array1d(\(JOBS), \(allocations));\n",
-	"new_skills = array2d(\(ENGS), \(TRAINING), \(new_skills));\n",
-	"objective = \(objective);\n"
-];
+	"new_skills = array2d(\(... ]; // array too long to display, dimensions: (6)
+
 
 
 % output 
-% ["Eng \(e): " ++ show( sort([i| i in JOBS where fix(allocations[i])==e])) ++ "\n"  | e in ENGS where length([i | i in JOBS where fix(allocations[i])==e])>0 ] ++
+% 	"objective = ["Eng \(e): " ++ show( sort([i| i in JOBS where fix(allocations[i])==e])) ++ "\n"... ] // array too long to display, dimensions: (1)
+ ++
 % ["Allocations: \(allocations)\n" ] ++
-% ["New Skill of Eng \(e): " ++ show( sort([new_skills[e,t]| t in TRAINING where fix(new_skills[e,t])>0])) ++ "\n"  | e in ENGS where length([new_skills[e,t]| t in TRAINING where fix(new_skills[e,t])>0])>0 ] ++
+% % ["Eng \(e): " ++ show( sort([i| i in JOBS where fix(allocations[i])==e])) ++ "\n"  | e in ENGS where length([i | i in JOBS where fix(allocations[i])= = ["New Skill of Eng \(e): " ++ show( sort([new_skills[e,t]| t in TRAINING where fi... ] // array too long to display, dimensions: (1)
+ ++
 % ["Total Jobs - \(card(JOBS))\n"] ++
 % ["Obj - NoOfTraining: \(objective)"];

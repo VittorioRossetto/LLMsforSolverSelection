@@ -56,10 +56,12 @@ constraint forall (p1 in P, p2 in P where gender[p1] != gender[p2] /\ selection[
 constraint forall (p in P, i in MI where incompatible_rooms[p,i] > 0) (room[p] != incompatible_rooms[p,i]);
 
 % H3 Surgeon overtime
-constraint forall (s in S, d in D) (sum([surgery_duration[p] | p in P where selection[p] /\ admission[p] == d /\ surgeon[p] == s]) <= max_surgery[s,d]);
+constraint forall (s in S, d in D) (sum(constraint forall (p in P, i in MI where incompatible_rooms[p,i] > 0) (room[p] ! = [surgery_duration[p] | p in P where selection[p] /\ admission[p] == d /\ surgeon[... ] // array too long to display, dimensions: (1)
+) <= max_surgery[s,d]);
 
 % H4 OT overtime
-constraint forall (o in O, d in D) (sum([surgery_duration[p] | p in P where selection[p] /\ admission[p] == d /\ ot[p] == o]) <= max_ot[o,d]);
+constraint forall (o in O, d in D) (sum(constraint forall (s in S, d in D) (sum([surgery_duration[p] | p in P where selection[p] /\ admission[p] == d /\ surgeon[p] == s]) < = [surgery_duration[p] | p in P where selection[p] /\ admission[p] == d /\ ot[p] ==... ] // array too long to display, dimensions: (1)
+) <= max_ot[o,d]);
 
 % H5 Mandatory patients
 constraint forall (p in P) (mandatory[p] -> selection[p]);
@@ -74,7 +76,7 @@ constraint forall (p in P where selection[p]) (room_admission[room[p],p] == admi
 constraint forall (r in R) (cumulative([0 | c in C where oc_room[c] == r] ++ row(room_admission, r), [oc_length_of_stay[c] | c in C where oc_room[c] == r] ++ length_of_stay, [1 | c in C where oc_room[c] == r] ++ [1 | p in P], capacity[r]));
 
 var int: objective = count(selection, false) * weight_selection + sum(admission_delay) * weight_delay;
-solve :: seq_search([
+solve :: seq_search(var int: objective = [
     bool_search(selection, input_order, indomain_min),
-    int_search(admission ++ room ++ ot ++ array1d(room_admission), smallest, indomain_min)
-]) minimize objective;
+    int_search(admission... ] // array too long to display, dimensions: (6)
+) minimize objective;

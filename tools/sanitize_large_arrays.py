@@ -111,7 +111,7 @@ def count_and_dims_from_list_inner(s):
         return len(flat_items), (len(flat_items),)
 
 
-def sanitize_file_contents(text, max_elements=200, keep_elements=30, max_chars=20000, char_keep=50):
+def sanitize_file_contents(text, max_elements=200, keep_elements=30, max_chars=80, char_keep=80):
     """Return (new_text, changed) where arrays/matrices above max_elements are replaced.
     Replacement: replace the full assignment statement (var ... = [...] ;) with a single-line
     comment: // <varname> array too long to display, dimensions: <dims>
@@ -212,7 +212,7 @@ def sanitize_file_contents(text, max_elements=200, keep_elements=30, max_chars=2
     return ''.join(out), changed
 
 
-def process_dir(src, dst, max_elements=256, keep_elements=30, max_chars=1000, char_keep=50, dry_run=False):
+def process_dir(src, dst, max_elements=256, keep_elements=30, max_chars=80, char_keep=80, dry_run=False):
     if os.path.exists(dst):
         print(f"Destination {dst} already exists. Overwriting contents.")
         # keep existing but we'll write files inside
@@ -252,8 +252,8 @@ def main(argv=None):
     parser.add_argument('--dst', default=None, help='Destination folder (default: <src>_sanitized)')
     parser.add_argument('--max-elements', type=int, default=200, help='Maximum scalar elements allowed before sanitizing (default: 200)')
     parser.add_argument('--keep-elements', type=int, default=30, help='Number of elements to keep when truncating (default: 30)')
-    parser.add_argument('--max-chars', type=int, default=500, help='Maximum characters inside brackets before truncating (default: 20000)')
-    parser.add_argument('--char-keep', type=int, default=50, help='Number of characters to keep when truncating by character length (default: 50)')
+    parser.add_argument('--max-chars', type=int, default=80, help='Maximum characters inside brackets before truncating (default: 20000)')
+    parser.add_argument('--char-keep', type=int, default=80, help='Number of characters to keep when truncating by character length (default: 50)')
     parser.add_argument('--dry-run', action='store_true', help='Show which files would be changed without modifying files')
     args = parser.parse_args(argv)
 

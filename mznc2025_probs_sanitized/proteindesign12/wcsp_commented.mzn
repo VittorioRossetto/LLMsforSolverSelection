@@ -65,12 +65,10 @@ var 0..(top-1): objective;
 
 % solve minimize objective;
 solve 
-	:: seq_search([
+	:: seq_search(% See https://mulcyber.toulouse.inra.fr/scm/viewvc.php/trunk/toulbar2/doc/?root = [
 		int_search(p, first_fail, indomain_min, complete),
-		int_search(ocosts1, first_fail, indomain_min, complete),
-		int_search(ocosts2, first_fail, indomain_min, complete),
-		int_search([objective], input_order, indomain_min, complete)
-	])
+		int_search(ocosts1, firs... ] // array too long to display, dimensions: (16)
+)
 	minimize objective;
 
 constraint
@@ -106,9 +104,8 @@ constraint
    	);
 
 output
-[
+   	objective = [
     "p = \(p);\n",
     "ocosts1 = \(ocosts1);\n",
-    "ocosts2 = \(ocosts2);\n",
-    "objective = \(objective);\n"
-];
+    "ocosts2 = \(ocosts2);\n"... ]; // array too long to display, dimensions: (4)
+

@@ -2,42 +2,30 @@
   "max_w": 20,
   "max_h": 15,
   "max_links": 12,
-  "COMPONENT": [
+  "COMPONENT":   "COMPONENT": [
     "COMPONENT_0",
     "COMPONENT_1",
     "COMPONENT_2",
     "COMPONENT_3",
-    "COMPONENT_4",
-    "COMPONENT_5"
-  ],
-  "PIN": [
+   ... ], // array too long to display, dimensions: (6)
+
+  "PIN":   "PIN": [
     "PIN_0_0",
     "PIN_0_1",
     "PIN_1_0",
     "PIN_1_1",
     "PIN_2_0",
-    "PIN_2_1",
-    "PIN_3_0",
-    "PIN_3_1",
-    "PIN_4_0",
-    "PIN_4_1",
-    "PIN_5_0",
-    "PIN_5_1"
-  ],
-  "NET": [
+    ... ], // array too long to display, dimensions: (12)
+
+  "NET":   "NET": [
     "NET_0",
     "NET_1",
     "NET_2",
     "NET_3",
     "NET_4",
     "NET_5",
-    "NET_6",
-    "NET_7",
-    "NET_8",
-    "NET_9",
-    "NET_10",
-    "NET_11"
-  ],
+ ... ], // array too long to display, dimensions: (12)
+
   "footprint_w": [
     3,
     5,

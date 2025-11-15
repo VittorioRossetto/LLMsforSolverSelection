@@ -18,5 +18,6 @@ solve
 	:: int_search(x, input_order, indomain_min, complete)
 	satisfy;
 output [ "x = ", show(x), ";\n" ];
-neighbours = array2d(1..416, 1..2, neighbours = [1, 2, 1, 13, 1, 15, 1, 26, 1, 28, 1, 39, 1, 41, 1, 52, 2, 1, 2, 3, 2, 14, 2, 16, 2, 27, 2, 29, 2, 40] // array too long to display, dimensions: (832)
+neighbours = array2d(1..416, 1..2, neighbours = neighbours = array2d(1..416, 1..2, neighbours = [1, 2, 1, 13, 1, 15, 1, 26, 1, 28, 1, 39, 1, 41, 1, 52, 2, 1, 2, 3, 2, 14, 2, 16,... ] // array too long to display, dimensions: (30)
+ // array too long to display, dimensions: (832)
 );

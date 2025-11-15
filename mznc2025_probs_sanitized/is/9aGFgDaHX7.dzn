@@ -21,32 +21,43 @@ inBlock = [|0, 0, |1, 0, |2, 0, |19, 0, |];
 
 inBlockSucc = [| |];
 
-locDomain = locDomain = [|11, 7, 0, 31, |11, 10, 0, 31, |11, 3, 1, 31, |12, 11, 0, 31, |12, 9, 0, 31, |12, 4, 1, 31, |13, 7, 0, 31, |13, 10]; // array too long to display, dimensions: (297)
+locDomain = locDomain = locDomain = locDomain = [|11, 7, 0, 31, |11, 10, 0, 31, |11, 3, 1, 31, |12, 11, 0, 31, |12, 9, 0, 31, |12... ]; // array too long to display, dimensions: (30)
+ // array too long to display, dimensions: (297)
 
 
-applyDefDomUseConstraintForMatch = array1d(allMatches, [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true]);
+applyDefDomUseConstraintForMatch = array1d(allMatches, applyDefDomUseConstraintForMatch = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,... ] // array too long to display, dimensions: (46)
+);
 
-codeSizeOfMatch = array1d(allMatches, [0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,8]);
+codeSizeOfMatch = array1d(allMatches, codeSizeOfMatch = [0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,... ] // array too long to display, dimensions: (46)
+);
 
-consumedBlocksInMatch = array1d(allMatches, [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]);
+consumedBlocksInMatch = array1d(allMatches, consumedBlocksInMatch = [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}... ] // array too long to display, dimensions: (46)
+);
 
-dataDefinedByMatch = array1d(allMatches, [{0},{1},{2},{7},{8},{9},{11},{12},{13},{14},{15},{3},{4},{3},{4},{6},{6},{5},{3,10},{},{7},{8},{9},{11},{12},{13},{14},{15},{7},{8},{9},{11},{12},{13},{14},{15},{7},{8},{9},{11},{12},{13},{14},{15},{10},{10}]);
+dataDefinedByMatch = array1d(allMatches, dataDefinedByMatch = [{0},{1},{2},{7},{8},{9},{11},{12},{13},{14},{15},{3},{4},{3},{4},{6},{6},{5},{3,... ] // array too long to display, dimensions: (47)
+);
 
-dataUsedByMatch = array1d(allMatches, [{},{},{},{0},{1},{1},{3},{4},{4},{5},{6},{7,10},{11,9},{7,10},{11,9},{12,14},{12,14},{13,8},{7,2,10},{15},{0},{1},{1},{3},{4},{4},{5},{6},{0},{1},{1},{3},{4},{4},{5},{6},{0},{1},{1},{3},{4},{4},{5},{6},{2},{2}]);
+dataUsedByMatch = array1d(allMatches, dataUsedByMatch = [{},{},{},{0},{1},{1},{3},{4},{4},{5},{6},{7,10},{11,9},{7,10},{11,9},{12,14},{12... ] // array too long to display, dimensions: (55)
+);
 
-entryBlockOfMatch = array1d(allMatches, [{0},{0},{0},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{0},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]);
+entryBlockOfMatch = array1d(allMatches, entryBlockOfMatch = [{0},{0},{0},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{0},{},{},{},{},{},{... ] // array too long to display, dimensions: (46)
+);
 
-latencyOfMatch = array1d(allMatches, [0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,38,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2]);
+latencyOfMatch = array1d(allMatches, latencyOfMatch = [0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,38,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1... ] // array too long to display, dimensions: (46)
+);
 
 nonCopyMatches = {0,1,2,11,12,13,14,15,16,17,18,19};
 
-operationsCoveredByMatch = array1d(allMatches, [{},{},{},{5},{6},{7},{9},{10},{11},{12},{13},{0},{1},{0},{1},{3},{3},{2},{0,8},{4},{5},{6},{7},{9},{10},{11},{12},{13},{5},{6},{7},{9},{10},{11},{12},{13},{5},{6},{7},{9},{10},{11},{12},{13},{8},{8}]);
+operationsCoveredByMatch = array1d(allMatches, operationsCoveredByMatch = [{},{},{},{5},{6},{7},{9},{10},{11},{12},{13},{0},{1},{0},{1},{3},{3},{2},{0,8},{... ] // array too long to display, dimensions: (47)
+);
 
-spannedBlocksInMatch = array1d(allMatches, [{0},{0},{0},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{0},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]);
+spannedBlocksInMatch = array1d(allMatches, spannedBlocksInMatch = [{0},{0},{0},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{0},{},{},{},{},{},{... ] // array too long to display, dimensions: (46)
+);
 
 numLocations = 34;
 
 numMatches = 46;
 
-sameLoc = [|3, 0, 7, |4, 1, 8, |5, 1, 9, |6, 3, 11, |7, 4, 12, |8, 4, 13, |9, 5, 14, |10, 6, 15, |];
+sameLoc = sameLoc = [|3, 0, 7, |4, 1, 8, |5, 1, 9, |6, 3, 11, |7, 4, 12, |8, 4, 13, |9, 5, 14, |10, 6... ]; // array too long to display, dimensions: (25)
+
 

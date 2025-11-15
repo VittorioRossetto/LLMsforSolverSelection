@@ -298,10 +298,9 @@ int: DomRelSize =
   ) + numBlocksInFunction;
 array[1..DomRelSize, 1..2] of allBlocksInFunctionPlusNull: DomRel =
   array2d(1..DomRelSize, 1..2,
-    [ if k=1 then i else j endif | i in allBlocksInFunctionPlusNull,
-                                   j in domSetOfBlockInFunctionPlusNull[i],
-                                   k in 1..2
-    ]);
+    array[1..DomRelSize, 1..2] of allBlocksInFunctionPlusNull: DomRel = [ if k=1 then i else j endif | i in allBlocksInFunctionPlusNull,
+                ... ] // array too long to display, dimensions: (3)
+);
 
 constraint
   forall ( m in allMatches diff Dominated, e in dataUsedByMatch[m]

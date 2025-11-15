@@ -11,12 +11,11 @@ int: k::output = round(f * u);
 set of int: L = 1..(1+ceil(log2(length(c))));
 array[L,index_set(s)] of var set of min(si in s, a in si)(a)..k: x;
 constraint x[1,..] = s;
-any: y_pairs = [
+any: y_pairs = any: y_pairs = [
   let {
     int: pairs = ceil(length(c) / (2^i));
-    array[1..pairs,1..2] of var 1..(2*pairs): y;
-  } in (pairs: pairs, y: y)
-| i in L diff {max(L)}];
+    array[1..pairs,1..2] of v... ]; // array too long to display, dimensions: (2)
+
 any: y_vars :: output = [y_j | z_i in y_pairs, y_j in z_i.y];
 constraint forall(i in L diff {max(L)})(
   let {
@@ -45,7 +44,7 @@ constraint forall(i in L diff {max(L)})(
 ));
 var int: obj ::output =  sum(xi in x)(card(xi));
 var int: objective = if run = WORST then -obj else obj endif;
-solve :: seq_search([
+solve :: seq_search(var int: objective = if run = [
   set_search(x, input_order, indomain_min),
-  int_search(y_vars, smallest, indomain_min)
-]) minimize objective;
+  int_search(y_vars, smallest, indo... ] // array too long to display, dimensions: (6)
+) minimize objective;

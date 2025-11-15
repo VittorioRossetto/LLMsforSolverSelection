@@ -6,18 +6,16 @@ set of int: Colors = 1..C;
 set of int: Width  = 1..W;
 set of int: Height = 1..H;
 array[Width, Height] of var Colors: puzzle;
-array[Width, Height] of var {0} union Colors: across = array2d(Width, Height, [
+array[Width, Height] of var {0} union Colors: across = array2d(Width, Height, array[Width, Height] of var {0} union Colors: across = [
     if puzzle[w-1,h] default 0 != puzzle[w,h] then
         puzzle[w, h]
-    else
-        0
-    endif | w in Width, h in Height]);
-array[Width, Height] of var {0} union Colors: down = array2d(Width, Height, [
+    els... ] // array too long to display, dimensions: (2)
+);
+array[Width, Height] of var {0} union Colors: down = array2d(Width, Height, array[Width, Height] of var {0} union Colors: down = [
     if puzzle[w,h-1] default 0 != puzzle[w,h] then
         puzzle[w, h]
-    else
-        0
-    endif | w in Width, h in Height]);
+    els... ] // array too long to display, dimensions: (2)
+);
 constraint forall(h in Height) (
     global_cardinality(across[.., h],
                        set2array({0} union Colors),
@@ -30,22 +28,14 @@ constraint forall(w in Width) (
                        [H - C] ++ [1 | c in Colors]
     )
 );
-array[int] of var int: diff_across = [
+array[int] of var int: diff_across = array[int] of var int: diff_across = [
     let {
-        array[int] of var int: occurences = global_cardinality(puzzle[.., h], set2array(Colors));
-        var int: minimum = min(occurences);
-        var int: maximum = max(occurences);
-    } in
-    maximum - minimum
-  | h in Height];
-array[int] of var int: diff_down = [
+        array[int] of var int: occurences = global_cardinality(puzzle... ]; // array too long to display, dimensions: (2)
+
+array[int] of var int: diff_down = array[int] of var int: diff_down = [
     let {
-        array[int] of var int: occurences = global_cardinality(puzzle[w, ..], set2array(Colors));
-        var int: minimum = min(occurences);
-        var int: maximum = max(occurences);
-    } in
-    maximum - minimum
-  | w in Width];
+        array[int] of var int: occurences = global_cardinality(puzzle... ]; // array too long to display, dimensions: (2)
+
 constraint symmetry_breaking_constraint(value_precede_chain(Colors, array1d(puzzle)));
 var int: objective = max(diff_across ++ diff_down);
 solve :: int_search(puzzle, first_fail, indomain_min) minimize objective;

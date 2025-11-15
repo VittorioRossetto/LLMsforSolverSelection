@@ -12,8 +12,10 @@ int: UNIT_BUY_COUNT = count (x in trades, i in 1..x.units) (x.trade = Buy);
 int: UNIT_SELL_COUNT = count (x in trades, i in 1..x.units) (x.trade = Sell);
 enum UNIT_BUY = UnitBuy(1..UNIT_BUY_COUNT);
 enum UNIT_SELL = UnitSell(1..UNIT_SELL_COUNT);
-any: unit_buys = array1d(UNIT_BUY, [(date: x.date, stock: x.stock, price: x.price) | x in trades where x.trade = Buy, i in 1..x.units]);
-any: unit_sells = array1d(UNIT_SELL, [(date: x.date, stock: x.stock, price: x.price) | x in trades where x.trade = Sell, i in 1..x.units]);
+any: unit_buys = array1d(UNIT_BUY, any: unit_buys = [(date: x.date, stock: x.stock, price: x.price) | x in trades where x.trade = Buy... ] // array too long to display, dimensions: (4)
+);
+any: unit_sells = array1d(UNIT_SELL, any: unit_sells = [(date: x.date, stock: x.stock, price: x.price) | x in trades where x.trade = Sel... ] // array too long to display, dimensions: (4)
+);
 array [UNIT_SELL] of var UNIT_BUY: origin;
 constraint all_different(origin);
 constraint forall (u in UNIT_SELL) (unit_buys[origin[u]].date < unit_sells[u].date);
