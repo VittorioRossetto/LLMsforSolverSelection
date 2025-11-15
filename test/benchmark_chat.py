@@ -89,7 +89,7 @@ def build_solver_description_text(solver_list, solver_desc_map=None):
     return get_solver_prompt(solver_list, name_only=False)
 
 
-def pack_instances_into_chats(solver_desc_text, common_instruction, script_text, instances, allowed_total_tokens):
+def pack_instances_into_chats(solver_desc_text, common_instruction, script_text, instances, allowed_total_tokens, prob_description=''):
     """Greedy pack instances into chat conversations given token budget.
 
     instances: list of tuples (inst_label, instance_content)
@@ -97,7 +97,13 @@ def pack_instances_into_chats(solver_desc_text, common_instruction, script_text,
     """
     chats = []
     # include the model script once per chat in the system message; account for its tokens
-    base_non_script = estimate_tokens(solver_desc_text) + estimate_tokens(common_instruction) + estimate_tokens(script_text)
+    # also account for the optional problem description when computing budget
+    base_non_script = (
+        estimate_tokens(solver_desc_text)
+        + estimate_tokens(common_instruction)
+        + estimate_tokens(script_text)
+        + estimate_tokens(prob_description)
+    )
     cur = []
     cur_tokens = base_non_script
     for inst_label, content in instances:
@@ -110,6 +116,9 @@ def pack_instances_into_chats(solver_desc_text, common_instruction, script_text,
             msgs = [
                 {'role': 'system', 'content': solver_desc_text},
             ]
+            # include problem description as its own system message when provided
+            if prob_description:
+                msgs.append({'role': 'system', 'content': "Problem description:\n" + prob_description + "\n"})
             if script_text:
                 model_msg = {
                     'role': 'system',
@@ -129,6 +138,8 @@ def pack_instances_into_chats(solver_desc_text, common_instruction, script_text,
         msgs = [
             {'role': 'system', 'content': solver_desc_text},
         ]
+        if prob_description:
+            msgs.append({'role': 'system', 'content': "Problem description:\n" + prob_description + "\n"})
         if script_text:
             msgs.append({'role': 'system', 'content': "MiniZinc model:\n" + script_text + "\n"})
         for c_label, c_content in cur:
@@ -386,7 +397,9 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
         if not insts:
             insts = [('base', '')]
 
-        chats = pack_instances_into_chats(solver_desc_text, common_instruction, script_text, insts, allowed_total_tokens)
+        # optionally include problem description as a system message at the start
+        prob_desc = prob.get('description', '') if getattr(args, 'include_problem_desc', False) else ''
+        chats = pack_instances_into_chats(solver_desc_text, common_instruction, script_text, insts, allowed_total_tokens, prob_desc)
         for c in chats:
             all_chats.append((prob_key, c))
 
@@ -472,6 +485,8 @@ def main(argv=None):
     parser.add_argument('--top-only', action='store_true', help='If set, only run models listed in TOP_MODELS')
     parser.add_argument('--solver-desc-file', default='/test/data/freeSolversDescription.json',
                         help='Path to JSON file with solver descriptions (default: test/data/freeSolversDescription.json)')
+    parser.add_argument('--include-problem-desc', action='store_true',
+                        help='Include the problem description as a system message at the start of each chat (default: False)')
     args = parser.parse_args(argv)
 
     models = []
@@ -492,11 +507,15 @@ def main(argv=None):
             results.setdefault(provider, {})[model_id] = r
             global_bar.update(1)
 
+    # choose output filename based on whether problem descriptions were included
+    fname = 'LLMsuggestions_chat.json'
+    if getattr(args, 'include_problem_desc', False):
+        fname = 'LLMsuggestions_chat_Pdesc.json'
     try:
-        with open('LLMsuggestions_chat.json', 'w') as of:
+        with open(fname, 'w') as of:
             json.dump(results, of, indent=2)
     except Exception as e:
-        logger.exception(f"Failed to write LLMsuggestions_chat.json: {e}")
+        logger.exception(f"Failed to write {fname}: {e}")
 
 
 if __name__ == '__main__':
