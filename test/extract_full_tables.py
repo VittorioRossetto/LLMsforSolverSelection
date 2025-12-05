@@ -1,7 +1,7 @@
 import json
 from bs4 import BeautifulSoup
 
-def extract_fixed_structure(html_path, output_path="./data/allTables_free.json"):
+def extract_fixed_structure(html_path, output_path="./data/allTables_open.json"):
     """
     Extracts MiniZinc Challenge-style HTML tables into hierarchical JSON:
     { Problem: { Instance: [ {Solver, Status, Time, ...} ] } }
@@ -76,6 +76,6 @@ def extract_fixed_structure(html_path, output_path="./data/allTables_free.json")
 
 
 if __name__ == "__main__":
-    html_file = "./data/allTables_free.html"  # Path to your HTML file
-    output_json = "./data/allTables_free.json"
+    html_file = "./data/allTables_open.html"  # Path to HTML file
+    output_json = "./data/allTables_open.json"
     extract_fixed_structure(html_file, output_json)
