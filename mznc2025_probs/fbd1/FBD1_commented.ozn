@@ -1,0 +1,11 @@
+output ["n = ",showDzn(n),";\n","n_star = ",showDzn(n_star),";\n","Q = ",showDzn(Q),";\n","T_plus = ",showDzn(T_plus),";\n","T_minus = ",showDzn(T_minus),";\n","Q_folded = ",showDzn(Q_folded),";\n","T_plus_folded = ",showDzn(T_plus_folded),";\n","N = ",showDzn(N),";\n"];
+set of int: main_factors = 1..9;
+array [main_factors] of int: n;
+int: k = 9;
+int: n_star;
+int: N = 2*n[k]+n_star;
+array [int] of int: T_plus = [n[j]+n[i] | i,j in main_factors where i < j];
+array [int] of int: T_plus_folded = [2*n[k]+n_star-t | t in T_plus];
+array [int] of int: Q_folded = [2*n[k]+n_star-2*ni | ni in n];
+array [int] of int: T_minus = [n[j]-n[i] | i,j in main_factors where i < j];
+array [int] of int: Q = [2*ni | ni in n];

@@ -1,0 +1,8 @@
+output ["allocations = array1d("++format(JOBS)++", "++format(allocations)++");\n","new_skills = array2d("++format(ENGS)++", "++format(TRAINING)++", "++format(new_skills)++");\n","objective = "++format(objective)++";\n"];
+int: objective;
+set of int: ENGS = 1..65;
+set of int: TRAINING = 1..2;
+array [1..130] of int: X_INTRODUCED_1071_;
+array [ENGS,TRAINING] of int: new_skills = array2d(1..65,1..2,X_INTRODUCED_1071_);
+set of int: JOBS = 1..1055;
+array [JOBS] of int: allocations;

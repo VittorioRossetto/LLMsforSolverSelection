@@ -169,16 +169,16 @@ constraint forall(i in user_ids) (
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % user 1 belongs always to the first group
-constraint redundant_constraint(
+constraint (
   user_group_map1[min(user_ids)] = min(group_ids) /\
-  user_group_map2[min(user_ids)] = min(group_ids));
+  user_group_map2[min(user_ids)] = min(group_ids)
+);
 
 % next user belongs to the group of the previous users or +1
-constraint symmetry_breaking_constraint(
-  forall (i in 1..max(group_ids)-min(group_ids)+1) (
+constraint forall (i in 1..max(group_ids)-min(group_ids)+1) (
   user_group_map1[min(user_ids)+i] in min(group_ids)..min(group_ids)+i /\
   user_group_map2[min(user_ids)+i] in min(group_ids)..min(group_ids)+i
-));
+);
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 % % Activity temporal constraints

@@ -1,0 +1,18 @@
+output ["job_program = ",showDzn(job_program),";\n","job_length = ",showDzn(job_length),";\n","job_moulds = array3d(1..25, 1..12, 1..3, ",showDzn(job_moulds),");\n","total_job_moulds = array3d(1..25, 1..12, 1..3, ",showDzn(total_job_moulds),");\n","job_end = ",showDzn(job_end),";\n","job_time = ",showDzn(job_time),";\n","demand_end = ",showDzn(demand_end),";\n","demand_end_job = ",showDzn(demand_end_job),";\n","makespan = ",showDzn(makespan),";\n","waste = ",showDzn(waste),";\n","tardiness = ",showDzn(tardiness),";\n"];
+int: tardiness;
+int: waste;
+int: makespan;
+set of int: demands = 1..20;
+set of int: jobs = 1..25;
+array [demands] of int: demand_end_job;
+array [demands] of int: demand_end;
+array [jobs] of int: job_time;
+array [jobs] of int: job_end;
+set of int: colors = 1..3;
+set of int: moulds = 1..12;
+array [1..900] of int: X_INTRODUCED_951_;
+array [jobs,moulds,colors] of int: total_job_moulds = array3d(1..25,1..12,1..3,X_INTRODUCED_951_);
+array [1..900] of int: X_INTRODUCED_50_;
+array [jobs,moulds,colors] of int: job_moulds = array3d(1..25,1..12,1..3,X_INTRODUCED_50_);
+array [jobs] of int: job_length;
+array [jobs] of int: job_program;

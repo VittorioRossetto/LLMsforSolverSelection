@@ -1,0 +1,15 @@
+output ["user_group_map1 = "++format(user_group_map1)++";\n","user_group_map2 = "++format(user_group_map2)++";\n","user_weight_map1 = "++format(user_weight_map1)++";\n","user_weight_map2 = "++format(user_weight_map2)++";\n","user_act_map1 = "++format(user_act_map1)++";\n","user_act_map2 = "++format(user_act_map2)++";\n","user_start_time_map1 = "++format(user_start_time_map1)++";\n","user_start_time_map2 = "++format(user_start_time_map2)++";\n","user_duration_map1 = "++format(user_duration_map1)++";\n","user_duration_map2 = "++format(user_duration_map2)++";\n","user_end_map1 = "++format(user_end_map1)++";\n","user_end_map2 = "++format(user_end_map2)++";\n","objective = "++format(objective)++";\n"];
+int: objective;
+set of int: user_ids = 1..15;
+array [user_ids] of int: user_end_map2;
+array [user_ids] of int: user_end_map1;
+array [user_ids] of int: user_duration_map2;
+array [user_ids] of int: user_duration_map1;
+array [user_ids] of int: user_start_time_map2;
+array [user_ids] of int: user_start_time_map1;
+array [user_ids] of int: user_act_map2;
+array [user_ids] of int: user_act_map1;
+array [user_ids] of int: user_weight_map2;
+array [user_ids] of int: user_weight_map1;
+array [user_ids] of int: user_group_map2;
+array [user_ids] of int: user_group_map1;

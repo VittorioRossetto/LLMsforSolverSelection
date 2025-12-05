@@ -1,0 +1,12 @@
+output ["rm_vori   = ",show(rm_vori),";\n","rm_x      = ",show(rm_x),";\n","rm_y      = ",show(rm_y),";\n","rm_rec_x  = ",show(rm_rec_x),";\n","rm_rec_y  = ",show(rm_rec_y),";\n","st_rec_x  = ",show(st_rec_x),";\n","st_rec_y  = ",show(st_rec_y),";\n","objective = ",show(objective),";\n"];
+int: objective;
+set of int: StRecs = 1..0;
+array [StRecs] of int: st_rec_y = [];
+array [StRecs] of int: st_rec_x = [];
+set of int: RmRecs = 1..13;
+array [RmRecs] of int: rm_rec_y;
+array [RmRecs] of int: rm_rec_x;
+set of int: Rooms = 1..8;
+array [Rooms] of int: rm_y;
+array [Rooms] of int: rm_x;
+array [Rooms] of int: rm_vori;
