@@ -53,7 +53,7 @@ TOP_MODELS = [
 ]
 
 # Model included when using --best-only
-BEST = 'gemini-2.5-flash'
+BEST = 'openai/gpt-oss-120b'
 
 
 def estimate_tokens(text: str) -> int:
@@ -65,6 +65,9 @@ def estimate_tokens(text: str) -> int:
 # --- load problems (sanitized dataset) ---
 dataset_path = os.path.join(repo_root, "mznc2025_probs_sanitized", "problems_with_descriptions.json")
 problems = load_problems(dataset_path)
+
+# optional cache for mzn2feat features (loaded by main when requested)
+MZN2FEAT = {}
 
 
 def load_solver_descriptions(path=None):
@@ -399,7 +402,15 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
                     except Exception as e:
                         content = ''
                         logger.exception(f"Error reading instance file {inst_path} for problem {prob_key}: {e}")
-                    insts.append((os.path.splitext(fname)[0], content))
+                    inst_label = os.path.splitext(fname)[0]
+                    # optionally include precomputed features for this instance
+                    if getattr(args, 'include_features', False):
+                        feat_entry = MZN2FEAT.get(prob_key, {}).get(inst_label, {})
+                        feat_text = feat_entry.get('features', '') if feat_entry else ''
+                        if feat_text:
+                            # attach features after the MiniZinc data block
+                            content = content + "\n\nInstance features:\n" + feat_text
+                    insts.append((inst_label, content))
         if not insts:
             insts = [('base', '')]
 
@@ -496,7 +507,27 @@ def main(argv=None):
                         help='Path to JSON file with solver descriptions (default: test/data/freeSolversDescription.json)')
     parser.add_argument('--include-solver-desc', action='store_true',
                         help='Include the solver descriptions system message at the start of each chat (default: False)')
+    parser.add_argument('--include-features', action='store_true',
+                        help='Include instance features with each instance (default: False)')
+    parser.add_argument('--mzn2feat-file', default='test/data/mzn2feat_all_features.json',
+                        help='Path to JSON file produced by mzn2feat (relative to repo root)')
     args = parser.parse_args(argv)
+
+    # load mzn2feat features if requested (cached globally)
+    global MZN2FEAT
+    MZN2FEAT = {}
+    if getattr(args, 'include_features', False):
+        mfile = args.mzn2feat_file
+        # allow relative path (repo_root relative)
+        if not os.path.isabs(mfile):
+            mfile = os.path.join(repo_root, mfile)
+        try:
+            with open(mfile, 'r') as mf:
+                MZN2FEAT = json.load(mf)
+            logger.info('Loaded mzn2feat features from %s', mfile)
+        except Exception as e:
+            logger.exception('Failed to load mzn2feat features file %s: %s', mfile, e)
+            MZN2FEAT = {}
 
     models = []
     for provider, mod_list, qf in [( 'gemini', GEMINI_MODELS, query_gemini), ('groq', GROQ_MODELS, query_groq)]:
