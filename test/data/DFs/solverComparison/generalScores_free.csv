@@ -1,41 +1,41 @@
 TotalScore,Solver,Type
-81.38669460157236,gemini-2.5-flash (Solvers Description + Problem Description),LLM Variant
-81.29945673571781,moonshotai/kimi-k2-instruct-0905 (Solvers Description + Problem Description),LLM Variant
-81.29945673571781,moonshotai/kimi-k2-instruct-0905 (Solvers Description),LLM Variant
-81.29945673571781,moonshotai/kimi-k2-instruct (Solvers Description),LLM Variant
-81.2994567357178,or-tools_cp-sat-free,Solver
-81.09593568550473,openai/gpt-oss-120b (Solvers Description + Problem Description),LLM Variant
-78.29945673571781,moonshotai/kimi-k2-instruct (Solvers Description + Problem Description),LLM Variant
-77.27787920404225,gemini-2.5-flash-lite (Simple),LLM Variant
-77.01346398568326,gemini-2.5-flash (Simple),LLM Variant
-76.69056666411254,moonshotai/kimi-k2-instruct-0905 (Problem Description),LLM Variant
-76.26165090975688,gemini-2.5-flash (Solvers Description),LLM Variant
-75.99460692345788,openai/gpt-oss-120b (Simple),LLM Variant
-75.98289169472507,moonshotai/kimi-k2-instruct-0905 (Simple),LLM Variant
-75.96266247901343,chuffed-free,Solver
-74.70349814881111,moonshotai/kimi-k2-instruct (Simple),LLM Variant
-73.49695554086554,openai/gpt-oss-120b (Problem Description),LLM Variant
-73.3779323826785,gemini-2.5-flash-lite (Problem Description),LLM Variant
-73.10881210262811,openai/gpt-oss-120b (Solvers Description),LLM Variant
-71.6833073179019,picatsat-free,Solver
-71.38593456780995,moonshotai/kimi-k2-instruct (Problem Description),LLM Variant
-70.34528989866662,choco-solver__cp-sat_-free,Solver
-69.80567901039348,huub-free,Solver
-67.75831050845298,izplus-free,Solver
-66.39807611043226,gemini-2.5-flash-lite (Solvers Description + Problem Description),LLM Variant
-63.58760142322564,choco-solver__cp_-free,Solver
-61.83587987130143,pumpkin-free,Solver
-61.400374606582915,cp_optimizer-free,Solver
-60.227160509550515,gurobi-free,Solver
-59.58939547312114,gemini-2.5-flash-lite (Solvers Description),LLM Variant
-59.149306351393356,or-tools_cp-sat_ls-free,Solver
-55.77935184087976,gemini-2.5-flash (Problem Description),LLM Variant
-53.96256585753381,gecode-fd,Solver
-52.15911210017964,cplex-free,Solver
-46.35200853345656,jacop-free,Solver
-45.53745154009826,sicstus_prolog-free,Solver
-42.67034322199226,yuck-free,Solver
-38.92982075462703,scip-free,Solver
-37.37298161701611,highs-free,Solver
-23.779303552848752,cbc-free,Solver
+77.26085386382384,openai/gpt-oss-120b (Solvers Description + Problem Description),LLM Variant
+76.96437491403692,moonshotai/kimi-k2-instruct-0905 (Solvers Description + Problem Description),LLM Variant
+76.96437491403692,moonshotai/kimi-k2-instruct-0905 (Solvers Description),LLM Variant
+76.96437491403692,moonshotai/kimi-k2-instruct (Solvers Description),LLM Variant
+76.96437491403691,or-tools_cp-sat-free,Solver
+74.48827840668847,openai/gpt-oss-120b (Simple),LLM Variant
+74.46437491403692,moonshotai/kimi-k2-instruct (Solvers Description + Problem Description),LLM Variant
+74.45633396224403,chuffed-free,Solver
+73.55161277989147,gemini-2.5-flash (Solvers Description + Problem Description),LLM Variant
+72.60548484243165,moonshotai/kimi-k2-instruct-0905 (Problem Description),LLM Variant
+71.68665090975688,gemini-2.5-flash (Solvers Description),LLM Variant
+71.62280987304418,moonshotai/kimi-k2-instruct-0905 (Simple),LLM Variant
+70.97435737124823,openai/gpt-oss-120b (Solvers Description),LLM Variant
+70.93939658100892,moonshotai/kimi-k2-instruct (Simple),LLM Variant
+70.9333073179019,picatsat-free,Solver
+70.74062702409614,openai/gpt-oss-120b (Problem Description),LLM Variant
+70.14518689634994,gemini-2.5-flash-lite (Simple),LLM Variant
+69.76346398568326,gemini-2.5-flash (Simple),LLM Variant
+69.0428505609976,gemini-2.5-flash-lite (Problem Description),LLM Variant
+68.49798670270116,huub-free,Solver
+67.55460605104057,moonshotai/kimi-k2-instruct (Problem Description),LLM Variant
+63.062994288751376,gemini-2.5-flash-lite (Solvers Description + Problem Description),LLM Variant
+60.80817577823609,choco-solver__cp-sat_-free,Solver
+58.672092559735034,izplus-free,Solver
+58.543229230207594,pumpkin-free,Solver
+58.40432304639856,choco-solver__cp_-free,Solver
+55.384518369082286,gurobi-free,Solver
+54.71380940398636,gemini-2.5-flash-lite (Solvers Description),LLM Variant
+50.9926822988906,cp_optimizer-free,Solver
+50.073442559017586,gecode-fd,Solver
+49.89665953318745,gemini-2.5-flash (Problem Description),LLM Variant
+48.5145288488189,cplex-free,Solver
+44.592608206484755,sicstus_prolog-free,Solver
+44.54944303424271,jacop-free,Solver
+43.222030723074155,or-tools_cp-sat_ls-free,Solver
+36.902765701836685,scip-free,Solver
+34.71551507821846,yuck-free,Solver
+34.41850604138009,highs-free,Solver
+22.61525946715711,cbc-free,Solver
 1.5,atlantis-free,Solver

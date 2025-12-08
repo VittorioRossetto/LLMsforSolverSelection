@@ -52,6 +52,9 @@ TOP_MODELS = [
     'openai/gpt-oss-120b'
 ]
 
+# Model included when using --best-only
+BEST = 'gemini-2.5-flash'
+
 
 def estimate_tokens(text: str) -> int:
     if not text:
@@ -112,10 +115,10 @@ def pack_instances_into_chats(solver_desc_text, common_instruction, script_text,
         # if adding would exceed allowed_total_tokens, flush
         if cur and (cur_tokens + inst_tokens > allowed_total_tokens):
             # build messages for cur
-            # keep solver descriptions and the model as two separate system messages
-            msgs = [
-                {'role': 'system', 'content': solver_desc_text},
-            ]
+            # keep solver descriptions and the model as separate system messages when present
+            msgs = []
+            if solver_desc_text:
+                msgs.append({'role': 'system', 'content': solver_desc_text})
             # include problem description as its own system message when provided
             if prob_description:
                 msgs.append({'role': 'system', 'content': "Problem description:\n" + prob_description + "\n"})
@@ -135,9 +138,9 @@ def pack_instances_into_chats(solver_desc_text, common_instruction, script_text,
             cur_tokens += inst_tokens
 
     if cur:
-        msgs = [
-            {'role': 'system', 'content': solver_desc_text},
-        ]
+        msgs = []
+        if solver_desc_text:
+            msgs.append({'role': 'system', 'content': solver_desc_text})
         if prob_description:
             msgs.append({'role': 'system', 'content': "Problem description:\n" + prob_description + "\n"})
         if script_text:
@@ -365,9 +368,12 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
     except Exception as e:
         logger.exception(f"Failed to load grok_models.json for model {model_id}: {e}")
 
-    # build solver description text
-    solver_desc_map = load_solver_descriptions(args.solver_desc_file if hasattr(args, 'solver_desc_file') else None)
-    solver_desc_text = build_solver_description_text(get_solver_list(args.solver_set if hasattr(args, 'solver_set') else 'free'), solver_desc_map)
+    # build solver description text only if requested
+    if getattr(args, 'include_solver_desc', False):
+        solver_desc_map = load_solver_descriptions(args.solver_desc_file if hasattr(args, 'solver_desc_file') else None)
+        solver_desc_text = build_solver_description_text(get_solver_list(args.solver_set if hasattr(args, 'solver_set') else 'free'), solver_desc_map)
+    else:
+        solver_desc_text = ''
     common_instruction = "For each instance above, output a single line: instance_name: [solver1, solver2, solver3]"
 
     # collect chats across all problems so we can run them in parallel per model
@@ -483,10 +489,13 @@ def main(argv=None):
     parser.add_argument('--max-workers-instances', type=int, default=1,
                         help='Number of concurrent chat sends per model (default=1)')
     parser.add_argument('--top-only', action='store_true', help='If set, only run models listed in TOP_MODELS')
-    parser.add_argument('--solver-desc-file', default='/test/data/freeSolversDescription.json',
-                        help='Path to JSON file with solver descriptions (default: test/data/freeSolversDescription.json)')
+    parser.add_argument('--best-only', action='store_true', help='If set, only run the best model')
     parser.add_argument('--include-problem-desc', action='store_true',
                         help='Include the problem description as a system message at the start of each chat (default: False)')
+    parser.add_argument('--solver-desc-file', default='/test/data/freeSolversDescription.json',
+                        help='Path to JSON file with solver descriptions (default: test/data/freeSolversDescription.json)')
+    parser.add_argument('--include-solver-desc', action='store_true',
+                        help='Include the solver descriptions system message at the start of each chat (default: False)')
     args = parser.parse_args(argv)
 
     models = []
