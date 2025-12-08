@@ -1,4 +1,4 @@
-output ["puzzle = \n",let {array [int] of string: X_INTRODUCED_1536_ = [], array [int] of string: X_INTRODUCED_1537_ = [], array [int,int] of string: X_INTRODUCED_1538_ = [(X_INTRODUCED_1534_, X_INTRODUCED_1535_) : showDzn(puzzle[X_INTRODUCED_1534_,X_INTRODUCED_1535_]) | X_INTRODUCED_1534_ in index_set_1of2(puzzle), X_INTRODUCED_1535_ in index_set_2of2(puzzle)]} in (show2d_indexed(X_INTRODUCED_1536_,X_INTRODUCED_1537_,X_INTRODUCED_1538_)),";\n"];
+output ["puzzle = \n",let {array [int] of string: X_INTRODUCED_1538_ = [], array [int] of string: X_INTRODUCED_1539_ = [], array [int,int] of string: X_INTRODUCED_1540_ = [(X_INTRODUCED_1536_, X_INTRODUCED_1537_) : showDzn(puzzle[X_INTRODUCED_1536_,X_INTRODUCED_1537_]) | X_INTRODUCED_1536_ in index_set_1of2(puzzle), X_INTRODUCED_1537_ in index_set_2of2(puzzle)]} in (show2d_indexed(X_INTRODUCED_1538_,X_INTRODUCED_1539_,X_INTRODUCED_1540_)),";\n"];
 set of int: Height = 1..8;
 set of int: Width = 1..8;
 array [1..64] of int: X_INTRODUCED_16_;

@@ -13,7 +13,7 @@ Prerequisites:
 This script will:
   - find commented model files in each problem folder (files matching '*_commented.mzn' or 'model_commented.mzn')
   - for each instance file (.dzn, .json) in the same folder, run:
-      minizinc --compile --solver Gecode --use-gecode <model> <instance> -o <out.fzn>
+      minizinc --compile --solver Gecode <model> <instance> -o <out.fzn>
   - run `mzn2feat -i <out.fzn> -o pp` and capture its stdout
   - write a JSON mapping Problem -> Instance -> {"features": <mzn2feat output>} to the output file
 
@@ -70,7 +70,7 @@ def instance_base_name(inst_path):
 
 def run_minizinc_compile(model_path, inst_path, out_fzn_path, extra_args=None):
     cmd = [
-        'minizinc', '--compile', '--solver', 'Gecode', '--use-gecode',
+        'minizinc', '--compile', '--solver', 'Gecode',
     ]
     if extra_args:
         cmd.extend(extra_args)
@@ -157,7 +157,7 @@ def process_instance(model_path, inst_path, fzn_dir, keep_fzn=False):
 
     if retcode != 0:
         logger.warning('minizinc compile failed for %s + %s: rc=%d stderr=%s', model_path, inst_path, retcode, err[:200])
-        return inst_-base, {'error': 'minizinc_compile_failed', 'rc': retcode, 'stderr': err, 'used_allow_unbounded': used_allow_unbounded}
+        return inst_base, {'error': 'minizinc_compile_failed', 'rc': retcode, 'stderr': err, 'used_allow_unbounded': used_allow_unbounded}
 
     # run mzn2feat
     # Run mzn2feat; if it fails with a syntax error mentioning '::', try sanitizing the .fzn and retry

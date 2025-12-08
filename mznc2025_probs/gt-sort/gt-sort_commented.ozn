@@ -1,4 +1,4 @@
-output ["run = ",_toString_Run(run,true,false),";\n","c = ",showDzn(c),";\n","n = ",showDzn(n),";\n","ub = ",showDzn(ub),";\n","f = ",showDzn(f),";\n","u = ",showDzn(u),";\n","k = ",showDzn(k),";\n","x = \n",let {array [int] of string: X_INTRODUCED_71365_ = [], array [int] of string: X_INTRODUCED_71366_ = [], array [int,int] of string: X_INTRODUCED_71367_ = [(X_INTRODUCED_71363_, X_INTRODUCED_71364_) : showDzn(x[X_INTRODUCED_71363_,X_INTRODUCED_71364_]) | X_INTRODUCED_71363_ in index_set_1of2(x), X_INTRODUCED_71364_ in index_set_2of2(x)]} in (show2d_indexed(X_INTRODUCED_71365_,X_INTRODUCED_71366_,X_INTRODUCED_71367_)),";\n","y_vars = ",showDzn(y_vars),";\n","obj = ",showDzn(obj),";\n"];
+output ["run = ",_toString_Run(run,true,false),";\n","c = ",showDzn(c),";\n","n = ",showDzn(n),";\n","ub = ",showDzn(ub),";\n","f = ",showDzn(f),";\n","u = ",showDzn(u),";\n","k = ",showDzn(k),";\n","x = \n",let {array [int] of string: X_INTRODUCED_104326_ = [], array [int] of string: X_INTRODUCED_104327_ = [], array [int,int] of string: X_INTRODUCED_104328_ = [(X_INTRODUCED_104324_, X_INTRODUCED_104325_) : showDzn(x[X_INTRODUCED_104324_,X_INTRODUCED_104325_]) | X_INTRODUCED_104324_ in index_set_1of2(x), X_INTRODUCED_104325_ in index_set_2of2(x)]} in (show2d_indexed(X_INTRODUCED_104326_,X_INTRODUCED_104327_,X_INTRODUCED_104328_)),";\n","y_vars = ",showDzn(y_vars),";\n","obj = ",showDzn(obj),";\n"];
 function string : _toString_Run(opt int: X_INTRODUCED_0_,bool: X_INTRODUCED_1_,bool: X_INTRODUCED_2_) = if occurs(X_INTRODUCED_0_) then if X_INTRODUCED_1_ then showDznId(_enum_to_string_0_Run[deopt(X_INTRODUCED_0_)]) elseif X_INTRODUCED_2_ then ("{\"e\":"++show(_enum_to_string_0_Run[deopt(X_INTRODUCED_0_)]))++"}" else _enum_to_string_0_Run[deopt(X_INTRODUCED_0_)] endif else if X_INTRODUCED_2_ then "null" else "<>" endif endif;
 array [1..14] of set of int: s = [{0,19},{0,17},{0,17},{0,13},{0,12},{0,11},{0,9},{0,7},{0,6},{0,4},{0,4},{0,3},0..1,0..0];
 set of int: L = 1..5;
@@ -6,7 +6,7 @@ int: k = 62;
 array [1..70] of set of int: X_INTRODUCED_32_;
 array [L,index_set(s)] of set of int: x = array2d(1..5,1..14,X_INTRODUCED_32_);
 int: obj = sum([card(xi) | xi in x]);
-array [1..2] of int: X_INTRODUCED_135_ = [|1,2|];
+array [1..2] of int: X_INTRODUCED_135_;
 record(int: pairs, array [int,int] of int: y): X_INTRODUCED_138_ = (pairs: 1,y: X_INTRODUCED_135_);
 array [1..4] of int: X_INTRODUCED_129_;
 record(int: pairs, array [int,int] of int: y): X_INTRODUCED_134_ = (pairs: 2,y: X_INTRODUCED_129_);

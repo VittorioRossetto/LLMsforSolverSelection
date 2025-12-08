@@ -2,8 +2,8 @@ output ["sel = array1d("++format(allMatches)++", "++format(sel)++");\n","def = a
 set of int: allMatches = 0..117;
 set of int: allBlocksInFunctionPlusNull = 0..13;
 int: objective;
-array [1..14] of int: X_INTRODUCED_305_;
-array [allBlocksInFunctionPlusNull] of int: succ = array1d(0..13,X_INTRODUCED_305_);
+array [1..14] of int: X_INTRODUCED_310_;
+array [allBlocksInFunctionPlusNull] of int: succ = array1d(0..13,X_INTRODUCED_310_);
 array [1..118] of int: X_INTRODUCED_191_;
 array [allMatches] of int: place = array1d(0..117,X_INTRODUCED_191_);
 set of int: allDataInFunction = 0..34;
