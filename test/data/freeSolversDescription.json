@@ -1,5 +1,5 @@
 {
-  "atlantis-free": "A free constraint-based optimization and SAT solver that targets combinatorial problems, offering hybrid modeling and efficient search strategies across diverse domains.",
+  "atlantis-free": "Atlantis is a constraint-based local search solver. Atlantis takes inspiration from Localizer, Comet, OscaR.cbls, Yuck, and Kangaroo.",
   "cbc-free": "COIN-OR Branch-and-Cut (CBC) is an open-source MILP solver specializing in integer and linear optimization, widely used as a robust and lightweight alternative to commercial engines.",
   "choco-solver__cp_-free": "A free configuration of Choco Solver, a Java-based constraint programming toolkit supporting finite domain constraints and offering customizable search strategies for discrete optimization.",
   "choco-solver__cp_-par": "A parallel configuration of Choco Solver that exploits multi-threaded search, improving runtimes on hard combinatorial problems while retaining its flexible Java modeling interface.",
@@ -18,5 +18,5 @@
   "pumpkin-free": "A free SAT and Max-SAT solver aimed at optimization-centric Boolean reasoning, providing clause learning and heuristics suitable for decision and cost-based models.",
   "scip-free": "A free solver that unifies mixed-integer programming and constraint programming with nonlinear extensions; known for strong presolve, cutting planes, and flexibility.",
   "sicstus_prolog-free": "A free edition of SICStus Prolog that blends Prolog with constraint logic programming capabilities, enabling expressive models for combinatorial reasoning and inference.",
-  "yuck-free": "A free constraint-based solver employing heuristics and local search to tackle combinatorial, optimization, and scheduling problems with concise modeling constructs."
+  "yuck-free": "Yuck is a FlatZinc interpreter that integrates with the MiniZinc toolchain. It combines local search with restarting, global constraints, and lexicographic cost functions."
 }

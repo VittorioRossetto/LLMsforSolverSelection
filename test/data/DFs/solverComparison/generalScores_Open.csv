@@ -1,0 +1,40 @@
+TotalScore,Solver,Type
+93.61774495411679,or-tools_cp-sat-par,Solver
+90.61287348792996,gemini-2.5-flash-lite (Top+Desc),LLM
+90.37689215475568,moonshotai/kimi-k2-instruct-0905 (Top),LLM
+90.36287348792996,gemini-2.5-flash (Top+SDesc+PDesc),LLM
+90.20870682126329,gemini-2.5-flash (Top+SDesc),LLM
+89.52317195930794,moonshotai/kimi-k2-instruct-0905 (Top+Desc),LLM
+88.90274530531653,openai/gpt-oss-120b (Top),LLM
+88.85656679493908,moonshotai/kimi-k2-instruct (Top+SDesc),LLM
+88.51308378831942,gemini-2.5-flash-lite (Top),LLM
+88.48402319727667,moonshotai/kimi-k2-instruct (Top),LLM
+88.16827259367079,openai/gpt-oss-120b (Top+Desc),LLM
+87.20451535017395,moonshotai/kimi-k2-instruct-0905 (Top+SDesc),LLM
+87.18108671845475,moonshotai/kimi-k2-instruct-0905 (Top+SDesc+PDesc),LLM
+86.20365249538021,moonshotai/kimi-k2-instruct (Top+Desc),LLM
+85.50459770848394,gemini-2.5-flash (Top),LLM
+84.58283045190717,openai/gpt-oss-120b (Top+SDesc+PDesc),LLM
+83.96616111119857,gemini-2.5-flash-lite (Top+SDesc),LLM
+83.85160666098,gemini-2.5-flash-lite (Top+SDesc+PDesc),LLM
+81.52482608434147,openai/gpt-oss-120b (Top+SDesc),LLM
+75.55158539630439,chuffed-free,Solver
+71.34486683610601,picatsat-free,Solver
+70.30968282306851,huub-free,Solver
+65.75260657416351,izplus-par,Solver
+65.70382703062268,or-tools_cp-sat_ls-par,Solver
+65.46104224373377,choco-solver__cp_-par,Solver
+64.96302190361615,gurobi-par,Solver
+63.45129428763396,gecode_dexter-open,Solver
+63.43433061700436,cp_optimizer-par,Solver
+62.596945912970234,cplex-par,Solver
+61.72171904008406,pumpkin-free,Solver
+61.55951966666714,choco-solver__cp-sat_-par,Solver
+59.24280161986919,gecode-par,Solver
+52.90286177388907,yuck-par,Solver
+47.3732108376385,jacop-free,Solver
+46.04062553705907,sicstus_prolog-free,Solver
+39.62152946337076,scip-par,Solver
+37.100323723261255,highs-par,Solver
+26.84698319098939,cbc-par,Solver
+1.5554945054945053,atlantis-free,Solver

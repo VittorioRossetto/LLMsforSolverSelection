@@ -476,7 +476,7 @@ if args.top_only:
 if args.include_problem_desc:
     _suffix_parts.append("desc")
 _suffix = ("_" + "_".join(_suffix_parts)) if _suffix_parts else ""
-output_file = f"LLMsuggestions_{args.solver_set}_{args.script_version}{_suffix}.json"
+output_file = f"testOutputFree/LLMsuggestions_{args.solver_set}_{args.script_version}{_suffix}.json"
 with open(output_file, "w") as f:
     try:
         json.dump(results, f, indent=2)

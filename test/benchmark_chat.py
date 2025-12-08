@@ -508,9 +508,9 @@ def main(argv=None):
             global_bar.update(1)
 
     # choose output filename based on whether problem descriptions were included
-    fname = 'LLMsuggestions_chat.json'
+    fname = 'testOutputFree/LLMsuggestions_chat.json'
     if getattr(args, 'include_problem_desc', False):
-        fname = 'LLMsuggestions_chat_Pdesc.json'
+        fname = 'testOutputFree/LLMsuggestions_chat_Pdesc.json'
     try:
         with open(fname, 'w') as of:
             json.dump(results, of, indent=2)

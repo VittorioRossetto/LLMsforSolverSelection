@@ -1,0 +1,6 @@
+provider,model,LLM_Top1_TotalScore,LLM_Top1_AvgScore,InstancesCovered
+chat,gemini-2.5-flash,81.38669460157236,0.8138669460157236,100
+chat,moonshotai/kimi-k2-instruct-0905,81.29945673571781,0.8129945673571781,100
+chat,openai/gpt-oss-120b,81.09593568550473,0.8191508655101488,100
+chat,moonshotai/kimi-k2-instruct,78.29945673571781,0.790903603391089,99
+chat,gemini-2.5-flash-lite,66.39807611043226,0.6639807611043226,100
