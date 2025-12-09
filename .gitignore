@@ -3,6 +3,5 @@ old/
 __pycache__/
 .venv/
 .vscode/
-benchmark_chat.log
-benchmark_parallel.log
+*.log
 papers/

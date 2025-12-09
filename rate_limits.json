@@ -1,5 +1,5 @@
 {
-  "openai_like_models": [
+  "groq_models": [
     { "model_id": "allam-2-7b", "rpm": 30, "rpd": 7000, "tpm": 6000, "tpd": 500000, "ash": null, "asd": null },
     { "model_id": "deepseek-r1-distill-llama-70b", "rpm": 30, "rpd": 1000, "tpm": 6000, "tpd": 100000, "ash": null, "asd": null },
     { "model_id": "gemma2-9b-it", "rpm": 30, "rpd": 14400, "tpm": 15000, "tpd": 500000, "ash": null, "asd": null },
