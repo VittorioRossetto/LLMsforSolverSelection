@@ -1,32 +1,32 @@
 {
   "gemini": {
-    "gemini-2.5-flash-lite": {},
-    "gemini-2.0-flash": {},
     "gemini-2.0-flash-lite": {},
+    "gemini-2.5-flash": {},
+    "gemini-2.5-flash-lite": {},
     "gemini-2.5-pro": {},
-    "gemini-2.5-flash": {}
+    "gemini-2.0-flash": {}
   },
   "groq": {
     "moonshotai/kimi-k2-instruct-0905": {},
-    "deepseek-r1-distill-llama-70b": {},
-    "groq/compound": {},
     "moonshotai/kimi-k2-instruct": {},
+    "groq/compound": {},
+    "deepseek-r1-distill-llama-70b": {},
     "meta-llama/llama-4-maverick-17b-128e-instruct": {},
     "qwen/qwen3-32b": {},
+    "playai-tts-arabic": {},
     "whisper-large-v3": {},
     "meta-llama/llama-4-scout-17b-16e-instruct": {},
     "meta-llama/llama-guard-4-12b": {},
-    "playai-tts-arabic": {},
-    "playai-tts": {},
-    "meta-llama/llama-prompt-guard-2-22m": {},
     "llama-3.1-8b-instant": {},
+    "playai-tts": {},
     "meta-llama/llama-prompt-guard-2-86m": {},
+    "meta-llama/llama-prompt-guard-2-22m": {},
     "allam-2-7b": {},
     "openai/gpt-oss-20b": {},
-    "openai/gpt-oss-120b": {},
-    "whisper-large-v3-turbo": {},
     "groq/compound-mini": {},
     "gemma2-9b-it": {},
+    "openai/gpt-oss-120b": {},
+    "whisper-large-v3-turbo": {},
     "llama-3.3-70b-versatile": {}
   }
 }

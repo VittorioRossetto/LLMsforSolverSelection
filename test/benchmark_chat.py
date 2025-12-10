@@ -555,6 +555,9 @@ def main(argv=None):
         for mid, mlabel in mod_list:
             if args.top_only and mid not in TOP_MODELS:
                 continue
+            # honor --best-only: only include the designated BEST model
+            if getattr(args, 'best_only', False) and mid != BEST:
+                continue
             models.append((provider, mid, mlabel, qf))
 
     results = {}

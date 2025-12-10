@@ -51,7 +51,7 @@ run_one() {
   local run_log="$LOG_DIR/${name}.log"
   echo "\n--- [$name] START $(date -u) ---" | tee -a "$SUMMARY_LOG" "$run_log"
 
-  cmd=("$PY" "$SCRIPT" $args --best-only --mzn2feat-file "$MZN2FEAT_FILE" $DRY_FLAG)
+  cmd=("$PY" "$SCRIPT" $args --mzn2feat-file "$MZN2FEAT_FILE" --best-only $DRY_FLAG)
   echo "Running: ${cmd[*]}" | tee -a "$SUMMARY_LOG" "$run_log"
 
   # run the command, capture stdout+stderr
