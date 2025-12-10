@@ -1,21 +1,37 @@
 \documentclass[../../main.tex]{subfiles}
 \begin{document}
 
-This is the first chapter.
+In this chapter, the focus is on outlining the foundational decisions required to establish an initial benchmark. This benchmark serves as the basis for refining subsequent experiments and assessing both the current capabilities and future potential of the project.
+
+The chapter is structured into four sections, each addressing a key preliminary choice. The first section discusses the selection of large language models used as candidates for the agentic component. The second details the initial prompt-engineering strategy needed to define a clean, consistent prompt format for evaluation. The third presents the rationale behind the selection of benchmark problems used to test model performance. The final section explains the metrics adopted to evaluate how effectively each model could operate as a meta-solver.
 
 \section{Preliminary Model Selection}
-\subsection{Provider Choice}
-To build the proposed Agentic Solver (AS), first of all, it is needed to have the agent, so an LLM that could orchestrate the system an act as an agent. Due to limited resources and computing power, for the initial testing phase, it was decided to opt for the use of, out of the box, APIs (Application Programming Interface) offered with a free tier basis. Based "freedom of use", so less limitation on rates, the decision led to
+\subsection{Provider Choice} 
+To build the proposed Agentic Solver (AS), the first requirement is the
+availability of an LLM capable of orchestrating the system and acting as the
+agent. Given the limited computational resources available during the testing
+phase, we had to rely on externally hosted models accessed through
+usage-based APIs. The selection prioritized generous free tiers, permissive rate
+limits, and straightforward integration. This led to the choice of the
+following providers:
 \begin{itemize}
-    \item Gemini API (add ref) by Google DeepMind. Gemini is a family of LLMs developed by Google DeepMind, with different sizes and capabilities. The model used for the initial testing phase was Gemini 1.5 Pro, which is a powerful model that can handle complex tasks and generate high-quality text.
-    \item Groq API by Groq (add ref). Groq is a company that provides hardware and software solutions for AI and machine learning. The Groq API allows users to access Groq's LLMs and other AI models through a simple and easy-to-use interface. 
+    \item \textbf{Gemini API} (add ref), offered by Google DeepMind. Gemini is a
+    family of large language models with multiple sizes and capabilities. This provider selected for its strong reasoning abilities, robust tool-use features, and overall high-quality text generation.
+
+    \item \textbf{Groq API} (add ref), provided by Groq. Groq offers
+    high-performance inference solutions through its specialized hardware
+    architecture. The Groq API exposes a selection of LLMs through a simple and
+    lightweight interface, enabling fast and low-latency experimentation.
 \end{itemize}
-Both APIs were chosen for their ease of use, flexibility, performance and larger rate limits when compared to competitors:
+
+Both APIs were selected for their ease of use, flexibility, overall performance,
+and, critically, their comparatively generous rate limits relative to competing
+services.
 
 \begin{table}[h]
     \centering
     \small % reduce font size for wide tables
-    \caption{Rate limits - groq\_models}
+    \caption{Rate limits - Groq models}
     \label{tab:rate_limits_groq}
     \begin{tabular}{@{} >{\raggedright\arraybackslash}p{6cm} r r r r r r @{}}
         \toprule
@@ -49,7 +65,7 @@ Both APIs were chosen for their ease of use, flexibility, performance and larger
 \begin{table}[h]
     \centering
     \small
-    \caption{Rate limits - gemini\_models}
+    \caption{Rate limits - Gemini models}
     \label{tab:rate_limits_gemini}
     \begin{tabular}{@{} >{\raggedright\arraybackslash}p{6cm} r r r r @{}}
         \toprule
@@ -66,14 +82,21 @@ Both APIs were chosen for their ease of use, flexibility, performance and larger
     \end{tabular}
 \end{table}
 
-
 \subsection{Model selection}
-Out of all the provided models, a selection needs to be done. First of all not all the models provided are made for text generation:
+Both providers expose a wide range of models with different capabilities and
+limitations. A preliminary filtering step was therefore required. Not all models
+offered by the APIs are designed for text generation, which is essential for
+the proposed AS. More specifically:
 \begin{itemize}
-    \item \texttt{playai-tts} and \texttt{playai-tts-arabic}: these models are only provided for use on groq's platform and not for remote testing
-    \item \texttt{whisper-large-v3} and \texttt{whisper-large-v3-turbo}: these models are actually for speech recognition , so not useful for the purpose of this research
+    \item \texttt{playai-tts} and \texttt{playai-tts-arabic}: text-to-speech
+    models available only within Groq's platform and unsuitable for remote
+    testing.
+    \item \texttt{whisper-large-v3} and \texttt{whisper-large-v3-turbo}:
+    speech-recognition models, irrelevant for this work.
 \end{itemize}
-Other models were removed as they didn't strictly follow requests, giving inconsitent answers:
+
+Additional models were removed because they failed to follow instructions
+reliably, producing inconsistent or sometimes unreadable answers:
 \begin{itemize}
     \item \texttt{deepseek-r1-distill-llama-70b}
     \item \texttt{gemini-2.0-flash-lite}
@@ -83,28 +106,45 @@ Other models were removed as they didn't strictly follow requests, giving incons
     \item \texttt{allam-2-7b}
 \end{itemize}
 
-After this preliminary selection we are left with a list of eighteen models as a stable base for testing.
+After this filtering stage, eighteen models remained as a stable base for the
+evaluation phase.
 
 \section{Preliminary Prompt Engineering}
-To test which would be the most fitting LLM for the task of building an AS, it was needed to build a set of standard prompt to send at each model.
-The first thing was to chose what wold be the prompt structure, the base idea was to keep it as short and clean as possible, for two main reasons:
+To determine which LLM would be best suited for building an AS, it was necessary to
+design a consistent prompt format to query each model. The primary objective was
+to define a structure that was as short and clean as possible, for two main
+reasons:
 \begin{itemize}
-    \item \textbf{Influence the model a less as possible}: A too complex prompt structure could influence the model and possibly tweak results for certain models. So using as less words as possible is the best and easiest way to limit possible unexpected results.
-    \item \textbf{Limit Token Usage}: The prompt needs to be limited to limit the token usage, since the testing environment is restricted to the token limits imposed from the providers.
-\end{itemize} 
-Another important factor to consider, was to have a standardized answer, and forcing that standardization was necessary due to two main reasons:
-\begin{itemize}
-    \item \textbf{Test Automation}: To make it possible to make automatic tests through programs, the answer need to have a standard form where features can be extracted seamlessly.
-    \item \textbf{Limit Token Usage}: The token usage isn't only an issue on requests limits, another big limitation is imposed on context window dimension, so a long answer could strongly limit the model usability. 
+    \item \textbf{Minimize prompt-induced bias}: A highly descriptive or complex
+    prompt could influence models differently and distort the evaluation. A
+    concise structure reduces unwanted variability.
+    \item \textbf{Reduce token usage}: Since the testing setup depends on API
+    limits, keeping the prompt compact minimizes token consumption.
 \end{itemize}
-Given those considerations, the chosen output form was an array of strings like, format: 
-\[ ["1^{st}Solver","2^{nd}Solver","3^{rd}Solver"] \]
-The choice to have the best 3 solvers as an answer was made to make two different evaluations possible:
+
+Ensuring a standardized output format was equally important:
 \begin{itemize}
-    \item \textbf{Single Solver Evaluation}: A basic evaluation on what the LLM figured to be the best solver for the given problem.
-    \item \textbf{Parallel Solver Evaluation}: An evaluation made as if all of the three selected solver were running in parallel the automatically extract the best out of the three.
+    \item \textbf{Automation}: Automated testing requires responses to follow a
+    strict format so that solver selections can be parsed without ambiguity.
+    \item \textbf{Context-window constraints}: Long outputs reduce the available
+    context window for subsequent turns, making the model less usable in a
+    multi-step system.
 \end{itemize}
-The actual explanation on metrics for model evaluation on those two basis will be explained later in section \ref{sec:metrics}
+
+For these reasons, the output format was fixed as an array of three strings:
+\[
+["1^{st}\text{Solver}",\ "2^{nd}\text{Solver}",\ "3^{rd}\text{Solver}"]
+\]
+
+Selecting the top three solvers enables two forms of evaluation:
+\begin{itemize}
+    \item \textbf{Single-solver evaluation}: The LLM's estimation of the single
+    best solver.
+    \item \textbf{Parallel-solver evaluation}: Assessing how effective the top
+    three solvers would be if run in parallel and the best result extracted.
+\end{itemize}
+The metrics used for these evaluations will be detailed in
+Section~\ref{sec:metrics}.
 
 After all of this considerations, the selected prompt structure is: 
 
@@ -123,33 +163,42 @@ After all of this considerations, the selected prompt structure is:
 \end{tcolorbox}
 
 \section{Problem Selection}
-Another clearly important decision for the testing project is the \textbf{Problem Selection}. To have consistent tests across all models, the problem selection is extremely important in order to have results that could be both significative and analyzable.
-In order for that to be possible, it is necessary the the list of problems has some characteristics:
+A crucial component of the testing pipeline is the \textbf{problem selection}.
+Consistent and meaningful evaluation requires a set of benchmark problems that
+are reliable, diverse, and representative of real solver behaviour. To meet
+these requirements, the problem set should satisfy the following criteria:
 \begin{itemize}
-    \item \textbf{Extensive Testing}: It needs to be proven that problems are correct, and it is needed to have actual,reliable results on solver performance on each of the given problems for consistent evaluation, preferably on last, state of the art solvers so that the system capability can be proven against the actual best competitors.
-    \item \textbf{Diversity}: The problem list needs to be diverse, so include: \begin{itemize}
-        \item Combinatorial problems
-        \item Real-life problems
-        \item Puzzle-like problems
-    \end{itemize}
-    From all three solving categories:
+    \item \textbf{Extensive prior testing}: The problems must be validated and
+    associated with reliable solver performance data, preferably obtained from
+    recent evaluations of state-of-the-art solvers.
+    \item \textbf{Diversity}: The set must include a varied mix of
+    problem types-combinatorial problems, real-world applications,
+    and puzzle-like tasks-covering all major categories:
     \begin{itemize}
-        \item Maximization
-        \item Minimization
-        \item Satisfaction
+        \item Maximization,
+        \item Minimization,
+        \item Satisfaction.
     \end{itemize}
-    In order for LLM performance to be proven on every realm.
-    \item \textbf{Complexity}: The problems need to be complex in order to make the solver choice actually significative, and in order to prove the LLM performance in a hard real life context of use.
+    This ensures that LLM performance can be assessed across different solving
+    paradigms.
+    \item \textbf{Complexity}: The problems must be sufficiently challenging so
+    that solver selection is non-trivial and the LLM's reasoning abilities are
+    meaningfully tested.
 \end{itemize}
-Given those constraints the problem selection aimed to the problem list of 2025 MiniZinc Challenge[ref \dots].
-The problems of the challenge have been proven to be the best on testing latest state of the art solvers. Each problem has been selected to test performance of the best solvers submitted on this same year, in order to chose the best overall solver at the moment.
-The problem ist is composed of a total of twenty problems:
+Following these criteria, the selected benchmark was the problem set from the
+\textit{MiniZinc Challenge 2025}~[ref]. These problems are specifically curated
+to benchmark the strongest solvers of the year and therefore represent an ideal
+test bed for evaluating the proposed Agentic Solver.
+
+The problem set contains twenty problems:
 \begin{itemize}
-    \item 1 Satisfaction problem
-    \item 3 Maximization problems
-    \item 16 Minimization problems
+    \item 1 satisfaction problem,
+    \item 3 maximization problems,
+    \item 16 minimization problems.
 \end{itemize}
-Each of those with a total of five instance relative data, resulting in a total of 100 testable, diverse and complex set of problems.
+
+Each problem includes five corresponding data instances, yielding a total of
+100 testable, diverse, and complex scenarios.
 
 \section{Test Metrics}
 \label{sec:metrics}
@@ -235,7 +284,7 @@ Solver $s_1$ finds the optimal value (40), therefore it receives score $0.75$.
 Solver $s_2$ finds the maximal value (50), hence score $0.25$. Solver $s_3$
 does not find a solution in time, giving score $0$. If instead $T=800$,
 the value of $s_1$ becomes $0.375$ and $s_3$ gets $0.75$. If $T=1000$,
-since $s_3$ improves the objective to 10 (marked with a star in Fig.~1),
+since $s_3$ improves the objective to 10 (marked with a star in Fig.~\ref{fig:solverperformaceex}),
 it receives the highest score.
 
 The parameter used for score calculation in testing are: 
@@ -247,6 +296,42 @@ The parameter used for score calculation in testing are:
 
 
 \subsection{Closed Gap}
-Helloooo
+Now that we have a way to calculate (meta-)solver score, we need a way to analyze how each of our AS does compared to the single best solver.
+For this objective, we have chosen to use \textit{closed-gap}[\dots add reference] as the evaluation metric.
+
+\noindent
+\textbf{Closed-Gap} can be defined as follows: Let ($\mathcal{I}, S, \tau$) be a scenario and 
+\[
+m : \mathcal{I} \times \bigl(S \cup \{S, \mathrm{VBS}\}\bigr) \times [0,\tau] \to \mathbb{R}
+\]
+an evaluation metric to minimize for that scenario, where $S$ is a
+meta-solver over the solvers of~$S$.
+Let
+\[
+m_\sigma \;=\; \sum_{i\in\mathcal{I}} m(i,\sigma,\tau)
+\qquad\text{for }\sigma\in\{S,\mathrm{SBS},\mathrm{VBS}\}.
+\]
+The closed gap of $S$ with respect to $m$ on that scenario is
+\[
+\frac{m_{\mathrm{SBS}} - m_S}{\,m_{\mathrm{SBS}} - m_{\mathrm{VBS}}\,}.
+\]
+
+\noindent
+Where:
+\begin{itemize}
+    \item $m_{\mathrm{SBS}}$ is the highest $m_\sigma$ out of all the single solvers.
+    \item $m_{\mathrm{VBS}}$ is the highest achievable total score, representing an ideally perfect solver.
+\end{itemize}
+The assumption $m_{\mathrm{VBS}} > m_{\mathrm{SBS}}$ is required, since
+otherwise a single solver would be the VBS and no algorithm selection
+would be needed. Unlike other scores, the closed gap is designed
+specifically for meta-solvers. Applying it to individual solvers would
+assign~0 to the SBS and a negative score to the remaining solvers,
+proportional to their performance difference with respect to the SBS and
+the gap $m_{\mathrm{SBS}} - m_{\mathrm{VBS}}$, which is nonsensical for
+individual solvers.
+
+Aggiungere reference per tutta la section sulle metrics, presa in gean parte da 
+
 
 \end{document}

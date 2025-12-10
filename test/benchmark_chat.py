@@ -372,11 +372,15 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
         logger.exception(f"Failed to load grok_models.json for model {model_id}: {e}")
 
     # build solver description text only if requested
-    if getattr(args, 'include_solver_desc', False):
-        solver_desc_map = load_solver_descriptions(args.solver_desc_file if hasattr(args, 'solver_desc_file') else None)
-        solver_desc_text = build_solver_description_text(get_solver_list(args.solver_set if hasattr(args, 'solver_set') else 'free'), solver_desc_map)
-    else:
+    if getattr(args, 'features_only', False):
+        # when sending only features, do not include solver description or script
         solver_desc_text = ''
+    else:
+        if getattr(args, 'include_solver_desc', False):
+            solver_desc_map = load_solver_descriptions(args.solver_desc_file if hasattr(args, 'solver_desc_file') else None)
+            solver_desc_text = build_solver_description_text(get_solver_list(args.solver_set if hasattr(args, 'solver_set') else 'free'), solver_desc_map)
+        else:
+            solver_desc_text = ''
     common_instruction = "For each instance above, output a single line: instance_name: [solver1, solver2, solver3]"
 
     # collect chats across all problems so we can run them in parallel per model
@@ -404,19 +408,32 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
                         logger.exception(f"Error reading instance file {inst_path} for problem {prob_key}: {e}")
                     inst_label = os.path.splitext(fname)[0]
                     # optionally include precomputed features for this instance
+                    feat_text = ''
                     if getattr(args, 'include_features', False):
                         feat_entry = MZN2FEAT.get(prob_key, {}).get(inst_label, {})
                         feat_text = feat_entry.get('features', '') if feat_entry else ''
+
+                    if getattr(args, 'features_only', False):
+                        # send only the features block (omit model and instance data)
+                        content = "Instance features:\n" + feat_text if feat_text else ''
+                    elif getattr(args, 'model_and_features', False):
+                        # send only the instance features as instance content; the model
+                        # will be included as a system message below
+                        content = "Instance features:\n" + feat_text if feat_text else ''
+                    else:
+                        # default: keep original instance content and optionally append features
                         if feat_text:
-                            # attach features after the MiniZinc data block
                             content = content + "\n\nInstance features:\n" + feat_text
+
                     insts.append((inst_label, content))
         if not insts:
             insts = [('base', '')]
 
         # optionally include problem description as a system message at the start
         prob_desc = prob.get('description', '') if getattr(args, 'include_problem_desc', False) else ''
-        chats = pack_instances_into_chats(solver_desc_text, common_instruction, script_text, insts, allowed_total_tokens, prob_desc)
+        # when features-only mode is active we intentionally omit the model
+        effective_script_text = '' if getattr(args, 'features_only', False) else script_text
+        chats = pack_instances_into_chats(solver_desc_text, common_instruction, effective_script_text, insts, allowed_total_tokens, prob_desc)
         for c in chats:
             all_chats.append((prob_key, c))
 
@@ -511,12 +528,16 @@ def main(argv=None):
                         help='Include instance features with each instance (default: False)')
     parser.add_argument('--mzn2feat-file', default='test/data/mzn2feat_all_features.json',
                         help='Path to JSON file produced by mzn2feat (relative to repo root)')
+    parser.add_argument('--features-only', action='store_true',
+                        help='Send only instance features to the model (omit model and instance data)')
+    parser.add_argument('--model-and-features', action='store_true',
+                        help='Send the problem model as system message and instance features as the instance content (omit raw instance data)')
     args = parser.parse_args(argv)
 
     # load mzn2feat features if requested (cached globally)
     global MZN2FEAT
     MZN2FEAT = {}
-    if getattr(args, 'include_features', False):
+    if getattr(args, 'include_features', False) or getattr(args, 'features_only', False) or getattr(args, 'model_and_features', False):
         mfile = args.mzn2feat_file
         # allow relative path (repo_root relative)
         if not os.path.isabs(mfile):
@@ -547,12 +568,24 @@ def main(argv=None):
             results.setdefault(provider, {})[model_id] = r
             global_bar.update(1)
 
-    # choose output filename based on whether problem descriptions were included
-    fname = 'data/testOutputFree/LLMsuggestions_chat.json'
+    # choose output filename reflecting selected modes
+    base = 'data/testOutputFree/LLMsuggestions'
+    if getattr(args, 'features_only', False):
+        name = base + '_featOnly'
+    elif getattr(args, 'model_and_features', False):
+        name = base + '_modelFeat'
+    elif getattr(args, 'include_features', False):
+        name = base + '_features'
+    else:
+        name = base + '_chat'
+
+    # append optional suffixes for problem and solver descriptions
     if getattr(args, 'include_problem_desc', False):
-        fname = 'data/testOutputFree/LLMsuggestions_chat_Pdesc.json'
-    if getattr(args, 'include_features', False):
-        fname = fname.replace('.json', '_features.json')
+        name += '_Pdesc'
+    if getattr(args, 'include_solver_desc', False):
+        name += '_Sdesc'
+
+    fname = name + '.json'
     try:
         os.makedirs(os.path.dirname(fname), exist_ok=True)
         with open(fname, 'w') as of:
