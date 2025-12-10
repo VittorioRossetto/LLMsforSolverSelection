@@ -1642,3 +1642,21 @@ Traceback (most recent call last):
     raise self._make_status_error_from_response(err.response) from None
 groq.RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01k6tdj201exjra3mspenq6dxe` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199020, Requested 5176. Please try again in 30m12.671999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
 2025-12-10 16:51:48,257 INFO Received rate-limit/429 for provider=groq model=openai/gpt-oss-120b; sleeping 60s before retry
+2025-12-10 17:00:16,005 ERROR send_chat error provider=groq model=openai/gpt-oss-120b: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01k6tdj201exjra3mspenq6dxe` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 197845, Requested 3355. Please try again in 8m38.4s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+Traceback (most recent call last):
+  File "/home/vro5/Coding/AgenticSolvers/test/benchmark_chat.py", line 201, in send_chat
+    return query_func(joined, model_name=model_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vro5/Coding/AgenticSolvers/utils.py", line 133, in query_groq
+    chat_completion = client.chat.completions.create(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vro5/Coding/AgenticSolvers/.venv/lib/python3.12/site-packages/groq/resources/chat/completions.py", line 456, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/home/vro5/Coding/AgenticSolvers/.venv/lib/python3.12/site-packages/groq/_base_client.py", line 1242, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vro5/Coding/AgenticSolvers/.venv/lib/python3.12/site-packages/groq/_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01k6tdj201exjra3mspenq6dxe` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 197845, Requested 3355. Please try again in 8m38.4s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
+2025-12-10 17:00:16,016 INFO Received rate-limit/429 for provider=groq model=openai/gpt-oss-120b; sleeping 60s before retry

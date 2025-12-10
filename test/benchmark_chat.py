@@ -560,18 +560,7 @@ def main(argv=None):
                 continue
             models.append((provider, mid, mlabel, qf))
 
-    results = {}
-    with ThreadPoolExecutor(max_workers=args.max_workers_models) as mex, \
-         tqdm(total=len(models), desc="All Models", position=0) as global_bar:
-        futures = {mex.submit(process_model_chat, prov, mid, mlabel, qf, args): (prov, mid)
-                   for prov, mid, mlabel, qf in models}
-        for fut in as_completed(futures):
-            provider, model_id = futures[fut]
-            provider, model_id, r = fut.result()
-            results.setdefault(provider, {})[model_id] = r
-            global_bar.update(1)
-
-    # choose output filename reflecting selected modes
+    # compute output filename early so we can write incremental results
     base = 'data/testOutputFree/LLMsuggestions'
     if getattr(args, 'features_only', False):
         name = base + '_featOnly'
@@ -582,7 +571,6 @@ def main(argv=None):
     else:
         name = base + '_chat'
 
-    # append optional suffixes for problem and solver descriptions
     if getattr(args, 'include_problem_desc', False):
         name += '_Pdesc'
     if getattr(args, 'include_solver_desc', False):
@@ -591,10 +579,33 @@ def main(argv=None):
     fname = name + '.json'
     try:
         os.makedirs(os.path.dirname(fname), exist_ok=True)
-        with open(fname, 'w') as of:
-            json.dump(results, of, indent=2)
-    except Exception as e:
-        logger.exception(f"Failed to write {fname}: {e}")
+    except Exception:
+        pass
+
+    results = {}
+    with ThreadPoolExecutor(max_workers=args.max_workers_models) as mex, \
+         tqdm(total=len(models), desc="All Models", position=0) as global_bar:
+        futures = {mex.submit(process_model_chat, prov, mid, mlabel, qf, args): (prov, mid)
+                   for prov, mid, mlabel, qf in models}
+        for fut in as_completed(futures):
+            provider, model_id = futures[fut]
+            provider, model_id, r = fut.result()
+            results.setdefault(provider, {})[model_id] = r
+            # write incremental results to file immediately
+            try:
+                with open(fname, 'w') as of:
+                    json.dump(results, of, indent=2)
+                    of.flush()
+                    try:
+                        os.fsync(of.fileno())
+                    except Exception:
+                        pass
+            except Exception as e:
+                logger.exception(f"Failed to write incremental results to {fname}: {e}")
+            global_bar.update(1)
+
+    # final write already performed incrementally; log final location
+    logger.info(f"Final results written to {fname}")
 
 
 if __name__ == '__main__':

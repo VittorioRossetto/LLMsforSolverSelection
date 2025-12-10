@@ -71,7 +71,8 @@ def get_solver_prompt(solver_list=None, name_only=False):
     If name_only is True, restricts output to names in brackets.
     """
     if solver_list is None:
-        solver_list = MINIZINC_SOLVERS
+        # default to the set of free/public solvers for lightweight benchmarking
+        solver_list = FREE_SOLVERS
     solver_lines = '\n'.join(f"- {s}" for s in solver_list)
     if name_only:
         return (
