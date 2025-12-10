@@ -548,10 +548,13 @@ def main(argv=None):
             global_bar.update(1)
 
     # choose output filename based on whether problem descriptions were included
-    fname = 'testOutputFree/LLMsuggestions_chat.json'
+    fname = 'data/testOutputFree/LLMsuggestions_chat.json'
     if getattr(args, 'include_problem_desc', False):
-        fname = 'testOutputFree/LLMsuggestions_chat_Pdesc.json'
+        fname = 'data/testOutputFree/LLMsuggestions_chat_Pdesc.json'
+    if getattr(args, 'include_features', False):
+        fname = fname.replace('.json', '_features.json')
     try:
+        os.makedirs(os.path.dirname(fname), exist_ok=True)
         with open(fname, 'w') as of:
             json.dump(results, of, indent=2)
     except Exception as e:

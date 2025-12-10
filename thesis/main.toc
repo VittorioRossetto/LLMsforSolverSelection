@@ -9,5 +9,3 @@
 \contentsline {section}{\numberline {1.4}Test Metrics}{5}{}%
 \contentsline {subsection}{\numberline {1.4.1}Metric for Solver Score Calculation}{6}{}%
 \contentsline {subsection}{\numberline {1.4.2}Closed Gap}{7}{}%
-\contentsline {chapter}{Conclusions}{9}{}%
-\contentsline {chapter}{\numberline {A}First Appendix}{11}{}%
