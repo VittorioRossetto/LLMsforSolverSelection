@@ -1,6 +1,8 @@
 # Fdb version 4
-["pdflatex"] 1765339147.08739 "/home/vro5/Coding/AgenticSolvers/thesis/sections/c1/c1.tex" "sections/c1/c1.pdf" "c1" 1765339154.56424 0
-  "/home/vro5/Coding/AgenticSolvers/thesis/sections/c1/c1.tex" 1765339145.39981 17046 86db051ca5ec193858c858a885659932 ""
+["pdflatex"] 1765345841.05066 "/home/vro5/Coding/AgenticSolvers/thesis/sections/c1/c1.tex" "c1.pdf" "c1" 1765345849.6082 0
+  "../../TableSolverMetricsExample.png" 1765258852.59073 30640 da313bc65bbfc244d7d536ce7f9f9591 ""
+  "../../main.tex" 1765345845.37671 3683 22f4f98b17cf93e8194be2b9aaa37fab ""
+  "/home/vro5/Coding/AgenticSolvers/thesis/sections/c1/c1.tex" 1765345833.09269 17112 e52683c819d49dec709c8018c0d358e5 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
@@ -163,12 +165,10 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1765244638 5541377 0af08d58b046ada1f2a2c7d4825ab417 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1765244711 3635690 72b742e7b2d6d2d3f8eab86c4cae7102 ""
   "/usr/local/texlive/2025/texmf.cnf" 1765244631.9966 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
-  "sections/c1/../../TableSolverMetricsExample.png" 1765258852.59073 30640 da313bc65bbfc244d7d536ce7f9f9591 ""
-  "sections/c1/../../main.tex" 1765335790.59931 2666 aea10fe5c9ab687be79f4c0936d054e9 ""
-  "sections/c1/c1.aux" 1765339153.80277 1657 ffd52d88bbaefba1545ca1e6ba7f3b78 "pdflatex"
-  "sections/c1/c1.tex" 1765339145.39981 17046 86db051ca5ec193858c858a885659932 ""
+  "c1.aux" 1765345848.45971 1800 2994bb9d95ee1c2f15e5c2c99bdd42bf "pdflatex"
+  "c1.tex" 1765345833.09269 17112 e52683c819d49dec709c8018c0d358e5 ""
   (generated)
-  "sections/c1/c1.aux"
-  "sections/c1/c1.log"
-  "sections/c1/c1.pdf"
+  "c1.aux"
+  "c1.log"
+  "c1.pdf"
   (rewritten before read)

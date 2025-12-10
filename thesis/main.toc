@@ -3,9 +3,10 @@
 \contentsline {chapter}{\numberline {1}Initial Researches}{1}{}%
 \contentsline {section}{\numberline {1.1}Preliminary Model Selection}{1}{}%
 \contentsline {subsection}{\numberline {1.1.1}Provider Choice}{1}{}%
-\contentsline {subsection}{\numberline {1.1.2}Model Selection}{1}{}%
+\contentsline {subsection}{\numberline {1.1.2}Model selection}{2}{}%
 \contentsline {section}{\numberline {1.2}Preliminary Prompt Engineering}{3}{}%
 \contentsline {section}{\numberline {1.3}Problem Selection}{4}{}%
 \contentsline {section}{\numberline {1.4}Test Metrics}{5}{}%
 \contentsline {subsection}{\numberline {1.4.1}Metric for Solver Score Calculation}{6}{}%
 \contentsline {subsection}{\numberline {1.4.2}Closed Gap}{7}{}%
+\contentsline {chapter}{Bibliography}{9}{}%
