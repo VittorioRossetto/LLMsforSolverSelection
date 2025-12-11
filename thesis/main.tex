@@ -1,3 +1,4 @@
+% !BIB TS-program = none
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%12pt: font size
                                         %a4paper: A4 format
                                         %openright: open chapters on right pages
@@ -35,6 +36,10 @@
 \usepackage{array} % for p{} column type
 \usepackage{geometry}
 \usepackage{subfiles}
+\usepackage[numbers]{natbib}
+\usepackage{cleveref}
+
+
 \geometry{margin=2cm} 
 
 \hyphenation{} % empty or add English words if needed
@@ -81,25 +86,32 @@ or nothing at all \ldots
 
 \clearpage{\pagestyle{empty}\cleardoublepage}
 
-\chapter{Initial Researches}
-\rhead[\fancyplain{}{\bfseries INITIAL RESEARCHES}]{\fancyplain{}{\bfseries\thepage}}
+\chapter{Experimental Evaluation}
+\rhead[\fancyplain{}{\bfseries EXPERIMENTAL EVALUATION}]{\fancyplain{}{\bfseries\thepage}}
 \lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
 \pagenumbering{arabic}
 
 \subfile{sections/c1/c1.tex}
 
-
+\clearpage{\pagestyle{empty}\cleardoublepage}
 \begin{thebibliography}{90}             
-\rhead[\fancyplain{}{\bfseries \leftmark}]{\fancyplain{}{\bfseries
-\thepage}}
+\rhead[\fancyplain{}{\bfseries BIBLIOGRAPHY}]{\fancyplain{}{\bfseries\thepage}}
 
 \addcontentsline{toc}{chapter}{Bibliography}
 
-\bibitem{evaluationMetaSolvers} R. Amadini, Maurizio Gabbrielli, T. Liu, and J. Mauro, "On the Evaluation of (Meta-)solver Approaches," Journal of Artificial Intelligence Research, vol. 76, pp. 705-719, Mar. 2023, doi: https://doi.org/10.1613/jair.1.14102.
 \bibitem{GeminiAPI} "Gemini API Docs and Reference," Google AI for Developers. https://ai.google.dev/gemini-api/docs (accessed Dec. 10, 2025). 
-\bibitem{GeminiRL} "Rate limits," Google AI for Developers, 2025. https://ai.google.dev/gemini-api/docs/rate-limits (accessed Dec. 10, 2025).
+\bibitem{GeminiAPIver} "API versions explained," Google AI for Developers, 2025. https://ai.google.dev/gemini-api/docs/api-versions (accessed Dec. 11, 2025).
 \bibitem{GroqAPI} "GroqCloud," Groq.com, 2024. https://console.groq.com/docs/overview (accessed Dec. 10, 2025).
 \bibitem{GroqRL} "Rate Limits - GroqDocs," GroqDocs, 2025. https://console.groq.com/docs/rate-limits (accessed Dec. 10, 2025).
+\bibitem{GeminiRL} "Rate limits," Google AI for Developers, 2025. https://ai.google.dev/gemini-api/docs/rate-limits (accessed Dec. 10, 2025).
+\bibitem{ContextRot} Kelly Hong, Anton Troynikov, Jeff Huber, "Context Rot: How Increasing Input Tokens Impacts LLM Performance," Trychroma.com, 2025. https://research.trychroma.com/context-rot?ref=blog.promptlayer.com (accessed Dec. 11, 2025).
+\bibitem{MznProblems} "MiniZinc - List of Problems and Globals used in the MiniZinc Challenge," Minizinc.org, 2025. https://www.minizinc.org/challenge/globals/ (accessed Dec. 11, 2025).
+\bibitem{MznResults25} "MiniZinc - Challenge 2025 Results," Minizinc.org, 2025. https://www.minizinc.org/challenge/2025/results/ (accessed Dec. 11, 2025).
+\bibitem{PhilMznChallenge}P. J. Stuckey, T. Feydy, A. Schutt, G. Tack, and J. Fischer, "The MiniZinc Challenge 2008-2013," AI Magazine, vol. 35, no. 2, p. 55, Jun. 2014, doi: https://doi.org/10.1609/aimag.v35i2.2539.
+\bibitem{MiniZinc}N. Nethercote, P. J. Stuckey, R. Becket, S. Brand, G. J. Duck, and G. Tack, "MiniZinc: Towards a Standard CP Modelling Language," Springer eBooks, pp. 529-543, Oct. 2007, doi: https://doi.org/10.1007/978-3-540-74970-7\_38.
+\bibitem{evaluationMetaSolvers} R. Amadini, Maurizio Gabbrielli, T. Liu, and J. Mauro, "On the Evaluation of (Meta-)solver Approaches," Journal of Artificial Intelligence Research, vol. 76, pp. 705-719, Mar. 2023, doi: https://doi.org/10.1613/jair.1.14102.
+\bibitem{PortfolioAproaches}R. Amadini, Maurizio Gabbrielli, and J. Mauro, "Portfolio Approaches for Constraint Optimization Problems," Lecture notes in computer science, pp. 21-35, Jan. 2014, doi: https://doi.org/10.1007/978-3-319-09584-4\_3.
+\bibitem{lindauer2019}Lindauer, M., van Rijn, J. N., \& Kotthoff, L. (2019). "The algorithm selection competitions" 2015 and 2017.Artificial Intelligence,272, 86-100.
 \end{thebibliography}
 
 \clearpage{\pagestyle{empty}\cleardoublepage}

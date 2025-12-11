@@ -1,4 +1,4 @@
 \babel@toc {english}{}\relax 
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {1.1}{\ignorespaces Rate limits - Groq models\cite {GroqRL}}}{2}{}%
-\contentsline {table}{\numberline {1.2}{\ignorespaces Rate limits - Gemini models\cite {GeminiRL}}}{3}{}%
+\contentsline {table}{\numberline {1.1}{\ignorespaces Rate limits - Groq models\cite {GroqRL}: \\This table shows all the offered models from Groq API, in leftmost column and each relative rate limit.}}{2}{}%
+\contentsline {table}{\numberline {1.2}{\ignorespaces Rate limits - Gemini models\cite {GeminiRL}\\This table shows all the offered models from Gemini API, in leftmost column and each relative rate limit.}}{3}{}%
