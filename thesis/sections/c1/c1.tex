@@ -4,9 +4,8 @@
 \section{Methodology}
 In this chapter, the focus is on outlining the foundational decisions required to establish an initial benchmark. This benchmark serves as the basis for refining subsequent experiments and assessing both the current capabilities and future potential of the solver.
 
-The chapter is structured into four sections, each addressing a key preliminary choice. The first section discusses the selection of large language models used as candidates for the agentic component. The second details the initial prompt-engineering strategy needed to define a clean, consistent prompt format for evaluation. The third presents the rationale behind the selection of benchmark problems used to test model performance. The final section explains the metrics adopted to evaluate how effectively each model could operate as a meta-solver.
+The chapter is structured into four subsections, each addressing a key preliminary choice. The first subsection discusses the selection of large language models used as candidates for the agentic component. The second details the initial prompt-engineering strategy needed to define a clean, consistent prompt format for evaluation. The third presents the rationale behind the selection of benchmark problems used to test model performance. The final subsection explains the metrics adopted to evaluate how effectively each model could operate as a meta-solver.
 
-\section{Preliminary Large Language Models Selection}
 \subsection{Provider Choice} 
 To build the proposed Agentic Solver (AS), the first requirement is the
 availability of an LLM capable of orchestrating the system and acting as the
@@ -16,9 +15,9 @@ usage-based APIs. The selection prioritized generous free tiers, permissive rate
 limits, and straightforward integration. This led to the choice of the
 following providers:
 \begin{itemize}
-    \item \textbf{Gemini API v1}\cite{GeminiAPI}, offered by Google DeepMind. Gemini is a family of large language models with multiple sizes and capabilities. This provider selected for its strong reasoning abilities, robust tool-use features, and overall high-quality text generation. For the purpose of this research, the version v1\cite{GeminiAPIver} was prefered as it is more stable and our only concern is its text generation capability.
+    \item \texttt{Gemini API v1}\cite{GeminiAPI}, offered by Google DeepMind. Gemini is a family of large language models with multiple sizes and capabilities. This provider selected for its strong reasoning abilities, robust tool-use features, and overall high-quality text generation. For the purpose of this research, the version v1\cite{GeminiAPIver} was prefered as it is more stable and our only concern is its text generation capability.
 
-    \item \textbf{Groq API}\cite{GroqAPI}, provided by Groq. Groq offers
+    \item \texttt{Groq API}\cite{GroqAPI}, provided by Groq. Groq offers
     high-performance inference solutions through its specialized hardware
     architecture. The Groq API exposes a selection of LLMs through a simple and
     lightweight interface, enabling fast and low-latency experimentation.
@@ -28,10 +27,9 @@ Both APIs were selected for their ease of use, flexibility, overall performance,
 and, critically, their comparatively generous rate limits relative to competing
 services, in \Cref{tab:rate_limits_gemini} and \Cref{tab:rate_limits_groq} are displayed rate limits of both APIs. From the leftmost column of the table, there are: Model containing the names of each one of the available LLMs (for the purpose of this paper, only text generation models were selected), moving to the right \textit{RPM} contains the maximum number of requests in a minute, \textit{RPD} contains the maximum number of requests per day, \textit{TPM} contains the maximum number of requested tokens per minute, and finally \textit{TPD} contains the maximum number of tokens per day.
 
-\begin{table}[h]
+\begin{table}[ht]
     \centering
     \small % reduce font size for wide tables
-    \caption{Rate limits - Groq models\cite{GroqRL}: \\This table shows all the offered models from Groq API, in leftmost column and each relative rate limit.}
     \label{tab:rate_limits_groq}
     \begin{tabular}{@{} >{\raggedright\arraybackslash}p{6cm} r r r r @{}}
         \toprule
@@ -58,12 +56,12 @@ services, in \Cref{tab:rate_limits_gemini} and \Cref{tab:rate_limits_groq} are d
         qwen/qwen3-32b & 60 & 1000 & 6000 & 500000 \\
         \bottomrule
     \end{tabular}
+    \caption{Rate limits - Groq models\cite{GroqRL}: \\This table shows all the offered models from Groq API, in leftmost column and each relative rate limit.}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[ht]
     \centering
     \small
-    \caption{Rate limits - Gemini models\cite{GeminiRL}\\This table shows all the offered models from Gemini API, in leftmost column and each relative rate limit.}
     \label{tab:rate_limits_gemini}
     \begin{tabular}{@{} >{\raggedright\arraybackslash}p{6cm} r r r r @{}}
         \toprule
@@ -76,6 +74,7 @@ services, in \Cref{tab:rate_limits_gemini} and \Cref{tab:rate_limits_groq} are d
         gemini-2.0-flash-lite & 30 & 200 & 1000000 & -- \\
         \bottomrule
     \end{tabular}
+    \caption{Rate limits - Gemini models\cite{GeminiRL}\\This table shows all the offered models from Gemini API, in leftmost column and each relative rate limit.}
 \end{table}
 
 \subsection{Large Language Models Selection}
@@ -95,17 +94,17 @@ Finally, \texttt{allam-2-7b} was removed because it failed to follow instruction
 After this filtering stage, 18 LLMs remained as a stable base for the
 evaluation phase.
 
-\section{Preliminary Prompt Engineering}
+\subsection{Prompt General Structure}
+\label{sec:promptStruct}
 To determine which LLM would be best suited for building an AS, it was necessary to design a consistent prompt format to query each model.
-\subsection{General Structure}
 The primary objective was to define a structure that was as short and clean as possible, for two main
 reasons:
 \begin{itemize}
-    \item \textbf{Minimize prompt-induced bias}: A highly descriptive or too long and complex prompt could influence LLMs negatively. As we could encounter problems as "context rot"\cite{ContextRot} - a progressive decay in accuracy as prompts grow longer.
-    \item \textbf{Reduce token usage}: Since the testing setup depends on API limits, keeping the prompt compact minimizes token consumption.
+    \item Minimize prompt-induced bias: A highly descriptive or too long and complex prompt could influence LLMs negatively. As we could encounter problems as "context rot"\cite{ContextRot} - a progressive decay in accuracy as prompts grow longer.
+    \item Reduce token usage: Since the testing setup depends on API limits, keeping the prompt compact minimizes token consumption.
 \end{itemize}
 
-\subsection{Output Structure}
+\subsubsection{Output Structure}
 Ensuring a standardized output format was equally important:
 Automated testing requires that model outputs follow a strict and predictable format. Any deviation introduces ambiguity during parsing and prevents reliable extraction of solver selections. Maintaining this structure is therefore essential to ensure consistent and fully automated evaluation.
 
@@ -118,11 +117,10 @@ For these reasons, the output format was fixed as an array of three strings:
 
 Selecting the top three solvers enables two forms of evaluation:
 \begin{itemize}
-    \item \textbf{Single-solver evaluation}: Measures whether the solver chosen by the LLM is the single best solver for the given instance. If it is not, the evaluation can quantify how close its performance is to the optimal solver.
-    \item \textbf{Parallel-solver evaluation}: Measures the effectiveness of running the top three solvers selected by the LLM in parallel. The best result among the three is considered, allowing assessment of whether any of them corresponds to the single best solver for the instance, or, if not, how close the best among the three comes to the optimal performance.
+    \item Single-solver evaluation: Measures whether the solver chosen by the LLM is the single best solver for the given instance. If it is not, the evaluation can quantify how close its performance is to the optimal solver.
+    \item Parallel-solver evaluation: Measures the effectiveness of running the top three solvers selected by the LLM in parallel. The best result among the three is considered, allowing assessment of whether any of them corresponds to the single best solver for the instance, or, if not, how close the best among the three comes to the optimal performance.
 \end{itemize}
-The metrics used for these evaluations will be detailed in
-Section~\ref{sec:metrics}.
+The metrics used for these evaluations will be detailed in subsection~\ref{sec:metrics}.
 
 After all of this considerations, the resulting prompt structure is the one displayed in \Cref{fig:promptEx} 
 
@@ -133,22 +131,23 @@ After all of this considerations, the resulting prompt structure is the one disp
     \label{fig:promptEx}
 \end{figure}
 
-\section{Problem Selection}
-A crucial component of the testing pipeline is the \textbf{problem selection}.
+\subsection{Problem Selection}
+\label{sec:probSelection}
+A crucial component of the testing pipeline is the problem selection.
 Consistent and meaningful evaluation requires a set of benchmark problems that
-are reliable, diverse, and representative of real solver behaviour. To meet
+are reliable, diverse, and representative of real solver behavior. To meet
 these requirements, the problem set should satisfy the following criteria:
 \begin{itemize}
-    \item \textbf{Extensive prior testing}: The problems must be validated and
+    \item Extensive prior testing: The problems must be validated and
     associated with reliable solver performance data, preferably obtained from
     recent evaluations of state-of-the-art solvers.
-    \item \textbf{Diversity}: The set must include a varied mix of
+    \item Diversity: The set must include a varied mix of
     problem types-combinatorial problems, real-world applications,
     and puzzle-like tasks-covering all major categories: Maximization, Minimization and Satisfaction.
 
     This ensures that LLM performance can be assessed across different solving
     paradigms.
-    \item \textbf{Complexity}: The problems must be sufficiently challenging so
+    \item Complexity: The problems must be sufficiently challenging so
     that solver selection is non-trivial and the LLM's reasoning abilities are
     meaningfully tested.
 \end{itemize}
@@ -162,7 +161,7 @@ The problem set contains twenty problems: 1 satisfaction problem, 3 maximization
 Each problem is a combination of a \texttt{.mzn} file containing the Minizinc\cite{MiniZinc} model made of the high-level description of the problem (variables, constraints and objective function). Every problem also is also accompanied by five corresponding data instances each of them contained either in a \texttt{.dzn} or a \texttt{.json} file containing specific parameters and constants, yielding a total of
 100 testable, diverse, and complex scenarios.
 
-\section{Test Metrics}
+\subsection{Test Metrics}
 \label{sec:metrics}
 In order to actually evaluate model performance, it is necessary to chose a standard metric for answer evaluation, other than that, it is necessary to have a metric to evaluate how an AS controlled by the given LLM would perform against the current Single Best Solver (SBS).
 
@@ -172,7 +171,7 @@ Evaluating meta-solvers over heterogeneous scenarios (\(\mathcal{I}_1, \mathcal{
 For those objectives two separate metrics were chosen
 
 
-\subsection{Metric for Solver Score Calculation}
+\subsubsection{Metric for Solver Score}
 
 \begin{figure}[h]
     \centering
@@ -246,12 +245,12 @@ Solver $s_1$ finds the optimal value (40), therefore it receives score $0.75$.
 Solver $s_2$ finds the maximal value (50), hence score $0.25$. Solver $s_3$
 does not find a solution in time, giving score $0$. If instead $T=800$,
 the value of $s_1$ becomes $0.375$ and $s_3$ gets $0.75$. If $T=1000$,
-since $s_3$ improves the objective to 10 (marked with a star in ),
+since $s_3$ improves the objective to 10 (marked with a star in the figure),
 it receives the highest score.
 
-The parameter used for score calculation in testing are: $T=1200000$ (which is the time limit used solver evaluation in the MiniZinc Challenge) $\alpha=0.25$ $\beta=0.75$.
+The parameter used for score calculation in testing are: $T=1200000$ (1200000ms = 20 minutes, which is the time limit used solver evaluation in the MiniZinc Challenge) $\alpha=0.25$ $\beta=0.75$.
 
-\subsection{Closed Gap}
+\subsubsection{Closed Gap}
 Once the evaluation metric for solver score has been defined, we also need a comparative metric after score calculation.
 For this objective, we have chosen to use \textit{closed-gap}\cite{evaluationMetaSolvers} as the evaluation metric. 
 Which is a relative and meta-solver-specific measure, adopted in the 2015 ICON and 2017 OASC \cite{lindauer2019}
@@ -271,10 +270,7 @@ and
 \mathrm{SBS} = \arg\min_{s \in S} \sum_{i \in I} m(i, s, \tau).
 \]
 
-With these definitions
-
-\noindent
-\textit{Closed-gap} can be defined as follows: Let ($\mathcal{I}, S, \tau$) be a scenario and 
+With these definitions, \textit{Closed-gap} can be defined as follows: Let ($\mathcal{I}, S, \tau$) be a scenario and 
 \[
 m : \mathcal{I} \times \bigl(S \cup \{S, \mathrm{VBS}\}\bigr) \times [0,\tau] \to \mathbb{R}
 \]
@@ -292,10 +288,33 @@ The closed gap of $S$ with respect to $m$ on that scenario is
 
 \noindent
 
-The assumption $m_{\mathrm{VBS}} > m_{\mathrm{SBS}}$ is required, i.e., no single-solver can be the $\mathrm{VBS}$ (otherwise, no algorithm selection would be needed, given that its objective is to reach the $\mathrm{VBS}$) . Unlike other scores, the closed gap is designed specifically for meta-solvers. Applying it to individual solvers would
+The assumption $m_{\mathrm{VBS}} > m_{\mathrm{SBS}}$ is required, i.e., no single-solver can be the $\mathrm{VBS}$ (otherwise, no algorithm selection would be needed, given that its objective is to reach the $\mathrm{VBS}$). Unlike other scores, the closed gap is designed specifically for meta-solvers. Applying it to individual solvers would
 assign~0 to the $\mathrm{SBS}$ and a negative score to the remaining solvers,
 proportional to their performance difference with respect to the $\mathrm{SBS}$ and
 the gap $m_{\mathrm{SBS}} - m_{\mathrm{VBS}}$, which makes little sense for
 individual solvers, as it wouldn't reflect their actual performance overall. 
+
+\subsection{Experiment Setup}
+We have the structure of what we want to ask the LLMs (\Cref{sec:probSelection}) and how we want to ask it (\Cref{sec:promptStruct}); now we need a way to test automatically on all of the selected instance.
+The idea is to automate testing, parallelizing execution with a thread per single LLM, on each of the LLMs, requests are sent sequentially, 5 for each problem, each containing minizinc model and single instance data as formulated in \Cref{fig:promptEx}.
+Even after preliminary prompt engineering and LLM selection, some minizinc models, and specially some data scripts exceed rate limits. Given that limits are strict, we had to find some workarounds to avoid limit exceedance while making it possible to analyze all the selected instances.
+
+\subsubsection{Custom Delays}
+Given that we are working with a list of multiple problems, multiple requests on a single LLM sum up on token usage and request usage, so even though the single request doesn't exceed the rate limits, multiple requests could.
+The easiest solution to this problem was to add custom delays to the experiment orchestration program, based on error messages, as the one in the following example:
+
+\begin{lstlisting}
+Error code: 413 - Request too large for model `openai/gpt-oss-120b` in organization `org_01k9qqesvte4d9h5jnhmzvbmy4` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 8939, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing
+\end{lstlisting}
+
+\begin{lstlisting}
+Error code: 429 - Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01k9qqesvte4d9h5jnhmzvbmy4` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 193047, Requested 10632. Please try again in 26m29.328s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing
+\begin{lstlisting}
+\end{lstlisting}
+
+
+The functioning is: once recieved an error message, the error code is analized, wether it is $413$ or $429$ signifying rate limits have been exceeded, the message is analyzed to look for the type of limit exceeded: exceedance is TPM or RPM meaning we have exceeded the limit per minute, the experiment is programmed to wait for 60 seconds and try again. in case the limit exceeded is either TPD or RPD the program analyze the message further to look for a time measure, in the form  $XXhXXmXX.XXs$ where $h$ stands for hours, $m$ for minutes and $s$ for seconds. Given this time measure the program extract the exact delay necessary to formulate the current request and try again.
+
+
 
 \end{document}

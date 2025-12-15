@@ -48,8 +48,7 @@ except Exception:
 # Models to include when --top-only is used (kept in sync with benchmark_parallel.py)
 TOP_MODELS = [
     'gemini-2.5-flash-lite', 'gemini-2.5-flash',
-    'moonshotai/kimi-k2-instruct', 'moonshotai/kimi-k2-instruct-0905',
-    'openai/gpt-oss-120b'
+    'moonshotai/kimi-k2-instruct', 'moonshotai/kimi-k2-instruct-0905'
 ]
 
 # Model included when using --best-only

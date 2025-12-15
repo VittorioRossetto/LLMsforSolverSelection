@@ -21,9 +21,9 @@ if [ "${EXEC_REAL:-0}" = "1" ]; then
 fi
 
 declare -a CONFIGS=(
-  # "featOnly|--features-only --include-features"
-  # "featOnly_Pdesc|--features-only --include-features --include-problem-desc"
-  # "featOnly_Sdesc|--features-only --include-features --include-solver-desc"
+  #"featOnly|--features-only --include-features"
+  "featOnly_Pdesc|--features-only --include-features --include-problem-desc"
+  "featOnly_Sdesc|--features-only --include-features --include-solver-desc"
   "featOnly_Pdesc_Sdesc|--features-only --include-features --include-problem-desc --include-solver-desc"
 
   "modelFeat|--model-and-features --include-features"
@@ -46,7 +46,7 @@ run_one() {
   local run_log="$LOG_DIR/${name}.log"
   echo "\n--- [$name] START $(date -u) ---" | tee -a "$SUMMARY_LOG" "$run_log"
 
-  cmd=("$PY" "$SCRIPT" $args --mzn2feat-file "$MZN2FEAT_FILE" --best-only $DRY_FLAG)
+  cmd=("$PY" "$SCRIPT" $args --mzn2feat-file "$MZN2FEAT_FILE" --top-only $DRY_FLAG)
   echo "Running: ${cmd[*]}" | tee -a "$SUMMARY_LOG" "$run_log"
 
   # run the command, capture stdout+stderr

@@ -4,7 +4,7 @@
                                         %openright: open chapters on right pages
                                         %twoside: for two-sided printing
                                         %report: thesis/book style
-\documentclass[12pt,a4paper,openright,twoside]{report}
+\documentclass[12pt,a4paper,openright,twoside]{book}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% language package
 \usepackage[english]{babel}
@@ -38,6 +38,17 @@
 \usepackage{subfiles}
 \usepackage[numbers]{natbib}
 \usepackage{cleveref}
+\usepackage{xcolor}
+\definecolor{darkred}{RGB}{139,0,0}
+\usepackage{listings}
+\lstset{
+    breaklines=true,
+    basicstyle=\ttfamily\color{darkred},
+    keywordstyle=\color{darkred},
+    commentstyle=\color{darkred},
+    stringstyle=\color{darkred},
+    % postbreak=\mbox{\color{darkred}{$\hookrightarrow$}\space}, % Optional: shows where the break occurred
+}
 
 
 \geometry{margin=2cm} 
