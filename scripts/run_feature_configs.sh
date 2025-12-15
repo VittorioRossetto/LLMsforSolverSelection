@@ -21,14 +21,9 @@ if [ "${EXEC_REAL:-0}" = "1" ]; then
 fi
 
 declare -a CONFIGS=(
-  "base|"
-  "Pdesc| --include-problem-desc"
-  "Sdesc| --include-solver-desc"
-  "Pdesc_Sdesc| --include-problem-desc --include-solver-desc"
-
-  "featOnly|--features-only --include-features"
-  "featOnly_Pdesc|--features-only --include-features --include-problem-desc"
-  "featOnly_Sdesc|--features-only --include-features --include-solver-desc"
+  # "featOnly|--features-only --include-features"
+  # "featOnly_Pdesc|--features-only --include-features --include-problem-desc"
+  # "featOnly_Sdesc|--features-only --include-features --include-solver-desc"
   "featOnly_Pdesc_Sdesc|--features-only --include-features --include-problem-desc --include-solver-desc"
 
   "modelFeat|--model-and-features --include-features"

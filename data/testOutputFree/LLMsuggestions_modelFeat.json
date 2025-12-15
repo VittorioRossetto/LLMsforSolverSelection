@@ -1,32 +1,5 @@
 {
-  "gemini": {
-    "gemini-2.0-flash-lite": {},
-    "gemini-2.5-flash": {},
-    "gemini-2.5-flash-lite": {},
-    "gemini-2.5-pro": {},
-    "gemini-2.0-flash": {}
-  },
   "groq": {
-    "deepseek-r1-distill-llama-70b": {},
-    "moonshotai/kimi-k2-instruct": {},
-    "meta-llama/llama-4-maverick-17b-128e-instruct": {},
-    "groq/compound": {},
-    "moonshotai/kimi-k2-instruct-0905": {},
-    "whisper-large-v3": {},
-    "meta-llama/llama-guard-4-12b": {},
-    "qwen/qwen3-32b": {},
-    "playai-tts-arabic": {},
-    "meta-llama/llama-4-scout-17b-16e-instruct": {},
-    "playai-tts": {},
-    "meta-llama/llama-prompt-guard-2-22m": {},
-    "llama-3.1-8b-instant": {},
-    "meta-llama/llama-prompt-guard-2-86m": {},
-    "allam-2-7b": {},
-    "gemma2-9b-it": {},
-    "openai/gpt-oss-20b": {},
-    "groq/compound-mini": {},
-    "whisper-large-v3-turbo": {},
-    "openai/gpt-oss-120b": {},
-    "llama-3.3-70b-versatile": {}
+    "openai/gpt-oss-120b": {}
   }
 }

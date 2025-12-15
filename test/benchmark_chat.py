@@ -95,7 +95,7 @@ def build_solver_description_text(solver_list, solver_desc_map=None):
     return get_solver_prompt(solver_list, name_only=False)
 
 
-def pack_instances_into_chats(solver_desc_text, common_instruction, script_text, instances, allowed_total_tokens, prob_description=''):
+def pack_instances_into_chats(solver_list_text, solver_desc_text, common_instruction, script_text, instances, allowed_total_tokens, prob_description=''):
     """Greedy pack instances into chat conversations given token budget.
 
     instances: list of tuples (inst_label, instance_content)
@@ -105,7 +105,8 @@ def pack_instances_into_chats(solver_desc_text, common_instruction, script_text,
     # include the model script once per chat in the system message; account for its tokens
     # also account for the optional problem description when computing budget
     base_non_script = (
-        estimate_tokens(solver_desc_text)
+        estimate_tokens(solver_list_text)
+        + estimate_tokens(solver_desc_text)
         + estimate_tokens(common_instruction)
         + estimate_tokens(script_text)
         + estimate_tokens(prob_description)
@@ -120,6 +121,10 @@ def pack_instances_into_chats(solver_desc_text, common_instruction, script_text,
             # build messages for cur
             # keep solver descriptions and the model as separate system messages when present
             msgs = []
+            # always include the solver NAMES list as a system message
+            if solver_list_text:
+                msgs.append({'role': 'system', 'content': solver_list_text})
+            # include the full solver descriptions only when provided
             if solver_desc_text:
                 msgs.append({'role': 'system', 'content': solver_desc_text})
             # include problem description as its own system message when provided
@@ -142,6 +147,10 @@ def pack_instances_into_chats(solver_desc_text, common_instruction, script_text,
 
     if cur:
         msgs = []
+        # always include the solver NAMES list as a system message
+        if solver_list_text:
+            msgs.append({'role': 'system', 'content': solver_list_text})
+        # include the full solver descriptions only when provided
         if solver_desc_text:
             msgs.append({'role': 'system', 'content': solver_desc_text})
         if prob_description:
@@ -371,9 +380,13 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
     except Exception as e:
         logger.exception(f"Failed to load grok_models.json for model {model_id}: {e}")
 
-    # build solver description text only if requested
+    # always build the solver NAMES list to include in system messages
+    solver_list = get_solver_list(args.solver_set if hasattr(args, 'solver_set') else 'free')
+    solver_list_text = get_solver_prompt(solver_list, name_only=True)
+
+    # build solver description text only if requested (this is the verbose descriptions map)
     if getattr(args, 'features_only', False):
-        # when sending only features, do not include solver description or script
+        # when sending only features, do not include the verbose solver description
         solver_desc_text = ''
     else:
         if getattr(args, 'include_solver_desc', False):
@@ -433,7 +446,7 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
         prob_desc = prob.get('description', '') if getattr(args, 'include_problem_desc', False) else ''
         # when features-only mode is active we intentionally omit the model
         effective_script_text = '' if getattr(args, 'features_only', False) else script_text
-        chats = pack_instances_into_chats(solver_desc_text, common_instruction, effective_script_text, insts, allowed_total_tokens, prob_desc)
+        chats = pack_instances_into_chats(solver_list_text, solver_desc_text, common_instruction, effective_script_text, insts, allowed_total_tokens, prob_desc)
         for c in chats:
             all_chats.append((prob_key, c))
 
