@@ -295,6 +295,7 @@ the gap $m_{\mathrm{SBS}} - m_{\mathrm{VBS}}$, which makes little sense for
 individual solvers, as it wouldn't reflect their actual performance overall. 
 
 \subsection{Experiment Setup}
+\label{sec:expSetup}
 We have defined both the structure of the queries posed to the LLMs (\Cref{sec:probSelection}) and the way in which these queries are formulated (\Cref{sec:promptStruct}). The remaining challenge is to evaluate them automatically over the full set of selected instances.
 To this end, we designed an automated testing pipeline that parallelizes execution by assigning one thread per LLM. For each model, requests are issued sequentially, with five requests per problem, each containing a MiniZinc model and a single instance encoded as shown in \Cref{fig:promptEx}.
 
@@ -326,5 +327,46 @@ Error code: 429 - Rate limit reached for model `openai/gpt-oss-120b` in organiza
 \end{lstlisting}
 
 Its code is inspected. Errors $413$ and $429$ indicate that a rate limit has been exceeded. The error message is then parsed to identify the specific limit involved. If the limit concerns tokens per minute (TPM) or requests per minute (RPM), the system pauses execution for 60 seconds before retrying. If the exceeded limit is tokens per day (TPD) or requests per day (RPD), the message is further analyzed to extract the cooldown duration, typically expressed in the form $XXh,XXm,XX.XXs$ where $h$ stands for hours, $m$ for minutes and $s$ for seconds. The required delay is then  computed from this value, after which the request is retried.
+
+% WebApp per richieste singole(?)
+% primi test con tutti gli LLM senza manipolare script, dicendo alla fine che da qua in poi si testano solo i primi 5 
+% test completi (setup richiesta singola)
+%   con solo codice 
+%   con desccrizione testuale del problema 
+% test a chat
+%   con descrizione solver
+%   con descrizione solver e problema, dico che da qua in poi si testa solo sul migliore
+% test con le features
+%   Estrazione e spiegazione features
+%   Risultati nei vari setup (feature da sole, con codice, con descrizioni testuali)
+
+\section{Experiments}
+
+In this section we are gonna show and explain al the experiments that led to the final choice of the context informations and overall setup of the agentic solver.
+\dots structure descrption \dots
+
+\subsection{Preliminary tests}
+First most simple test to be done is made using raw scripts, so giving the .mzn model with relative instance data (either in .dzn or .json) to each of the available LLMs using the previously defined prompt structure \Cref{sec:promptStruct}.
+As shown in (add table) and (add figure) the results aren't flattering and for most LLMs are actually quite bad, aside from the primitive formulation of the requests, a huge limitation is due to the rate limits,which doesn't allow many problems to be processed entirely.
+Those limitations lead to both the use of techniques emplying script manipulation, as previously explained in \Cref{sec:expSetup}, and the choice to test only on the five best performing LLMs from now on.
+
+\subsection{Single Request Experiments}
+After the necessary steps to realize working experiments, we need to test on the 100 instances again, the experiments are made using a "single request setup"(ref funzione groq e gemini), where we send the prompt and recieve back the answer without keeping an history or previous context in any instance.
+
+\subsubsection{Simple Setup}
+First of all it is due to test the the LLMs on the same setup of preliminary experiments, so only using raw scripts.
+
+(table parallel)
+
+As shown in the tables, the results are pretty good in parallel evaluation, in fact all of the LLMs are putting up better score the all of the LLMs beside \texttt{or-tools_cp-sat-par}, so the SBS for open category, that, anyway is winning with a wide margin from both the tested LLMs and the other single solvers.
+
+
+(table single)
+
+In the tables we can see, there is more variation on the score distribution, in fact the only LLM placing itself above all the single solvers, beside \texttt{or-tools_cp-sat-free}, the SBS for free category, the other LLMs are still giving considerably good results against other single solvers, but there is still a big margin for improvement, As can be directly seen from the closed gap table.
+
+\subsubsection{Problem Description}
+
+
 
 \end{document}
