@@ -2,9 +2,9 @@
 \begin{document}
 
 \section{Methodology}
-In this chapter, the focus is on outlining the foundational decisions required to establish an initial benchmark. This benchmark serves as the basis for refining subsequent experiments and assessing both the current capabilities and future potential of the solver.
+In this section, the focus is on outlining the foundational decisions required to establish an initial benchmark. This benchmark serves as the basis for refining subsequent experiments and assessing both the current capabilities and future potential of the solver.
 
-The chapter is structured into four subsections, each addressing a key preliminary choice. The first subsection discusses the selection of large language models used as candidates for the agentic component. The second details the initial prompt-engineering strategy needed to define a clean, consistent prompt format for evaluation. The third presents the rationale behind the selection of benchmark problems used to test model performance. The final subsection explains the metrics adopted to evaluate how effectively each model could operate as a meta-solver.
+The section is structured into four subsections, each addressing a key preliminary choice. The first subsection discusses the selection of large language models used as candidates for the agentic component. The second details the initial prompt-engineering strategy needed to define a clean, consistent prompt format for evaluation. The third presents the rationale behind the selection of benchmark problems used to test model performance. The fifth explains the metrics adopted to evaluate how effectively each model could operate as a meta-solver. The final subsection explains the pre-processing methods adopted the make automatic testing possible.
 
 \subsection{Provider Choice} 
 To build the proposed Agentic Solver (AS), the first requirement is the
@@ -295,13 +295,27 @@ the gap $m_{\mathrm{SBS}} - m_{\mathrm{VBS}}$, which makes little sense for
 individual solvers, as it wouldn't reflect their actual performance overall. 
 
 \subsection{Experiment Setup}
-We have the structure of what we want to ask the LLMs (\Cref{sec:probSelection}) and how we want to ask it (\Cref{sec:promptStruct}); now we need a way to test automatically on all of the selected instance.
-The idea is to automate testing, parallelizing execution with a thread per single LLM, on each of the LLMs, requests are sent sequentially, 5 for each problem, each containing minizinc model and single instance data as formulated in \Cref{fig:promptEx}.
-Even after preliminary prompt engineering and LLM selection, some minizinc models, and specially some data scripts exceed rate limits. Given that limits are strict, we had to find some workarounds to avoid limit exceedance while making it possible to analyze all the selected instances.
+We have defined both the structure of the queries posed to the LLMs (\Cref{sec:probSelection}) and the way in which these queries are formulated (\Cref{sec:promptStruct}). The remaining challenge is to evaluate them automatically over the full set of selected instances.
+To this end, we designed an automated testing pipeline that parallelizes execution by assigning one thread per LLM. For each model, requests are issued sequentially, with five requests per problem, each containing a MiniZinc model and a single instance encoded as shown in \Cref{fig:promptEx}.
+
+Despite preliminary prompt engineering and model filtering, several MiniZinc models, particularly their associated data files, still exceed the providers' rate limits. Since these limits are strict, additional mechanisms were required to prevent limit violations while still allowing evaluation over the complete instance set.
+
+\subsubsection{Script Manipulation}
+
+The most direct way to address oversized requests is to reduce their length. As the prompt itself was already minimal, this required direct manipulation of the MiniZinc model (\texttt{.mzn}) and data files.
+
+A first step consisted in removing all non-essential elements, such as comments (starting with \texttt{\%}\cite{MiniZinc}), tabs, and unnecessary whitespace. While this helps reduce token usage and standardizes script formatting, it is insufficient on its own. The main contributor to token overflow is the presence of large data arrays, which not only increase message length but may also pollute the context, "distracting" the LLM from the most relevant information\cite{LLMdistract}.
+
+To mitigate this issue, data arrays were truncated to a fixed maximum length of 30 elements, with an inline comment indicating the original size:
+\[ 
+[e_1,e_2,\dots,e_{30} \texttt{// array too long to display, dimensions: (150)} ]
+\]
+While effective for simple arrays of scalar values, this approach does not account for the complexity of individual elements and performs poorly on more structured data. For this reason, a second truncation mechanism was introduced based on raw character length. Arrays exceeding 90 characters were truncated accordingly, using the same annotation to preserve information about the original size. 
 
 \subsubsection{Custom Delays}
-Given that we are working with a list of multiple problems, multiple requests on a single LLM sum up on token usage and request usage, so even though the single request doesn't exceed the rate limits, multiple requests could.
-The easiest solution to this problem was to add custom delays to the experiment orchestration program, based on error messages, as the one in the following example:
+Since each experiment involves multiple problems and multiple sequential requests per LLM, rate limits can still be exceeded even when individual requests are within bounds. To handle this, custom delays were introduced into the experiment orchestration logic.
+
+When an error message is received, for example:
 
 \begin{lstlisting}
 Error code: 413 - Request too large for model `openai/gpt-oss-120b` in organization `org_01k9qqesvte4d9h5jnhmzvbmy4` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 8939, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing
@@ -309,12 +323,8 @@ Error code: 413 - Request too large for model `openai/gpt-oss-120b` in organizat
 
 \begin{lstlisting}
 Error code: 429 - Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01k9qqesvte4d9h5jnhmzvbmy4` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 193047, Requested 10632. Please try again in 26m29.328s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing
-\begin{lstlisting}
 \end{lstlisting}
 
-
-The functioning is: once recieved an error message, the error code is analized, wether it is $413$ or $429$ signifying rate limits have been exceeded, the message is analyzed to look for the type of limit exceeded: exceedance is TPM or RPM meaning we have exceeded the limit per minute, the experiment is programmed to wait for 60 seconds and try again. in case the limit exceeded is either TPD or RPD the program analyze the message further to look for a time measure, in the form  $XXhXXmXX.XXs$ where $h$ stands for hours, $m$ for minutes and $s$ for seconds. Given this time measure the program extract the exact delay necessary to formulate the current request and try again.
-
-
+Its code is inspected. Errors $413$ and $429$ indicate that a rate limit has been exceeded. The error message is then parsed to identify the specific limit involved. If the limit concerns tokens per minute (TPM) or requests per minute (RPM), the system pauses execution for 60 seconds before retrying. If the exceeded limit is tokens per day (TPD) or requests per day (RPD), the message is further analyzed to extract the cooldown duration, typically expressed in the form $XXh,XXm,XX.XXs$ where $h$ stands for hours, $m$ for minutes and $s$ for seconds. The required delay is then  computed from this value, after which the request is retried.
 
 \end{document}

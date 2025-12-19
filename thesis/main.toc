@@ -11,5 +11,6 @@
 \contentsline {subsubsection}{Metric for Solver Score}{6}{}%
 \contentsline {subsubsection}{Closed Gap}{7}{}%
 \contentsline {subsection}{\numberline {1.1.6}Experiment Setup}{8}{}%
-\contentsline {subsubsection}{Custom Delays}{8}{}%
+\contentsline {subsubsection}{Script Manipulation}{8}{}%
+\contentsline {subsubsection}{Custom Delays}{9}{}%
 \contentsline {chapter}{Bibliography}{11}{}%
