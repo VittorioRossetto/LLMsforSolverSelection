@@ -246,34 +246,25 @@ def compute_closed_gap(llm_top1_scored, scored_df):
 
     cg_results = []
 
-    # Compute VBS scores for all instances once
+    # Compute VBS scores for all instances once (always over all instances)
     vbs_df = (
         scored_df.groupby(['Problem', 'Instance'], as_index=False)['ComputedScore']
         .max()
         .rename(columns={'ComputedScore': 'VBS_Score'})
     )
+    vbs_total = vbs_df['VBS_Score'].sum()
+
+    # Compute SBS score over all instances (not limited to model coverage)
+    sbs_total = scored_df.loc[scored_df['Solver'] == SBS_SOLVER, 'ComputedScore'].sum()
 
     for (prov, mod), group in llm_top1_scored.groupby(['provider', 'model']):
         # Instances this model actually made predictions for
         covered = group[['problem', 'instance']].drop_duplicates()
-        
-        # Subset SBS and VBS to same instance set
-        vbs_sub = vbs_df.merge(
-            covered,
-            left_on=['Problem', 'Instance'],
-            right_on=['problem', 'instance'],
-            how='inner'
-        )
-        sbs_sub = scored_df[
-            (scored_df['Solver'] == SBS_SOLVER)
-            & (scored_df['Problem'].isin(covered['problem']))
-            & (scored_df['Instance'].isin(covered['instance']))
-        ]
-        
-        # Compute total scores normalized over same instance set
+
+        # Compute total scores for this model (only over its covered predictions)
         score_AS = group['ComputedScore'].sum()
-        score_VBS = vbs_sub['VBS_Score'].sum()
-        score_SBS = sbs_sub['ComputedScore'].sum()
+        score_SBS = sbs_total
+        score_VBS = vbs_total
 
         # Compute closed gap
         cg = (score_AS - score_SBS) / (score_VBS - score_SBS) if (score_VBS - score_SBS) != 0 else float('nan')
