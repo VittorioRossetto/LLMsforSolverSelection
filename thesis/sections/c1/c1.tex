@@ -342,7 +342,7 @@ Its code is inspected. Errors $413$ and $429$ indicate that a rate limit has bee
 
 \section{Experiments}
 
-In this section we are gonna show and explain al the experiments that led to the final choice of the context informations and overall setup of the agentic solver.
+In this section we are gonna show and explain al the experiments that led to the final choice of the context information and overall setup of the agentic solver.
 \dots structure descrption \dots
 
 \subsection{Preliminary tests}
@@ -358,15 +358,64 @@ First of all it is due to test the the LLMs on the same setup of preliminary exp
 
 (table parallel)
 
-As shown in the tables, the results are pretty good in parallel evaluation, in fact all of the LLMs are putting up better score the all of the LLMs beside \texttt{or-tools_cp-sat-par}, so the SBS for open category, that, anyway is winning with a wide margin from both the tested LLMs and the other single solvers.
+As shown in the tables, the results are pretty good in parallel evaluation, in fact all of the LLMs are putting up better score the all of the LLMs beside \texttt{or-tools\_cp-sat-par}, so the SBS for open category, that, anyway is winning with a wide margin from both the tested LLMs and the other single solvers.
 
 
 (table single)
 
-In the tables we can see, there is more variation on the score distribution, in fact the only LLM placing itself above all the single solvers, beside \texttt{or-tools_cp-sat-free}, the SBS for free category, the other LLMs are still giving considerably good results against other single solvers, but there is still a big margin for improvement, As can be directly seen from the closed gap table.
+In the tables we can see, there is more variation on the score distribution, in fact the only LLM placing itself above all the single solvers, beside the SBS for free category (\texttt{or-tools\_cp-sat-free}), is \texttt{gpt-oss-120b}, the other LLMs are still giving considerably good results against other single solvers, but there is still a big margin for improvement, As can be directly seen from the closed gap table.
+
+(closed gap table)
 
 \subsubsection{Problem Description}
+After these first tests, it becomes clear that it is needed a way to improve the Agentic Solver performance. What seems the easiest solution to this problem, is simply to give the LLM more context information. But, as previously stated, too big of a context might actually "distract" the LLM and even worsen its performance\cite{ContextRot}\cite{LLMdistract}, instead of making it better. 
+This conflict, raises a new question, it is needed that we understand which information are actually more understandable for the LLMs, and to do that we need to test on different setups.
+Starting by giving our AS the problem description (PD), a brief text relative to a single \texttt{.mzn} describing the content of the problem. The descriptions were automatically generated via another LLM (\texttt{GPT-5.1}), and later slightly modified by hand to fix minor errors.
+The PDs are then incorporated in the prompt structure (\Cref{fig:promptEx}) as follows:
+\[ \text{"Problem Description: "}+PD+PromptStructure \]
+As shown in (ref a tabella) adding these context information gave opposite results on parallel and single execution. Giving consistently worse results on single solver answers, and giving slightly better results for parallel executions with better performance on 3 out of the 5 tested LLMs.
 
+(table single) (table parallel)
 
+As can be deduced from the results, sadly, the closed gap is still negative in this case.
+
+(closed gap table)
+
+\subsection{Multi-turn experiments}
+From previously explained experiments, it turn out that the context information we are giving are either limited or not helping, in a broader sense. The obvious follow-up steps are to test again, by giving different context information, this anyway raises a couple questions. First of all, we are already reaching the maximum limit of requested tokens (TPM) in a single request setup, so adding more information, while keeping the the same experiment configuration, wouldn't be a viable option. Another problem with the previous setup is that we are actively wasting tokens, by giving the LLMs redundant context. To further explain this, for each problem, we have 5 different instances we are testing on, so 5 different sets of data, while the problem stays the same, and clearly it's the same thing for the problem description as well.
+In our context of limited resources, it is imperative we solve those issues, and to do that we switched to a multi-turn experiment setup (or chat-like setup).
+
+\subsubsection{Setup Explanation}
+The main idea is to split the conversation with the use of a technique called role-based formatting\cite{RBFormatting}. To unlock the full potential of LLMs, especially in multi-turn setups, the model must understand who is speaking, what role they are playing, and what has already happened in the conversation. This is where role come in, such as \texttt{system}, \texttt{user}, and \texttt{assistant}, which define the context and intent behind every message.
+In particular, \texttt{system} help us define the general instructions for the conversation. In our case, we are using that by giving the LLM what were the redundant information: \texttt{.mzn} content, verbal problem descriptions and answer instructions. Then we used \texttt{user} which is used in the questions or commands that the model responds to. In our case,that contains the instance relative data (\texttt{.dzn} or \texttt{.json} content). Allowing us to further refine the conversation, giving clear instructions, while also limiting the token usage, and consequently enabling longer, more complex requests.
+This setup also enables longer instance data, by simply giving us the possibility to directly split messages, while the LLM is retaining information.
+
+\subsubsection{Solvers Description}
+With this improved setup we can add a new element to the context information: the solvers description. We generated a description of each of the involved solvers, and than gave it to the LLM, in the system prompt giving it a better understanding of its options for a result. To reach a better understanding of information importance, we tried to add this information in two different ways: combined with all the previous context, and as the only text information combined with the \texttt{.mzn} model, and instance data.
+
+(table parallel s)
+
+In the case of parallel evaluation, adding only solver description haven't produced any better results, beside for \texttt{gemini-2.5-flash}, but still not reaching the open category SBS score.
+
+(table single s)
+
+On the other hand, talking about single solver evaluation, it showed great improvement for two particular models, \texttt{moonshotai/kimi-k2-instruct-0905} and \texttt{moonshotai/kimi-k2-instruct} which actually reached the SBS score, giving for the first time a non-negative closed gap, but a 0 one. Sadly, when looking into the answers, we discovered that the improvement is simply due to the LLMs always giving the same answer for the best solver, specifically \texttt{or-tools\_cp-sat-free}, the SBS, invalidating the purpose of an LLM involvement.
+
+(closed gap table)
+
+\subsubsection{Solver Description and Problem Description}
+As previously stated, then we tried using both textual information, so both solvers description and problem description together. With this setup, we reached the maximum ammount of information given as context to the LLMs.
+
+(table parallel s p) 
+
+In the case of parallel evaluation, while we reached the best score yet, with \texttt{gemini-2.5-flash}, the results aren't improving for other LLMs and we are still far back from the open category SBS.
+
+(table single s p)
+
+In the case of single solver evaluation, while \texttt{moonshotai/kimi-k2-instruct-0905} still is giving the SBS as the only answer. We reached better results for 2 LLMs (\texttt{gemini-2.5-flash}), and \texttt{gpt-oss-120b}, which finally gives us the first positive closed gap yep, surpassing \texttt{or-tools\_cp-sat-free}
+
+(closed gap table)
+
+\subsection{Features}
 
 \end{document}

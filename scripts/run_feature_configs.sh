@@ -28,12 +28,12 @@ declare -a CONFIGS=(
 
   # "modelFeat|--model-and-features --include-features"
   # "modelFeat_Pdesc|--model-and-features --include-features --include-problem-desc"
-  "modelFeat_Sdesc|--model-and-features --include-features --include-solver-desc"
-  "modelFeat_Pdesc_Sdesc|--model-and-features --include-features --include-problem-desc --include-solver-desc"
+  # "modelFeat_Sdesc|--model-and-features --include-features --include-solver-desc"
+  # "modelFeat_Pdesc_Sdesc|--model-and-features --include-features --include-problem-desc --include-solver-desc"
 
-  "features|--include-features"
-  "features_Pdesc|--include-features --include-problem-desc"
-  "features_Sdesc|--include-features --include-solver-desc"
+  # "features|--include-features"
+  # "features_Pdesc|--include-features --include-problem-desc"
+  # "features_Sdesc|--include-features --include-solver-desc"
   "features_Pdesc_Sdesc|--include-features --include-problem-desc --include-solver-desc"
 )
 

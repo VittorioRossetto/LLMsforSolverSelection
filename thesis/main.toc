@@ -13,4 +13,11 @@
 \contentsline {subsection}{\numberline {1.1.6}Experiment Setup}{8}{}%
 \contentsline {subsubsection}{Script Manipulation}{8}{}%
 \contentsline {subsubsection}{Custom Delays}{9}{}%
-\contentsline {chapter}{Bibliography}{11}{}%
+\contentsline {section}{\numberline {1.2}Experiments}{10}{}%
+\contentsline {subsection}{\numberline {1.2.1}Preliminary tests}{10}{}%
+\contentsline {subsection}{\numberline {1.2.2}Single Request Experiments}{10}{}%
+\contentsline {subsubsection}{Simple Setup}{10}{}%
+\contentsline {subsubsection}{Problem Description}{11}{}%
+\contentsline {subsection}{\numberline {1.2.3}Multi-request experiments}{11}{}%
+\contentsline {subsubsection}{Setup Explanation}{11}{}%
+\contentsline {chapter}{Bibliography}{13}{}%
