@@ -25,11 +25,15 @@ TotalScore,Solver,Type
 69.76346398568326,gemini-2.5-flash (Simple),LLM Variant
 69.0428505609976,gemini-2.5-flash-lite (Problem Description),LLM Variant
 68.49798670270116,huub-free,Solver
+68.4227077842851,openai/gpt-oss-120b (Feature + .mzn + Instance Data + Problem Description),LLM Variant
 67.55460605104057,moonshotai/kimi-k2-instruct (Problem Description),LLM Variant
+63.58545875527549,openai/gpt-oss-120b (Feature + .mzn + Instance Data + Solver Description + Problem Description),LLM Variant
 63.062994288751376,gemini-2.5-flash-lite (Solvers Description + Problem Description),LLM Variant
+62.516549952420235,openai/gpt-oss-120b (Feature + .mzn + Instance Data + Solver Description),LLM Variant
 61.687989685978806,openai/gpt-oss-120b (Feature + .mzn + Solver Description),LLM Variant
 60.80817577823609,choco-solver__cp-sat_-free,Solver
 58.67209255973504,izplus-free,Solver
+58.57654271579126,openai/gpt-oss-120b (Feature + .mzn + Instance Data),LLM Variant
 58.5432292302076,pumpkin-free,Solver
 58.40432304639856,choco-solver__cp_-free,Solver
 55.384518369082286,gurobi-free,Solver

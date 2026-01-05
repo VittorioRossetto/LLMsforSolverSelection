@@ -163,7 +163,7 @@ def pack_instances_into_chats(solver_list_text, solver_desc_text, common_instruc
     return chats
 
 
-def send_chat(messages, provider, model_id, query_func):
+def send_chat(messages, provider, model_id, query_func, temperature=None):
     """Try to send chat messages with TPM/size-aware retries.
 
     On TPM/TPH or context/size errors, attempt to truncate the MiniZinc model
@@ -193,19 +193,35 @@ def send_chat(messages, provider, model_id, query_func):
                 user_parts = [m.get('content','') for m in curr_messages if m.get('role') == 'user']
                 contents = '\n----\n'.join(user_parts)
                 client = genai.Client()
-                cfg = types.GenerateContentConfig(system_instruction=system_instruction) if system_instruction else None
-                if cfg:
-                    response = client.models.generate_content(model=model_id, config=cfg, contents=contents)
-                else:
-                    response = client.models.generate_content(model=model_id, contents=contents)
+                cfg = None
+                if system_instruction or (temperature is not None):
+                    cfg = types.GenerateContentConfig(
+                        system_instruction=system_instruction if system_instruction else None,
+                        temperature=temperature,
+                    )
+                response = client.models.generate_content(
+                    model=model_id,
+                    config=cfg,
+                    contents=contents,
+                )
                 return getattr(response, 'text', str(response))
 
             # prefer chat/multi-message API otherwise
             try:
+                if temperature is not None:
+                    try:
+                        return query_func(messages=curr_messages, model_name=model_id, temperature=temperature)
+                    except TypeError:
+                        return query_func(messages=curr_messages, model_name=model_id)
                 return query_func(messages=curr_messages, model_name=model_id)
             except TypeError:
                 # provider wrapper probably expects plain prompt; call fallback
                 joined = "\n----\n".join(m['content'] for m in curr_messages)
+                if temperature is not None:
+                    try:
+                        return query_func(joined, model_name=model_id, temperature=temperature)
+                    except TypeError:
+                        return query_func(joined, model_name=model_id)
                 return query_func(joined, model_name=model_id)
         except Exception as e:
             is_rate, is_tpm, is_size, is_503_like = handle_api_error(e)
@@ -234,8 +250,8 @@ def send_chat(messages, provider, model_id, query_func):
 
                 logger.info(f"Splitting oversized request into 2 chats for provider={provider} model={model_id}")
                 # send first half then second half, concatenate results
-                resp1 = send_chat(msgs1, provider, model_id, query_func)
-                resp2 = send_chat(msgs2, provider, model_id, query_func)
+                resp1 = send_chat(msgs1, provider, model_id, query_func, temperature=temperature)
+                resp2 = send_chat(msgs2, provider, model_id, query_func, temperature=temperature)
                 return (resp1 or '') + "\n" + (resp2 or '')
             elif '413' in msg or is_size:
                 logger.info(f"Received size/context error (413) for provider={provider} model={model_id}; sleeping 60s before retry")
@@ -332,7 +348,7 @@ def _split_messages_in_two(messages):
     return msgs1, msgs2
 
 
-def resilient_send_chat(messages, provider, model_id, query_func):
+def resilient_send_chat(messages, provider, model_id, query_func, temperature=None):
     """Call `send_chat` but never give up: retries indefinitely until a response is returned.
 
     This wrapper will parse provider error messages for suggested wait times when
@@ -342,7 +358,7 @@ def resilient_send_chat(messages, provider, model_id, query_func):
     attempt = 0
     while True:
         try:
-            return send_chat(messages, provider, model_id, query_func)
+            return send_chat(messages, provider, model_id, query_func, temperature=temperature)
         except Exception as e:
             attempt += 1
             msg = str(e)
@@ -472,7 +488,7 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
     with ThreadPoolExecutor(max_workers=args.max_workers_instances) as executor, \
          tqdm(total=total_chats, desc=f"{provider}/{model_id}", leave=False) as pbar:
 
-        future_to_chat = {executor.submit(resilient_send_chat, msgs, provider, model_id, query_func): (pk, msgs)
+        future_to_chat = {executor.submit(resilient_send_chat, msgs, provider, model_id, query_func, args.temperature): (pk, msgs)
                   for pk, msgs in all_chats}
 
         for fut in as_completed(future_to_chat):
@@ -485,7 +501,7 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
                 # attempt a blocking retry (will retry indefinitely until success).
                 logger.exception(f"Future raised unexpectedly for provider={provider} model={model_id} problem={pk}: {e}. Falling back to blocking retry.")
                 try:
-                    resp = resilient_send_chat(msgs, provider, model_id, query_func)
+                    resp = resilient_send_chat(msgs, provider, model_id, query_func, args.temperature)
                 except Exception as e2:
                     # This should be unreachable because resilient_send_chat retries forever,
                     # but log and continue to next chat if it happens.
@@ -544,6 +560,8 @@ def main(argv=None):
                         help='Send only instance features to the model (omit model and instance data)')
     parser.add_argument('--model-and-features', action='store_true',
                         help='Send the problem model as system message and instance features as the instance content (omit raw instance data)')
+    parser.add_argument('--temperature', type=float, default=None,
+                        help='Sampling temperature for the conversation (provider support varies). Default: provider default')
     args = parser.parse_args(argv)
 
     # load mzn2feat features if requested (cached globally)

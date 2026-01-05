@@ -4,6 +4,7 @@ load_dotenv()
 import json
 import requests
 from google import genai
+from google.genai import types
 from groq import Groq
 import re
 
@@ -112,13 +113,11 @@ def get_problem_script(problem_entry: dict):
             return f"[Error reading {script}: {e}]"
     return script
 
-def query_gemini(prompt_text: str, model_name: str = "gemini-2.5-flash"):
+def query_gemini(prompt_text: str, model_name: str = "gemini-2.5-flash", temperature: float | None = None):
     """Sends prompt to Gemini using the selected model and returns the response text."""
     client = genai.Client()
-    response = client.models.generate_content(
-        model=model_name,
-        contents=prompt_text
-    )
+    cfg = types.GenerateContentConfig(temperature=temperature) if temperature is not None else None
+    response = client.models.generate_content(model=model_name, config=cfg, contents=prompt_text)
     return getattr(response, "text", str(response))
 
 def get_groq_model_label(model_id):
@@ -127,12 +126,16 @@ def get_groq_model_label(model_id):
             return label
     return model_id
 
-def query_groq(prompt_text: str, model_name: str = "llama-3-70b-versatile"):
+def query_groq(prompt_text: str, model_name: str = "llama-3-70b-versatile", temperature: float | None = None):
     """Sends prompt to Groq using the selected model and returns the response text."""
     client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+    kwargs = {}
+    if temperature is not None:
+        kwargs["temperature"] = temperature
     chat_completion = client.chat.completions.create(
         messages=[{"role": "user", "content": prompt_text}],
-        model=model_name
+        model=model_name,
+        **kwargs,
     )
     return chat_completion.choices[0].message.content
 

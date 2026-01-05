@@ -399,7 +399,7 @@ In the case of parallel evaluation, adding only solver description haven't produ
 
 (table single s)
 
-On the other hand, talking about single solver evaluation, it showed great improvement for two particular models, \texttt{moonshotai/kimi-k2-instruct-0905} and \texttt{moonshotai/kimi-k2-instruct} which actually reached the SBS score, giving for the first time a non-negative closed gap, but a 0 one. Sadly, when looking into the answers, we discovered that the improvement is simply due to the LLMs always giving the same answer for the best solver, specifically \texttt{or-tools\_cp-sat-free}, the SBS, invalidating the purpose of an LLM involvement.
+On the other hand, talking about single solver evaluation, it showed great improvement for two particular models, \texttt{moonshotai/kimi-k2-instruct-0905} and \\\texttt{moonshotai/kimi-k2-instruct} which actually reached the SBS score, giving for the first time a non-negative closed gap, but a 0 one. Sadly, when looking into the answers, we discovered that the improvement is simply due to the LLMs always giving the same answer for the best solver, specifically \texttt{or-tools\_cp-sat-free}, the SBS, invalidating the purpose of an LLM involvement.
 
 (closed gap table)
 
@@ -412,7 +412,7 @@ In the case of parallel evaluation, while we reached the best score yet, with \t
 
 (table single s p)
 
-In the case of single solver evaluation, while \texttt{moonshotai/kimi-k2-instruct-0905} still is giving the SBS as the only answer. We reached better results for 2 LLMs (\texttt{gemini-2.5-flash}), and \texttt{gpt-oss-120b}, which finally gives us the first positive closed gap yep, surpassing \texttt{or-tools\_cp-sat-free}
+In the case of single solver evaluation, while \texttt{moonshotai/kimi-k2-instruct-0905} still is giving the SBS as the only answer. We reached better results for 2 LLMs (\texttt{gemini-2.5-flash}), and \texttt{gpt-oss-120b}, which finally gives us the first positive closed gap yep, surpassing\\\texttt{or-tools\_cp-sat-free}
 
 (closed gap table)
 
