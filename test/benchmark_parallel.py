@@ -51,6 +51,8 @@ parser.add_argument('--dry-run', action='store_true', default=False,
                     help="If set, print planned models and instance counts and exit without querying LLMs.")
 parser.add_argument('--include-problem-desc', action='store_true', default=False,
                     help="If set, include the problem description (from problems_with_descriptions.json) at the start of each prompt.")
+parser.add_argument('--temperature', type=float, default=None,
+                    help='Sampling temperature for each question (provider support varies). Default: provider default')
 args = parser.parse_args()
 
 # --- Solver set selection ---
@@ -165,13 +167,19 @@ def get_allowed_total_tokens_for_model(model_id, model_label, fallback_budget=25
     return allowed, int(model_budget)
 
 
-def run_single_query(provider, model_id, prob_key, inst_label, prompt, query_func):
+def run_single_query(provider, model_id, prob_key, inst_label, prompt, query_func, temperature=None):
     """Executes one LLM query with retry handling."""
     retry_count = 0
     while True:
         try:
             start = time.time()
-            response = query_func(prompt, model_name=model_id)
+            if temperature is not None:
+                try:
+                    response = query_func(prompt, model_name=model_id, temperature=temperature)
+                except TypeError:
+                    response = query_func(prompt, model_name=model_id)
+            else:
+                response = query_func(prompt, model_name=model_id)
             duration = time.time() - start
             match = re.search(r"\[([^\]]+)\]", response)
             llm_top3 = [s.strip() for s in match.group(1).split(',')] if match else []
@@ -312,7 +320,7 @@ def process_model(provider, model_id, model_label, query_func):
                 prompt += f"MiniZinc data:\n{instance_content}\n\n"
             prompt += trunc_note + solver_prompt
 
-            futures[executor.submit(run_single_query, provider, model_id, prob_key, inst_label, prompt, query_func)] = (prob_key, inst_label)
+            futures[executor.submit(run_single_query, provider, model_id, prob_key, inst_label, prompt, query_func, args.temperature)] = (prob_key, inst_label)
 
         for future in as_completed(futures):
             prob_key, inst_label = futures[future]

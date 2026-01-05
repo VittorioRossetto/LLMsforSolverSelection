@@ -18,9 +18,10 @@
 \contentsline {subsection}{\numberline {1.2.2}Single Request Experiments}{10}{}%
 \contentsline {subsubsection}{Simple Setup}{11}{}%
 \contentsline {subsubsection}{Problem Description}{12}{}%
-\contentsline {subsection}{\numberline {1.2.3}Multi-turn experiments}{12}{}%
-\contentsline {subsubsection}{Setup Explanation}{13}{}%
+\contentsline {subsection}{\numberline {1.2.3}Multi-turn Experiments}{13}{}%
+\contentsline {subsubsection}{Setup Explanation}{14}{}%
 \contentsline {subsubsection}{Solvers Description}{14}{}%
 \contentsline {subsubsection}{Solver Description and Problem Description}{15}{}%
+\contentsline {subsubsection}{Basic Tests Evaluation}{16}{}%
 \contentsline {subsection}{\numberline {1.2.4}Features}{16}{}%
 \contentsline {chapter}{Bibliography}{17}{}%
