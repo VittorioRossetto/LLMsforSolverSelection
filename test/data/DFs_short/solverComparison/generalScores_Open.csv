@@ -1,0 +1,40 @@
+TotalScore,Solver,Type
+88.117,or-tools_cp-sat-par,Solver
+83.650,gemini-2.5-flash (Top+SDesc+PDesc),LLM
+83.268,moonshotai/kimi-k2-instruct (Top),LLM
+83.249,openai/gpt-oss-120b (Top+Desc),LLM
+83.182,moonshotai/kimi-k2-instruct-0905 (Top+Desc),LLM
+83.137,gemini-2.5-flash (Top+SDesc),LLM
+82.656,moonshotai/kimi-k2-instruct-0905 (Top),LLM
+82.620,gemini-2.5-flash-lite (Top+Desc),LLM
+82.488,moonshotai/kimi-k2-instruct-0905 (Top+SDesc),LLM
+82.236,moonshotai/kimi-k2-instruct (Top+SDesc),LLM
+82.226,openai/gpt-oss-120b (Top),LLM
+82.218,moonshotai/kimi-k2-instruct-0905 (Top+SDesc+PDesc),LLM
+81.889,moonshotai/kimi-k2-instruct (Top+Desc),LLM
+80.740,gemini-2.5-flash-lite (Top),LLM
+80.295,openai/gpt-oss-120b (Top+SDesc+PDesc),LLM
+79.105,gemini-2.5-flash (Top),LLM
+78.799,openai/gpt-oss-120b (Top+SDesc),LLM
+78.147,gemini-2.5-flash-lite (Top+SDesc+PDesc),LLM
+77.746,gemini-2.5-flash-lite (Top+SDesc),LLM
+74.819,chuffed-free,Solver
+70.647,picatsat-free,Solver
+68.784,huub-free,Solver
+61.081,gurobi-par,Solver
+60.301,cplex-par,Solver
+59.365,choco-solver__cp_-par,Solver
+58.216,izplus-par,Solver
+57.681,pumpkin-free,Solver
+56.896,choco-solver__cp-sat_-par,Solver
+54.283,gecode-par,Solver
+53.877,cp_optimizer-par,Solver
+47.304,gecode_dexter-open,Solver
+46.292,or-tools_cp-sat_ls-par,Solver
+44.373,jacop-free,Solver
+43.548,sicstus_prolog-free,Solver
+38.321,yuck-par,Solver
+36.675,scip-par,Solver
+33.598,highs-par,Solver
+26.334,cbc-par,Solver
+1.555,atlantis-free,Solver

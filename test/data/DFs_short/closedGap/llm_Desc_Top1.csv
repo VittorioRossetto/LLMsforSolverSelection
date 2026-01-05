@@ -1,0 +1,6 @@
+provider,model,InstancesCovered,AS,SBS,VBS,ClosedGap
+groq,moonshotai/kimi-k2-instruct-0905,100,72.605,76.964,89.0,-0.362
+groq,openai/gpt-oss-120b,100,70.740,76.964,89.0,-0.517
+gemini,gemini-2.5-flash-lite,100,69.042,76.964,89.0,-0.658
+groq,moonshotai/kimi-k2-instruct,100,67.554,76.964,89.0,-0.781
+gemini,gemini-2.5-flash,73,49.896,76.964,89.0,-2.248

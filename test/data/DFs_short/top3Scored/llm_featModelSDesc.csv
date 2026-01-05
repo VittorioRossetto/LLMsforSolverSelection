@@ -1,0 +1,2 @@
+provider,model,LLM_TotalScore,InstancesCovered,LLM_AvgScore
+chat,openai/gpt-oss-120b,66.874,82,0.815

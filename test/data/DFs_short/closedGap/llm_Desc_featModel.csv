@@ -1,0 +1,2 @@
+provider,model,InstancesCovered,AS,SBS,VBS,ClosedGap
+chat,openai/gpt-oss-120b,94,71.916,76.964,89.0,-0.419

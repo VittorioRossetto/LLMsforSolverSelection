@@ -1,0 +1,41 @@
+TotalScore,Solver,Type
+77.260,openai/gpt-oss-120b (Solvers Description + Problem Description),LLM Variant
+76.964,moonshotai/kimi-k2-instruct-0905 (Solvers Description + Problem Description),LLM Variant
+76.964,moonshotai/kimi-k2-instruct-0905 (Solvers Description),LLM Variant
+76.964,moonshotai/kimi-k2-instruct (Solvers Description),LLM Variant
+76.964,or-tools_cp-sat-free,Solver
+74.488,openai/gpt-oss-120b (Simple),LLM Variant
+74.464,moonshotai/kimi-k2-instruct (Solvers Description + Problem Description),LLM Variant
+74.456,chuffed-free,Solver
+73.551,gemini-2.5-flash (Solvers Description + Problem Description),LLM Variant
+72.605,moonshotai/kimi-k2-instruct-0905 (Problem Description),LLM Variant
+71.686,gemini-2.5-flash (Solvers Description),LLM Variant
+71.622,moonshotai/kimi-k2-instruct-0905 (Simple),LLM Variant
+70.974,openai/gpt-oss-120b (Solvers Description),LLM Variant
+70.939,moonshotai/kimi-k2-instruct (Simple),LLM Variant
+70.933,picatsat-free,Solver
+70.740,openai/gpt-oss-120b (Problem Description),LLM Variant
+70.145,gemini-2.5-flash-lite (Simple),LLM Variant
+69.763,gemini-2.5-flash (Simple),LLM Variant
+69.042,gemini-2.5-flash-lite (Problem Description),LLM Variant
+68.497,huub-free,Solver
+67.554,moonshotai/kimi-k2-instruct (Problem Description),LLM Variant
+63.062,gemini-2.5-flash-lite (Solvers Description + Problem Description),LLM Variant
+60.808,choco-solver__cp-sat_-free,Solver
+58.672,izplus-free,Solver
+58.543,pumpkin-free,Solver
+58.404,choco-solver__cp_-free,Solver
+55.384,gurobi-free,Solver
+54.713,gemini-2.5-flash-lite (Solvers Description),LLM Variant
+50.992,cp_optimizer-free,Solver
+50.073,gecode-fd,Solver
+49.896,gemini-2.5-flash (Problem Description),LLM Variant
+48.514,cplex-free,Solver
+44.592,sicstus_prolog-free,Solver
+44.549,jacop-free,Solver
+43.222,or-tools_cp-sat_ls-free,Solver
+36.902,scip-free,Solver
+34.715,yuck-free,Solver
+34.418,highs-free,Solver
+22.615,cbc-free,Solver
+1.5,atlantis-free,Solver

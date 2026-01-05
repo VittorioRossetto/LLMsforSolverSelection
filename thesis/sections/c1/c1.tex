@@ -347,7 +347,65 @@ In this section we are gonna show and explain al the experiments that led to the
 
 \subsection{Preliminary tests}
 First most simple test to be done is made using raw scripts, so giving the .mzn model with relative instance data (either in .dzn or .json) to each of the available LLMs using the previously defined prompt structure \Cref{sec:promptStruct}.
-As shown in (add table) and (add figure) the results aren't flattering and for most LLMs are actually quite bad, aside from the primitive formulation of the requests, a huge limitation is due to the rate limits,which doesn't allow many problems to be processed entirely.
+
+\begin{table}[!ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{lllll}
+        \hline
+            provider & model & LLM\_TotalScore & InstancesCovered & LLM\_AvgScore \\ \hline
+            gemini & gemini-2.0-flash & 53.748 & 67 & 0.802 \\ 
+            gemini & gemini-2.5-flash & 69.426 & 86 & 0.807 \\ 
+            gemini & gemini-2.5-flash-lite & 69.040 & 85 & 0.812 \\ 
+            gemini & gemini-2.5-pro & 41.594 & 51 & 0.815 \\ 
+            groq & allam-2-7b & 0.0 & 10 & 0.0 \\ 
+            groq & groq/compound & 8.246 & 9 & 0.916 \\ 
+            groq & groq/compound-mini & 29.623 & 35 & 0.846 \\ 
+            groq & llama-3.1-8b-instant & 56.228 & 72 & 0.780 \\ 
+            groq & llama-3.3-70b-versatile & 9.496 & 10 & 0.949 \\ 
+            groq & meta-llama/llama-4-maverick-17b-128e-instruct & 63.548 & 72 & 0.882 \\ 
+            groq & meta-llama/llama-4-scout-17b-16e-instruct & 57.814 & 69 & 0.837 \\ 
+            groq & meta-llama/llama-guard-4-12b & 0.0 & 77 & 0.0 \\ 
+            groq & moonshotai/kimi-k2-instruct & 65.816 & 75 & 0.877 \\ 
+            groq & moonshotai/kimi-k2-instruct-0905 & 66.186 & 75 & 0.882 \\ 
+            groq & openai/gpt-oss-120b & 64.508 & 74 & 0.871 \\ 
+            groq & openai/gpt-oss-20b & 63.328 & 75 & 0.844 \\ 
+            groq & qwen/qwen3-32b & 48.018 & 65 & 0.738 \\ \hline
+        \end{tabular}
+    }
+    \label{tab:allLLM3}
+    \caption{Initial tests giving plain scripts to all the LLMs, evaluated on parallel score}
+\end{table}
+
+\begin{table}[!ht]
+    \centering
+    \resizebox{\textwidth}{!}{%
+        \begin{tabular}{lllll}
+        \hline
+            provider & model & LLM\_Top1\_TotalScore & InstancesCovered & LLM\_Top1\_AvgScore \\ \hline
+            gemini & gemini-2.5-flash-lite & 64.363 & 85 & 0.794 \\ 
+            gemini & gemini-2.5-flash & 60.962 & 85 & 0.734 \\ 
+            groq & moonshotai/kimi-k2-instruct-0905 & 59.680 & 75 & 0.817 \\
+            groq & moonshotai/kimi-k2-instruct & 58.609 & 75 & 0.837 \\ 
+            groq & openai/gpt-oss-120b & 58.166 & 74 & 0.796 \\
+            groq & openai/gpt-oss-20b & 57.154 & 75 & 0.828 \\
+            groq & meta-llama/llama-4-maverick-17b-128e-instruct & 56.297 & 72 & 0.804 \\
+            groq & meta-llama/llama-4-scout-17b-16e-instruct & 54.305 & 69 & 0.798 \\
+            gemini & gemini-2.0-flash & 43.412 & 67 & 0.700 \\
+            groq & qwen/qwen3-32b & 42.116 & 65 & 0.779 \\
+            gemini & gemini-2.5-pro & 37.640 & 51 & 0.738 \\
+            groq & llama-3.1-8b-instant & 36.082 & 72 & 0.546 \\ 
+            groq & groq/compound-mini & 25.422 & 35 & 0.726 \\
+            groq & llama-3.3-70b-versatile & 7.454 & 10 & 0.745 \\
+            groq & groq/compound & 5.197 & 9 & 0.577 \\ 
+            groq & allam-2-7b & 0.0 & 4 & 0.0 \\ \hline
+        \end{tabular}%
+    }
+    \caption{Initial tests giving plain scripts to all the LLMs, evaluated on single best score}
+    \label{tab:allLLM1}
+\end{table}
+
+As shown in \Cref{tab:allLLM3} and \Cref{tab:allLLM1} the results aren't flattering and for most LLMs are actually quite bad, aside from the primitive formulation of the requests, a huge limitation is due to the rate limits,which doesn't allow many problems to be processed entirely.
 Those limitations lead to both the use of techniques emplying script manipulation, as previously explained in \Cref{sec:expSetup}, and the choice to test only on the five best performing LLMs from now on.
 
 \subsection{Single Request Experiments}
@@ -356,16 +414,61 @@ After the necessary steps to realize working experiments, we need to test on the
 \subsubsection{Simple Setup}
 First of all it is due to test the the LLMs on the same setup of preliminary experiments, so only using raw scripts.
 
-(table parallel)
+\begin{table}[!ht]
+    \centering
+    \resizebox{\textwidth}{!}{%
+        \begin{tabular}{lllll}
+        \hline
+            provider & model & LLM\_TotalScore & InstancesCovered & LLM\_AvgScore \\ \hline
+            gemini & gemini-2.5-flash & 79.105 & 100 & 0.791 \\ 
+            gemini & gemini-2.5-flash-lite & 80.740 & 100 & 0.807 \\ 
+            groq & moonshotai/kimi-k2-instruct & 83.268 & 100 & 0.832 \\ 
+            groq & moonshotai/kimi-k2-instruct-0905 & 82.656 & 100 & 0.826 \\ 
+            groq & openai/gpt-oss-120b & 82.226 & 100 & 0.822 \\ \hline
+        \end{tabular}%
+    }
+    \caption{Tests on sanitized scripts given to the 5 best performing LLMs, evaluated on parallel score}
+    \label{tab:base3}
+\end{table}
 
 As shown in the tables, the results are pretty good in parallel evaluation, in fact all of the LLMs are putting up better score the all of the LLMs beside \texttt{or-tools\_cp-sat-par}, so the SBS for open category, that, anyway is winning with a wide margin from both the tested LLMs and the other single solvers.
 
 
-(table single)
+\begin{table}[!ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{lllll}
+        \hline
+            provider & model & LLM\_Top1\_TotalScore & InstancesCovered & LLM\_Top1\_AvgScore \\ \hline
+            groq & openai/gpt-oss-120b & 74.488 & 100 & 0.744 \\ 
+            groq & moonshotai/kimi-k2-instruct-0905 & 71.622 & 100 & 0.753 \\ 
+            groq & moonshotai/kimi-k2-instruct & 70.939 & 100 & 0.723 \\ 
+            gemini & gemini-2.5-flash-lite & 70.145 & 100 & 0.738 \\ 
+            gemini & gemini-2.5-flash & 69.763 & 98 & 0.742 \\ \hline
+        \end{tabular}
+    }
+    \caption{Tests on sanitized scripts given to the 5 best performing LLMs, evaluated on single best score}
+    \label{tab:base1}
+\end{table}
 
-In the tables we can see, there is more variation on the score distribution, in fact the only LLM placing itself above all the single solvers, beside the SBS for free category (\texttt{or-tools\_cp-sat-free}), is \texttt{gpt-oss-120b}, the other LLMs are still giving considerably good results against other single solvers, but there is still a big margin for improvement, As can be directly seen from the closed gap table.
+In the tables we can see, there is more variation on the score distribution, in fact the only LLM placing itself above all the single solvers, beside the SBS for free category \\(\texttt{or-tools\_cp-sat-free}), is \texttt{gpt-oss-120b}, the other LLMs are still giving considerably good results against other single solvers, but there is still a big margin for improvement, As can be directly seen from the closed gap table \Cref{tab:basecg}.
 
-(closed gap table)
+\begin{table}[!ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{lllllll}
+        \hline
+            provider & model & InstancesCovered & AS & SBS & VBS & ClosedGap \\ \hline
+            groq & openai/gpt-oss-120b & 100 & 74.488 & 76.964 & 89.0 & -0.205 \\ 
+            groq & moonshotai/kimi-k2-instruct-0905 & 100 & 71.622 & 76.964 & 89.0 & -0.443 \\ 
+            groq & moonshotai/kimi-k2-instruct & 100 & 70.939 & 76.964 & 89.0 & -0.500 \\ 
+            gemini & gemini-2.5-flash-lite & 100 & 70.145 & 76.964 & 89.0 & -0.566 \\ 
+            gemini & gemini-2.5-flash & 98 & 69.763 & 76.964 & 89.0 & -0.598 \\ \hline
+        \end{tabular}
+    }
+    \caption{Tests on sanitized scripts given to the 5 best performing LLMs, closed gap}
+    \label{tab:basecg}
+\end{table}
 
 \subsubsection{Problem Description}
 After these first tests, it becomes clear that it is needed a way to improve the Agentic Solver performance. What seems the easiest solution to this problem, is simply to give the LLM more context information. But, as previously stated, too big of a context might actually "distract" the LLM and even worsen its performance\cite{ContextRot}\cite{LLMdistract}, instead of making it better. 
@@ -375,11 +478,58 @@ The PDs are then incorporated in the prompt structure (\Cref{fig:promptEx}) as f
 \[ \text{"Problem Description: "}+PD+PromptStructure \]
 As shown in (ref a tabella) adding these context information gave opposite results on parallel and single execution. Giving consistently worse results on single solver answers, and giving slightly better results for parallel executions with better performance on 3 out of the 5 tested LLMs.
 
-(table single) (table parallel)
+\begin{table}[!ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{lllll}
+        \hline
+            provider & model & LLM\_TotalScore & InstancesCovered & LLM\_AvgScore \\ \hline
+            gemini & gemini-2.5-flash & 59.154 & 75 & 0.788 \\ 
+            gemini & gemini-2.5-flash-lite & 82.620 & 100 & 0.826 \\ 
+            groq & moonshotai/kimi-k2-instruct & 81.889 & 100 & 0.818 \\ 
+            groq & moonshotai/kimi-k2-instruct-0905 & 83.182 & 100 & 0.831 \\ 
+            groq & openai/gpt-oss-120b & 83.249 & 100 & 0.832 \\ \hline
+        \end{tabular}
+    }
+    \caption{Test on sanitized scripts combined with textual problem description, parallel score evaluation}
+    \label{tab:pDesc3}
+\end{table}
+
+\begin{table}[!ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{lllll}
+        \hline
+            provider & model & LLM\_Top1\_TotalScore & InstancesCovered & LLM\_Top1\_AvgScore \\ \hline
+            groq & moonshotai/kimi-k2-instruct-0905 & 72.605 & 100 & 0.748 \\ 
+            groq & openai/gpt-oss-120b & 70.740 & 100 & 0.721 \\ 
+            gemini & gemini-2.5-flash-lite & 69.042 & 100 & 0.719 \\ 
+            groq & moonshotai/kimi-k2-instruct & 67.554 & 100 & 0.718 \\ 
+            gemini & gemini-2.5-flash & 49.896 & 73 & 0.723 \\ \hline
+        \end{tabular}
+    }
+    \caption{Test on sanitized scripts combined with textual problem description, single best evaluation}
+    \label{tab:pDesc1}
+\end{table}
 
 As can be deduced from the results, sadly, the closed gap is still negative in this case.
 
-(closed gap table)
+\begin{table}[!ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{lllllll}
+        \hline
+            provider & model & InstancesCovered & AS & SBS & VBS & ClosedGap \\ \hline
+            groq & moonshotai/kimi-k2-instruct-0905 & 100 & 72.605 & 76.964 & 89.0 & -0.362 \\ 
+            groq & openai/gpt-oss-120b & 100 & 70.740 & 76.964 & 89.0 & -0.517 \\ 
+            gemini & gemini-2.5-flash-lite & 100 & 69.042 & 76.964 & 89.0 & -0.658 \\ 
+            groq & moonshotai/kimi-k2-instruct & 100 & 67.554 & 76.964 & 89.0 & -0.781 \\ 
+            gemini & gemini-2.5-flash & 73 & 49.896 & 76.964 & 89.0 & -2.248 \\ \hline
+        \end{tabular}
+    }
+    \caption{Test on sanitized scripts combined with textual problem description, closed gap}
+    \label{tab:pDesccg}
+\end{table}
 
 \subsection{Multi-turn experiments}
 From previously explained experiments, it turn out that the context information we are giving are either limited or not helping, in a broader sense. The obvious follow-up steps are to test again, by giving different context information, this anyway raises a couple questions. First of all, we are already reaching the maximum limit of requested tokens (TPM) in a single request setup, so adding more information, while keeping the the same experiment configuration, wouldn't be a viable option. Another problem with the previous setup is that we are actively wasting tokens, by giving the LLMs redundant context. To further explain this, for each problem, we have 5 different instances we are testing on, so 5 different sets of data, while the problem stays the same, and clearly it's the same thing for the problem description as well.
@@ -393,28 +543,118 @@ This setup also enables longer instance data, by simply giving us the possibilit
 \subsubsection{Solvers Description}
 With this improved setup we can add a new element to the context information: the solvers description. We generated a description of each of the involved solvers, and than gave it to the LLM, in the system prompt giving it a better understanding of its options for a result. To reach a better understanding of information importance, we tried to add this information in two different ways: combined with all the previous context, and as the only text information combined with the \texttt{.mzn} model, and instance data.
 
-(table parallel s)
+\begin{table}[!ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{lllll}
+        \hline
+            provider & model & LLM\_TotalScore & InstancesCovered & LLM\_AvgScore \\ \hline
+            gemini & gemini-2.5-flash & 83.137 & 100 & 0.831 \\ 
+            gemini & gemini-2.5-flash-lite & 77.746 & 100 & 0.777 \\ 
+            groq & moonshotai/kimi-k2-instruct & 82.236 & 100 & 0.822 \\ 
+            groq & moonshotai/kimi-k2-instruct-0905 & 82.488 & 100 & 0.824 \\ 
+            groq & openai/gpt-oss-120b & 78.799 & 100 & 0.787 \\ \hline
+        \end{tabular}
+    }
+    \caption{Test with sanitized scripts combined with solvers description in a multi turn setup, parallel score evaluation}
+    \label{tab:sDesc3}
+\end{table}
 
 In the case of parallel evaluation, adding only solver description haven't produced any better results, beside for \texttt{gemini-2.5-flash}, but still not reaching the open category SBS score.
 
-(table single s)
+\begin{table}[!ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{lllll}
+        \hline
+            provider & model & LLM\_Top1\_TotalScore & InstancesCovered & LLM\_Top1\_AvgScore \\ \hline
+            groq & moonshotai/kimi-k2-instruct & 76.964 & 100 & 0.769 \\ 
+            groq & moonshotai/kimi-k2-instruct-0905 & 76.964 & 100 & 0.769 \\ 
+            gemni & gemini-2.5-flash & 71.686 & 100 & 0.716 \\ 
+            groq & openai/gpt-oss-120b & 70.974 & 100 & 0.716 \\ 
+            gemni & gemini-2.5-flash-lite & 54.713 & 100 & 0.552 \\ \hline
+        \end{tabular}
+    }
+    \caption{Test with sanitized scripts combined with solvers description in a multi turn setup, single best score evaluation}
+    \label{tab:sDesc1}
+\end{table}
 
 On the other hand, talking about single solver evaluation, it showed great improvement for two particular models, \texttt{moonshotai/kimi-k2-instruct-0905} and \\\texttt{moonshotai/kimi-k2-instruct} which actually reached the SBS score, giving for the first time a non-negative closed gap, but a 0 one. Sadly, when looking into the answers, we discovered that the improvement is simply due to the LLMs always giving the same answer for the best solver, specifically \texttt{or-tools\_cp-sat-free}, the SBS, invalidating the purpose of an LLM involvement.
 
-(closed gap table)
+\begin{table}[!ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{lllllll}
+        \hline
+            provider & model & InstancesCovered & AS & SBS & VBS & ClosedGap \\ \hline
+            groq & moonshotai/kimi-k2-instruct & 100 & 76.964 & 76.964 & 89.0 & 0.0 \\ 
+            groq & moonshotai/kimi-k2-instruct-0905 & 100 & 76.964 & 76.964 & 89.0 & 0.0 \\ 
+            gemini & gemini-2.5-flash & 100 & 71.686 & 76.964 & 89.0 & -0.438 \\ 
+            groq & openai/gpt-oss-120b & 100 & 70.974 & 76.964 & 89.0 & -0.497 \\ 
+            gemini & gemini-2.5-flash-lite & 100 & 54.713 & 76.964 & 89.0 & -1.848 \\ \hline
+        \end{tabular}
+    }
+    \caption{Test with sanitized scripts combined with solvers description in a multi turn setup, closed gap}
+    \label{tab:sDesccg}
+\end{table}
 
 \subsubsection{Solver Description and Problem Description}
-As previously stated, then we tried using both textual information, so both solvers description and problem description together. With this setup, we reached the maximum ammount of information given as context to the LLMs.
+As previously stated, the next step was to try using both textual information, so both solvers description and problem description together. With this setup, we reached the maximum ammount of information given as context to the LLMs.
 
-(table parallel s p) 
+\begin{table}[!ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{lllll}
+        \hline
+            provider & model & LLM\_TotalScore & InstancesCovered & LLM\_AvgScore \\ \hline
+            gemini & gemini-2.5-flash & 83.650 & 100 & 0.836 \\ 
+            gemini & gemini-2.5-flash-lite & 78.147 & 100 & 0.781 \\ 
+            groq & moonshotai/kimi-k2-instruct & 80.417 & 99 & 0.812 \\ 
+            groq & moonshotai/kimi-k2-instruct-0905 & 82.218 & 100 & 0.822 \\ 
+            groq & openai/gpt-oss-120b & 80.295 & 100 & 0.802 \\ \hline
+        \end{tabular}
+    }
+    \caption{Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, parallel score evaluation}
+    \label{tab:sDescpDesc3}
+\end{table}
 
-In the case of parallel evaluation, while we reached the best score yet, with \texttt{gemini-2.5-flash}, the results aren't improving for other LLMs and we are still far back from the open category SBS.
+In the case of parallel evaluation, while we reached the best score yet, with \\\texttt{gemini-2.5-flash}, the results aren't improving for other LLMs and we are still far back from the open category SBS.
 
-(table single s p)
+\begin{table}[!ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{lllll}
+        \hline
+            provider & model & LLM\_Top1\_TotalScore & InstancesCovered & LLM\_Top1\_AvgScore \\ \hline
+            groq & openai/gpt-oss-120b & 77.260 & 100 & 0.780 \\ 
+            groq & moonshotai/kimi-k2-instruct-0905 & 76.964 & 100 & 0.769 \\ 
+            groq & moonshotai/kimi-k2-instruct & 74.464 & 99 & 0.752 \\ 
+            gemini & gemini-2.5-flash & 73.551 & 100 & 0.750 \\ 
+            gemini & gemini-2.5-flash-lite & 63.062 & 100 & 0.630 \\ \hline
+        \end{tabular}
+    }
+    \caption{Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, single best score evaluation}
+    \label{tab:sDescpDesc1}
+\end{table}
 
 In the case of single solver evaluation, while \texttt{moonshotai/kimi-k2-instruct-0905} still is giving the SBS as the only answer. We reached better results for 2 LLMs (\texttt{gemini-2.5-flash}), and \texttt{gpt-oss-120b}, which finally gives us the first positive closed gap yep, surpassing\\\texttt{or-tools\_cp-sat-free}
 
-(closed gap table)
+\begin{table}[!ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{lllllll}
+        \hline
+            provider & model & InstancesCovered & AS & SBS & VBS & ClosedGap \\ \hline
+            groq & openai/gpt-oss-120b & 100 & 77.260 & 76.964 & 89.0 & 0.024 \\ 
+            groq & moonshotai/kimi-k2-instruct-0905 & 100 & 76.964 & 76.964 & 89.0 & 0.0 \\ 
+            groq & moonshotai/kimi-k2-instruct & 99 & 74.464 & 76.964 & 89.0 & -0.207 \\ 
+            gemini & gemini-2.5-flash & 100 & 73.551 & 76.964 & 89.0 & -0.283 \\ 
+            gemini & gemini-2.5-flash-lite & 100 & 63.062 & 76.964 & 89.0 & -1.155 \\ \hline
+        \end{tabular}
+    }
+    \caption{Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, closed gap}
+    \label{tab:sDescpDesccg}
+\end{table}
 
 \subsection{Features}
 

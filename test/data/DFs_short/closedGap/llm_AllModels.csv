@@ -1,0 +1,17 @@
+provider,model,InstancesCovered,AS,SBS,VBS,ClosedGap
+gemini,gemini-2.5-flash-lite,85,64.363,76.964,89.0,-1.046
+gemini,gemini-2.5-flash,85,60.962,76.964,89.0,-1.329
+groq,moonshotai/kimi-k2-instruct-0905,75,59.680,76.964,89.0,-1.436
+groq,moonshotai/kimi-k2-instruct,75,58.609,76.964,89.0,-1.525
+groq,openai/gpt-oss-120b,74,58.166,76.964,89.0,-1.561
+groq,openai/gpt-oss-20b,75,57.154,76.964,89.0,-1.645
+groq,meta-llama/llama-4-maverick-17b-128e-instruct,72,56.297,76.964,89.0,-1.717
+groq,meta-llama/llama-4-scout-17b-16e-instruct,69,54.305,76.964,89.0,-1.882
+gemini,gemini-2.0-flash,67,43.412,76.964,89.0,-2.787
+groq,qwen/qwen3-32b,65,42.116,76.964,89.0,-2.895
+gemini,gemini-2.5-pro,51,37.640,76.964,89.0,-3.267
+groq,llama-3.1-8b-instant,72,36.082,76.964,89.0,-3.396
+groq,groq/compound-mini,35,25.422,76.964,89.0,-4.282
+groq,llama-3.3-70b-versatile,10,7.454,76.964,89.0,-5.775
+groq,groq/compound,9,5.197,76.964,89.0,-5.962
+groq,allam-2-7b,4,0.0,76.964,89.0,-6.394

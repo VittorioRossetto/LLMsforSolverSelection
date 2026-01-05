@@ -1,0 +1,17 @@
+provider,model,LLM_Top1_TotalScore,LLM_Top1_AvgScore,InstancesCovered
+gemini,gemini-2.5-flash-lite,64.363,0.794,85
+gemini,gemini-2.5-flash,60.962,0.734,85
+groq,moonshotai/kimi-k2-instruct-0905,59.680,0.817,75
+groq,moonshotai/kimi-k2-instruct,58.609,0.837,75
+groq,openai/gpt-oss-120b,58.166,0.796,74
+groq,openai/gpt-oss-20b,57.154,0.828,75
+groq,meta-llama/llama-4-maverick-17b-128e-instruct,56.297,0.804,72
+groq,meta-llama/llama-4-scout-17b-16e-instruct,54.305,0.798,69
+gemini,gemini-2.0-flash,43.412,0.700,67
+groq,qwen/qwen3-32b,42.116,0.779,65
+gemini,gemini-2.5-pro,37.640,0.738,51
+groq,llama-3.1-8b-instant,36.082,0.546,72
+groq,groq/compound-mini,25.422,0.726,35
+groq,llama-3.3-70b-versatile,7.454,0.745,10
+groq,groq/compound,5.197,0.577,9
+groq,allam-2-7b,0.0,,4

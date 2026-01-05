@@ -1,0 +1,6 @@
+provider,model,InstancesCovered,AS,SBS,VBS,ClosedGap
+chat,openai/gpt-oss-120b,100,77.260,76.964,89.0,0.024
+chat,moonshotai/kimi-k2-instruct-0905,100,76.964,76.964,89.0,0.0
+chat,moonshotai/kimi-k2-instruct,99,74.464,76.964,89.0,-0.207
+chat,gemini-2.5-flash,100,73.551,76.964,89.0,-0.283
+chat,gemini-2.5-flash-lite,100,63.062,76.964,89.0,-1.155

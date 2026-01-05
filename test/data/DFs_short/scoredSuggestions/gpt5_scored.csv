@@ -1,0 +1,6 @@
+problem,instance,top3,top1,Top1_Score,Top3_Scores,Top3_BestScore
+gt-sort,n9_ub30_35.0_BEST,"chuffed-free, izplus-free, choco-solver__cp_-par",chuffed-free,0.0,"[0.0, 0.0, 0.0]",0.0
+gt-sort,n13_ub20_50.0_BEST,"chuffed-free, choco-solver__cp_-par, cp_optimizer-free",chuffed-free,0.0,"[0.0, 0.0, 0.0]",0.0
+ihtc-2024-marte,i11,"chuffed-free, cp_optimizer-free, or-tools_cp-sat-free",chuffed-free,0.0,"[0.0, 0.0, 0.0]",0.0
+ihtc-2024-marte,i14,"or-tools_cp-sat-free, chuffed-free, cp_optimizer-free",or-tools_cp-sat-free,0.0,"[0.0, 0.0, 0.6492934348319805]",0.649
+tsptw,n80w180.003,"chuffed-free, or-tools_cp-sat-free, cp_optimizer-free",chuffed-free,0.0,"[0.0, 0.0, 0.0]",0.0

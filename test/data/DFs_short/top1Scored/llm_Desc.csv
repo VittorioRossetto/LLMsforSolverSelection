@@ -1,0 +1,6 @@
+provider,model,LLM_Top1_TotalScore,LLM_Top1_AvgScore,InstancesCovered
+groq,moonshotai/kimi-k2-instruct-0905,72.605,0.748,100
+groq,openai/gpt-oss-120b,70.740,0.721,100
+gemini,gemini-2.5-flash-lite,69.042,0.719,100
+groq,moonshotai/kimi-k2-instruct,67.554,0.718,100
+gemini,gemini-2.5-flash,49.896,0.723,73

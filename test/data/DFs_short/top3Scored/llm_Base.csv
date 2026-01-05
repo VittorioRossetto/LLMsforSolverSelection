@@ -1,0 +1,6 @@
+provider,model,LLM_TotalScore,InstancesCovered,LLM_AvgScore
+gemini,gemini-2.5-flash,79.105,100,0.791
+gemini,gemini-2.5-flash-lite,80.740,100,0.807
+groq,moonshotai/kimi-k2-instruct,83.268,100,0.832
+groq,moonshotai/kimi-k2-instruct-0905,82.656,100,0.826
+groq,openai/gpt-oss-120b,82.226,100,0.822
