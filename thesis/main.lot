@@ -1,18 +1,20 @@
 \babel@toc {english}{}\relax 
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {1.1}{\ignorespaces Rate limits - Groq models\cite {GroqRL}: \\This table shows all the offered models from Groq API, in leftmost column and each relative rate limit.}}{2}{}%
-\contentsline {table}{\numberline {1.2}{\ignorespaces Rate limits - Gemini models\cite {GeminiRL}\\This table shows all the offered models from Gemini API, in leftmost column and each relative rate limit.}}{3}{}%
-\contentsline {table}{\numberline {1.3}{\ignorespaces Initial tests giving plain scripts to all the LLMs, evaluated on parallel score}}{10}{}%
-\contentsline {table}{\numberline {1.4}{\ignorespaces Initial tests giving plain scripts to all the LLMs, evaluated on single best score}}{11}{}%
-\contentsline {table}{\numberline {1.5}{\ignorespaces Tests on sanitized scripts given to the 5 best performing LLMs, evaluated on parallel score}}{11}{}%
-\contentsline {table}{\numberline {1.6}{\ignorespaces Tests on sanitized scripts given to the 5 best performing LLMs, evaluated on single best score}}{12}{}%
-\contentsline {table}{\numberline {1.7}{\ignorespaces Tests on sanitized scripts given to the 5 best performing LLMs, closed gap}}{12}{}%
-\contentsline {table}{\numberline {1.8}{\ignorespaces Test on sanitized scripts combined with textual problem description, parallel score evaluation}}{13}{}%
-\contentsline {table}{\numberline {1.9}{\ignorespaces Test on sanitized scripts combined with textual problem description, single best evaluation}}{13}{}%
-\contentsline {table}{\numberline {1.10}{\ignorespaces Test on sanitized scripts combined with textual problem description, closed gap}}{13}{}%
-\contentsline {table}{\numberline {1.11}{\ignorespaces Test with sanitized scripts combined with solvers description in a multi turn setup, parallel score evaluation}}{14}{}%
-\contentsline {table}{\numberline {1.12}{\ignorespaces Test with sanitized scripts combined with solvers description in a multi turn setup, single best score evaluation}}{15}{}%
-\contentsline {table}{\numberline {1.13}{\ignorespaces Test with sanitized scripts combined with solvers description in a multi turn setup, closed gap}}{15}{}%
-\contentsline {table}{\numberline {1.14}{\ignorespaces Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, parallel score evaluation}}{16}{}%
-\contentsline {table}{\numberline {1.15}{\ignorespaces Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, single best score evaluation}}{16}{}%
-\contentsline {table}{\numberline {1.16}{\ignorespaces Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, closed gap}}{16}{}%
+\contentsline {table}{\numberline {1.1}{\ignorespaces Rate limits - Groq models\cite {GroqRL}: This table shows all the offered models from Groq API, in leftmost column and each relative rate limit.}}{2}{}%
+\contentsline {table}{\numberline {1.2}{\ignorespaces Rate limits - Gemini models\cite {GeminiRL} This table shows all the offered models from Gemini API, in leftmost column and each relative rate limit.}}{3}{}%
+\contentsline {table}{\numberline {1.3}{\ignorespaces Initial tests giving plain scripts to all the LLMs, parallel-solver evaluation}}{10}{}%
+\contentsline {table}{\numberline {1.4}{\ignorespaces Initial tests giving plain scripts to all the LLMs, single-solver evaluation}}{12}{}%
+\contentsline {table}{\numberline {1.5}{\ignorespaces Tests on sanitized scripts given to the 5 best performing LLMs, parallel-solver evaluation}}{12}{}%
+\contentsline {table}{\numberline {1.6}{\ignorespaces Tests on sanitized scripts given to the 5 best performing LLMs, single-solver evaluation}}{12}{}%
+\contentsline {table}{\numberline {1.7}{\ignorespaces Tests on sanitized scripts given to the 5 best performing LLMs, closed gap}}{13}{}%
+\contentsline {table}{\numberline {1.8}{\ignorespaces Test on sanitized scripts combined with textual problem description, parallel-solver evaluation}}{14}{}%
+\contentsline {table}{\numberline {1.9}{\ignorespaces Test on sanitized scripts combined with textual problem description, single-solver evaluation}}{14}{}%
+\contentsline {table}{\numberline {1.10}{\ignorespaces Test on sanitized scripts combined with textual problem description, closed gap}}{14}{}%
+\contentsline {table}{\numberline {1.11}{\ignorespaces Test with sanitized scripts combined with solvers description in a multi turn setup, parallel-solver evaluation}}{16}{}%
+\contentsline {table}{\numberline {1.12}{\ignorespaces Test with sanitized scripts combined with solvers description in a multi turn setup, single-solver evaluation}}{16}{}%
+\contentsline {table}{\numberline {1.13}{\ignorespaces Test with sanitized scripts combined with solvers description in a multi turn setup, closed gap}}{16}{}%
+\contentsline {table}{\numberline {1.14}{\ignorespaces Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, parallel-solver evaluation}}{17}{}%
+\contentsline {table}{\numberline {1.15}{\ignorespaces Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, single-solver evaluation}}{17}{}%
+\contentsline {table}{\numberline {1.16}{\ignorespaces Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, closed gap}}{17}{}%
+\contentsline {table}{\numberline {1.17}{\ignorespaces Table displaying all the different LLM variants results from parallel-solver evaluation, and compared to all of the single solvers in open category of the MiniZinc Challenge\cite {MznResults25}}}{21}{}%
+\contentsline {table}{\numberline {1.18}{\ignorespaces Table displaying all the different LLM variants results given single-solver evaluation, and compared to all of the single solvers in free category of the MiniZinc Challenge\cite {MznResults25}}}{22}{}%

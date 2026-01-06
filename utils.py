@@ -5,8 +5,12 @@ import json
 import requests
 from google import genai
 from google.genai import types
-from groq import Groq
 import re
+
+try:
+    from groq import Groq  # type: ignore
+except ModuleNotFoundError:
+    Groq = None
 
 # ---------- Configuration ----------
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -128,6 +132,8 @@ def get_groq_model_label(model_id):
 
 def query_groq(prompt_text: str, model_name: str = "llama-3-70b-versatile", temperature: float | None = None):
     """Sends prompt to Groq using the selected model and returns the response text."""
+    if Groq is None:
+        raise RuntimeError("Groq client library not installed. Install it with: pip install groq")
     client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
     kwargs = {}
     if temperature is not None:

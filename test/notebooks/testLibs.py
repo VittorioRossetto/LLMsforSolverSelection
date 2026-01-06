@@ -310,7 +310,7 @@ def plot_llm_variant_comparison(summaries, variant_names, label):
         y='model',
         hue='Variant'
     )
-    plt.title('Comparison of LLM Variants Parallel by ' + label)
+    # plt.title('Comparison of LLM Variants Parallel by ' + label)
     plt.xlabel(label)
     plt.ylabel('LLM Model')
     plt.legend(title='Variant')

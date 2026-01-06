@@ -8,7 +8,8 @@ set -u
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PY=python3
-SCRIPT="$REPO_ROOT/test/benchmark_chat.py"
+SCRIPT_CHAT="$REPO_ROOT/test/benchmark_chat.py"
+SCRIPT_PAR="$REPO_ROOT/test/benchmark_parallel.py"
 MZN2FEAT_FILE="test/data/mzn2feat_all_features.json"
 LOG_DIR="$REPO_ROOT/logs/feature_runs"
 SUMMARY_LOG="$LOG_DIR/summary.log"
@@ -21,7 +22,9 @@ if [ "${EXEC_REAL:-0}" = "1" ]; then
 fi
 
 declare -a CONFIGS=(
-  #"featOnly|--features-only --include-features"
+
+  # # All feature configurations
+  # "featOnly|--features-only --include-features"
   # "featOnly_Pdesc|--features-only --include-features --include-problem-desc"
   # "featOnly_Sdesc|--features-only --include-features --include-solver-desc"
   # "featOnly_Pdesc_Sdesc|--features-only --include-features --include-problem-desc --include-solver-desc"
@@ -34,7 +37,23 @@ declare -a CONFIGS=(
   # "features|--include-features"
   # "features_Pdesc|--include-features --include-problem-desc"
   # "features_Sdesc|--include-features --include-solver-desc"
-  "features_Pdesc_Sdesc|--include-features --include-problem-desc --include-solver-desc"
+  # "features_Pdesc_Sdesc|--include-features --include-problem-desc --include-solver-desc"
+
+  # Best-performing configurations
+  "base|"
+  "base_Pdesc_Sdesc|--include-problem-desc --include-solver-desc"
+  "featOnly_Pdesc|--features-only --include-features --include-problem-desc"
+  "featOnly_Sdesc|--features-only --include-features --include-solver-desc"
+  "featOnly_Pdesc_Sdesc|--features-only --include-features --include-problem-desc --include-solver-desc"
+)
+
+# Temperature sweep for each configuration (passed through to benchmark_chat.py)
+declare -a TEMPS=(
+  "0.2"
+  "0.0"
+  "0.8"
+  "0.3"
+  "0.7"
 )
 
 echo "Run started at $(date -u)" | tee -a "$SUMMARY_LOG"
@@ -43,10 +62,34 @@ echo "EXEC_REAL=${EXEC_REAL:-0}" | tee -a "$SUMMARY_LOG"
 run_one() {
   local name="$1"
   local args="$2"
+  local temp="$3"
+  local temp_tag
+  temp_tag="t${temp}"
   local run_log="$LOG_DIR/${name}.log"
-  echo "\n--- [$name] START $(date -u) ---" | tee -a "$SUMMARY_LOG" "$run_log"
 
-  cmd=("$PY" "$SCRIPT" $args --mzn2feat-file "$MZN2FEAT_FILE" --best-only $DRY_FLAG)
+  # include temp in log filename so we don't overwrite
+  run_log="$LOG_DIR/${name}_${temp_tag}.log"
+  echo "\n--- [$name] [$temp_tag] START $(date -u) ---" | tee -a "$SUMMARY_LOG" "$run_log"
+
+  # parse args safely into an array (avoid word-splitting surprises)
+  local -a arg_array
+  if [ -n "${args}" ]; then
+    read -r -a arg_array <<< "$args"
+  else
+    arg_array=()
+  fi
+
+  local -a cmd
+  if [ "$name" = "base" ]; then
+    # Base config uses benchmark_parallel.py (no features/mzn2feat flags)
+    cmd=("$PY" "$SCRIPT_PAR" "${arg_array[@]}" --temperature "$temp" --best-only)
+  else
+    # All other configs use benchmark_chat.py
+    cmd=("$PY" "$SCRIPT_CHAT" "${arg_array[@]}" --temperature "$temp" --mzn2feat-file "$MZN2FEAT_FILE" --best-only)
+  fi
+  if [ -n "${DRY_FLAG}" ]; then
+    cmd+=("$DRY_FLAG")
+  fi
   echo "Running: ${cmd[*]}" | tee -a "$SUMMARY_LOG" "$run_log"
 
   # run the command, capture stdout+stderr
@@ -59,14 +102,16 @@ run_one() {
     rc=${PIPESTATUS[0]:-0}
   fi
 
-  echo "--- [$name] END $(date -u) rc=$rc ---" | tee -a "$SUMMARY_LOG" "$run_log"
+  echo "--- [$name] [$temp_tag] END $(date -u) rc=$rc ---" | tee -a "$SUMMARY_LOG" "$run_log"
   return $rc
 }
 
 # iterate and run
 for entry in "${CONFIGS[@]}"; do
   IFS='|' read -r name args <<< "$entry"
-  run_one "$name" "$args"
+  for temp in "${TEMPS[@]}"; do
+    run_one "$name" "$args" "$temp"
+  done
 done
 
 echo "Run finished at $(date -u)" | tee -a "$SUMMARY_LOG"

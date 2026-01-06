@@ -35,6 +35,9 @@ IGNORED_MODELS = [
 
 TOP_MODELS = ['gemini-2.5-flash-lite', 'gemini-2.5-flash', 'moonshotai/kimi-k2-instruct', 'moonshotai/kimi-k2-instruct-0905', 'openai/gpt-oss-120b']
 
+# Model included when using --best-only (kept consistent with benchmark_chat.py)
+BEST = 'openai/gpt-oss-120b'
+
 # --- Argument parsing ---
 parser = argparse.ArgumentParser(description="Benchmark LLM solver recommendations on MiniZinc problems.")
 parser.add_argument('--solver-set', choices=['minizinc', 'all', 'free'], default='free',
@@ -47,6 +50,8 @@ parser.add_argument('--max-workers-instances', type=int, default=1,
                     help="Number of concurrent instance queries per model (default=1).")
 parser.add_argument('--top-only', action='store_true', default=False,
                     help="If set, only query models listed in TOP_MODELS.")
+parser.add_argument('--best-only', action='store_true', default=False,
+                    help="If set, only query the designated BEST model.")
 parser.add_argument('--dry-run', action='store_true', default=False,
                     help="If set, print planned models and instance counts and exit without querying LLMs.")
 parser.add_argument('--include-problem-desc', action='store_true', default=False,
@@ -344,6 +349,9 @@ for provider, models, query_func in [
     ("groq", GROQ_MODELS, query_groq),
 ]:
     for model_id, model_label in models:
+        # If best-only requested, skip models not matching BEST
+        if args.best_only and model_id != BEST:
+            continue
         # If top-only requested, skip models not in TOP_MODELS
         if args.top_only and model_id not in TOP_MODELS:
             continue
@@ -483,8 +491,19 @@ if args.top_only:
     _suffix_parts.append("top")
 if args.include_problem_desc:
     _suffix_parts.append("desc")
+if args.temperature is not None:
+    # 0.2 -> 0p2, 0.0 -> 0, 0.80 -> 0p8
+    t = f"{float(args.temperature):g}".replace('.', 'p')
+    _suffix_parts.append(f"T{t}")
 _suffix = ("_" + "_".join(_suffix_parts)) if _suffix_parts else ""
 output_file = f"testOutputFree/LLMsuggestions_{args.solver_set}_{args.script_version}{_suffix}.json"
+
+# Ensure output directory exists (benchmark_chat does this; keep consistent)
+try:
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
+except Exception:
+    pass
+
 with open(output_file, "w") as f:
     try:
         json.dump(results, f, indent=2)

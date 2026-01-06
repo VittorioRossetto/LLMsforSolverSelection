@@ -5,6 +5,8 @@
 \@writefile{toc}{\contentsline {chapter}{Introduction}{i}{}\protected@file@percent }
 \citation{GroqRL}
 \citation{GeminiRL}
+\citation{MznResults25}
+\citation{MznResults25}
 \citation{GeminiAPI}
 \citation{GeminiAPIver}
 \citation{GroqAPI}
@@ -17,13 +19,14 @@
 \citation{GroqRL}
 \citation{GeminiRL}
 \citation{GeminiRL}
-\newlabel{tab:rate_limits_groq}{{1.1.1}{2}{}{subsection.1.1.1}{}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:rate_limits_groq}{{\caption@xref {tab:rate_limits_groq}{ on input line 33}}{2}{}{subsection.1.1.1}{}}
 \newlabel{tab:rate_limits_groq@cref}{{[subsection][1][1,1]1.1.1}{[1][2][]2}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1.1}{\ignorespaces Rate limits - Groq models\cite  {GroqRL}: \\This table shows all the offered models from Groq API, in leftmost column and each relative rate limit.}}{2}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1.1}{\ignorespaces Rate limits - Groq models\cite  {GroqRL}:  This table shows all the offered models from Groq API, in leftmost column and each relative rate limit.}}{2}{}\protected@file@percent }
 \citation{ContextRot}
-\newlabel{tab:rate_limits_gemini}{{1.1.1}{3}{}{table.1.1}{}}
+\newlabel{tab:rate_limits_gemini}{{\caption@xref {tab:rate_limits_gemini}{ on input line 65}}{3}{}{table.1.1}{}}
 \newlabel{tab:rate_limits_gemini@cref}{{[subsection][1][1,1]1.1.1}{[1][2][]3}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1.2}{\ignorespaces Rate limits - Gemini models\cite  {GeminiRL}\\This table shows all the offered models from Gemini API, in leftmost column and each relative rate limit.}}{3}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1.2}{\ignorespaces Rate limits - Gemini models\cite  {GeminiRL} This table shows all the offered models from Gemini API, in leftmost column and each relative rate limit.}}{3}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1.2}Large Language Models Selection}{3}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1.3}Prompt General Structure}{3}{}\protected@file@percent }
 \newlabel{sec:promptStruct}{{1.1.3}{3}{}{subsection.1.1.3}{}}
@@ -60,59 +63,91 @@
 \@writefile{toc}{\contentsline {subsubsection}{Custom Delays}{9}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {1.2}Experiments}{10}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.2.1}Preliminary tests}{10}{}\protected@file@percent }
-\newlabel{tab:allLLM3}{{1.2.1}{10}{}{subsection.1.2.1}{}}
+\newlabel{sec:initTests}{{1.2.1}{10}{}{subsection.1.2.1}{}}
+\newlabel{sec:initTests@cref}{{[subsection][1][1,2]1.2.1}{[1][10][]10}{}{}{}}
+\newlabel{tab:allLLM3}{{\caption@xref {tab:allLLM3}{ on input line 377}}{10}{}{subsection.1.2.1}{}}
 \newlabel{tab:allLLM3@cref}{{[subsection][1][1,2]1.2.1}{[1][10][]10}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1.3}{\ignorespaces Initial tests giving plain scripts to all the LLMs, evaluated on parallel score}}{10}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.2}Single Request Experiments}{10}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1.4}{\ignorespaces Initial tests giving plain scripts to all the LLMs, evaluated on single best score}}{11}{}\protected@file@percent }
-\newlabel{tab:allLLM1}{{1.4}{11}{}{table.1.4}{}}
-\newlabel{tab:allLLM1@cref}{{[table][4][1]1.4}{[1][10][]11}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Simple Setup}{11}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1.5}{\ignorespaces Tests on sanitized scripts given to the 5 best performing LLMs, evaluated on parallel score}}{11}{}\protected@file@percent }
-\newlabel{tab:base3}{{1.5}{11}{}{table.1.5}{}}
-\newlabel{tab:base3@cref}{{[table][5][1]1.5}{[1][11][]11}{}{}{}}
-\citation{ContextRot,LLMdistract}
-\@writefile{lot}{\contentsline {table}{\numberline {1.6}{\ignorespaces Tests on sanitized scripts given to the 5 best performing LLMs, evaluated on single best score}}{12}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1.3}{\ignorespaces Initial tests giving plain scripts to all the LLMs, parallel-solver evaluation}}{10}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1.3}{\ignorespaces Scores obtained by all of the considered LLM from parallel-solver evaluation}}{11}{}\protected@file@percent }
+\newlabel{fig:allLLMpar}{{1.3}{11}{}{figure.1.3}{}}
+\newlabel{fig:allLLMpar@cref}{{[figure][3][1]1.3}{[1][10][]11}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.4}{\ignorespaces Scores obtained by all of the considered LLM from single-solver evaluation}}{11}{}\protected@file@percent }
+\newlabel{fig:allLLMsin}{{1.4}{11}{}{figure.1.4}{}}
+\newlabel{fig:allLLMsin@cref}{{[figure][4][1]1.4}{[1][10][]11}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.2}Single Request Experiments}{11}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Base Setup}{11}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1.4}{\ignorespaces Initial tests giving plain scripts to all the LLMs, single-solver evaluation}}{12}{}\protected@file@percent }
+\newlabel{tab:allLLM1}{{1.4}{12}{}{table.1.4}{}}
+\newlabel{tab:allLLM1@cref}{{[table][4][1]1.4}{[1][10][]12}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1.5}{\ignorespaces Tests on sanitized scripts given to the 5 best performing LLMs, parallel-solver evaluation}}{12}{}\protected@file@percent }
+\newlabel{tab:base3}{{1.5}{12}{}{table.1.5}{}}
+\newlabel{tab:base3@cref}{{[table][5][1]1.5}{[1][11][]12}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1.6}{\ignorespaces Tests on sanitized scripts given to the 5 best performing LLMs, single-solver evaluation}}{12}{}\protected@file@percent }
 \newlabel{tab:base1}{{1.6}{12}{}{table.1.6}{}}
-\newlabel{tab:base1@cref}{{[table][6][1]1.6}{[1][11][]12}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1.7}{\ignorespaces Tests on sanitized scripts given to the 5 best performing LLMs, closed gap}}{12}{}\protected@file@percent }
-\newlabel{tab:basecg}{{1.7}{12}{}{table.1.7}{}}
-\newlabel{tab:basecg@cref}{{[table][7][1]1.7}{[1][11][]12}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Problem Description}{12}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1.8}{\ignorespaces Test on sanitized scripts combined with textual problem description, parallel score evaluation}}{13}{}\protected@file@percent }
-\newlabel{tab:pDesc3}{{1.8}{13}{}{table.1.8}{}}
-\newlabel{tab:pDesc3@cref}{{[table][8][1]1.8}{[1][12][]13}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1.9}{\ignorespaces Test on sanitized scripts combined with textual problem description, single best evaluation}}{13}{}\protected@file@percent }
-\newlabel{tab:pDesc1}{{1.9}{13}{}{table.1.9}{}}
-\newlabel{tab:pDesc1@cref}{{[table][9][1]1.9}{[1][12][]13}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1.10}{\ignorespaces Test on sanitized scripts combined with textual problem description, closed gap}}{13}{}\protected@file@percent }
-\newlabel{tab:pDesccg}{{1.10}{13}{}{table.1.10}{}}
-\newlabel{tab:pDesccg@cref}{{[table][10][1]1.10}{[1][12][]13}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.3}Multi-turn Experiments}{13}{}\protected@file@percent }
+\newlabel{tab:base1@cref}{{[table][6][1]1.6}{[1][12][]12}{}{}{}}
+\citation{ContextRot,LLMdistract}
+\@writefile{lot}{\contentsline {table}{\numberline {1.7}{\ignorespaces Tests on sanitized scripts given to the 5 best performing LLMs, closed gap}}{13}{}\protected@file@percent }
+\newlabel{tab:basecg}{{1.7}{13}{}{table.1.7}{}}
+\newlabel{tab:basecg@cref}{{[table][7][1]1.7}{[1][13][]13}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Problem Description}{13}{}\protected@file@percent }
 \citation{RBFormatting}
-\@writefile{toc}{\contentsline {subsubsection}{Setup Explanation}{14}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Solvers Description}{14}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1.11}{\ignorespaces Test with sanitized scripts combined with solvers description in a multi turn setup, parallel score evaluation}}{14}{}\protected@file@percent }
-\newlabel{tab:sDesc3}{{1.11}{14}{}{table.1.11}{}}
-\newlabel{tab:sDesc3@cref}{{[table][11][1]1.11}{[1][14][]14}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1.12}{\ignorespaces Test with sanitized scripts combined with solvers description in a multi turn setup, single best score evaluation}}{15}{}\protected@file@percent }
-\newlabel{tab:sDesc1}{{1.12}{15}{}{table.1.12}{}}
-\newlabel{tab:sDesc1@cref}{{[table][12][1]1.12}{[1][15][]15}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1.13}{\ignorespaces Test with sanitized scripts combined with solvers description in a multi turn setup, closed gap}}{15}{}\protected@file@percent }
-\newlabel{tab:sDesccg}{{1.13}{15}{}{table.1.13}{}}
-\newlabel{tab:sDesccg@cref}{{[table][13][1]1.13}{[1][15][]15}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Solver Description and Problem Description}{15}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1.14}{\ignorespaces Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, parallel score evaluation}}{16}{}\protected@file@percent }
-\newlabel{tab:sDescpDesc3}{{1.14}{16}{}{table.1.14}{}}
-\newlabel{tab:sDescpDesc3@cref}{{[table][14][1]1.14}{[1][15][]16}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1.15}{\ignorespaces Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, single best score evaluation}}{16}{}\protected@file@percent }
-\newlabel{tab:sDescpDesc1}{{1.15}{16}{}{table.1.15}{}}
-\newlabel{tab:sDescpDesc1@cref}{{[table][15][1]1.15}{[1][15][]16}{}{}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1.16}{\ignorespaces Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, closed gap}}{16}{}\protected@file@percent }
-\newlabel{tab:sDescpDesccg}{{1.16}{16}{}{table.1.16}{}}
-\newlabel{tab:sDescpDesccg@cref}{{[table][16][1]1.16}{[1][16][]16}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Basic Tests Evaluation}{16}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.4}Features}{16}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1.8}{\ignorespaces Test on sanitized scripts combined with textual problem description, parallel-solver evaluation}}{14}{}\protected@file@percent }
+\newlabel{tab:pDesc3}{{1.8}{14}{}{table.1.8}{}}
+\newlabel{tab:pDesc3@cref}{{[table][8][1]1.8}{[1][13][]14}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1.9}{\ignorespaces Test on sanitized scripts combined with textual problem description, single-solver evaluation}}{14}{}\protected@file@percent }
+\newlabel{tab:pDesc1}{{1.9}{14}{}{table.1.9}{}}
+\newlabel{tab:pDesc1@cref}{{[table][9][1]1.9}{[1][13][]14}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1.10}{\ignorespaces Test on sanitized scripts combined with textual problem description, closed gap}}{14}{}\protected@file@percent }
+\newlabel{tab:pDesccg}{{1.10}{14}{}{table.1.10}{}}
+\newlabel{tab:pDesccg@cref}{{[table][10][1]1.10}{[1][13][]14}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.3}Multi-turn Experiments}{14}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Setup Explanation}{15}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Solvers Description}{15}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1.11}{\ignorespaces Test with sanitized scripts combined with solvers description in a multi turn setup, parallel-solver evaluation}}{16}{}\protected@file@percent }
+\newlabel{tab:sDesc3}{{1.11}{16}{}{table.1.11}{}}
+\newlabel{tab:sDesc3@cref}{{[table][11][1]1.11}{[1][15][]16}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1.12}{\ignorespaces Test with sanitized scripts combined with solvers description in a multi turn setup, single-solver evaluation}}{16}{}\protected@file@percent }
+\newlabel{tab:sDesc1}{{1.12}{16}{}{table.1.12}{}}
+\newlabel{tab:sDesc1@cref}{{[table][12][1]1.12}{[1][15][]16}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1.13}{\ignorespaces Test with sanitized scripts combined with solvers description in a multi turn setup, closed gap}}{16}{}\protected@file@percent }
+\newlabel{tab:sDesccg}{{1.13}{16}{}{table.1.13}{}}
+\newlabel{tab:sDesccg@cref}{{[table][13][1]1.13}{[1][15][]16}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Solver Description and Problem Description}{16}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1.14}{\ignorespaces Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, parallel-solver evaluation}}{17}{}\protected@file@percent }
+\newlabel{tab:sDescpDesc3}{{1.14}{17}{}{table.1.14}{}}
+\newlabel{tab:sDescpDesc3@cref}{{[table][14][1]1.14}{[1][16][]17}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1.15}{\ignorespaces Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, single-solver evaluation}}{17}{}\protected@file@percent }
+\newlabel{tab:sDescpDesc1}{{1.15}{17}{}{table.1.15}{}}
+\newlabel{tab:sDescpDesc1@cref}{{[table][15][1]1.15}{[1][16][]17}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1.16}{\ignorespaces Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, closed gap}}{17}{}\protected@file@percent }
+\newlabel{tab:sDescpDesccg}{{1.16}{17}{}{table.1.16}{}}
+\newlabel{tab:sDescpDesccg@cref}{{[table][16][1]1.16}{[1][17][]17}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Basic Tests Evaluation}{17}{}\protected@file@percent }
+\citation{MznResults25}
+\citation{MznResults25}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.5}{\ignorespaces Histogram to display all variants performances in parallel-solver evaluation}}{18}{}\protected@file@percent }
+\newlabel{fig:allVarPar}{{1.5}{18}{}{figure.1.5}{}}
+\newlabel{fig:allVarPar@cref}{{[figure][5][1]1.5}{[1][18][]18}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.6}{\ignorespaces Histogram to display all variants performances in single-solver evaluation}}{18}{}\protected@file@percent }
+\newlabel{fig:allVarSin}{{1.6}{18}{}{figure.1.6}{}}
+\newlabel{fig:allVarSin@cref}{{[figure][6][1]1.6}{[1][18][]18}{}{}{}}
+\citation{MznResults25}
+\citation{MznResults25}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.7}{\ignorespaces Histogram to display all variants performances in closed gap evaluation}}{19}{}\protected@file@percent }
+\newlabel{fig:allVarCg}{{1.7}{19}{}{figure.1.7}{}}
+\newlabel{fig:allVarCg@cref}{{[figure][7][1]1.7}{[1][18][]19}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.8}{\ignorespaces Histograms to visualize the difference between LLMs and single solvers from open category performance}}{20}{}\protected@file@percent }
+\newlabel{fig:comparisanVarPar}{{1.8}{20}{}{figure.1.8}{}}
+\newlabel{fig:comparisanVarPar@cref}{{[figure][8][1]1.8}{[1][19][]20}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.9}{\ignorespaces Histograms to visualize the difference between LLMs and single solvers from free category performance}}{20}{}\protected@file@percent }
+\newlabel{fig:comparisanVarSin}{{1.9}{20}{}{figure.1.9}{}}
+\newlabel{fig:comparisanVarSin@cref}{{[figure][9][1]1.9}{[1][19][]20}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1.17}{\ignorespaces Table displaying all the different LLM variants results from parallel-solver evaluation, and compared to all of the single solvers in open category of the MiniZinc Challenge\cite  {MznResults25}}}{21}{}\protected@file@percent }
+\newlabel{tab:comparisanVarPar}{{1.17}{21}{}{table.1.17}{}}
+\newlabel{tab:comparisanVarPar@cref}{{[table][17][1]1.17}{[1][18][]21}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1.18}{\ignorespaces Table displaying all the different LLM variants results given single-solver evaluation, and compared to all of the single solvers in free category of the MiniZinc Challenge\cite  {MznResults25}}}{22}{}\protected@file@percent }
+\newlabel{tab:comparisanVarSin}{{1.18}{22}{}{table.1.18}{}}
+\newlabel{tab:comparisanVarSin@cref}{{[table][18][1]1.18}{[1][19][]22}{}{}{}}
 \bibcite{GeminiAPI}{{1}{}{{}}{{}}}
 \bibcite{GeminiAPIver}{{2}{}{{}}{{}}}
 \bibcite{GroqAPI}{{3}{}{{}}{{}}}
@@ -125,10 +160,10 @@
 \bibcite{MiniZinc}{{10}{}{{}}{{}}}
 \bibcite{evaluationMetaSolvers}{{11}{}{{}}{{}}}
 \bibcite{PortfolioAproaches}{{12}{}{{}}{{}}}
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{17}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{23}{}\protected@file@percent }
 \bibcite{lindauer2019}{{13}{}{{}}{{}}}
 \bibcite{LLMdistract}{{14}{}{{}}{{}}}
 \bibcite{RBFormatting}{{15}{}{{}}{{}}}
 \bibcite{mzn2feat}{{16}{}{{}}{{}}}
 \providecommand\NAT@force@numbers{}\NAT@force@numbers
-\gdef \@abspage@last{29}
+\gdef \@abspage@last{35}

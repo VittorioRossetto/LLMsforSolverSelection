@@ -606,6 +606,12 @@ def main(argv=None):
     if getattr(args, 'include_solver_desc', False):
         name += '_Sdesc'
 
+    # Ensure temperature sweeps do not overwrite each other: include temp in filename.
+    if getattr(args, 'temperature', None) is not None:
+        # Use a stable tag: 0.2 -> 0p2, 0.0 -> 0, 0.80 -> 0p8
+        t = f"{float(args.temperature):g}".replace('.', 'p')
+        name += f"_T{t}"
+
     fname = name + '.json'
     try:
         os.makedirs(os.path.dirname(fname), exist_ok=True)
