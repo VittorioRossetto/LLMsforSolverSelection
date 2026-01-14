@@ -22,15 +22,15 @@
           "top3": [
             "chuffed-free",
             "or-tools_cp-sat-free",
-            "choco-solver__cp_-free"
+            "cp_optimizer-free"
           ],
           "time_seconds": null
         },
         "instance20_0p35": {
           "top3": [
-            "or-tools_cp-sat-free",
-            "chuffed-free",
-            "cp_optimizer-free"
+            "choco-solver__cp-sat_-free",
+            "cp_optimizer-free",
+            "or-tools_cp-sat_ls-free"
           ],
           "time_seconds": null
         },
@@ -38,7 +38,7 @@
           "top3": [
             "chuffed-free",
             "or-tools_cp-sat-free",
-            "cp_optimizer-free"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         }
@@ -48,7 +48,7 @@
           "top3": [
             "chuffed-free",
             "or-tools_cp-sat-free",
-            "cp_optimizer-free"
+            "picatsat-free"
           ],
           "time_seconds": null
         },
@@ -56,7 +56,7 @@
           "top3": [
             "chuffed-free",
             "or-tools_cp-sat-free",
-            "cp_optimizer-free"
+            "picatsat-free"
           ],
           "time_seconds": null
         },
@@ -88,41 +88,41 @@
       "carpet-cutting": {
         "cc_rnd_12_3": {
           "top3": [
-            "chuffed-free",
             "or-tools_cp-sat-free",
-            "cp_optimizer-free"
+            "chuffed-free",
+            "picatsat-free"
           ],
           "time_seconds": null
         },
         "cc_rnd_16_1": {
           "top3": [
-            "chuffed-free",
             "or-tools_cp-sat-free",
-            "cp_optimizer-free"
+            "chuffed-free",
+            "picatsat-free"
           ],
           "time_seconds": null
         },
         "cc_rnd_4_4": {
           "top3": [
             "chuffed-free",
-            "or-tools_cp-sat-free",
-            "picatsat-free"
+            "picatsat-free",
+            "sicstus_prolog-free"
           ],
           "time_seconds": null
         },
         "cc_rnd_8_1": {
           "top3": [
             "chuffed-free",
-            "or-tools_cp-sat-free",
-            "picatsat-free"
+            "picatsat-free",
+            "sicstus_prolog-free"
           ],
           "time_seconds": null
         },
         "cc_rnd_8_2": {
           "top3": [
             "chuffed-free",
-            "or-tools_cp-sat-free",
-            "picatsat-free"
+            "picatsat-free",
+            "sicstus_prolog-free"
           ],
           "time_seconds": null
         }
@@ -146,24 +146,24 @@
         },
         "cgt_3_h39_r0.05_s1_3": {
           "top3": [
-            "or-tools_cp-sat-free",
             "chuffed-free",
+            "or-tools_cp-sat-free",
             "picatsat-free"
           ],
           "time_seconds": null
         },
         "cgt_5_h27_r0.05_s0.8_0": {
           "top3": [
-            "or-tools_cp-sat-free",
             "chuffed-free",
+            "or-tools_cp-sat-free",
             "picatsat-free"
           ],
           "time_seconds": null
         },
         "cgt_8_h16_r0.05_s0.5_3": {
           "top3": [
-            "or-tools_cp-sat-free",
             "chuffed-free",
+            "or-tools_cp-sat-free",
             "picatsat-free"
           ],
           "time_seconds": null
@@ -174,7 +174,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "picatsat-free"
+            "cp_optimizer-free"
           ],
           "time_seconds": null
         },
@@ -182,31 +182,31 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "picatsat-free"
+            "cp_optimizer-free"
           ],
           "time_seconds": null
         },
         "14-10-0-2_1": {
           "top3": [
-            "or-tools_cp-sat-free",
             "chuffed-free",
-            "cp_optimizer-free"
+            "or-tools_cp-sat-free",
+            "picatsat-free"
           ],
           "time_seconds": null
         },
         "14-10-0-2_3": {
           "top3": [
-            "or-tools_cp-sat-free",
             "chuffed-free",
-            "cp_optimizer-free"
+            "or-tools_cp-sat-free",
+            "picatsat-free"
           ],
           "time_seconds": null
         },
         "15-15-0-1_3": {
           "top3": [
-            "or-tools_cp-sat-free",
             "chuffed-free",
-            "cp_optimizer-free"
+            "or-tools_cp-sat-free",
+            "picatsat-free"
           ],
           "time_seconds": null
         }
@@ -274,7 +274,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "picatsat-free"
+            "cp_optimizer-free"
           ],
           "time_seconds": null
         },
@@ -282,7 +282,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "picatsat-free"
+            "cp_optimizer-free"
           ],
           "time_seconds": null
         },
@@ -290,7 +290,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "picatsat-free"
+            "cp_optimizer-free"
           ],
           "time_seconds": null
         }
@@ -298,41 +298,41 @@
       "gt-sort": {
         "n13_ub20_50.0_BEST": {
           "top3": [
-            "cp_optimizer-free",
-            "sicstus_prolog-free",
-            "jacop-free"
+            "chuffed-free",
+            "choco-solver__cp_-free",
+            "picatsat-free"
           ],
           "time_seconds": null
         },
         "n7_ub20_75.0_BEST": {
           "top3": [
-            "cp_optimizer-free",
-            "sicstus_prolog-free",
-            "jacop-free"
+            "chuffed-free",
+            "choco-solver__cp_-free",
+            "picatsat-free"
           ],
           "time_seconds": null
         },
         "n9_ub10_50.0_BEST": {
           "top3": [
-            "choco-solver__cp_-free",
             "chuffed-free",
-            "cp_optimizer-free"
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
           ],
           "time_seconds": null
         },
         "n9_ub10_75.0_BEST": {
           "top3": [
-            "choco-solver__cp_-free",
             "chuffed-free",
-            "cp_optimizer-free"
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
           ],
           "time_seconds": null
         },
         "n9_ub30_35.0_BEST": {
           "top3": [
-            "choco-solver__cp_-free",
             "chuffed-free",
-            "cp_optimizer-free"
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
           ],
           "time_seconds": null
         }
@@ -342,7 +342,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "cp_optimizer-free"
+            "picatsat-free"
           ],
           "time_seconds": null
         },
@@ -350,7 +350,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "cp_optimizer-free"
+            "picatsat-free"
           ],
           "time_seconds": null
         },
@@ -374,7 +374,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "choco-solver__cp_-free"
+            "cp_optimizer-free"
           ],
           "time_seconds": null
         }
@@ -398,24 +398,24 @@
         },
         "i09": {
           "top3": [
-            "chuffed-free",
             "or-tools_cp-sat-free",
+            "chuffed-free",
             "picatsat-free"
           ],
           "time_seconds": null
         },
         "test03": {
           "top3": [
-            "chuffed-free",
             "or-tools_cp-sat-free",
+            "chuffed-free",
             "picatsat-free"
           ],
           "time_seconds": null
         },
         "test05": {
           "top3": [
-            "chuffed-free",
             "or-tools_cp-sat-free",
+            "chuffed-free",
             "picatsat-free"
           ],
           "time_seconds": null
@@ -442,7 +442,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "picatsat-free"
+            "cp_optimizer-free"
           ],
           "time_seconds": null
         },
@@ -450,7 +450,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "picatsat-free"
+            "cp_optimizer-free"
           ],
           "time_seconds": null
         },
@@ -458,7 +458,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "picatsat-free"
+            "cp_optimizer-free"
           ],
           "time_seconds": null
         }
@@ -526,7 +526,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "cp_optimizer-free"
+            "picatsat-free"
           ],
           "time_seconds": null
         },
@@ -534,7 +534,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "cp_optimizer-free"
+            "picatsat-free"
           ],
           "time_seconds": null
         },
@@ -542,7 +542,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "cp_optimizer-free"
+            "picatsat-free"
           ],
           "time_seconds": null
         }
@@ -551,16 +551,16 @@
         "ps-25-01": {
           "top3": [
             "or-tools_cp-sat-free",
-            "cp_optimizer-free",
-            "chuffed-free"
+            "chuffed-free",
+            "cp_optimizer-free"
           ],
           "time_seconds": null
         },
         "ps-25-03": {
           "top3": [
             "or-tools_cp-sat-free",
-            "cp_optimizer-free",
-            "chuffed-free"
+            "chuffed-free",
+            "cp_optimizer-free"
           ],
           "time_seconds": null
         },
@@ -568,7 +568,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "cp_optimizer-free"
+            "picatsat-free"
           ],
           "time_seconds": null
         },
@@ -576,15 +576,15 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "cp_optimizer-free"
+            "picatsat-free"
           ],
           "time_seconds": null
         },
         "toy": {
           "top3": [
+            "choco-solver__cp-sat_-free",
             "or-tools_cp-sat-free",
-            "choco-solver__cp_-free",
-            "picatsat-free"
+            "chuffed-free"
           ],
           "time_seconds": null
         }
@@ -610,7 +610,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "picatsat-free"
+            "cp_optimizer-free"
           ],
           "time_seconds": null
         },
@@ -618,7 +618,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "picatsat-free"
+            "cp_optimizer-free"
           ],
           "time_seconds": null
         },
@@ -626,7 +626,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "picatsat-free"
+            "cp_optimizer-free"
           ],
           "time_seconds": null
         }
@@ -650,25 +650,25 @@
         },
         "skill_allocation_mzn_2w_2": {
           "top3": [
-            "cp_optimizer-free",
             "or-tools_cp-sat-free",
-            "chuffed-free"
+            "chuffed-free",
+            "picatsat-free"
           ],
           "time_seconds": null
         },
         "skill_allocation_mzn_3m_3": {
           "top3": [
-            "cp_optimizer-free",
             "or-tools_cp-sat-free",
-            "chuffed-free"
+            "chuffed-free",
+            "picatsat-free"
           ],
           "time_seconds": null
         },
         "skill_allocation_mzn_5d_1": {
           "top3": [
-            "cp_optimizer-free",
             "or-tools_cp-sat-free",
-            "chuffed-free"
+            "chuffed-free",
+            "picatsat-free"
           ],
           "time_seconds": null
         }
@@ -676,17 +676,17 @@
       "stripboard": {
         "stripboard_w10_h10_l12_c4_n24": {
           "top3": [
-            "chuffed-free",
             "or-tools_cp-sat-free",
-            "picatsat-free"
+            "chuffed-free",
+            "cp_optimizer-free"
           ],
           "time_seconds": null
         },
         "stripboard_w15_h10_l12_c6_n12": {
           "top3": [
-            "chuffed-free",
             "or-tools_cp-sat-free",
-            "picatsat-free"
+            "chuffed-free",
+            "cp_optimizer-free"
           ],
           "time_seconds": null
         },
@@ -694,7 +694,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "cp_optimizer-free"
+            "picatsat-free"
           ],
           "time_seconds": null
         },
@@ -702,7 +702,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "cp_optimizer-free"
+            "picatsat-free"
           ],
           "time_seconds": null
         },
@@ -710,7 +710,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "cp_optimizer-free"
+            "picatsat-free"
           ],
           "time_seconds": null
         }
@@ -760,16 +760,16 @@
       "tsptw": {
         "n100w120.003": {
           "top3": [
-            "or-tools_cp-sat-free",
             "chuffed-free",
+            "or-tools_cp-sat-free",
             "cp_optimizer-free"
           ],
           "time_seconds": null
         },
         "n20w140.005": {
           "top3": [
-            "or-tools_cp-sat-free",
             "chuffed-free",
+            "or-tools_cp-sat-free",
             "cp_optimizer-free"
           ],
           "time_seconds": null
@@ -804,7 +804,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "cp_optimizer-free"
+            "picatsat-free"
           ],
           "time_seconds": null
         },
@@ -812,7 +812,7 @@
           "top3": [
             "or-tools_cp-sat-free",
             "chuffed-free",
-            "cp_optimizer-free"
+            "picatsat-free"
           ],
           "time_seconds": null
         },

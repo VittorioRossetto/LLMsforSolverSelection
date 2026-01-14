@@ -342,3 +342,157 @@ def aggregate_llm_instance_scores(*llm_scored_dfs):
     )
     inst_scores_sorted = inst_scores.sort_values('TotalLLMScore', ascending=True).reset_index(drop=True)
     return inst_scores_sorted
+
+
+def build_llm_performance_table(
+    *,
+    top3_summary: pd.DataFrame | None = None,
+    top1_summary: pd.DataFrame | None = None,
+    closed_gap: pd.DataFrame | None = None,
+    merge_on: list[str] | None = None,
+    include_provider: bool = False,
+    fill_missing_scores: float | None = None,
+    sort_by: str | None = None,
+    ascending: bool = False,
+) -> pd.DataFrame:
+    """Build a single table: Model, Single Score, Parallel Score, Closed Gap.
+
+    Expects inputs from:
+    - compute_llm_scores(...)            -> `top3_summary`
+    - compute_top1_llm_scores(...)       -> `top1_summary`
+    - compute_closed_gap(...) + DataFrame-> `closed_gap`
+
+    By default it merges on ['provider', 'model'] when present; if `Model_Variant`
+    exists in any input and `merge_on` is not provided, it merges on ['Model_Variant'].
+
+    Args:
+        top3_summary: DataFrame with at least ['provider','model','LLM_TotalScore'].
+        top1_summary: DataFrame with at least ['provider','model','LLM_Top1_TotalScore'].
+        closed_gap:   DataFrame with at least ['provider','model','ClosedGap'].
+        merge_on:     Explicit merge keys.
+        include_provider: If True and provider is available, appends it into `Model`
+            (e.g., "gpt-4o (openai)"). Provider is never returned as its own column.
+        fill_missing_scores: If set, fills missing Total/Top1 scores with this value.
+        sort_by:      Column to sort by (e.g. 'Top1TotalScore', 'TotalScore', 'ClosedGap').
+        ascending:    Sort order.
+
+    Returns:
+        A merged DataFrame with columns (in order): Model, Single Score,
+        Parallel Score, Closed Gap.
+    """
+
+    def _copy_or_none(df: pd.DataFrame | None) -> pd.DataFrame | None:
+        if df is None:
+            return None
+        if not isinstance(df, pd.DataFrame):
+            raise TypeError(f"Expected a pandas DataFrame, got: {type(df)}")
+        return df.copy()
+
+    t3 = _copy_or_none(top3_summary)
+    t1 = _copy_or_none(top1_summary)
+    cg = _copy_or_none(closed_gap)
+
+    if t3 is None and t1 is None and cg is None:
+        return pd.DataFrame(columns=['Model', 'Single Score', 'Parallel Score', 'Closed Gap'])
+
+    # Infer merge keys if not provided
+    if merge_on is None:
+        any_has_model_variant = any(
+            (df is not None and 'Model_Variant' in df.columns) for df in (t3, t1, cg)
+        )
+        if any_has_model_variant:
+            merge_on = ['Model_Variant']
+        else:
+            merge_on = ['provider', 'model']
+
+    def _prep_top3(df: pd.DataFrame | None) -> pd.DataFrame | None:
+        if df is None:
+            return None
+        cols = set(df.columns)
+        if 'LLM_TotalScore' in cols:
+            out = df[merge_on + ['LLM_TotalScore']].rename(columns={'LLM_TotalScore': 'ParallelScore'})
+        elif 'ParallelScore' in cols:
+            out = df[merge_on + ['ParallelScore']].copy()
+        elif 'TotalScore' in cols:
+            # Backward/alternate naming support
+            out = df[merge_on + ['TotalScore']].rename(columns={'TotalScore': 'ParallelScore'})
+        else:
+            raise KeyError(
+                "top3_summary must contain 'LLM_TotalScore' (or already-renamed 'ParallelScore'/'TotalScore')."
+            )
+        return out
+
+    def _prep_top1(df: pd.DataFrame | None) -> pd.DataFrame | None:
+        if df is None:
+            return None
+        cols = set(df.columns)
+        if 'LLM_Top1_TotalScore' in cols:
+            out = df[merge_on + ['LLM_Top1_TotalScore']].rename(
+                columns={'LLM_Top1_TotalScore': 'SingleScore'}
+            )
+        elif 'SingleScore' in cols:
+            out = df[merge_on + ['SingleScore']].copy()
+        elif 'Top1TotalScore' in cols:
+            # Backward/alternate naming support
+            out = df[merge_on + ['Top1TotalScore']].rename(columns={'Top1TotalScore': 'SingleScore'})
+        else:
+            raise KeyError(
+                "top1_summary must contain 'LLM_Top1_TotalScore' (or already-renamed 'SingleScore'/'Top1TotalScore')."
+            )
+        return out
+
+    def _prep_cg(df: pd.DataFrame | None) -> pd.DataFrame | None:
+        if df is None:
+            return None
+        if 'ClosedGap' not in df.columns:
+            raise KeyError("closed_gap must contain 'ClosedGap'.")
+        return df[merge_on + ['ClosedGap']].copy()
+
+    parts: list[pd.DataFrame] = [p for p in (_prep_top3(t3), _prep_top1(t1), _prep_cg(cg)) if p is not None]
+
+    merged = parts[0]
+    for part in parts[1:]:
+        merged = merged.merge(part, on=merge_on, how='outer')
+
+    # Final presentation: rename `Model_Variant` to `model` if needed.
+    if merge_on == ['Model_Variant']:
+        merged = merged.rename(columns={'Model_Variant': 'model'})
+
+    # Ensure required columns exist
+    for col in ['ParallelScore', 'SingleScore', 'ClosedGap']:
+        if col not in merged.columns:
+            merged[col] = np.nan
+
+    # Optional filling for missing score columns
+    if fill_missing_scores is not None:
+        for col in ['ParallelScore', 'SingleScore']:
+            merged[col] = pd.to_numeric(merged[col], errors='coerce').fillna(fill_missing_scores)
+
+    # Backward-compatible sort key mapping
+    if sort_by in ('TotalScore', 'ParallelScore', 'Parallel Score'):
+        sort_by = 'ParallelScore'
+    elif sort_by in ('Top1TotalScore', 'SingleScore', 'Single Score'):
+        sort_by = 'SingleScore'
+    elif sort_by in ('ClosedGap', 'Closed Gap'):
+        sort_by = 'ClosedGap'
+
+    if sort_by is not None and sort_by in merged.columns:
+        merged = merged.sort_values(sort_by, ascending=ascending)
+
+    merged = merged.reset_index(drop=True)
+
+    # Final formatting: exact names + order requested, and no separate provider column.
+    if 'model' not in merged.columns:
+        merged['model'] = np.nan
+
+    if include_provider and 'provider' in merged.columns:
+        merged['Model'] = merged['model'].astype(str) + ' (' + merged['provider'].astype(str) + ')'
+    else:
+        merged['Model'] = merged['model']
+
+    merged['Single Score'] = merged['SingleScore']
+    merged['Parallel Score'] = merged['ParallelScore']
+    merged['Closed Gap'] = merged['ClosedGap']
+
+    return merged[['Model', 'Single Score', 'Parallel Score', 'Closed Gap']]
+

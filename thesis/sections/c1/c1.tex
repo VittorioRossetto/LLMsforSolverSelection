@@ -15,9 +15,9 @@ usage-based APIs. The selection prioritized generous free tiers, permissive rate
 limits, and straightforward integration. This led to the choice of the
 following providers:
 \begin{itemize}
-    \item \texttt{Gemini API v1}\cite{GeminiAPI}, offered by Google DeepMind. Gemini is a family of large language models with multiple sizes and capabilities. This provider selected for its strong reasoning abilities, robust tool-use features, and overall high-quality text generation. For the purpose of this research, the version v1\cite{GeminiAPIver} was prefered as it is more stable and our only concern is its text generation capability.
+    \item \texttt{Gemini API v1}~\cite{GeminiAPI}, offered by Google DeepMind. Gemini is a family of large language models with multiple sizes and capabilities. This provider selected for its strong reasoning abilities, robust tool-use features, and overall high-quality text generation. For the purpose of this research, the version v1~\cite{GeminiAPIver} was prefered as it is more stable and our only concern is its text generation capability.
 
-    \item \texttt{Groq API}\cite{GroqAPI}, provided by Groq. Groq offers
+    \item \texttt{Groq API}~\cite{GroqAPI}, provided by Groq. Groq offers
     high-performance inference solutions through its specialized hardware
     architecture. The Groq API exposes a selection of LLMs through a simple and
     lightweight interface, enabling fast and low-latency experimentation.
@@ -30,7 +30,6 @@ services, in \Cref{tab:rate_limits_gemini} and \Cref{tab:rate_limits_groq} are d
 \begin{table}[ht]
     \centering
     \small % reduce font size for wide tables
-    \label{tab:rate_limits_groq}
     \begin{tabular}{@{} >{\raggedright\arraybackslash}p{6cm} r r r r @{}}
         \toprule
         Model & RPM & RPD & TPM & TPD \\
@@ -56,13 +55,13 @@ services, in \Cref{tab:rate_limits_gemini} and \Cref{tab:rate_limits_groq} are d
         qwen/qwen3-32b & 60 & 1000 & 6000 & 500000 \\
         \bottomrule
     \end{tabular}
-    \caption{Rate limits - Groq models\cite{GroqRL}: \\This table shows all the offered models from Groq API, in leftmost column and each relative rate limit.}
+    \caption{Rate limits - Groq models~\cite{GroqRL}: \\This table shows all the offered models from Groq API, in leftmost column and each relative rate limit.}
+    \label{tab:rate_limits_groq}
 \end{table}
 
 \begin{table}[ht]
     \centering
     \small
-    \label{tab:rate_limits_gemini}
     \begin{tabular}{@{} >{\raggedright\arraybackslash}p{6cm} r r r r @{}}
         \toprule
         Model & RPM & RPD & TPM & TPD \\
@@ -74,7 +73,8 @@ services, in \Cref{tab:rate_limits_gemini} and \Cref{tab:rate_limits_groq} are d
         gemini-2.0-flash-lite & 30 & 200 & 1000000 & -- \\
         \bottomrule
     \end{tabular}
-    \caption{Rate limits - Gemini models\cite{GeminiRL}\\This table shows all the offered models from Gemini API, in leftmost column and each relative rate limit.}
+    \caption{Rate limits - Gemini models~\cite{GeminiRL}\\This table shows all the offered models from Gemini API, in leftmost column and each relative rate limit.}
+    \label{tab:rate_limits_gemini}
 \end{table}
 
 \subsection{Large Language Models Selection}
@@ -100,7 +100,7 @@ To determine which LLM would be best suited for building an AS, it was necessary
 The primary objective was to define a structure that was as short and clean as possible, for two main
 reasons:
 \begin{itemize}
-    \item Minimize prompt-induced bias: A highly descriptive or too long and complex prompt could influence LLMs negatively. As we could encounter problems as ``context rot``\cite{ContextRot} - a progressive decay in accuracy as prompts grow longer.
+    \item Minimize prompt-induced bias: A highly descriptive or too long and complex prompt could influence LLMs negatively. As we could encounter problems as ``context rot``~\cite{ContextRot} - a progressive decay in accuracy as prompts grow longer.
     \item Reduce token usage: Since the testing setup depends on API limits, keeping the prompt compact minimizes token consumption.
 \end{itemize}
 
@@ -152,13 +152,13 @@ these requirements, the problem set should satisfy the following criteria:
     meaningfully tested.
 \end{itemize}
 Following these criteria, the selected benchmark was the problem set from the
-\textit{MiniZinc Challenge 2025}\cite{PhilMznChallenge}\cite{MznProblems}\cite{MznResults25}. These problems are specifically curated
+\textit{MiniZinc Challenge 2025}~\cite{PhilMznChallenge}~\cite{MznProblems}~\cite{MznResults25}. These problems are specifically curated
 to benchmark the strongest solvers of the year and therefore represent an ideal
 test bed for evaluating the proposed Agentic Solver.
 
 The problem set contains twenty problems: 1 satisfaction problem, 3 maximization problems, 16 minimization problems.
 
-Each problem is a combination of a \texttt{.mzn} file containing the Minizinc\cite{MiniZinc} model made of the high-level description of the problem (variables, constraints and objective function). Every problem also is also accompanied by five corresponding data instances each of them contained either in a \texttt{.dzn} or a \texttt{.json} file containing specific parameters and constants, yielding a total of
+Each problem is a combination of a \texttt{.mzn} file containing the Minizinc~\cite{MiniZinc} model made of the high-level description of the problem (variables, constraints and objective function). Every problem also is also accompanied by five corresponding data instances each of them contained either in a \texttt{.dzn} or a \texttt{.json} file containing specific parameters and constants, yielding a total of
 100 testable, diverse, and complex scenarios.
 
 \subsection{Test Metrics}
@@ -183,7 +183,7 @@ For those objectives two separate metrics were chosen
 We are now ready to associate to every instance $i$ and solver $s$ a weight that
 quantitatively represents how good is $s$ when solving $i$ over time $T$. We
 define the scoring value of $s$ (shortly, score) on the instance $i$ at a
-given time $t$ as a function $\mathrm{score}_{\alpha,\beta}$\cite{evaluationMetaSolvers}\cite{PortfolioAproaches} defined as follows:
+given time $t$ as a function $\mathrm{score}_{\alpha,\beta}$~\cite{evaluationMetaSolvers}~\cite{PortfolioAproaches} defined as follows:
 
 \[
 \mathrm{score}_{\alpha,\beta}(s,i,t)=
@@ -251,9 +251,10 @@ it receives the highest score.
 The parameter used for score calculation in testing are: $T=1200000$ (1200000ms = 20 minutes, which is the time limit used solver evaluation in the MiniZinc Challenge) $\alpha=0.25$ $\beta=0.75$.
 
 \subsubsection{Closed Gap}
+\label{sec:closedGap}
 Once the evaluation metric for solver score has been defined, we also need a comparative metric after score calculation.
-For this objective, we have chosen to use \textit{closed-gap}\cite{evaluationMetaSolvers} as the evaluation metric. 
-Which is a relative and meta-solver-specific measure, adopted in the 2015 ICON and 2017 OASC \cite{lindauer2019}
+For this objective, we have chosen to use \textit{closed-gap}~\cite{evaluationMetaSolvers} as the evaluation metric. 
+Which is a relative and meta-solver-specific measure, adopted in the 2015 ICON and 2017 OASC ~\cite{lindauer2019}
 challenges to handle the disparate nature of the scenarios, is the 
 closed gap score. This metric assigns to a meta-solver a value in $(-\infty, 1]$ 
 proportional to how much it closes the gap between the best individual solver available, 
@@ -305,7 +306,7 @@ Despite preliminary prompt engineering and model filtering, several MiniZinc mod
 
 The most direct way to address oversized requests is to reduce their length. As the prompt itself was already minimal, this required direct manipulation of the MiniZinc model (\texttt{.mzn}) and data files.
 
-A first step consisted in removing all non-essential elements, such as comments (starting with \texttt{\%}\cite{MiniZinc}), tabs, and unnecessary whitespace. While this helps reduce token usage and standardizes script formatting, it is insufficient on its own. The main contributor to token overflow is the presence of large data arrays, which not only increase message length but may also pollute the context, ``distracting`` the LLM from the most relevant information\cite{LLMdistract}.
+A first step consisted in removing all non-essential elements, such as comments (starting with \texttt{\%}~\cite{MiniZinc}), tabs, and unnecessary whitespace. While this helps reduce token usage and standardizes script formatting, it is insufficient on its own. The main contributor to token overflow is the presence of large data arrays, which not only increase message length but may also pollute the context, ``distracting`` the LLM from the most relevant information~\cite{LLMdistract}.
 
 To mitigate this issue, data arrays were truncated to a fixed maximum length of 30 elements, with an inline comment indicating the original size:
 \[ 
@@ -349,79 +350,34 @@ In this section we are gonna show and explain al the experiments that led to the
 \label{sec:initTests}
 The first experiments were conducted using the unedited problems. Each LLM was provided with the original MiniZinc model (\texttt{.mzn}) together with the corresponding instance data (in either \texttt{.dzn} or \texttt{.json} format), following the prompt structure defined in \Cref{sec:promptStruct}.
 
-\begin{table}[h]
+\begin{table}[!ht]
     \centering
     \resizebox{\textwidth}{!}{
-        \begin{tabular}{lllll}
+        \begin{tabular}{llll}
         \hline
-            Model & Total Score & Instances Covered & Average Score \\ \hline
-            gemini-2.0-flash & 53.748 & 67 & 0.802 \\ 
-            gemini-2.5-flash & 69.426 & 86 & 0.807 \\ 
-            gemini-2.5-flash-lite & 69.040 & 85 & 0.812 \\ 
-            gemini-2.5-pro & 41.594 & 51 & 0.815 \\ 
-            allam-2-7b & 0.0 & 10 & 0.0 \\ 
-            groq/compound & 8.246 & 9 & 0.916 \\ 
-            groq/compound-mini & 29.623 & 35 & 0.846 \\ 
-            llama-3.1-8b-instant & 56.228 & 72 & 0.780 \\ 
-            llama-3.3-70b-versatile & 9.496 & 10 & 0.949 \\ 
-            meta-llama/llama-4-maverick-17b-128e-instruct & 63.548 & 72 & 0.882 \\ 
-            meta-llama/llama-4-scout-17b-16e-instruct & 57.814 & 69 & 0.837 \\ 
-            meta-llama/llama-guard-4-12b & 0.0 & 77 & 0.0 \\ 
-            moonshotai/kimi-k2-instruct & 65.816 & 75 & 0.877 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 66.186 & 75 & 0.882 \\ 
-            openai/gpt-oss-120b & 64.508 & 74 & 0.871 \\ 
-            openai/gpt-oss-20b & 63.328 & 75 & 0.844 \\ 
-            qwen/qwen3-32b & 48.018 & 65 & 0.738 \\ \hline
+            Model & Single Score & Parallel Score & Closed Gap \\ \hline
+            gemini-2.5-flash-lite & 64.363 & 69.040 & -1.047 \\ 
+            gemini-2.5-flash & 60.962 & 69.426 & -1.330 \\ 
+            moonshotai/kimi-k2-instruct-0905 & 59.680 & 66.186 & -1.436 \\ 
+            moonshotai/kimi-k2-instruct & 58.609 & 65.816 & -1.525 \\ 
+            openai/gpt-oss-120b & 58.166 & 64.508 & -1.562 \\ 
+            openai/gpt-oss-20b & 57.154 & 63.329 & -1.646 \\ 
+            meta-llama/llama-4-maverick-17b-128e-instruct & 56.297 & 63.549 & -1.717 \\ 
+            meta-llama/llama-4-scout-17b-16e-instruct & 54.305 & 57.815 & -1.883 \\ 
+            gemini-2.0-flash & 43.413 & 53.748 & -2.788 \\ 
+            qwen/qwen3-32b & 42.117 & 48.018 & -2.895 \\ 
+            gemini-2.5-pro & 37.641 & 41.594 & -3.267 \\ 
+            llama-3.1-8b-instant & 36.082 & 56.228 & -3.397 \\ 
+            groq/compound-mini & 25.423 & 29.623 & -4.282 \\ 
+            llama-3.3-70b-versatile & 7.455 & 9.496 & -5.775 \\ 
+            groq/compound & 5.197 & 8.246 & -5.963 \\ \hline
         \end{tabular}
     }
-    \label{tab:allLLM3}
-    \caption{Initial tests giving plain scripts to all the LLMs, In this table: column "Model" contains the names of each tested LLM, `` Total Score'' represents the sum of the score reached in every instance, score was calculated in parallel-solver setup, so taking the 3 best solvers given by the LLM, calculate the score of all the 3, and take the maximum out of the three, ``Instances Covered'' contains the amount of instances that gave a viable result so the ones that did not exceed the token limitations portrayed in \Cref{tab:rate_limits_groq} and \Cref{tab:rate_limits_gemini}, ``Average Score'' represents +7}
+    \caption{Initial tests giving plain scripts to all the LLMs, In this table:column "Model" contains the names of each tested LLM,`` Total Score'' represents the sum of the score reached in every instance, in this table ``Total Score'' represents the sum of the score reached in every instance, score was calculated by summing the performance of what was suggested to be the best solver on the given instance by each of the LLMs, `` Parallel Score'' represents the sum of the score reached in every instance, score was calculated in parallel-solver setup, so taking the 3 best solvers given by the LLM, calculate the score of all the 3, and take the maximum out of the three, and finally ``Closed Gap'' displays the closed gap score calculated over ``Single Score'' by using the formula explained in \Cref{sec:closedGap}}
+    \label{tab:combinedAllLLM}
 \end{table}
 
-\begin{table}[h]
-    \centering
-    \resizebox{\textwidth}{!}{%
-        \begin{tabular}{lllll}
-        \hline
-            Model & Total Score & Instances Covered & Average Score \\ \hline
-            gemini-2.5-flash-lite & 64.363 & 85 & 0.794 \\ 
-            gemini-2.5-flash & 60.962 & 85 & 0.734 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 59.680 & 75 & 0.817 \\
-            moonshotai/kimi-k2-instruct & 58.609 & 75 & 0.837 \\ 
-            openai/gpt-oss-120b & 58.166 & 74 & 0.796 \\
-            openai/gpt-oss-20b & 57.154 & 75 & 0.828 \\
-            meta-llama/llama-4-maverick-17b-128e-instruct & 56.297 & 72 & 0.804 \\
-            meta-llama/llama-4-scout-17b-16e-instruct & 54.305 & 69 & 0.798 \\
-            gemini-2.0-flash & 43.412 & 67 & 0.700 \\
-            qwen/qwen3-32b & 42.116 & 65 & 0.779 \\
-            gemini-2.5-pro & 37.640 & 51 & 0.738 \\
-            llama-3.1-8b-instant & 36.082 & 72 & 0.546 \\ 
-            groq/compound-mini & 25.422 & 35 & 0.726 \\
-            llama-3.3-70b-versatile & 7.454 & 10 & 0.745 \\
-            groq/compound & 5.197 & 9 & 0.577 \\ 
-            allam-2-7b & 0.0 & 4 & 0.0 \\ \hline
-        \end{tabular}%
-    }
-    \caption{Initial tests giving plain scripts to all the LLMs, single-solver evaluation}
-    \label{tab:allLLM1}
-\end{table}
-
-\begin{figure*}[h]
-    \centering
-    \begin{subfigure}[t]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{allLLMspar.png}
-        \caption{Scores obtained by all of the considered LLM from parallel-solver evaluation}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{allLLMsingle.png}
-        \caption{Scores obtained by all of the considered LLM from single-solver evaluation}
-    \end{subfigure}
-\end{figure*}
-
-As reported in \Cref{tab:allLLM3} for parallel-solver evaluation, and in \Cref{tab:allLLM1} for single-solver evaluation, the scores are under 70, meaning a lower performance than 3 of the single solvers. While part of this outcome can be attributed to the deliberately simple formulation of the requests, a major limiting factor is the presence of strict rate limits, which prevent many instances from being processed by some, if not all, of the LLMs, due to the script length alone exceeding TPM (showed in \Cref{tab:rate_limits_gemini} and \Cref{tab:rate_limits_groq}). This problem is predominant in problems with large instance data, such as: \texttt{ihtc-2024-marte} or \texttt{gt-sort}
+As reported in \Cref{tab:combinedAllLLM}, (and more in depth in \Cref{tab:allLLM1}, \Cref{tab:allLLM3} and \Cref{tab:allLLMcg}) for both single-solver evaluation and parallel-solver evaluation, the scores are all under 70, meaning a lower performance than 3 of the single solvers from free category, and 4 of the single solvers from open category, and clearly a negative closed gap for all of the LLMs. While part of this outcome can be attributed to the deliberately simple formulation of the requests, a major limiting factor is the presence of strict rate limits, which prevent many instances from being processed by some, if not all, of the LLMs, due to the script length alone exceeding TPM (showed in \Cref{tab:rate_limits_gemini} and \Cref{tab:rate_limits_groq}). This problem is predominant in problems with large instance data, such as: \texttt{ihtc-2024-marte} or \texttt{gt-sort}
 
 These constraints motivated both the adoption of script manipulation techniques, as described in \Cref{sec:expSetup}, and, simple time issues due to tests taking even up to 48 hours, the decision to restrict subsequent experiments to the five best-performing LLMs identified in this preliminary phase, namely: \texttt{gpt-oss-120b}, \texttt{gemini-2,5-flash}, \texttt{gemini-2,5-flash-lite}, \texttt{kimi-k2-instruct-0905} and \texttt{kimi-k2-instruct}.
 
@@ -434,60 +390,26 @@ As a baseline, the LLMs were first evaluated under the same conditions as the pr
 \begin{table}[!ht]
     \centering
     \resizebox{\textwidth}{!}{%
-        \begin{tabular}{lllll}
+        \begin{tabular}{llll}
         \hline
-            Model & Total Score & Instances Covered & Average Score \\ \hline
-            gemini-2.5-flash & 79.105 & 100 & 0.791 \\ 
-            gemini-2.5-flash-lite & 80.740 & 100 & 0.807 \\ 
-            moonshotai/kimi-k2-instruct & 83.268 & 100 & 0.832 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 82.656 & 100 & 0.826 \\ 
-            openai/gpt-oss-120b & 82.226 & 100 & 0.822 \\ \hline
-        \end{tabular}%
-    }
-    \caption{Tests on sanitized scripts given to the 5 best performing LLMs, parallel-solver evaluation}
-    \label{tab:base3}
-\end{table}
-
-As shown in \Cref{tab:base3}, performance in the parallel-solver evaluation is generally strong. All tested LLMs outperform every individual solver except \texttt{or-tools\_cp-sat-par}, which corresponds to the single best solver (SBS) in the open category and remains clearly dominant, with a substantial margin over both the LLM-based meta-solvers and the remaining individual solvers, as will be later reported in \Cref{tab:comparisanVarPar} and \Cref{fig:comparisanVarPar}.
-
-\begin{table}[!ht]
-    \centering
-    \resizebox{\textwidth}{!}{
-        \begin{tabular}{lllll}
-        \hline
-            Model & Total Score & Instances Covered & Average Score \\ \hline
-            openai/gpt-oss-120b & 74.488 & 100 & 0.744 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 71.622 & 100 & 0.753 \\ 
-            moonshotai/kimi-k2-instruct & 70.939 & 100 & 0.723 \\ 
-            gemini-2.5-flash-lite & 70.145 & 100 & 0.738 \\ 
-            gemini-2.5-flash & 69.763 & 98 & 0.742 \\ \hline
+            Model & Single Score & Parallel Score & Closed Gap \\ \hline
+            openai/gpt-oss-120b & 74.488 & 82.227 & -0.206 \\ 
+            moonshotai/kimi-k2-instruct-0905 & 71.623 & 82.657 & -0.444 \\ 
+            moonshotai/kimi-k2-instruct & 70.939 & 83.268 & -0.501 \\ 
+            gemini-2.5-flash-lite & 70.145 & 80.741 & -0.567 \\ 
+            gemini-2.5-flash & 69.763 & 79.105 & -0.598 \\ \hline
         \end{tabular}
     }
-    \caption{Tests on sanitized scripts given to the 5 best performing LLMs, single-solver evaluation}
-    \label{tab:base1}
+    \caption{Tests on sanitized scripts given to the 5 best performing LLMs, columns content is calculated as in \Cref{tab:combinedAllLLM}}
+    \label{tab:combinedBase}
 \end{table}
 
-Greater variability emerges in the single-solver evaluation (\Cref{tab:base1}). In this case, only \texttt{gpt-oss-120b} consistently outperforms all individual solvers other than the SBS in the free category (\texttt{or-tools\_cp-sat-free}), as will be later reported in \Cref{tab:comparisanVarSin} and \Cref{fig:comparisanVarSin}. The remaining LLMs still achieve competitive results compared to most standalone solvers, but a significant performance gap remains, as highlighted by the closed-gap scores reported in \Cref{tab:basecg}.
+As shown in \Cref{tab:combinedBase} and \Cref{tab:base3}, performance in the parallel-solver evaluation is generally strong. All tested LLMs outperform every individual solver except \texttt{or-tools\_cp-sat-par}, which corresponds to the single best solver (SBS) in the open category and remains clearly dominant, with a substantial margin over both the LLM-based meta-solvers and the remaining individual solvers.
 
-\begin{table}[!ht]
-    \centering
-    \resizebox{\textwidth}{!}{
-        \begin{tabular}{lllllll}
-        \hline
-            Model & Instances Covered & AS & SBS & VBS & Closed Gap \\ \hline
-            openai/gpt-oss-120b & 100 & 74.488 & 76.964 & 89.0 & -0.205 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 100 & 71.622 & 76.964 & 89.0 & -0.443 \\ 
-            moonshotai/kimi-k2-instruct & 100 & 70.939 & 76.964 & 89.0 & -0.500 \\ 
-            gemini-2.5-flash-lite & 100 & 70.145 & 76.964 & 89.0 & -0.566 \\ 
-            gemini-2.5-flash & 98 & 69.763 & 76.964 & 89.0 & -0.598 \\ \hline
-        \end{tabular}
-    }
-    \caption{Tests on sanitized scripts given to the 5 best performing LLMs, closed gap}
-    \label{tab:basecg}
-\end{table}
+Greater variability emerges in the single-solver evaluation (\Cref{tab:base1}). In this case, only \texttt{gpt-oss-120b} consistently outperforms all individual solvers other than the SBS in the free category (\texttt{or-tools\_cp-sat-free}), as will be later reported in \Cref{tab:comparisanVarSin} and \Cref{fig:comparisanVarSin}. The remaining LLMs still achieve competitive results compared to most standalone solvers, but a significant performance gap remains, as highlighted by the closed-gap scores, also reported more in depth in \Cref{tab:basecg}.
 
 \subsubsection{Problem Description}
-The results of the baseline experiments indicate that further improvements to the Agentic Solver are necessary. A natural approach is to provide the LLM with additional contextual information. However, as discussed previously, excessively large contexts can be counterproductive, potentially distracting the model and degrading performance rather than improving it\cite{ContextRot,LLMdistract}. This trade-off motivates a more careful investigation into which types of information are most beneficial for LLM-based solver selection.
+The results of the baseline experiments indicate that further improvements to the Agentic Solver are necessary. A natural approach is to provide the LLM with additional contextual information. However, as discussed previously, excessively large contexts can be counterproductive, potentially distracting the model and degrading performance rather than improving it~\cite{ContextRot,LLMdistract}. This trade-off motivates a more careful investigation into which types of information are most beneficial for LLM-based solver selection.
 
 As a first step, we augmented the prompt with a concise problem description (PD): a short textual summary of the MiniZinc model's semantics. These descriptions were automatically generated using another LLM (\texttt{GPT-5.1}) and subsequently refined manually to correct minor inaccuracies, e.g.:
 \begin{itemize}
@@ -525,55 +447,21 @@ The PD was incorporated into the prompt structure (\Cref{fig:promptEx}) as:
 \begin{table}[!ht]
     \centering
     \resizebox{\textwidth}{!}{
-        \begin{tabular}{lllll}
+        \begin{tabular}{llll}
         \hline
-            Model & Total Score & Instances Covered & Average Score \\ \hline
-            gemini-2.5-flash & 59.154 & 75 & 0.788 \\ 
-            gemini-2.5-flash-lite & 82.620 & 100 & 0.826 \\ 
-            moonshotai/kimi-k2-instruct & 81.889 & 100 & 0.818 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 83.182 & 100 & 0.831 \\ 
-            openai/gpt-oss-120b & 83.249 & 100 & 0.832 \\ \hline
+            Model & Single Score & Parallel Score & Closed Gap \\ \hline
+            moonshotai/kimi-k2-instruct-0905 & 72.605 & 83.182 & -0.362 \\ 
+            openai/gpt-oss-120b & 70.741 & 83.250 & -0.517 \\ 
+            gemini-2.5-flash-lite & 69.043 & 82.621 & -0.658 \\ 
+            moonshotai/kimi-k2-instruct & 67.555 & 81.890 & -0.782 \\ 
+            gemini-2.5-flash & 49.897 & 59.154 & -2.249 \\ \hline
         \end{tabular}
     }
     \caption{Test on sanitized scripts combined with textual problem description, parallel-solver evaluation}
-    \label{tab:pDesc3}
+    \label{tab:combinedpDesc3}
 \end{table}
 
-\begin{table}[!ht]
-    \centering
-    \resizebox{\textwidth}{!}{
-        \begin{tabular}{lllll}
-        \hline
-            Model & Total Score & Instances Covered & Average Score \\ \hline
-            moonshotai/kimi-k2-instruct-0905 & 72.605 & 100 & 0.748 \\ 
-            openai/gpt-oss-120b & 70.740 & 100 & 0.721 \\ 
-            gemini-2.5-flash-lite & 69.042 & 100 & 0.719 \\ 
-            moonshotai/kimi-k2-instruct & 67.554 & 100 & 0.718 \\ 
-            gemini-2.5-flash & 49.896 & 73 & 0.723 \\ \hline
-        \end{tabular}
-    }
-    \caption{Test on sanitized scripts combined with textual problem description, single-solver evaluation}
-    \label{tab:pDesc1}
-\end{table}
-
-As shown in \Cref{tab:pDesc3} and \Cref{tab:pDesc1}, Single-solver performance consistently degrades, while parallel-solver evaluation shows modest improvements, with three out of the five tested LLMs achieving better results than in the base configuration. This divergence suggests that additional context can aid diversification in solver selection, even if, in this case, it does not reliably improve the choice of an optimal solver.
-
-\begin{table}[!ht]
-    \centering
-    \resizebox{\textwidth}{!}{
-        \begin{tabular}{lllllll}
-        \hline
-            Model & Instances Covered & AS & SBS & VBS & Closed Gap \\ \hline
-            moonshotai/kimi-k2-instruct-0905 & 100 & 72.605 & 76.964 & 89.0 & -0.362 \\ 
-            openai/gpt-oss-120b & 100 & 70.740 & 76.964 & 89.0 & -0.517 \\ 
-            gemini-2.5-flash-lite & 100 & 69.042 & 76.964 & 89.0 & -0.658 \\ 
-            moonshotai/kimi-k2-instruct & 100 & 67.554 & 76.964 & 89.0 & -0.781 \\ 
-            gemini-2.5-flash & 73 & 49.896 & 76.964 & 89.0 & -2.248 \\ \hline
-        \end{tabular}
-    }
-    \caption{Test on sanitized scripts combined with textual problem description, closed gap}
-    \label{tab:pDesccg}
-\end{table}
+As shown in \Cref{tab:combinedpDesc3}, single-solver performance consistently degrades, while parallel-solver evaluation shows modest improvements, with three out of the five tested LLMs achieving better results than in the base configuration. This divergence suggests that additional context can aid diversification in solver selection, even if, in this case, it does not reliably improve the choice of an optimal solver.
 
 As can be deduced from the results, all the closed gap scores are negatives even after improving the context.
 
@@ -594,60 +482,26 @@ The increased efficiency of the multi-turn setup also makes it possible to enric
 
 To better understand the importance of this information, we experimented with two different configurations: one in which solver descriptions were combined with all previously provided contextual elements, and another in which the solvers descriptions constituted the only additional textual information alongside the MiniZinc model and the instance data. This design allows us to assess the contribution of solver-specific knowledge to the overall performance of the Agentic Solver.
 
+\begin{table}[!ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{llll}
+        \hline
+            Model & Single Score & Parallel Score & Closed Gap \\ \hline
+            \textbf{moonshotai/kimi-k2-instruct} & \textbf{76.964} & 82.236 & \textbf{0.000} \\ 
+            \textbf{moonshotai/kimi-k2-instruct-0905} & \textbf{76.964} & 82.489 & \textbf{0.000} \\ 
+            gemini-2.5-flash & 71.687 & 83.137 & -0.439 \\ 
+            openai/gpt-oss-120b & 70.974 & 78.800 & -0.498 \\ 
+            gemini-2.5-flash-lite & 54.714 & 77.747 & -1.849 \\ \hline
+        \end{tabular}
+    }
+    \caption{Test with sanitized scripts combined with solvers description in a multi turn setup. Columns are calculated as in \Cref{tab:combinedAllLLM}}
+    \label{tab:combinedSdesc}
+\end{table}
+
 In the parallel-solver evaluation (\Cref{tab:sDesc3}), providing only solver descriptions does not lead to systematic improvements. The sole exception is \texttt{gemini-2.5-flash} although its score is still under that of the single best solver (SBS) in the open category.
 
-\begin{table}[!ht]
-    \centering
-    \resizebox{\textwidth}{!}{
-        \begin{tabular}{lllll}
-        \hline
-            Model & Total Score & Instances Covered & Average Score \\ \hline
-            gemini-2.5-flash & 83.137 & 100 & 0.831 \\ 
-            gemini-2.5-flash-lite & 77.746 & 100 & 0.777 \\ 
-            moonshotai/kimi-k2-instruct & 82.236 & 100 & 0.822 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 82.488 & 100 & 0.824 \\ 
-            openai/gpt-oss-120b & 78.799 & 100 & 0.787 \\ \hline
-        \end{tabular}
-    }
-    \caption{Test with sanitized scripts combined with solvers description in a multi turn setup, parallel-solver evaluation}
-    \label{tab:sDesc3}
-\end{table}
-
-\begin{table}[!ht]
-    \centering
-    \resizebox{\textwidth}{!}{
-        \begin{tabular}{lllll}
-        \hline
-            Model & Total Score & Instances Covered & Average Score \\ \hline
-            moonshotai/kimi-k2-instruct & 76.964 & 100 & 0.769 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 76.964 & 100 & 0.769 \\ 
-            gemni & gemini-2.5-flash & 71.686 & 100 & 0.716 \\ 
-            openai/gpt-oss-120b & 70.974 & 100 & 0.716 \\ 
-            gemni & gemini-2.5-flash-lite & 54.713 & 100 & 0.552 \\ \hline
-        \end{tabular}
-    }
-    \caption{Test with sanitized scripts combined with solvers description in a multi turn setup, single-solver evaluation}
-    \label{tab:sDesc1}
-\end{table}
-
-On the other hand, the effects are more pronounced in the single-solver evaluation, displayed in \Cref{tab:sDesc1}. Two models, \texttt{moonshotai/kimi-k2-instruct-0905} and \\\texttt{moonshotai/kimi-k2-instruct}, exhibit a substantial improvement, reaching the SBS score and thus achieving a closed-gap value of zero for the first time. A closer inspection of their outputs, however, reveals that this result is achieved by consistently selecting the same solver, namely \texttt{or-tools\_cp-sat-free}, which is itself the SBS. This behavior effectively bypasses the decision-making role of the LLM, thereby undermining the intended purpose of employing an LLM in the first place.
-
-\begin{table}[!ht]
-    \centering
-    \resizebox{\textwidth}{!}{
-        \begin{tabular}{lllllll}
-        \hline
-            Model & Instances Covered & AS & SBS & VBS & Closed Gap \\ \hline
-            moonshotai/kimi-k2-instruct & 100 & 76.964 & 76.964 & 89.0 & 0.0 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 100 & 76.964 & 76.964 & 89.0 & 0.0 \\ 
-            gemini-2.5-flash & 100 & 71.686 & 76.964 & 89.0 & -0.438 \\ 
-            openai/gpt-oss-120b & 100 & 70.974 & 76.964 & 89.0 & -0.497 \\ 
-            gemini-2.5-flash-lite & 100 & 54.713 & 76.964 & 89.0 & -1.848 \\ \hline
-        \end{tabular}
-    }
-    \caption{Test with sanitized scripts combined with solvers description in a multi turn setup, closed gap}
-    \label{tab:sDesccg}
-\end{table}
+On the other hand, the effects are more pronounced in the single-solver evaluation, displayed in \Cref{tab:combinedSdesc}\Cref{tab:sDesc1}. Two models, \texttt{moonshotai/kimi-k2-instruct-0905} and \\\texttt{moonshotai/kimi-k2-instruct}, exhibit a substantial improvement, reaching the SBS score and thus achieving a closed-gap value of zero for the first time. A closer inspection of their outputs, however, reveals that this result is achieved by consistently selecting the same solver, namely \texttt{or-tools\_cp-sat-free}, which is itself the SBS. This behavior effectively bypasses the decision-making role of the LLM, thereby undermining the intended purpose of employing an LLM in the first place.
 
 \subsubsection{Solver Description and Problem Description}
 Following this observation, we evaluated the configuration combining both forms of textual context: solver descriptions and problem descriptions. In this setup, each LLM is provided with the largest amount of contextual information until now.
@@ -655,207 +509,54 @@ Following this observation, we evaluated the configuration combining both forms 
 \begin{table}[!ht]
     \centering
     \resizebox{\textwidth}{!}{
-        \begin{tabular}{lllll}
-        \hline
-            Model & Total Score & Instances Covered & Average Score \\ \hline
-            gemini-2.5-flash & 83.650 & 100 & 0.836 \\ 
-            gemini-2.5-flash-lite & 78.147 & 100 & 0.781 \\ 
-            moonshotai/kimi-k2-instruct & 80.417 & 99 & 0.812 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 82.218 & 100 & 0.822 \\ 
-            openai/gpt-oss-120b & 80.295 & 100 & 0.802 \\ \hline
-        \end{tabular}
+        \begin{tabular}{llll}
+    \hline
+        Model & Single Score & Parallel Score & Closed Gap \\ \hline
+        \textbf{openai/gpt-oss-120b} & \textbf{77.261} & 80.296 & \textbf{0.025} \\ 
+        moonshotai/kimi-k2-instruct-0905 & 76.964 & 82.219 & 0.000 \\ 
+        moonshotai/kimi-k2-instruct & 74.464 & 80.417 & -0.208 \\ 
+        gemini-2.5-flash & 73.552 & 83.651 & -0.284 \\ 
+        gemini-2.5-flash-lite & 63.063 & 78.148 & -1.155 \\ \hline
+    \end{tabular}
     }
     \caption{Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, parallel-solver evaluation}
-    \label{tab:sDescpDesc3}
+    \label{tab:combinedsDescpDesc}
 \end{table}
 
 In the parallel-solver evaluation, this configuration yields the highest scores observed so far, again driven primarily by \texttt{gemini-2.5-flash}. However, otehr LLMs score is slightly lower than in the previous setups, and all of the reached scores are still under the open-category SBS.
 
-\begin{table}[!ht]
-    \centering
-    \resizebox{\textwidth}{!}{
-        \begin{tabular}{lllll}
-        \hline
-            Model & Total Score & Instances Covered & Average Score \\ \hline
-            openai/gpt-oss-120b & 77.260 & 100 & 0.780 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 76.964 & 100 & 0.769 \\ 
-            moonshotai/kimi-k2-instruct & 74.464 & 99 & 0.752 \\ 
-            gemini-2.5-flash & 73.551 & 100 & 0.750 \\ 
-            gemini-2.5-flash-lite & 63.062 & 100 & 0.630 \\ \hline
-        \end{tabular}
-    }
-    \caption{Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, single-solver evaluation}
-    \label{tab:sDescpDesc1}
-\end{table}
-
 In the single-solver evaluation, \texttt{moonshotai/kimi-k2-instruct-0905} continues to default to selecting the SBS exclusively. Nevertheless, improvements emerge for two other models, namely \texttt{gemini-2.5-flash} and \texttt{gpt-oss-120b}. In particular, \texttt{gpt-oss-120b} achieves the first strictly positive closed-gap score, surpassing \texttt{or-tools\_cp-sat-free}.
-
-\begin{table}[!ht]
-    \centering
-    \resizebox{\textwidth}{!}{
-        \begin{tabular}{lllllll}
-        \hline
-            Model & Instances Covered & AS & SBS & VBS & Closed Gap \\ \hline
-            openai/gpt-oss-120b & 100 & 77.260 & 76.964 & 89.0 & 0.024 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 100 & 76.964 & 76.964 & 89.0 & 0.0 \\ 
-            moonshotai/kimi-k2-instruct & 99 & 74.464 & 76.964 & 89.0 & -0.207 \\ 
-            gemini-2.5-flash & 100 & 73.551 & 76.964 & 89.0 & -0.283 \\ 
-            gemini-2.5-flash-lite & 100 & 63.062 & 76.964 & 89.0 & -1.155 \\ \hline
-        \end{tabular}
-    }
-    \caption{Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, closed gap}
-    \label{tab:sDescpDesccg}
-\end{table}
 
 \subsubsection{Basic Tests Evaluation}
 In this initial testing phase, a positive closed gap has been achieved, showing an agentic solver with better performance than the single best solver. Moreover, when we put the performance respect to the ``non-best solvers``, these primitive configurations of agentic solvers still hold fairly competitive results.
 
 To better display single LLMs performances, all variants scores are put together against one another, using histograms for better visualization. In \Cref{fig:allVarPar} for parallel-solver evaluation, \Cref{fig:allVarSin} for single-solver evaluation and \Cref{fig:allVarCg} for closed gap evaluation.
-\begin{figure}[H]
+\begin{figure}[ht]
     \centering
-    \begin{subfigure}[t]{0.49\textwidth}
+    \begin{subfigure}[t]{0.32\textwidth}
         \centering
         \includegraphics[width=\linewidth]{allVarPar.png}
-        \caption{Histogram to display all variants performances in parallel-solver evaluation}
+        \caption{Histogram to display all variants performances in parallel-solver evaluation.}
         \label{fig:allVarPar}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[t]{0.49\textwidth}
+    \begin{subfigure}[t]{0.32\textwidth}
         \centering
         \includegraphics[width=\linewidth]{allVarSin.png}
-        \caption{Histogram to display all variants performances in single-solver evaluation}
+        \caption{Histogram to display all variants performances in single-solver evaluation.}
         \label{fig:allVarSin}
     \end{subfigure}
-
-    \begin{subfigure}[b]{0.49\textwidth}
+    \hfill
+    \begin{subfigure}[t]{0.32\textwidth}
         \centering
         \includegraphics[width=\linewidth]{allVarcg.png}
-        \caption{Histogram to display all variants performances in closed gap evaluation}
+        \caption{Histogram to display all variants performances in closed gap evaluation.}
         \label{fig:allVarCg}
     \end{subfigure}
+    \caption{Histograms displaying the performaces of all the solver variants in single-solver evaluation, parallel-solver evaluation and closed gap evaluation.}
 \end{figure}
 
 
 To give results another point of view, the performance of each agentic solver configuration is displayed against the single solvers of the corresponding category.
 In \Cref{tab:comparisanVarPar} and \Cref{fig:comparisanVarPar} are shown the performance of all the configurations, scored with parallel-solvers evaluation, when put agains single solvers from the open category.
 On the other hand, looking at \Cref{tab:comparisanVarSin} and \Cref{fig:comparisanVarSin}, the resulting score of single-solver evaluation of all the variants is put against all the single solvers from free category.
-
-\begin{table}[!ht]
-    \centering
-    \resizebox{0.85\textwidth}{!}{
-        \begin{tabular}{lll}
-        \hline
-            Type & Solver & Total Score \\ \hline
-            Solver & or-tools\_cp-sat-par & 88.117 \\ 
-            LLM  Variant & gemini-2.5-flash (Solvers Description + Problem Description) & 83.650 \\ 
-            LLM  Variant & moonshotai/kimi-k2-instruct & 83.268 \\ 
-            LLM  Variant & openai/gpt-oss-120b (Problem Description) & 83.249 \\ 
-            LLM  Variant & moonshotai/kimi-k2-instruct-0905 (Problem Description) & 83.182 \\ 
-            LLM  Variant & gemini-2.5-flash (Solvers Description) & 83.137 \\ 
-            LLM  Variant & moonshotai/kimi-k2-instruct-0905 & 82.656 \\ 
-            LLM  Variant & gemini-2.5-flash-lite (Problem Description) & 82.620 \\ 
-            LLM  Variant & moonshotai/kimi-k2-instruct-0905 (Solvers Description) & 82.488 \\ 
-            LLM  Variant & moonshotai/kimi-k2-instruct (Solvers Description) & 82.236 \\ 
-            LLM  Variant & openai/gpt-oss-120b & 82.226 \\ 
-            LLM  Variant & moonshotai/kimi-k2-instruct-0905 (Solvers Description + Problem Description) & 82.218 \\ 
-            LLM  Variant & moonshotai/kimi-k2-instruct (Problem Description) & 81.889 \\ 
-            LLM  Variant & gemini-2.5-flash-lite & 80.740 \\ 
-            LLM  Variant & openai/gpt-oss-120b (Solvers Description + Problem Description) & 80.295 \\ 
-            LLM  Variant & gemini-2.5-flash & 79.105 \\ 
-            LLM  Variant & openai/gpt-oss-120b (Solvers Description) & 78.799 \\ 
-            LLM  Variant & gemini-2.5-flash-lite (Solvers Description + Problem Description) & 78.147 \\ 
-            LLM  Variant & gemini-2.5-flash-lite (Solvers Description) & 77.746 \\ 
-            Solver & chuffed-free & 74.819 \\ 
-            Solver & picatsat-free & 70.647 \\ 
-            Solver & huub-free & 68.784 \\ 
-            Solver & gurobi-par & 61.081 \\ 
-            Solver & cplex-par & 60.301 \\ 
-            Solver & choco-solver\_\_cp\_-par & 59.365 \\ 
-            Solver & izplus-par & 58.216 \\ 
-            Solver & pumpkin-free & 57.681 \\ 
-            Solver & choco-solver\_\_cp-sat\_-par & 56.896 \\ 
-            Solver & gecode-par & 54.283 \\ 
-            Solver & cp\_optimizer-par & 53.877 \\ 
-            Solver & gecode\_dexter-open & 47.304 \\ 
-            Solver & or-tools\_cp-sat\_ls-par & 46.292 \\ 
-            Solver & jacop-free & 44.373 \\ 
-            Solver & sicstus\_prolog-free & 43.548 \\ 
-            Solver & yuck-par & 38.321 \\ 
-            Solver & scip-par & 36.675 \\ 
-            Solver & highs-par & 33.598 \\ 
-            Solver & cbc-par & 26.334 \\ 
-            Solver & atlantis-free & 1.555 \\ \hline
-        \end{tabular}
-        }
-    \caption{Table displaying all the different LLM variants results from parallel-solver evaluation, and compared to all of the single solvers in open category of the MiniZinc Challenge\cite{MznResults25}}
-    \label{tab:comparisanVarPar}
-\end{table}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.75\linewidth]{comparison1stvarPar.png}
-    \caption{Histograms to visualize the difference between LLMs and single solvers from open category performance}
-    \label{fig:comparisanVarPar}
-\end{figure}
-
-\begin{table}[!ht]
-    \centering
-    \resizebox{\textwidth}{!}{
-        \begin{tabular}{lll}
-        \hline
-            Type & Solver & TotalScore \\ \hline
-            LLM Variant & openai/gpt-oss-120b (Solvers Description + Problem Description) & 77.260 \\ 
-            LLM Variant & moonshotai/kimi-k2-instruct-0905 (Solvers Description + Problem Description) & 76.964 \\ 
-            LLM Variant & moonshotai/kimi-k2-instruct-0905 (Solvers Description) & 76.964 \\ 
-            LLM Variant & moonshotai/kimi-k2-instruct (Solvers Description) & 76.964 \\ 
-            Solver & or-tools\_cp-sat-free & 76.964 \\ 
-            LLM Variant & openai/gpt-oss-120b (Simple) & 74.488 \\ 
-            LLM Variant & moonshotai/kimi-k2-instruct (Solvers Description + Problem Description) & 74.464 \\ 
-            Solver & chuffed-free & 74.456 \\ 
-            LLM Variant & gemini-2.5-flash (Solvers Description + Problem Description) & 73.551 \\ 
-            LLM Variant & moonshotai/kimi-k2-instruct-0905 (Problem Description) & 72.605 \\ 
-            LLM Variant & gemini-2.5-flash (Solvers Description) & 71.686 \\ 
-            LLM Variant & moonshotai/kimi-k2-instruct-0905 (Simple) & 71.622 \\ 
-            LLM Variant & openai/gpt-oss-120b (Solvers Description) & 70.974 \\ 
-            LLM Variant & moonshotai/kimi-k2-instruct (Simple) & 70.939 \\ 
-            Solver & picatsat-free & 70.933 \\ 
-            LLM Variant & openai/gpt-oss-120b (Problem Description) & 70.740 \\ 
-            LLM Variant & gemini-2.5-flash-lite (Simple) & 70.145 \\ 
-            LLM Variant & gemini-2.5-flash (Simple) & 69.763 \\ 
-            LLM Variant & gemini-2.5-flash-lite (Problem Description) & 69.042 \\ 
-            Solver & huub-free & 68.497 \\ 
-            LLM Variant & moonshotai/kimi-k2-instruct (Problem Description) & 67.554 \\ 
-            LLM Variant & gemini-2.5-flash-lite (Solvers Description + Problem Description) & 63.062 \\ 
-            Solver & choco-solver\_\_cp-sat\_-free & 60.808 \\ 
-            Solver & izplus-free & 58.672 \\ 
-            Solver & pumpkin-free & 58.543 \\ 
-            Solver & choco-solver\_\_cp\_-free & 58.404 \\ 
-            Solver & gurobi-free & 55.384 \\ 
-            LLM Variant & gemini-2.5-flash-lite (Solvers Description) & 54.713 \\ 
-            Solver & cp\_optimizer-free & 50.992 \\ 
-            Solver & gecode-fd & 50.073 \\ 
-            LLM Variant & gemini-2.5-flash (Problem Description) & 49.896 \\ 
-            Solver & cplex-free & 48.514 \\ 
-            Solver & sicstus\_prolog-free & 44.592 \\ 
-            Solver & jacop-free & 44.549 \\ 
-            Solver & or-tools\_cp-sat\_ls-free & 43.222 \\ 
-            Solver & scip-free & 36.902 \\ 
-            Solver & yuck-free & 34.715 \\ 
-            Solver & highs-free & 34.418 \\ 
-            Solver & cbc-free & 22.615 \\ 
-            Solver & atlantis-free & 1.5 \\ \hline
-        \end{tabular}
-    }
-    \caption{Table displaying all the different LLM variants results given single-solver evaluation, and compared to all of the single solvers in free category of the MiniZinc Challenge\cite{MznResults25}}
-    \label{tab:comparisanVarSin}
-\end{table}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{comparison1stvarSin.png}
-    \caption{Histograms to visualize the difference between LLMs and single solvers from free category performance}
-    \label{fig:comparisanVarSin}
-\end{figure}
-
-
-\end{document}
