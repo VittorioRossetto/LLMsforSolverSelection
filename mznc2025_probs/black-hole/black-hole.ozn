@@ -1,0 +1,2 @@
+output ["x = ",show(x),";\n"];
+array [1..52] of int: x;

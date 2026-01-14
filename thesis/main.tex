@@ -37,6 +37,7 @@
 \usepackage{geometry}
 \usepackage{subfiles}
 \usepackage[numbers]{natbib}
+\usepackage{hyperref}
 \usepackage{cleveref}
 \usepackage{xcolor}
 \definecolor{darkred}{RGB}{139,0,0}
@@ -51,6 +52,19 @@
 }
 \usepackage{float}
 \usepackage{subcaption}
+\newtcolorbox{definition}[1]{
+        colback=gray!10,
+    colframe=gray,
+    boxrule=0.8pt,
+    arc=2mm,
+    left=6pt,
+    right=6pt,
+    top=6pt,
+    bottom=6pt,
+    title={#1},
+    coltitle=white,
+    colbacktitle=gray
+}
 
 
 \geometry{margin=2cm} 
@@ -91,11 +105,11 @@ or nothing at all \ldots
 \clearpage{\pagestyle{empty}\cleardoublepage}
 \tableofcontents
 
-\clearpage{\pagestyle{empty}\cleardoublepage}
-\listoffigures
+% \clearpage{\pagestyle{empty}\cleardoublepage}
+% \listoffigures
 
-\clearpage{\pagestyle{empty}\cleardoublepage}
-\listoftables
+% \clearpage{\pagestyle{empty}\cleardoublepage}
+% \listoftables
 
 \clearpage{\pagestyle{empty}\cleardoublepage}
 
@@ -106,9 +120,18 @@ or nothing at all \ldots
 
 \subfile{sections/c1/c1.tex}
 
+\chapter*{Appendix}
+\rhead[\fancyplain{}{\bfseries APPENDIX}]{\fancyplain{}{\bfseries\thepage}}
+\lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries APPENDIX}}
+\addcontentsline{toc}{chapter}{Appendix}
+
+\subfile{sections/appendix/appendix.tex}
+
 \clearpage{\pagestyle{empty}\cleardoublepage}
 \begin{thebibliography}{90}             
 \rhead[\fancyplain{}{\bfseries BIBLIOGRAPHY}]{\fancyplain{}{\bfseries\thepage}}
+\lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries BIBLIOGRAPHY}}
+
 
 \addcontentsline{toc}{chapter}{Bibliography}
 
