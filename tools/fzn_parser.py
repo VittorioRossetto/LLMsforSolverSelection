@@ -57,6 +57,10 @@ CONSTRAINT_TEXT = {
         "Multiplicative constraints enforce that one integer variable equals the product of two others",
     "int_max":
         "Maximum constraints bind a variable to the maximum value among a set of variables",
+
+    # Gecode/FlatZinc specific globals
+    "gecode_cumulatives":
+        "Cumulative constraints are scheduling constraints that require that a set of tasks, given by start times, durations, and resource requirements, never require more than a global resource bound at any time",
 }
 
 # ============================================================
@@ -71,6 +75,27 @@ class FlatZincModel:
         self.problem_type = None
         self.objective = None
         self.search = None
+
+
+def compute_variable_degrees(model: "FlatZincModel") -> Dict[str, int]:
+    """Return a best-effort mapping var_name -> number of constraints mentioning it."""
+    degrees: Dict[str, int] = {name: 0 for name in model.variables.keys()}
+
+    # Tokenize arguments and count mentions of known scalar variables.
+    token_re = re.compile(r"\b[A-Za-z]\w*\b")
+    for c in model.constraints:
+        if isinstance(c, dict):
+            args = c.get("args", "")
+        else:
+            # Backwards compatibility (old format stored only the type string).
+            args = ""
+        if not args:
+            continue
+        tokens = token_re.findall(args)
+        for name in tokens:
+            if name in degrees:
+                degrees[name] += 1
+    return degrees
 
 
 @dataclass(frozen=True)
@@ -258,7 +283,10 @@ def parse_fzn(path):
     #   var bool: b;
     #   var 1..52: X_INTRODUCED_1_;
     #   var {1,3,5}: v;
-    for m in re.finditer(r"\bvar\s+(?P<spec>int|bool|-?\d+\.\.-?\d+|\{[^}]*\})\s*:\s*(?P<name>\w+)\s*;", text):
+    for m in re.finditer(
+        r"\bvar\s+(?P<spec>int|bool|-?\d+\.\.-?\d+|\{[^}]*\})\s*:\s*(?P<name>\w+)(?:\s*::[^;]*)?\s*;",
+        text,
+    ):
         spec = m.group("spec")
         name = m.group("name")
 
@@ -302,7 +330,7 @@ def parse_fzn(path):
     # Constraints
     for m in re.finditer(r"constraint\s+(\w+)\((.*?)\);", text, re.DOTALL):
         ctype, args = m.groups()
-        model.constraints.append(ctype)
+        model.constraints.append({"type": ctype, "args": args})
 
     # Solve + search
     solve_match = re.search(
@@ -327,33 +355,49 @@ def parse_fzn(path):
 
 def describe_problem(model):
     if model.problem_type == "satisfy":
-        return "Find any solution satisfying all constraints."
-    if model.problem_type == "minimize":
-        return f"Find a solution minimizing {model.objective}."
-    if model.problem_type == "maximize":
-        return f"Find a solution maximizing {model.objective}."
+        return "This is a satisfaction problem."
+
+    if model.problem_type in {"minimize", "maximize"}:
+        direction = "minimization" if model.problem_type == "minimize" else "maximization"
+        base = f"This is a {direction} problem."
+
+        objective_name = model.objective if isinstance(model.objective, str) else None
+        if not objective_name or objective_name not in model.variables:
+            return base + " Objective variable could not be determined."
+
+        v = model.variables[objective_name]
+        d = v.get("domain")
+        deg = compute_variable_degrees(model).get(objective_name, 0)
+
+        if d is None:
+            return base + f" Objective: {model.problem_type} an objective variable with unknown domain and degree {deg}."
+
+        size = d.max_value - d.min_value + 1
+        mean_value = (d.min_value + d.max_value) / 2
+        return (
+            base
+            + f" Objective: {model.problem_type} an objective variable with domain [{d.min_value}, {d.max_value}]"
+            + f" (size {size}, mean {mean_value:.2f}) and degree {deg}."
+        )
+
     return "Problem type could not be determined."
 
 def describe_search(search):
     if not search:
         return "No explicit search strategy is specified."
 
-    def _names_preview(names: List[str], limit: int = 6) -> str:
-        names = [n for n in names if n]
-        if not names:
-            return "(none)"
-        names_sorted = sorted(names)
-        if len(names_sorted) <= limit:
-            return ", ".join(names_sorted)
-        head = ", ".join(names_sorted[:limit])
-        return f"{head}, … (+{len(names_sorted) - limit})"
+    def _vars_count_text(names: List[str]) -> str:
+        count = sum(1 for n in names if n)
+        if count == 1:
+            return "1 variable"
+        return f"{count} variables"
 
     def _describe_int_search(s: dict) -> str:
-        vars_ = _names_preview(s.get("vars", []))
+        vars_ = _vars_count_text(s.get("vars", []))
         var_sel = SEARCH_VAR_STRATEGY.get(s.get("var_strategy"), s.get("var_strategy"))
         val_sel = SEARCH_VALUE_STRATEGY.get(s.get("val_strategy"), s.get("val_strategy"))
         comp = SEARCH_COMPLETENESS.get(s.get("completeness"), s.get("completeness"))
-        return f"integer search on variables {vars_}, using {var_sel}, {val_sel}, and {comp}";
+        return f"integer search on {vars_}, using {var_sel}, {val_sel}, and {comp}";
 
     if isinstance(search, dict) and search.get("kind") == "seq_search":
         phases = search.get("phases", [])
@@ -367,21 +411,22 @@ def describe_search(search):
         if not phase_desc:
             return "No explicit search strategy is specified."
         joined = "; ".join(f"({i+1}) {d}" for i, d in enumerate(phase_desc))
-        return f"The solver applies a sequential search strategy with {len(phase_desc)} phases: {joined}."
+        return f"The model suggests a sequential search strategy with {len(phase_desc)} phases: {joined}."
 
     if isinstance(search, dict) and search.get("kind") == "int_search":
-        return f"The solver applies an {_describe_int_search(search)}."
+        return f"The model suggests an {_describe_int_search(search)}."
 
     # Backwards compatibility if something else assigned a plain dict.
     if isinstance(search, dict) and {"vars", "var_strategy", "val_strategy", "completeness"}.issubset(search.keys()):
         compat = {"kind": "int_search", **search}
-        return f"The solver applies an {_describe_int_search(compat)}."
+        return f"The model suggests an {_describe_int_search(compat)}."
 
     return "No explicit search strategy is specified."
 
 def describe_variables_detailed(model):
     lines = []
-    scalar_domain_sizes = []
+    scalar_domain_sizes: List[int] = []
+    unknown_domain_count = 0
 
     def _fmt_domain(d: Optional[Domain]) -> str:
         if d is None:
@@ -394,74 +439,141 @@ def describe_variables_detailed(model):
         return d.max_value - d.min_value + 1
 
     objective_name = model.objective if isinstance(model.objective, str) else None
+    degrees = compute_variable_degrees(model)
+
+    # Gather scalar domain statistics for all variables.
+    for v in model.variables.values():
+        size = _domain_size(v.get("domain"))
+        if size is None:
+            unknown_domain_count += 1
+        else:
+            scalar_domain_sizes.append(size)
 
     # Keep the objective variable described (not grouped), but do not print its name.
     if objective_name and objective_name in model.variables:
         v = model.variables[objective_name]
         d = v.get("domain")
+        deg = degrees.get(objective_name, 0)
         size = _domain_size(d)
-        if size is not None:
-            scalar_domain_sizes.append(size)
-        lines.append(f"  Objective variable ({v['type']}): {_fmt_domain(d)}")
+        if size is None:
+            lines.append(f"  Objective variable ({v['type']}): {_fmt_domain(d)}, degree {deg}")
+        else:
+            lines.append(f"  Objective variable ({v['type']}): {_fmt_domain(d)} (size {size}), degree {deg}")
 
-    # Group remaining scalar variables by (type, domain).
-    groups: Dict[Tuple[str, Optional[Domain]], List[str]] = defaultdict(list)
-    for name, v in model.variables.items():
-        if objective_name and name == objective_name:
-            continue
-        d = v.get("domain")
-        size = _domain_size(d)
-        if size is not None:
-            scalar_domain_sizes.append(size)
-        groups[(v["type"], d if isinstance(d, Domain) else None)].append(name)
+    int_count = sum(1 for v in model.variables.values() if v["type"] == "int")
+    bool_count = sum(1 for v in model.variables.values() if v["type"] == "bool")
 
-    for (vtype, d), names in sorted(groups.items(), key=lambda kv: (kv[0][0], str(kv[0][1]), len(kv[1]))):
-        lines.append(f"  {len(names)}× variables ({vtype}): {_fmt_domain(d)}")
+    count_parts: List[str] = []
+    if int_count:
+        count_parts.append(f"{int_count} integer variables")
+    if bool_count:
+        count_parts.append(f"{bool_count} Boolean variables")
 
-    header = [
-        f"The model contains "
-        f"{sum(1 for v in model.variables.values() if v['type']=='int')} integer variables and "
-        f"{sum(1 for v in model.variables.values() if v['type']=='bool')} Boolean variables."
-    ]
+    if not count_parts:
+        header = ["The model contains no scalar variables."]
+    elif len(count_parts) == 1:
+        header = [f"The model contains {count_parts[0]}."]
+    else:
+        header = [f"The model contains {count_parts[0]} and {count_parts[1]}."]
 
     if scalar_domain_sizes:
+        min_size = min(scalar_domain_sizes)
+        max_size = max(scalar_domain_sizes)
+        known_count = len(scalar_domain_sizes)
+
+        # Split [min_size, max_size] into 4 equal-ish integer intervals.
+        span = max_size - min_size + 1
+        bounds = []
+        for i in range(4):
+            lo = min_size + (span * i) // 4
+            hi = min_size + (span * (i + 1)) // 4 - 1
+            if i == 3:
+                hi = max_size
+            if hi >= lo:
+                bounds.append((lo, hi))
+
+        # Count and average domain size per interval.
+        bucket_lines: List[str] = []
+        for lo, hi in bounds:
+            bucket = [s for s in scalar_domain_sizes if lo <= s <= hi]
+            if not bucket:
+                continue
+            pct = 100.0 * len(bucket) / known_count
+            avg = mean(bucket)
+            bucket_lines.append(
+                f"{pct:.1f}% of variables have domain size in [{lo}, {hi}] (avg size {avg:.2f})"
+            )
+
         header.append(
-            f"Scalar variable domain sizes range from {min(scalar_domain_sizes)} to {max(scalar_domain_sizes)}, "
-            f"with an average size of {mean(scalar_domain_sizes):.2f}."
+            f"Among {known_count} variables with known finite domains, "
+            + "; ".join(bucket_lines)
+            + "."
         )
 
-    return "\n".join(header + [""] + lines)
+    if unknown_domain_count:
+        header.append(f"{unknown_domain_count} variables have unknown domains.")
+
+    if lines:
+        return "\n".join(header + [""] + lines)
+    return "\n".join(header)
 
 def describe_constraints(model):
     counts = defaultdict(int)
     for c in model.constraints:
-        counts[c] += 1
+        if isinstance(c, dict):
+            ctype = c.get("type")
+        else:
+            ctype = c
+        if ctype:
+            counts[ctype] += 1
 
-    paragraphs = []
+    # Heuristic classification: fixed-arity constraints are treated as "primitive"; others as "global".
+    # FlatZinc global constraints typically accept arrays (variable arity), e.g., all_different, element,
+    # linear constraints, clauses, and scheduling constraints like cumulative.
+    fixed_arity = {
+        "int_eq",       # binary
+        "int_ne",       # binary
+        "int_le",       # binary
+        "bool2int",     # unary + int
+        "int_times",    # ternary
+    }
+
+    def _to_parenthetical(desc: str) -> str:
+        desc = (desc or "").strip()
+        if desc.endswith("."):
+            desc = desc[:-1]
+        if desc and desc[0].isupper():
+            desc = desc[0].lower() + desc[1:]
+        return desc
+
+    def _fmt_line(ctype: str, count: int) -> str:
+        desc = CONSTRAINT_TEXT.get(
+            ctype,
+            f"Constraints of type {ctype} restrict relationships between variables",
+        )
+        return f"  {ctype}: {count} ({_to_parenthetical(desc)})"
+
     total = sum(counts.values())
-
+    primitives: List[str] = []
+    globals_: List[str] = []
     for ctype, count in sorted(counts.items()):
-        text = CONSTRAINT_TEXT.get(
-            ctype,
-            f"Constraints of type {ctype} restrict relationships between variables"
-        )
-        paragraphs.append(f"  {ctype}: {count}")
+        if ctype in fixed_arity:
+            primitives.append(_fmt_line(ctype, count))
+        else:
+            globals_.append(_fmt_line(ctype, count))
 
-    organic = []
-    for ctype, count in sorted(counts.items()):
-        base = CONSTRAINT_TEXT.get(
-            ctype,
-            f"Constraints of type {ctype} restrict relationships between variables"
-        )
-        organic.append(f"{count} instances of {base.lower()}")
+    lines: List[str] = []
+    if globals_:
+        lines.append("Global constraints (variable arity):")
+        lines.extend(globals_)
+    if primitives:
+        if lines:
+            lines.append("")
+        lines.append("Primitive constraints (fixed arity):")
+        lines.extend(primitives)
 
-    return (
-        "\n".join(paragraphs)
-        + f"\n\nTotal constraints: {total}\n\n"
-        + "Qualitatively, the model is composed of "
-        + ", ".join(organic)
-        + "."
-    )
+    lines.append(f"\nTotal constraints: {total}")
+    return "\n".join(lines)
 
 # ============================================================
 # Output

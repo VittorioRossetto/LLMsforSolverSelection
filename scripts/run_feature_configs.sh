@@ -43,13 +43,13 @@ declare -a CONFIGS=(
   # "base|"
   #"base_Pdesc_Sdesc|--include-problem-desc --include-solver-desc"
   # "featOnly_Pdesc|--features-only --include-features --include-problem-desc"
-  "featOnly_Sdesc|--features-only --include-features --include-solver-desc"
+  # "featOnly_Sdesc|--features-only --include-features --include-solver-desc"
   "featOnly_Pdesc_Sdesc|--features-only --include-features --include-problem-desc --include-solver-desc"
 )
 
 # Temperature sweep for each configuration (passed through to benchmark_chat.py)
 declare -a TEMPS=(
-  # "0.2"
+  "0.2"
   "0.0"
   "0.8"
   "0.3"

@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1768368314.25109 "/home/vro5/Coding/AgenticSolvers/thesis/main.tex" "main.pdf" "main" 1768368316.55602 0
-  "/home/vro5/Coding/AgenticSolvers/thesis/main.tex" 1768188611.92221 7075 bd435111d4d89fb277ce43f4461162c5 ""
+["pdflatex"] 1768445808.80016 "/home/vro5/Coding/AgenticSolvers/thesis/main.tex" "main.pdf" "main" 1768445810.80396 0
+  "/home/vro5/Coding/AgenticSolvers/thesis/main.tex" 1768445806.33677 7706 6fd4250c8814645fbdf1bacb50f6fcd9 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
@@ -202,15 +202,15 @@
   "allVarcg.png" 1768366155.86538 36606 f6e5541f3fd2e153c4ca32ddbb2b8fe0 ""
   "comparison1stvarPar.png" 1768365013.26262 122204 df129d3a9e3b6906c4d29b040a4baaf0 ""
   "comparison1stvarSin.png" 1768365052.63543 154072 418ff31711783d432e52f252962c23bf ""
-  "main.aux" 1768368316.41873 26444 2d42bb575715888178c92f19d9fa55ac "pdflatex"
-  "main.out" 1768368316.42273 2167 786fe4499918acaa4f4f8fbfa77c5a0b "pdflatex"
-  "main.tex" 1768188611.92221 7075 bd435111d4d89fb277ce43f4461162c5 ""
-  "main.toc" 1768368316.42273 1979 ed8cbdd4af23b312d861074b11cb4ea8 "pdflatex"
+  "main.aux" 1768445810.67881 27716 c1c6d8c282e8b12a0c679457f974712c "pdflatex"
+  "main.out" 1768445810.68281 2322 2a3bdf07636eeb40a659103e4b3cdbd8 "pdflatex"
+  "main.tex" 1768445806.33677 7706 6fd4250c8814645fbdf1bacb50f6fcd9 ""
+  "main.toc" 1768445810.68381 2207 64580862a9102c8b7d2bf80f205d6387 "pdflatex"
   "sections/Intro/intro.tex" 1765429439.41706 95 3f93b58ff5da68a06e94fe9809afcc0d ""
   "sections/appendix/appendix.tex" 1768368295.5196 22897 a820d581623b64ac41d12c96588e0d7f ""
   "sections/c1/../../PromptExample.png" 1765417121.24397 60042 f03a361437d97b43ccadc60fee95e81e ""
   "sections/c1/../../TableSolverMetricsExample.png" 1765428295.80671 24634 8ffa7fdb4b8acb2553a721f339e9d8c7 ""
-  "sections/c1/c1.tex" 1768368295.4296 42280 29b99fbf8ad1f27aa6772f878f2ee2c5 ""
+  "sections/c1/c1.tex" 1768445806.42177 44083 56a0df9ecac73fdfd04b18e4923c319b ""
   (generated)
   "main.aux"
   "main.log"

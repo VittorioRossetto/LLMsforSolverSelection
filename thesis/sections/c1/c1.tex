@@ -303,6 +303,7 @@ To this end, we designed an automated testing pipeline that parallelizes executi
 Despite preliminary prompt engineering and model filtering, several MiniZinc models, particularly their associated data files, still exceed the providers' rate limits. Since these limits are strict, additional mechanisms were required to prevent limit violations while still allowing evaluation over the complete instance set.
 
 \subsubsection{Script Manipulation}
+\label{sec:scriptMan}
 
 The most direct way to address oversized requests is to reduce their length. As the prompt itself was already minimal, this required direct manipulation of the MiniZinc model (\texttt{.mzn}) and data files.
 
@@ -373,7 +374,7 @@ The first experiments were conducted using the unedited problems. Each LLM was p
             groq/compound & 5.197 & 8.246 & -5.963 \\ \hline
         \end{tabular}
     }
-    \caption{Initial tests giving plain scripts to all the LLMs, In this table:column "Model" contains the names of each tested LLM,`` Total Score'' represents the sum of the score reached in every instance, in this table ``Total Score'' represents the sum of the score reached in every instance, score was calculated by summing the performance of what was suggested to be the best solver on the given instance by each of the LLMs, `` Parallel Score'' represents the sum of the score reached in every instance, score was calculated in parallel-solver setup, so taking the 3 best solvers given by the LLM, calculate the score of all the 3, and take the maximum out of the three, and finally ``Closed Gap'' displays the closed gap score calculated over ``Single Score'' by using the formula explained in \Cref{sec:closedGap}}
+    \caption{Initial tests giving plain scripts to all the LLMs, In this table:column "Model" contains the names of each tested LLM,`` Total Score'' represents the sum of the score reached in every instance, in this table ``Total Score'' represents the sum of the score reached in every instance, score was calculated by summing the performance of what was suggested to be the best solver on the given instance by each of the LLMs, `` Parallel Score'' represents the sum of the score reached in every instance, score was calculated in parallel-solver setup, so taking the 3 best solvers given by the LLM, calculate the score of all the 3, and take the maximum out of the three, and finally ``Closed Gap'' displays the closed gap score calculated over ``Single Score'' by using the formula explained in \Cref{sec:closedGap}.}
     \label{tab:combinedAllLLM}
 \end{table}
 
@@ -400,7 +401,7 @@ As a baseline, the LLMs were first evaluated under the same conditions as the pr
             gemini-2.5-flash & 69.763 & 79.105 & -0.598 \\ \hline
         \end{tabular}
     }
-    \caption{Tests on sanitized scripts given to the 5 best performing LLMs, columns content is calculated as in \Cref{tab:combinedAllLLM}}
+    \caption{Tests on sanitized scripts given to the 5 best performing LLMs, columns content is calculated as in \Cref{tab:combinedAllLLM}.}
     \label{tab:combinedBase}
 \end{table}
 
@@ -418,6 +419,23 @@ As a first step, we augmented the prompt with a concise problem description (PD)
 \end{itemize}
 
 The PD was incorporated into the prompt structure (\Cref{fig:promptEx}) as:
+
+\begin{table}[!ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{llll}
+        \hline
+            Model & Single Score & Parallel Score & Closed Gap \\ \hline
+            moonshotai/kimi-k2-instruct-0905 & 72.605 & 83.182 & -0.362 \\ 
+            openai/gpt-oss-120b & 70.741 & 83.250 & -0.517 \\ 
+            gemini-2.5-flash-lite & 69.043 & 82.621 & -0.658 \\ 
+            moonshotai/kimi-k2-instruct & 67.555 & 81.890 & -0.782 \\ 
+            gemini-2.5-flash & 49.897 & 59.154 & -2.249 \\ \hline
+        \end{tabular}
+    }
+    \caption{Test on sanitized scripts combined with textual problem description. Columns are calculated as in \Cref{tab:combinedAllLLM}.}
+    \label{tab:combinedpDesc3}
+\end{table}
 
 \begin{definition}{Prompt Structure}
     Prompt description:\\
@@ -442,24 +460,6 @@ The PD was incorporated into the prompt structure (\Cref{fig:promptEx}) as:
     Answer only with the name of the 3 best solvers inside square brackets separated by comma and nothing else.
 
 \end{definition}
-
-
-\begin{table}[!ht]
-    \centering
-    \resizebox{\textwidth}{!}{
-        \begin{tabular}{llll}
-        \hline
-            Model & Single Score & Parallel Score & Closed Gap \\ \hline
-            moonshotai/kimi-k2-instruct-0905 & 72.605 & 83.182 & -0.362 \\ 
-            openai/gpt-oss-120b & 70.741 & 83.250 & -0.517 \\ 
-            gemini-2.5-flash-lite & 69.043 & 82.621 & -0.658 \\ 
-            moonshotai/kimi-k2-instruct & 67.555 & 81.890 & -0.782 \\ 
-            gemini-2.5-flash & 49.897 & 59.154 & -2.249 \\ \hline
-        \end{tabular}
-    }
-    \caption{Test on sanitized scripts combined with textual problem description, parallel-solver evaluation}
-    \label{tab:combinedpDesc3}
-\end{table}
 
 As shown in \Cref{tab:combinedpDesc3}, single-solver performance consistently degrades, while parallel-solver evaluation shows modest improvements, with three out of the five tested LLMs achieving better results than in the base configuration. This divergence suggests that additional context can aid diversification in solver selection, even if, in this case, it does not reliably improve the choice of an optimal solver.
 
@@ -495,7 +495,7 @@ To better understand the importance of this information, we experimented with tw
             gemini-2.5-flash-lite & 54.714 & 77.747 & -1.849 \\ \hline
         \end{tabular}
     }
-    \caption{Test with sanitized scripts combined with solvers description in a multi turn setup. Columns are calculated as in \Cref{tab:combinedAllLLM}}
+    \caption{Test with sanitized scripts combined with solvers description in a multi turn setup. Columns are calculated as in \Cref{tab:combinedAllLLM}.}
     \label{tab:combinedSdesc}
 \end{table}
 
@@ -519,7 +519,7 @@ Following this observation, we evaluated the configuration combining both forms 
         gemini-2.5-flash-lite & 63.063 & 78.148 & -1.155 \\ \hline
     \end{tabular}
     }
-    \caption{Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, parallel-solver evaluation}
+    \caption{Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup. Columns are calculated as in \Cref{tab:combinedAllLLM}.}
     \label{tab:combinedsDescpDesc}
 \end{table}
 
@@ -530,33 +530,48 @@ In the single-solver evaluation, \texttt{moonshotai/kimi-k2-instruct-0905} conti
 \subsubsection{Basic Tests Evaluation}
 In this initial testing phase, a positive closed gap has been achieved, showing an agentic solver with better performance than the single best solver. Moreover, when we put the performance respect to the ``non-best solvers``, these primitive configurations of agentic solvers still hold fairly competitive results.
 
-To better display single LLMs performances, all variants scores are put together against one another, using histograms for better visualization. In \Cref{fig:allVarPar} for parallel-solver evaluation, \Cref{fig:allVarSin} for single-solver evaluation and \Cref{fig:allVarCg} for closed gap evaluation.
+To better display single LLMs performances, all variants scores are put together against one another, using histograms for better visualization in \Cref{fig:histoVar1}. In \Cref{fig:allVarPar} for parallel-solver evaluation, \Cref{fig:allVarSin} for single-solver evaluation and \Cref{fig:allVarCg} for closed gap evaluation.
+
 \begin{figure}[ht]
     \centering
     \begin{subfigure}[t]{0.32\textwidth}
         \centering
         \includegraphics[width=\linewidth]{allVarPar.png}
-        \caption{Histogram to display all variants performances in parallel-solver evaluation.}
+        \caption{All variants performances in ``Parallel Score'', as calculated in \Cref{tab:combinedAllLLM}.}
         \label{fig:allVarPar}
     \end{subfigure}
     \hfill
     \begin{subfigure}[t]{0.32\textwidth}
         \centering
         \includegraphics[width=\linewidth]{allVarSin.png}
-        \caption{Histogram to display all variants performances in single-solver evaluation.}
+        \caption{All variants performances in ``Single Score'', as calculated in \Cref{tab:combinedAllLLM}.}
         \label{fig:allVarSin}
     \end{subfigure}
     \hfill
     \begin{subfigure}[t]{0.32\textwidth}
         \centering
         \includegraphics[width=\linewidth]{allVarcg.png}
-        \caption{Histogram to display all variants performances in closed gap evaluation.}
+        \caption{All variants performances in ``Closed Gap'', as calculated in \Cref{tab:combinedAllLLM}.}
         \label{fig:allVarCg}
     \end{subfigure}
-    \caption{Histograms displaying the performaces of all the solver variants in single-solver evaluation, parallel-solver evaluation and closed gap evaluation.}
+    \caption{Histograms displaying the performaces of all the solver variants in ``Single Score''evaluation, ``Parallel Score'' evaluation and ``Closed Gap'' evaluation.}
+    \label{fig:histoVar1}
 \end{figure}
 
 
 To give results another point of view, the performance of each agentic solver configuration is displayed against the single solvers of the corresponding category.
 In \Cref{tab:comparisanVarPar} and \Cref{fig:comparisanVarPar} are shown the performance of all the configurations, scored with parallel-solvers evaluation, when put agains single solvers from the open category.
 On the other hand, looking at \Cref{tab:comparisanVarSin} and \Cref{fig:comparisanVarSin}, the resulting score of single-solver evaluation of all the variants is put against all the single solvers from free category.
+
+\subsection{Feature Employment}
+In the last section, we exposed the importance of textual informations, and giving a richer context to the LLM instead of relying on its understanding of a \texttt{.mzn} script. Even though a closed gap was already reached in previous experiments, relying on context information such as the problem description is a strong limitation for the solver, given those data need to be supervised, if not entirely rewritten by hand, due to the high variability, especially when extracted on new problems. This limitation highlights the necessity of a mean to extract informations automatically, in a controlled and predictable way.
+
+Another problem is the one concerning script dimensions: programs with longer scripts need some techniques like sanitization, as previously stated in \Cref{sec:scriptMan}, these type of technique, makes it possible to work with longer scripts and context data. But is still penalizing towards longer problems, raising the risk of hallucination~\cite{LLMhallucination}, due to the forced removal of elements in data, leaving incomplete arrays as input.
+
+
+For these tasks we decided to employ a feature-extractor~\cite{mzn2feat}, which allows to extract an extensive set of 95 features from a Constraint (Satisfaction/Optimization) Problem defined in possibly different modelling languages: MiniZinc, FlatZinc or XCSP. Designed to be independent from the particular machine on which it is run as well as from the specific global redefinitions of a given solver. The employed version was already used in other projects~\cite{splitAndBounds}~\cite{SUNNY-CP}~\cite{multicoreCS}.
+
+\subsubsection{Features Description}
+\dots
+
+\subsubsection{Testing and Results}
