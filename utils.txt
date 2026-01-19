@@ -1,0 +1,2 @@
+comando compilatore custom:
+~/minizinc-custom/bin/minizinc -c -s --solver mzn-fzn -I /home/vro5/Coding/minizincHLstdlib/std ../mznc2025_probs/products-and-shelves/product-and-shelves.mzn ../mznc2025_probs/products-and-shelves/ps-25-01.dzn

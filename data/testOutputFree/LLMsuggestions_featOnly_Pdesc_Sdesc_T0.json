@@ -1,0 +1,846 @@
+{
+  "chat": {
+    "openai/gpt-oss-120b": {
+      "atsp": {
+        "instance11_0p25": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "instance14_0p25": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "instance1_0p05": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": null
+        },
+        "instance20_0p35": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": null
+        },
+        "instance4_0p15": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": null
+        }
+      },
+      "black-hole": {
+        "layout_14": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "layout_17": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "layout_25": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": null
+        },
+        "layout_27": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": null
+        },
+        "layout_3": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": null
+        }
+      },
+      "carpet-cutting": {
+        "cc_rnd_12_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "cc_rnd_16_1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "cc_rnd_4_4": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "cc_rnd_8_1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "cc_rnd_8_2": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        }
+      },
+      "cgt": {
+        "cgt_12_h27_r0.05_s0.5_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "cgt_3_h39_r0.05_s0.5_0": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "cgt_3_h39_r0.05_s1_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "cgt_5_h27_r0.05_s0.8_0": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "cgt_8_h16_r0.05_s0.5_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        }
+      },
+      "EchoSched": {
+        "12-12-0-1_7": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "13-14-0-2_6": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "14-10-0-2_1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "14-10-0-2_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "15-15-0-1_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        }
+      },
+      "fbd1": {
+        "FBDk04": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "FBDk06": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "FBDk07": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "FBDk08": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "FBDk09": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        }
+      },
+      "groupsplitter": {
+        "u12g2pref0": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "u12g2pref2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "u15g1pref2": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "u15g3pref0": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "u15g5pref1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        }
+      },
+      "gt-sort": {
+        "n13_ub20_50.0_BEST": {
+          "top3": [
+            "choco-solver__cp_-free",
+            "chuffed-free",
+            "jacop-free"
+          ],
+          "time_seconds": null
+        },
+        "n7_ub20_75.0_BEST": {
+          "top3": [
+            "choco-solver__cp_-free",
+            "chuffed-free",
+            "jacop-free"
+          ],
+          "time_seconds": null
+        },
+        "n9_ub10_50.0_BEST": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "n9_ub10_75.0_BEST": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "n9_ub30_35.0_BEST": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        }
+      },
+      "hitori": {
+        "h11-1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "h14-1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "h15-1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "h20-2": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "h5-1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        }
+      },
+      "ihtc-2024-kletzander": {
+        "i02": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "i07": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "i09": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "test03": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "test05": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        }
+      },
+      "ihtc-2024-marte": {
+        "i01": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "i03": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "i06": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "i11": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "i14": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        }
+      },
+      "is": {
+        "1vERFuvviS": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": null
+        },
+        "9aGFgDaHX7": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": null
+        },
+        "BnMUR3YMRk": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "avdoaYnfXq": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "vWQp9idqMs": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        }
+      },
+      "mondoku": {
+        "10-10-6": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "12-12-8": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "14-14-8": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "20-18-9": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "8-8-4": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        }
+      },
+      "products-and-shelves": {
+        "ps-25-01": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "ps-25-03": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "ps-50-06": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "ps-50-09": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "toy": {
+          "top3": [
+            "choco-solver__cp_-free",
+            "chuffed-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": null
+        }
+      },
+      "proteindesign12": {
+        "1HZ5.12p.19aa.usingEref_self": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "1HZ5.12p.9aa.usingEref_self": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "1UBI.13p.19aa.usingEref_self": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "1UBI.13p.9aa.usingEref_self_x": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "2TRX.11p.8aa.usingEref_self_x": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        }
+      },
+      "skill-allocation": {
+        "skill_allocation_mzn_1m_2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "skill_allocation_mzn_2m_2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "skill_allocation_mzn_2w_2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "skill_allocation_mzn_3m_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "skill_allocation_mzn_5d_1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        }
+      },
+      "stripboard": {
+        "stripboard_w10_h10_l12_c4_n24": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "stripboard_w15_h10_l12_c6_n12": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "stripboard_w20_h15_l12_c6_n12": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "stripboard_w20_h15_l4_c4_n24": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "stripboard_w20_h15_l7_c6_n24": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        }
+      },
+      "tower": {
+        "tower_050_050_10_050-03": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "tower_070_070_15_070-02": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "tower_070_070_15_070-08": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "tower_070_070_30_100-02": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "tower_500_500_50_300-05": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        }
+      },
+      "tsptw": {
+        "n100w120.003": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "n20w140.005": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "n20w160.001": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "n20w180.004": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "n80w180.003": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        }
+      },
+      "work-task-variation": {
+        "generated-seed-1-length-16-open-14-workers-12-block-15": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "generated-seed-10-length-12-open-10-workers-12-block-5": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": null
+        },
+        "generated-seed-3-length-10-open-8-workers-12-block-15": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "generated-seed-4-length-14-open-12-workers-12-block-15": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        },
+        "generated-seed-8-length-12-open-10-workers-10-block-15": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": null
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,548 @@
+[
+  {
+    "constraint": "fzn_all_different_int",
+    "description": "Constrains the array of objects 'x' to be all different.",
+    "file": "fzn_all_different_int.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_all_different_int_reif",
+    "description": "Constrains the array of objects 'x' to be all different.",
+    "file": "fzn_all_different_int_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_all_different_set",
+    "description": "Constrains the array of objects 'x' to be all different.",
+    "file": "fzn_all_different_set.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_all_different_set_reif",
+    "description": "Constrains the array of objects 'x' to be all different.",
+    "file": "fzn_all_different_set_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_all_equal_int",
+    "description": "Constrains the array of objects 'x' to be all equal.",
+    "file": "fzn_all_equal_int.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_all_equal_int_reif",
+    "description": "Constrains the array of objects 'x' to be all equal.",
+    "file": "fzn_all_equal_int_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_all_equal_set",
+    "description": "Constrains the array of objects 'x' to be all equal.",
+    "file": "fzn_all_equal_set.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_all_equal_set_reif",
+    "description": "Constrains the array of objects 'x' to be all equal.",
+    "file": "fzn_all_equal_set_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_array_int_union",
+    "description": "Constrain y to be the set of the elements in x",
+    "file": "fzn_array_int_union.mzn",
+    "line": 2
+  },
+  {
+    "constraint": "fzn_array_opt_int_union",
+    "description": "Constrain y to be the set of the non-absent elements in x",
+    "file": "fzn_array_opt_int_union.mzn",
+    "line": 2
+  },
+  {
+    "constraint": "fzn_array_set_intersect",
+    "description": "Constrain z to be the intersection of the elements in x. False if x is empty.",
+    "file": "fzn_array_set_intersect.mzn",
+    "line": 2
+  },
+  {
+    "constraint": "fzn_array_set_union",
+    "description": "Constrain z to be the union of the elements in x",
+    "file": "fzn_array_set_union.mzn",
+    "line": 2
+  },
+  {
+    "constraint": "fzn_at_least_int",
+    "description": "Requires at least 'n' variables in 'x' to take the value 'v'.",
+    "file": "fzn_at_least_int.mzn",
+    "line": 7
+  },
+  {
+    "constraint": "fzn_at_least_int_reif",
+    "description": "Requires at least 'n' variables in 'x' to take the value 'v'.",
+    "file": "fzn_at_least_int_reif.mzn",
+    "line": 7
+  },
+  {
+    "constraint": "fzn_at_least_set",
+    "description": "Requires at least 'n' variables in 'x' to take the value 'v'.",
+    "file": "fzn_at_least_set.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_at_least_set_reif",
+    "description": "Requires at least 'n' variables in 'x' to take the value 'v'.",
+    "file": "fzn_at_least_set_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_at_most_int",
+    "description": "Requires at most 'n' variables in 'x' to take the value 'v'.",
+    "file": "fzn_at_most_int.mzn",
+    "line": 7
+  },
+  {
+    "constraint": "fzn_at_most_int_reif",
+    "description": "Requires at most 'n' variables in 'x' to take the value 'v'.",
+    "file": "fzn_at_most_int_reif.mzn",
+    "line": 7
+  },
+  {
+    "constraint": "fzn_at_most_set",
+    "description": "Requires at most 'n' variables in 'x' to take the value 'v'.",
+    "file": "fzn_at_most_set.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_at_most_set_reif",
+    "description": "Requires at most 'n' variables in 'x' to take the value 'v'.",
+    "file": "fzn_at_most_set_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_cumulatives",
+    "description": "min_m is the first machine (which is the minimum, of the index set of b). For native implementations, you can subtract (min_m - 1) from the m array values to obtain 1-based machine numbers.",
+    "file": "fzn_cumulatives.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_cumulatives_decomp",
+    "description": "Decomposition provided by Mats Carlsson",
+    "file": "fzn_cumulatives_decomp.mzn",
+    "line": 2
+  },
+  {
+    "constraint": "fzn_exactly_int",
+    "description": "Requires exactly 'n' variables in 'x' to take the value 'v'.",
+    "file": "fzn_exactly_int.mzn",
+    "line": 7
+  },
+  {
+    "constraint": "fzn_exactly_int_reif",
+    "description": "Requires exactly 'n' variables in 'x' to take the value 'v'.",
+    "file": "fzn_exactly_int_reif.mzn",
+    "line": 7
+  },
+  {
+    "constraint": "fzn_exactly_set",
+    "description": "Requires exactly 'n' variables in 'x' to take the value 'v'.",
+    "file": "fzn_exactly_set.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_exactly_set_reif",
+    "description": "Requires exactly 'n' variables in 'x' to take the value 'v'.",
+    "file": "fzn_exactly_set_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_increasing_bool",
+    "description": "Requires that the array 'x' is in increasing order (duplicates are allowed).",
+    "file": "fzn_increasing_bool.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_increasing_bool_reif",
+    "description": "Requires that the array 'x' is in increasing order (duplicates are allowed).",
+    "file": "fzn_increasing_bool_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_increasing_float",
+    "description": "Requires that the array 'x' is in increasing order (duplicates are allowed).",
+    "file": "fzn_increasing_float.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_increasing_float_opt",
+    "description": "Requires that the array 'x' is in increasing order",
+    "file": "fzn_increasing_float_opt.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_increasing_float_opt_reif",
+    "description": "Requires that the array 'x' is in increasing order iff b is true",
+    "file": "fzn_increasing_float_opt_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_increasing_float_reif",
+    "description": "Requires that the array 'x' is in increasing order (duplicates are allowed).",
+    "file": "fzn_increasing_float_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_increasing_int",
+    "description": "Requires that the array 'x' is in increasing order (duplicates are allowed).",
+    "file": "fzn_increasing_int.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_increasing_int_opt",
+    "description": "Requires that the array 'x' is in increasing order",
+    "file": "fzn_increasing_int_opt.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_increasing_int_opt_reif",
+    "description": "Requires that the array 'x' is in increasing order iff b is true",
+    "file": "fzn_increasing_int_opt_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_increasing_int_reif",
+    "description": "Requires that the array 'x' is in increasing order (duplicates are allowed).",
+    "file": "fzn_increasing_int_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_increasing_set",
+    "description": "Requires that the array 'x' is in increasing order (duplicates are allowed).",
+    "file": "fzn_increasing_set.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_increasing_set_reif",
+    "description": "Requires that the array 'x' is in increasing order (duplicates are allowed).",
+    "file": "fzn_increasing_set_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_lex_less_bool",
+    "description": "Requires that the array 'x' is strictly lexicographically less than array 'y'. Compares them from first to last element, regardless of indices",
+    "file": "fzn_lex_less_bool.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_lex_less_bool_reif",
+    "description": "Requires that the array 'x' is strictly lexicographically less than array 'y'. Compares them from first to last element, regardless of indices",
+    "file": "fzn_lex_less_bool_reif.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_lex_less_float",
+    "description": "Requires that the array 'x' is strictly lexicographically less than array 'y'. Compares them from first to last element, regardless of indices",
+    "file": "fzn_lex_less_float.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_lex_less_float_reif",
+    "description": "Requires that the array 'x' is strictly lexicographically less than array 'y'. Compares them from first to last element, regardless of indices",
+    "file": "fzn_lex_less_float_reif.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_lex_less_int",
+    "description": "Requires that the array 'x' is strictly lexicographically less than array 'y'. Compares them from first to last element, regardless of indices",
+    "file": "fzn_lex_less_int.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_lex_less_int_reif",
+    "description": "Requires that the array 'x' is strictly lexicographically less than array 'y'. Compares them from first to last element, regardless of indices",
+    "file": "fzn_lex_less_int_reif.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_lex_less_set",
+    "description": "Requires that the array 'x' is strictly lexicographically less than array 'y'. Compares them from first to last element, regardless of indices",
+    "file": "fzn_lex_less_set.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_lex_less_set_reif",
+    "description": "Requires that the array 'x' is strictly lexicographically less than array 'y'. Compares them from first to last element, regardless of indices",
+    "file": "fzn_lex_less_set_reif.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_lex_lesseq_bool",
+    "description": "Requires that the array 'x' is lexicographically less than or equal to array 'y'. Compares them from first to last element, regardless of indices",
+    "file": "fzn_lex_lesseq_bool.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_lex_lesseq_bool_reif",
+    "description": "Requires that the array 'x' is lexicographically less than or equal to array 'y'. Compares them from first to last element, regardless of indices",
+    "file": "fzn_lex_lesseq_bool_reif.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_lex_lesseq_float",
+    "description": "Requires that the array 'x' is lexicographically less than or equal to array 'y'. Compares them from first to last element, regardless of indices",
+    "file": "fzn_lex_lesseq_float.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_lex_lesseq_float_reif",
+    "description": "Requires that the array 'x' is lexicographically less than or equal to array 'y'. Compares them from first to last element, regardless of indices",
+    "file": "fzn_lex_lesseq_float_reif.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_lex_lesseq_int",
+    "description": "Requires that the array 'x' is lexicographically less than or equal to array 'y'. Compares them from first to last element, regardless of indices",
+    "file": "fzn_lex_lesseq_int.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_lex_lesseq_int_reif",
+    "description": "Requires that the array 'x' is lexicographically less than or equal to array 'y'. Compares them from first to last element, regardless of indices",
+    "file": "fzn_lex_lesseq_int_reif.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_lex_lesseq_set",
+    "description": "Requires that the array 'x' is lexicographically less than or equal to array 'y'. Compares them from first to last element, regardless of indices",
+    "file": "fzn_lex_lesseq_set.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_lex_lesseq_set_reif",
+    "description": "Requires that the array 'x' is lexicographically less than or equal to array 'y'. Compares them from first to last element, regardless of indices",
+    "file": "fzn_lex_lesseq_set_reif.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_member_bool",
+    "description": "Requires that 'y' occurs in the array or set 'x'.",
+    "file": "fzn_member_bool.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_member_bool_reif",
+    "description": "Requires that 'y' occurs in the array or set 'x'.",
+    "file": "fzn_member_bool_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_member_float",
+    "description": "Requires that 'y' occurs in the array or set 'x'.",
+    "file": "fzn_member_float.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_member_float_reif",
+    "description": "Requires that 'y' occurs in the array or set 'x'.",
+    "file": "fzn_member_float_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_member_int",
+    "description": "Requires that 'y' occurs in the array or set 'x'.",
+    "file": "fzn_member_int.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_member_int_reif",
+    "description": "Requires that 'y' occurs in the array or set 'x'.",
+    "file": "fzn_member_int_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_member_set",
+    "description": "Requires that 'y' occurs in the array of set 'x'.",
+    "file": "fzn_member_set.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_member_set_reif",
+    "description": "Requires that 'y' occurs in the array of set 'x'.",
+    "file": "fzn_member_set_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_on_restart_complete",
+    "description": "Abandon and mark search as complete when argument variable is assigned `true'.",
+    "file": "experimental/on_restart/fzn_on_restart_complete.mzn",
+    "line": 2
+  },
+  {
+    "constraint": "fzn_on_restart_last_val_bool",
+    "description": "Set `out` to be a the last assigned value of `input` on each restart",
+    "file": "experimental/on_restart/fzn_on_restart_last_val_bool.mzn",
+    "line": 2
+  },
+  {
+    "constraint": "fzn_on_restart_last_val_float",
+    "description": "Set `out` to be a the last assigned value of `input` on each restart",
+    "file": "experimental/on_restart/fzn_on_restart_last_val_float.mzn",
+    "line": 2
+  },
+  {
+    "constraint": "fzn_on_restart_last_val_int",
+    "description": "Set `out` to be a the last assigned value of `input` on each restart",
+    "file": "experimental/on_restart/fzn_on_restart_last_val_int.mzn",
+    "line": 2
+  },
+  {
+    "constraint": "fzn_on_restart_last_val_set",
+    "description": "Set `out` to be a the last assigned value of `input` on each restart",
+    "file": "experimental/on_restart/fzn_on_restart_last_val_set.mzn",
+    "line": 4
+  },
+  {
+    "constraint": "fzn_on_restart_sol_bool",
+    "description": "Set `out` to be a the last solution value of `input` on each restart",
+    "file": "experimental/on_restart/fzn_on_restart_sol_bool.mzn",
+    "line": 2
+  },
+  {
+    "constraint": "fzn_on_restart_sol_float",
+    "description": "Set `out` to be a the last solution value of `input` on each restart",
+    "file": "experimental/on_restart/fzn_on_restart_sol_float.mzn",
+    "line": 2
+  },
+  {
+    "constraint": "fzn_on_restart_sol_int",
+    "description": "Set `out` to be a the last solution value of `input` on each restart",
+    "file": "experimental/on_restart/fzn_on_restart_sol_int.mzn",
+    "line": 2
+  },
+  {
+    "constraint": "fzn_on_restart_sol_set",
+    "description": "Set `out` to be a the last solution value of `input` on each restart",
+    "file": "experimental/on_restart/fzn_on_restart_sol_set.mzn",
+    "line": 4
+  },
+  {
+    "constraint": "fzn_on_restart_status",
+    "description": "Set the variable `s` to one of the following numbers before solving and after each restart to reflect the result of searching since the last restart: - 1 (START) -> The solver has not yet been restarted - 2 (UNKNOWN) -> No solution has been found since the last restart - 3 (UNSAT) -> The search space was (provably) exhausted and no solution was found since the last restart - 4 (SAT) -> A solution was found since the last restart - 5 (OPT) -> The (provably) optimal solution for the search space was found since the last restart",
+    "file": "experimental/on_restart/fzn_on_restart_status.mzn",
+    "line": 12
+  },
+  {
+    "constraint": "fzn_on_restart_uniform_float",
+    "description": "Set `out` to be a random value between `low` and `high` (inclusive) from a uniform distribution",
+    "file": "experimental/on_restart/fzn_on_restart_uniform_float.mzn",
+    "line": 2
+  },
+  {
+    "constraint": "fzn_on_restart_uniform_int",
+    "description": "Set `out` to be a random value between `low` and `high` (inclusive) from a uniform distribution",
+    "file": "experimental/on_restart/fzn_on_restart_uniform_int.mzn",
+    "line": 2
+  },
+  {
+    "constraint": "fzn_regular",
+    "description": "Deprecated call",
+    "file": "fzn_regular_set.mzn",
+    "line": 12
+  },
+  {
+    "constraint": "fzn_set_member",
+    "description": "Requires that 'y' occurs in the array or set 'x'.",
+    "file": "fzn_set_member.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_set_member_reif",
+    "description": "Requires that 'y' occurs in the array or set 'x'.",
+    "file": "fzn_set_member_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_strictly_increasing_float",
+    "description": "Requires that the array 'x' is in strict increasing order",
+    "file": "fzn_strictly_increasing_float.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_strictly_increasing_float_opt",
+    "description": "Requires that the array 'x' is in strict increasing order",
+    "file": "fzn_strictly_increasing_float_opt.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_strictly_increasing_float_opt_reif",
+    "description": "Requires that the array 'x' is in strict increasing order iff b is true",
+    "file": "fzn_strictly_increasing_float_opt_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_strictly_increasing_float_reif",
+    "description": "Requires that the array 'x' is in strict increasing order",
+    "file": "fzn_strictly_increasing_float_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_strictly_increasing_int",
+    "description": "Requires that the array 'x' is in strict increasing order",
+    "file": "fzn_strictly_increasing_int.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_strictly_increasing_int_opt",
+    "description": "Requires that the array 'x' is in strict increasing order",
+    "file": "fzn_strictly_increasing_int_opt.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_strictly_increasing_int_opt_reif",
+    "description": "Requires that the array 'x' is in strict increasing order iff b is true",
+    "file": "fzn_strictly_increasing_int_opt_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_strictly_increasing_int_reif",
+    "description": "Requires that the array 'x' is in strict increasing order",
+    "file": "fzn_strictly_increasing_int_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_strictly_increasing_set",
+    "description": "Requires that the array 'x' is in strict increasing order",
+    "file": "fzn_strictly_increasing_set.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_strictly_increasing_set_reif",
+    "description": "Requires that the array 'x' is in strict increasing order",
+    "file": "fzn_strictly_increasing_set_reif.mzn",
+    "line": 5
+  },
+  {
+    "constraint": "fzn_table_bool",
+    "description": "A table constraint: table(x, t) represents the constraint x in t where we consider each row in t to be a tuple and t as a set of tuples.",
+    "file": "fzn_table_bool.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_table_bool_reif",
+    "description": "A table constraint: table(x, t) represents the constraint x in t where we consider each row in t to be a tuple and t as a set of tuples.",
+    "file": "fzn_table_bool_reif.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_table_int",
+    "description": "A table constraint table(x, t) represents the constraint x in t where we consider each row in t to be a tuple and t as a set of tuples.",
+    "file": "fzn_table_int.mzn",
+    "line": 6
+  },
+  {
+    "constraint": "fzn_table_int_reif",
+    "description": "Reified version We only support special cases of a few variables. The approach is to add the Boolean variable to the list of variables and create an extended table. The extended table covers all combinations of assignments to the original variables, and every entry in it is padded with a value that depends on whether that entry occurs in the original table. For example, the original table constraint x y 2 3 5 8 4 1 reified with a Boolean b is turned into a table constraint of the form x y b 2 3 true 5 8 true 4 1 true ... false ... false % for all other pairs (x,y) ... false",
+    "file": "fzn_table_int_reif.mzn",
+    "line": 36
+  }
+]
