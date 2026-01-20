@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import sys
 import re
+import json
+from pathlib import Path
 from collections import defaultdict
 from statistics import mean
 from dataclasses import dataclass
@@ -59,6 +61,106 @@ CONSTRAINT_TEXT = {
         "Maximum constraints bind a variable to the maximum value among a set of variables",
 
 }
+
+
+_FZN_DESCRIPTIONS_CACHE: Optional[Dict[str, str]] = None
+
+
+def _load_fzn_constraint_descriptions() -> Dict[str, str]:
+    """Load a mapping constraint_name -> description from fzn_descriptions.json.
+
+    Preferred format (simple JSON object):
+        {"fzn_table_int": "A table constraint ...", ...}
+
+    Backwards compatibility: we also accept the older list-of-objects format:
+        [{"constraint": "fzn_table_int", "description": "...", ...}, ...]
+
+    Best-effort: if the file is missing or malformed we just return {}.
+    """
+    global _FZN_DESCRIPTIONS_CACHE
+    if _FZN_DESCRIPTIONS_CACHE is not None:
+        return _FZN_DESCRIPTIONS_CACHE
+
+    path = Path(__file__).with_name("fzn_descriptions.json")
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        _FZN_DESCRIPTIONS_CACHE = {}
+        return _FZN_DESCRIPTIONS_CACHE
+
+    mapping: Dict[str, str] = {}
+    if isinstance(data, dict):
+        for k, v in data.items():
+            key = str(k).strip()
+            desc = str(v).strip()
+            if not key or not desc:
+                continue
+            mapping.setdefault(key, desc)
+    elif isinstance(data, list):
+        for item in data:
+            if not isinstance(item, dict):
+                continue
+            key = (item.get("constraint") or "").strip()
+            desc = (item.get("description") or "").strip()
+            if not key or not desc:
+                continue
+            mapping.setdefault(key, desc)
+
+    _FZN_DESCRIPTIONS_CACHE = mapping
+    return _FZN_DESCRIPTIONS_CACHE
+
+
+def _resolve_constraint_description(
+    ctype: str,
+    descriptions: Dict[str, str],
+) -> Optional[str]:
+    """Resolve a human description for a FlatZinc constraint type.
+
+    Lookup strategy (in order):
+    1) Exact match (e.g. 'fzn_lex_lesseq_bool_reif')
+    2) If prefixed with 'fzn_', strip the prefix AND strip one trailing suffix token
+       (e.g. 'fzn_lex_lesseq_bool_reif' -> 'lex_lesseq_bool')
+    3) Keep stripping one trailing suffix token at a time
+       (e.g. 'lex_lesseq_bool' -> 'lex_lesseq' -> 'lex')
+    """
+    ctype = (ctype or "").strip()
+    if not ctype:
+        return None
+
+    def _get(key: str) -> Optional[str]:
+        key = (key or "").strip()
+        if not key:
+            return None
+        val = descriptions.get(key)
+        return (val or "").strip() or None
+
+    # 1) Exact match
+    desc = _get(ctype)
+    if desc:
+        return desc
+
+    # 2) Strip 'fzn_' prefix + one trailing token
+    base = ctype
+    if base.startswith("fzn_"):
+        base = base[len("fzn_") :]
+        parts = [p for p in base.split("_") if p]
+        if len(parts) >= 2:
+            candidate = "_".join(parts[:-1])
+            desc = _get(candidate)
+            if desc:
+                return desc
+            base = candidate
+
+    # 3) Iteratively strip trailing suffix tokens
+    parts = [p for p in base.split("_") if p]
+    while len(parts) >= 2:
+        parts = parts[:-1]
+        candidate = "_".join(parts)
+        desc = _get(candidate)
+        if desc:
+            return desc
+
+    return None
 
 # ============================================================
 # Model container
@@ -438,7 +540,7 @@ def parse_fzn(path):
 # Descriptions
 # ============================================================
 
-def describe_objective_function(model: "FlatZincModel", max_depth: int = 3, max_len: int = 800) -> Optional[str]:
+def describe_objective_function(model: "FlatZincModel", max_depth: int = 2, max_len: int = 800) -> Optional[str]:
     """Best-effort symbolic objective formulation.
 
     FlatZinc only gives an objective variable plus constraints; there is no
@@ -1147,6 +1249,7 @@ def describe_variables_detailed(model):
 def describe_constraints(model):
     counts = defaultdict(int)
     arity_sums = defaultdict(int)
+    fzn_desc = _load_fzn_constraint_descriptions()
 
     def _is_constant_scalar(v: dict) -> bool:
         d = v.get("domain")
@@ -1202,9 +1305,10 @@ def describe_constraints(model):
         return desc
 
     def _fmt_line(ctype: str, count: int) -> str:
-        desc = CONSTRAINT_TEXT.get(
-            ctype,
-            f"Constraints of type {ctype} restrict relationships between variables",
+        desc = (
+            _resolve_constraint_description(ctype, fzn_desc)
+            or CONSTRAINT_TEXT.get(ctype)
+            or f"Constraints of type {ctype} restrict relationships between variables"
         )
         avg_arity = (arity_sums.get(ctype, 0) / count) if count else 0.0
         # Example: "5 array_int_element constraints with average arity 2.00 (element constraints ...)"
