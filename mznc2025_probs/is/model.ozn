@@ -1,0 +1,15 @@
+output ["sel = array1d("++format(allMatches)++", "++format(sel)++");\n","def = array1d("++format(allDataInFunction)++", "++format(def)++");\n","loc = array1d("++format(allDataInFunction)++", "++format(loc)++");\n","place = array1d("++format(allMatches)++", "++format(place)++");\n","succ = array1d("++format(allBlocksInFunctionPlusNull)++", "++format(succ)++");\n","objective = "++format(objective)++";\n"];
+set of int: allMatches = 0..117;
+set of int: allBlocksInFunctionPlusNull = 0..13;
+int: objective;
+array [1..14] of int: X_INTRODUCED_305_;
+array [allBlocksInFunctionPlusNull] of int: succ = array1d(0..13,X_INTRODUCED_305_);
+array [1..118] of int: X_INTRODUCED_191_;
+array [allMatches] of int: place = array1d(0..117,X_INTRODUCED_191_);
+set of int: allDataInFunction = 0..34;
+array [1..35] of int: X_INTRODUCED_36_;
+array [allDataInFunction] of int: loc = array1d(0..34,X_INTRODUCED_36_);
+array [1..35] of int: X_INTRODUCED_0_;
+array [allDataInFunction] of int: def = array1d(0..34,X_INTRODUCED_0_);
+array [1..118] of bool: X_INTRODUCED_72_;
+array [allMatches] of bool: sel = array1d(0..117,X_INTRODUCED_72_);

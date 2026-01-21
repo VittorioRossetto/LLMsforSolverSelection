@@ -1,0 +1,11 @@
+output ([if fix(x[r,c])==0 then block else show_int(digits,x[r,c]) endif++if c==n then "\n" else "," endif | r in ROW, c in COL]++["obj = "++format(obj)++";\n"])++["nofilled = "++format(sum(bool2int(filled)))++";\n"];
+string: block = "#";
+set of int: COL = 1..5;
+set of int: ROW = 1..5;
+array [1..25] of bool: X_INTRODUCED_16_;
+array [ROW,COL] of bool: filled = array2d(1..5,1..5,X_INTRODUCED_16_);
+array [ROW,COL] of int: clue = [|4,2,4,3,1|3,2,1,2,2|4,5,3,1,2|2,2,5,3,3|1,3,4,5,4|];
+array [ROW,COL] of int: x = [(r, c) : if filled[r,c] then 0 else clue[r,c] endif | r in ROW, c in COL];
+int: digits = 1;
+int: n = 5;
+int: obj = sum([bool2int(filled[r,c])*clue[r,c] | r in ROW, c in COL]);

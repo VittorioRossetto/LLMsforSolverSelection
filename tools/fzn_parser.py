@@ -540,7 +540,7 @@ def parse_fzn(path):
 # Descriptions
 # ============================================================
 
-def describe_objective_function(model: "FlatZincModel", max_depth: int = 3, max_len: int = 800) -> Optional[str]:
+def describe_objective_function(model: "FlatZincModel", max_depth: int = 2, max_len: int = 800) -> Optional[str]:
     """Best-effort symbolic objective formulation.
 
     FlatZinc only gives an objective variable plus constraints; there is no
@@ -1432,9 +1432,9 @@ def describe_constraints(model):
 # ============================================================
 
 def summarize(model):
-    print("=" * 60)
-    print("PROBLEM SUMMARY")
-    print("=" * 60)
+    # print("=" * 60)
+    # print("PROBLEM SUMMARY")
+    # print("=" * 60)
 
     print("\nProblem:")
     problem_txt = (describe_problem(model) or "").strip()
@@ -1453,7 +1453,7 @@ def summarize(model):
     print("\nConstraints:")
     print(describe_constraints(model))
 
-    print("=" * 60)
+    # print("=" * 60)
 
 # ============================================================
 # Main

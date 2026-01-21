@@ -1,0 +1,5 @@
+output ["puzzle = \n",let {array [int] of string: X_INTRODUCED_978_ = [], array [int] of string: X_INTRODUCED_979_ = [], array [int,int] of string: X_INTRODUCED_980_ = [(X_INTRODUCED_976_, X_INTRODUCED_977_) : showDzn(puzzle[X_INTRODUCED_976_,X_INTRODUCED_977_]) | X_INTRODUCED_976_ in index_set_1of2(puzzle), X_INTRODUCED_977_ in index_set_2of2(puzzle)]} in (show2d_indexed(X_INTRODUCED_978_,X_INTRODUCED_979_,X_INTRODUCED_980_)),";\n"];
+set of int: Height = 1..8;
+set of int: Width = 1..8;
+array [1..64] of int: X_INTRODUCED_16_;
+array [Width,Height] of int: puzzle = array2d(1..8,1..8,X_INTRODUCED_16_);

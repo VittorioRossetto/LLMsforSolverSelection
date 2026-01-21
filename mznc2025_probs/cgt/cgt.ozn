@@ -1,0 +1,18 @@
+output ["origin = ",let {array [int] of string: X_INTRODUCED_1282_ = [_toString_UNIT_SELL(X_INTRODUCED_1280_,true,false) | X_INTRODUCED_1280_ in index_set(origin)], array [int] of string: X_INTRODUCED_1283_ = [_toString_UNIT_BUY(origin[X_INTRODUCED_1281_],true,false) | X_INTRODUCED_1281_ in index_set(origin)]} in (show_indexed(X_INTRODUCED_1282_,X_INTRODUCED_1283_)),";\n","objective = ",showDzn(objective),";\n"];
+function string : _toString_UNIT_BUY(opt UNIT_BUY: X_INTRODUCED_39_,bool: X_INTRODUCED_40_,bool: X_INTRODUCED_41_) = if absent(X_INTRODUCED_39_) then if X_INTRODUCED_41_ then "null" else "<>" endif else (if X_INTRODUCED_41_ then "{ \"c\" : \"UnitBuy\", \"e\" : " else if X_INTRODUCED_40_ then showDznId("UnitBuy") else "UnitBuy" endif++"(" endif++'_13@_toString__constrId_0_UNIT_BUY'('UnitBuy⁻¹'(X_INTRODUCED_39_),X_INTRODUCED_40_,X_INTRODUCED_41_))++if X_INTRODUCED_41_ then "}" else ")" endif endif;
+function string : '_13@_toString__constrId_0_UNIT_BUY'(opt int: X_INTRODUCED_126_,bool: X_INTRODUCED_127_,bool: X_INTRODUCED_128_) = show(X_INTRODUCED_126_);
+function opt _constrId_0_UNIT_BUY : 'UnitBuy⁻¹'(opt UNIT_BUY: X_INTRODUCED_26_) = if occurs(X_INTRODUCED_26_) then 'UnitBuy⁻¹'(deopt(X_INTRODUCED_26_)) else to_enum(_constrId_0_UNIT_BUY,<>) endif;
+function _constrId_0_UNIT_BUY : 'UnitBuy⁻¹'(UNIT_BUY: X_INTRODUCED_24_) = to_enum(_constrId_0_UNIT_BUY,X_INTRODUCED_24_-_constrMin_0_UNIT_BUY);
+function string : _toString_UNIT_SELL(opt UNIT_SELL: X_INTRODUCED_75_,bool: X_INTRODUCED_76_,bool: X_INTRODUCED_77_) = if absent(X_INTRODUCED_75_) then if X_INTRODUCED_77_ then "null" else "<>" endif else (if X_INTRODUCED_77_ then "{ \"c\" : \"UnitSell\", \"e\" : " else if X_INTRODUCED_76_ then showDznId("UnitSell") else "UnitSell" endif++"(" endif++'_3@_toString__constrId_0_UNIT_SELL'('UnitSell⁻¹'(X_INTRODUCED_75_),X_INTRODUCED_76_,X_INTRODUCED_77_))++if X_INTRODUCED_77_ then "}" else ")" endif endif;
+function string : '_3@_toString__constrId_0_UNIT_SELL'(opt int: X_INTRODUCED_123_,bool: X_INTRODUCED_124_,bool: X_INTRODUCED_125_) = show(X_INTRODUCED_123_);
+function opt _constrId_0_UNIT_SELL : 'UnitSell⁻¹'(opt UNIT_SELL: X_INTRODUCED_62_) = if occurs(X_INTRODUCED_62_) then 'UnitSell⁻¹'(deopt(X_INTRODUCED_62_)) else to_enum(_constrId_0_UNIT_SELL,<>) endif;
+function _constrId_0_UNIT_SELL : 'UnitSell⁻¹'(UNIT_SELL: X_INTRODUCED_60_) = to_enum(_constrId_0_UNIT_SELL,X_INTRODUCED_60_-_constrMin_0_UNIT_SELL);
+set of int: UNIT_SELL = 1..43;
+set of int: UNIT_BUY = 1..217;
+array [UNIT_SELL] of int: origin;
+int: double_capital_gains;
+int: objective = double_capital_gains;
+int: _constrMin_0_UNIT_BUY = 0;
+set of int: _constrId_0_UNIT_BUY = 1..217;
+int: _constrMin_0_UNIT_SELL = 0;
+set of int: _constrId_0_UNIT_SELL = 1..43;

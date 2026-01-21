@@ -1,0 +1,9 @@
+output ["selection = ",showDzn(selection),";\n","admission = ",showDzn(admission),";\n","room = ",showDzn(room),";\n","ot = ",showDzn(ot),";\n","room_admission = \n",let {array [int] of string: X_INTRODUCED_18452_ = [], array [int] of string: X_INTRODUCED_18453_ = [], array [int,int] of string: X_INTRODUCED_18454_ = [(X_INTRODUCED_18450_, X_INTRODUCED_18451_) : showDzn(room_admission[X_INTRODUCED_18450_,X_INTRODUCED_18451_]) | X_INTRODUCED_18450_ in index_set_1of2(room_admission), X_INTRODUCED_18451_ in index_set_2of2(room_admission)]} in (show2d_indexed(X_INTRODUCED_18452_,X_INTRODUCED_18453_,X_INTRODUCED_18454_)),";\n"];
+set of int: P = 1..62;
+set of int: R = 1..6;
+array [1..372] of int: X_INTRODUCED_456_;
+array [R,P] of int: room_admission = array2d(1..6,1..62,X_INTRODUCED_456_);
+array [P] of int: ot;
+array [P] of int: room;
+array [P] of int: admission;
+array [P] of bool: selection;

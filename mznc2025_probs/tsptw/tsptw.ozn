@@ -1,0 +1,4 @@
+output ["pred = ",showDzn(pred),";\n","arrival = ",showDzn(arrival),";\n"];
+set of int: Locations = 1..81;
+array [Locations] of int: arrival;
+array [Locations] of int: pred;

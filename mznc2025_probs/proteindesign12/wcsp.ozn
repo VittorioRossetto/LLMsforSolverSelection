@@ -1,0 +1,8 @@
+output ["p = "++format(p)++";\n","ocosts1 = "++format(ocosts1)++";\n","ocosts2 = "++format(ocosts2)++";\n","objective = "++format(objective)++";\n"];
+int: objective;
+int: num_constraints2 = 55;
+array [1..num_constraints2] of int: ocosts2;
+int: num_constraints1 = 11;
+array [1..num_constraints1] of int: ocosts1;
+int: num_variables = 11;
+array [1..num_variables] of int: p;
