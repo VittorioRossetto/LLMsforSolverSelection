@@ -540,7 +540,7 @@ def parse_fzn(path):
 # Descriptions
 # ============================================================
 
-def describe_objective_function(model: "FlatZincModel", max_depth: int = 2, max_len: int = 800) -> Optional[str]:
+def describe_objective_function(model: "FlatZincModel", max_depth: int = 3, max_len: int = 800) -> Optional[str]:
     """Best-effort symbolic objective formulation.
 
     FlatZinc only gives an objective variable plus constraints; there is no
@@ -878,7 +878,7 @@ def describe_problem(model):
         obj_expr = describe_objective_function(model)
         if d is None:
             suffix = (
-                f" Objective: {model.problem_type} an objective variable with unknown domain and degree {deg}."
+                f" The objective is to {model.problem_type} an objective variable with unknown domain and degree {deg}."
             )
             if obj_expr:
                 suffix += f" {obj_expr}."
@@ -887,7 +887,7 @@ def describe_problem(model):
         size = d.max_value - d.min_value + 1
         mean_value = (d.min_value + d.max_value) / 2
         suffix = (
-            f" Objective: {model.problem_type} an objective variable with domain [{d.min_value}, {d.max_value}]"
+            f" The objective is to {model.problem_type} an objective variable with domain [{d.min_value}, {d.max_value}]"
             f" (size {size}, mean {mean_value:.2f}) and degree {deg}."
         )
         if obj_expr:
@@ -989,6 +989,14 @@ def describe_search(search, model: Optional["FlatZincModel"] = None):
     if not search:
         return "No explicit search strategy is specified."
 
+    def _array_var_count(a: dict) -> Optional[int]:
+        items = a.get("items") or []
+        items = [str(it).strip() for it in items if str(it).strip()]
+        if items:
+            return len(items)
+        length = a.get("length")
+        return length if isinstance(length, int) and length >= 0 else None
+
     def _vars_count_text(names: List[str]) -> str:
         count = sum(1 for n in names if n)
         if count == 1:
@@ -1028,14 +1036,20 @@ def describe_search(search, model: Optional["FlatZincModel"] = None):
                 length = a.get("length")
                 length_txt = f"length {length}" if isinstance(length, int) else "unknown length"
                 domain_txt = _domain_text_for_array(model, name)
+                n_vars = _array_var_count(a)
                 c_count, _c_types = _constraint_stats_for_name(model, name)
                 examples = _constraint_texts_for_name(model, name, limit=3) if c_count > 0 else []
                 constraints_txt = f"{c_count} constraints"
                 if c_count > 0 and examples:
                     constraints_txt += f"( {', '.join(examples)} )"
 
+                if isinstance(n_vars, int):
+                    subject = f"{n_vars} {elem_type} variables (from 1 array, {length_txt})"
+                else:
+                    subject = f"{elem_type} variables from 1 array ({length_txt})"
+
                 text = (
-                    f"integer search on 1 {elem_type} array ({length_txt}) with {domain_txt}, "
+                    f"integer search on {subject} with {domain_txt}, "
                     f"involved in {constraints_txt}, {strategy_txt}"
                 )
                 return text
@@ -1068,11 +1082,18 @@ def describe_search(search, model: Optional["FlatZincModel"] = None):
 
 def describe_variables_detailed(model):
     lines = []
-    scalar_domain_sizes_user: List[int] = []
-    scalar_domain_sizes_introduced: List[int] = []
-    scalar_domain_sizes_all: List[int] = []
+    domain_sizes_user: List[int] = []
+    domain_sizes_introduced: List[int] = []
+    domain_sizes_all: List[int] = []
     unknown_domain_count_user = 0
     unknown_domain_count_introduced = 0
+    unknown_domain_count_other = 0
+    anonymous_array_elems_user = 0
+    anonymous_array_elems_introduced = 0
+    arrays_with_unknown_length_user = 0
+    arrays_with_unknown_length_introduced = 0
+    arrays_total = 0
+    arrays_elems_estimated = 0
 
     def _is_constant_scalar(v: dict) -> bool:
         d = v.get("domain")
@@ -1088,118 +1109,171 @@ def describe_variables_detailed(model):
             return None
         return d.max_value - d.min_value + 1
 
-    # Gather scalar domain statistics for all variables.
-    for v in model.variables.values():
+    # Track all *variable names* we can identify (avoids double counting when
+    # arrays are initialized with named scalar variables).
+    counted_names: set[str] = set()
+
+    def _counted_add(name: str) -> bool:
+        name = (name or "").strip()
+        if not name:
+            return False
+        if name in counted_names:
+            return False
+        counted_names.add(name)
+        return True
+
+    def _array_var_count(a: dict) -> Optional[int]:
+        items = a.get("items") or []
+        items = [str(it).strip() for it in items if str(it).strip()]
+        if items:
+            return len(items)
+        length = a.get("length")
+        return length if isinstance(length, int) and length >= 0 else None
+
+    # If a variable appears as an element of a user-origin decision array, report it
+    # as user-introduced even if the FlatZinc backend declared it as introduced.
+    user_decision_var_names: set[str] = set()
+    for _aname, a in model.arrays.items():
+        if not a.get("is_var", False):
+            continue
+        if a.get("origin", "user") != "user":
+            continue
+        items = a.get("items") or []
+        for it in items:
+            it = str(it).strip()
+            if not it:
+                continue
+            if re.fullmatch(r"-?\d+", it):
+                continue
+            user_decision_var_names.add(it)
+
+    # Gather (named) variable domain statistics for scalar variables.
+    # Domain-size analysis is only meaningful for integer variables; ignore Booleans.
+    for name, v in model.variables.items():
         if _is_constant_scalar(v):
+            continue
+        if v.get("type") == "bool":
             continue
         size = _domain_size(v.get("domain"))
         origin = v.get("origin", "user")
+        if name in user_decision_var_names:
+            origin = "user"
         if size is None:
             if origin == "introduced":
                 unknown_domain_count_introduced += 1
             else:
                 unknown_domain_count_user += 1
         else:
-            scalar_domain_sizes_all.append(size)
+            domain_sizes_all.append(size)
             if origin == "introduced":
-                scalar_domain_sizes_introduced.append(size)
+                domain_sizes_introduced.append(size)
             else:
-                scalar_domain_sizes_user.append(size)
+                domain_sizes_user.append(size)
 
-    def _group_counts(origin: str) -> Tuple[int, int]:
-        int_count = sum(
-            1
-            for v in model.variables.values()
-            if v.get("origin", "user") == origin
-            and v.get("type") == "int"
-            and not _is_constant_scalar(v)
-        )
-        bool_count = sum(
-            1
-            for v in model.variables.values()
-            if v.get("origin", "user") == origin
-            and v.get("type") == "bool"
-            and not _is_constant_scalar(v)
-        )
-        return int_count, bool_count
+    # Count variables by iterating names (needed to avoid double-counting array items).
+    def _is_int_lit(s: str) -> bool:
+        return bool(re.fullmatch(r"-?\d+", (s or "").strip()))
 
-    user_int, user_bool = _group_counts("user")
-    intro_int, intro_bool = _group_counts("introduced")
+    type_counts = {
+        ("user", "int"): 0,
+        ("user", "bool"): 0,
+        ("introduced", "int"): 0,
+        ("introduced", "bool"): 0,
+    }
 
-    # Arrays of var int/bool are often the *user-level* decision variables in FlatZinc.
-    user_arr_int = sum(
-        1
-        for a in model.arrays.values()
-        if a.get("is_var", False)
-        and a.get("origin", "user") == "user"
-        and a.get("elem_type") == "int"
-    )
-    user_arr_bool = sum(
-        1
-        for a in model.arrays.values()
-        if a.get("is_var", False)
-        and a.get("origin", "user") == "user"
-        and a.get("elem_type") == "bool"
-    )
-    intro_arr_int = sum(
-        1
-        for a in model.arrays.values()
-        if a.get("is_var", False)
-        and a.get("origin", "user") == "introduced"
-        and a.get("elem_type") == "int"
-    )
-    intro_arr_bool = sum(
-        1
-        for a in model.arrays.values()
-        if a.get("is_var", False)
-        and a.get("origin", "user") == "introduced"
-        and a.get("elem_type") == "bool"
-    )
+    for name, v in model.variables.items():
+        if _is_constant_scalar(v):
+            continue
+        if not _counted_add(name):
+            continue
+        origin = v.get("origin", "user")
+        if name in user_decision_var_names:
+            origin = "user"
+        vtype = v.get("type", "int")
+        if (origin, vtype) in type_counts:
+            type_counts[(origin, vtype)] += 1
+
+    # Treat arrays of decision variables as their element variables.
+    for aname, a in model.arrays.items():
+        if not a.get("is_var", False):
+            continue
+        arrays_total += 1
+        origin = a.get("origin", "user")
+        elem_type = a.get("elem_type", "int")
+        items = a.get("items") or []
+        items = [str(it).strip() for it in items if str(it).strip()]
+
+        if items:
+            arrays_elems_estimated += len(items)
+            for it in items:
+                if _is_int_lit(it):
+                    # Shouldn't happen for var arrays, but be defensive.
+                    continue
+                if it in model.variables and _is_constant_scalar(model.variables[it]):
+                    continue
+                if not _counted_add(it):
+                    continue
+                # If the element isn't declared as a scalar var, we can still count it
+                # as a variable with unknown domain (integers only).
+                if it not in model.variables and elem_type != "bool":
+                    if origin == "introduced":
+                        unknown_domain_count_introduced += 1
+                    elif origin == "user":
+                        unknown_domain_count_user += 1
+                    else:
+                        unknown_domain_count_other += 1
+                    if (origin, elem_type) in type_counts:
+                        type_counts[(origin, elem_type)] += 1
+            continue
+
+        n = _array_var_count(a)
+        if isinstance(n, int):
+            arrays_elems_estimated += n
+            if origin == "introduced":
+                anonymous_array_elems_introduced += n
+                if elem_type != "bool":
+                    unknown_domain_count_introduced += n
+            elif origin == "user":
+                anonymous_array_elems_user += n
+                if elem_type != "bool":
+                    unknown_domain_count_user += n
+            else:
+                if elem_type != "bool":
+                    unknown_domain_count_other += n
+
+            if (origin, elem_type) in type_counts:
+                type_counts[(origin, elem_type)] += n
+        else:
+            if origin == "introduced":
+                arrays_with_unknown_length_introduced += 1
+            else:
+                arrays_with_unknown_length_user += 1
 
     header: List[str] = []
-    total_scalars = user_int + user_bool + intro_int + intro_bool
-    if total_scalars == 0:
-        header.append("The model contains no scalar variables.")
+    total_variables = len(counted_names) + anonymous_array_elems_user + anonymous_array_elems_introduced
+    total_user = type_counts[("user", "int")] + type_counts[("user", "bool")]
+    total_intro = type_counts[("introduced", "int")] + type_counts[("introduced", "bool")]
+    total_int = type_counts[("user", "int")] + type_counts[("introduced", "int")]
+    total_bool = type_counts[("user", "bool")] + type_counts[("introduced", "bool")]
+
+    if total_variables == 0:
+        header.append("The model contains no variables.")
     else:
-        intro_parts: List[str] = []
-        if intro_int:
-            intro_parts.append(f"{intro_int} integer")
-        if intro_bool:
-            intro_parts.append(f"{intro_bool} Boolean")
-
-        user_parts: List[str] = []
-        if user_int:
-            user_parts.append(f"{user_int} integer")
-        if user_bool:
-            user_parts.append(f"{user_bool} Boolean")
-
         header.append(
             "The model contains "
-            + f"{intro_int + intro_bool} compiler-introduced ({', '.join(intro_parts) if intro_parts else '0'}) scalar variables "
-            + f"and {user_int + user_bool} user-introduced ({', '.join(user_parts) if user_parts else '0'}) scalar variables."
+            + f"{total_variables} variables ({total_int} integer, {total_bool} Boolean): "
+            + f"{total_intro} compiler-introduced and {total_user} user-introduced."
         )
 
-    total_user_arrays = user_arr_int + user_arr_bool
-    total_intro_arrays = intro_arr_int + intro_arr_bool
-    if total_user_arrays or total_intro_arrays:
-        arr_parts: List[str] = []
-        if total_user_arrays:
-            detail: List[str] = []
-            if user_arr_int:
-                detail.append(f"{user_arr_int} int[]")
-            if user_arr_bool:
-                detail.append(f"{user_arr_bool} bool[]")
-            arr_parts.append(f"{total_user_arrays} user-defined ({', '.join(detail)})")
-        if total_intro_arrays:
-            detail = []
-            if intro_arr_int:
-                detail.append(f"{intro_arr_int} int[]")
-            if intro_arr_bool:
-                detail.append(f"{intro_arr_bool} bool[]")
-            arr_parts.append(
-                f"{total_intro_arrays} compiler-introduced ({', '.join(detail)})"
-            )
-        header.append("Arrays of decision variables: " + " and ".join(arr_parts) + ".")
+    # if arrays_total:
+    #     unknown_arrays = arrays_with_unknown_length_user + arrays_with_unknown_length_introduced
+    #     note = (
+    #         f"Decision-variable arrays are treated as their element variables: "
+    #         f"{arrays_total} arrays contribute {arrays_elems_estimated} variables"
+    #     )
+    #     if unknown_arrays:
+    #         note += f" ({unknown_arrays} arrays have unknown length)"
+    #     header.append(note + ".")
 
     def _append_domain_stats(sizes: List[int]):
         if not sizes:
@@ -1230,17 +1304,14 @@ def describe_variables_detailed(model):
                 f"{pct:.1f}% have domain size in [{lo}, {hi}] (avg size {avg:.2f})"
             )
 
-        if total_scalars:
-            prefix = f"Among {known_count} of the {total_scalars} scalar variables with known finite domains, "
-        else:
-            prefix = f"Among {known_count} scalar variables with known finite domains, "
+        prefix = f"Among {known_count} integer variables with known finite domains, "
         header.append(prefix + "; ".join(bucket_lines) + ".")
 
-    _append_domain_stats(scalar_domain_sizes_all)
+    _append_domain_stats(domain_sizes_all)
 
-    unknown_total = unknown_domain_count_user + unknown_domain_count_introduced
+    unknown_total = unknown_domain_count_user + unknown_domain_count_introduced + unknown_domain_count_other
     if unknown_total:
-        header.append(f"{unknown_total} scalar variables have unknown domains.")
+        header.append(f"{unknown_total} integer variables have unknown domains.")
 
     if lines:
         return "\n".join(header + [""] + lines)
@@ -1276,11 +1347,27 @@ def describe_constraints(model):
 
         counts[ctype] += 1
 
-        # Best-effort arity: number of distinct variable identifiers mentioned in args.
-        # Count both scalar variables and arrays-of-vars (many FlatZinc globals take arrays).
+        # Best-effort arity: treat arrays of variables as their element variables.
+        # If we know the array items, expand them; otherwise fall back to the array length.
         if args:
             tokens = token_re.findall(args)
-            arity = len({t for t in tokens if t in scalar_names or t in array_names})
+            mentioned: set[str] = {t for t in tokens if t in scalar_names}
+            anon_count = 0
+            for t in tokens:
+                if t not in array_names:
+                    continue
+                a = model.arrays.get(t) or {}
+                items = a.get("items") or []
+                items = [str(it).strip() for it in items if str(it).strip()]
+                if items:
+                    for it in items:
+                        if it in scalar_names:
+                            mentioned.add(it)
+                else:
+                    length = a.get("length")
+                    if isinstance(length, int) and length >= 0:
+                        anon_count += length
+            arity = len(mentioned) + anon_count
         else:
             arity = 0
         arity_sums[ctype] += arity
@@ -1329,15 +1416,15 @@ def describe_constraints(model):
 
     lines: List[str] = []
     if globals_:
-        lines.append("Global constraints (variable arity):")
+        lines.append("Global constraints:")
         lines.extend(globals_)
     if primitives:
         if lines:
             lines.append("")
-        lines.append("Non-global constraints (fixed arity):")
+        lines.append("Non-global constraints:")
         lines.extend(primitives)
 
-    lines.append(f"\nTotal constraints: {total}")
+    # lines.append(f"\nTotal constraints: {total}")
     return "\n".join(lines)
 
 # ============================================================
@@ -1353,7 +1440,6 @@ def summarize(model):
     problem_txt = (describe_problem(model) or "").strip()
     search_txt = (describe_search(model.search, model=model) or "").strip()
     if search_txt:
-        # The user asked for: "<problem>. Where the model suggests ..."
         if search_txt.startswith("The model suggests"):
             search_txt = "Where the model suggests" + search_txt[len("The model suggests"):]
         combined = (problem_txt.rstrip(".") + ". " + search_txt) if problem_txt else search_txt
