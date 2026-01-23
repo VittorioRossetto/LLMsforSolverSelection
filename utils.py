@@ -70,16 +70,26 @@ MINIZINC_SOLVERS = [
     "Gecode", "Chuffed", "Google OR-Tools CP-SAT", "HiGHS", "COIN-OR CBC"
 ]
 
-def get_solver_prompt(solver_list=None, name_only=False):
-    """
-    Returns a prompt string for the given solver list.
-    If name_only is True, restricts output to names in brackets.
+def get_solver_prompt(solver_list=None, name_only=False, with_reasoning: bool = False):
+    """Returns a prompt string for the given solver list.
+
+    Args:
+        solver_list: List of solver names.
+        name_only: If True, request only solver names in brackets.
+        with_reasoning: If True, request a short explanation after the bracketed list.
+            Note: This asks for a concise explanation (not step-by-step hidden reasoning).
     """
     if solver_list is None:
         # default to the set of free/public solvers for lightweight benchmarking
         solver_list = FREE_SOLVERS
     solver_lines = '\n'.join(f"- {s}" for s in solver_list)
     if name_only:
+        if with_reasoning:
+            return (
+                f"The goal is to determine which constraint programming solver would be best suited for this problem, considering the following options:\n\n"
+                f"{solver_lines}\n\n"
+                "Answer with the name of the 3 best solvers inside square brackets separated by comma, followed by a short explanation of the main factors behind your choice."
+            )
         return (
             f"The goal is to determine which constraint programming solver would be best suited for this problem, considering the following options:\n\n"
             f"{solver_lines}\n\n"

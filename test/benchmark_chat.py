@@ -434,7 +434,7 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
 
     # always build the solver NAMES list to include in system messages
     solver_list = get_solver_list(args.solver_set if hasattr(args, 'solver_set') else 'free')
-    solver_list_text = get_solver_prompt(solver_list, name_only=True)
+    solver_list_text = get_solver_prompt(solver_list, name_only=True, with_reasoning=getattr(args, 'with_reasoning', False))
 
     # build solver description text only if requested (this is the verbose descriptions map)
     if getattr(args, 'features_only', False):
@@ -447,10 +447,13 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
         else:
             solver_desc_text = ''
     if getattr(args, 'use_fzn_parser_outputs', False):
-        # solver_list_text already instructs bracket-only answers; keep user message minimal
+        # In fzn-parser mode we send one instance per chat; allow optional explanation after bracket list.
         common_instruction = ""
     else:
-        common_instruction = "For each instance above, output a single line: instance_name: [solver1, solver2, solver3]"
+        if getattr(args, 'with_reasoning', False):
+            common_instruction = "For each instance above, output a single line: instance_name: [solver1, solver2, solver3] explanation"
+        else:
+            common_instruction = "For each instance above, output a single line: instance_name: [solver1, solver2, solver3]"
 
     # load fzn parser outputs if requested
     fzn_outputs = {}
@@ -595,15 +598,48 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
                 # Expect a single bracketed list response.
                 match = re.search(r"\[([^\]]+)\]", resp)
                 top3 = [s.strip() for s in match.group(1).split(',')] if match else []
+                reasoning = (resp[match.end():].strip() if (match and getattr(args, 'with_reasoning', False)) else None)
                 name = inst_label or 'unknown'
-                chats_results.setdefault(pk, {})[name] = {'top3': top3, 'time_seconds': None}
+                entry = {'top3': top3, 'time_seconds': None}
+                if getattr(args, 'with_reasoning', False):
+                    entry['reasoning'] = reasoning
+                    entry['raw_response'] = resp
+                chats_results.setdefault(pk, {})[name] = entry
             else:
-                pairs = re.findall(r"([^:\n]+)\s*:\s*\[([^\]]+)\]", resp)
-                if pairs:
-                    for name, inner in pairs:
-                        name = name.strip()
-                        top3 = [s.strip() for s in inner.split(',')]
-                        chats_results.setdefault(pk, {})[name] = {'top3': top3, 'time_seconds': None}
+                if getattr(args, 'with_reasoning', False):
+                    pairs = re.findall(r"([^:\n]+)\s*:\s*\[([^\]]+)\]\s*(.*)", resp)
+                    if pairs:
+                        for name, inner, tail in pairs:
+                            name = name.strip()
+                            top3 = [s.strip() for s in inner.split(',')]
+                            chats_results.setdefault(pk, {})[name] = {
+                                'top3': top3,
+                                'time_seconds': None,
+                                'reasoning': (tail.strip() or None),
+                                'raw_response': resp,
+                            }
+                    else:
+                        brackets = re.findall(r"\[([^\]]+)\]", resp)
+                        user_msgs = [m for m in msgs if m['role'] == 'user']
+                        for idx, um in enumerate(user_msgs):
+                            first_line = um['content'].splitlines()[0]
+                            name = first_line.replace('Instance:','').strip()
+                            if idx < len(brackets):
+                                chats_results.setdefault(pk, {})[name] = {
+                                    'top3': [s.strip() for s in brackets[idx].split(',')],
+                                    'time_seconds': None,
+                                    'reasoning': None,
+                                    'raw_response': resp,
+                                }
+                            else:
+                                chats_results.setdefault(pk, {})[name] = {'top3': None, 'error': 'no parsed response', 'raw_response': resp}
+                else:
+                    pairs = re.findall(r"([^:\n]+)\s*:\s*\[([^\]]+)\]", resp)
+                    if pairs:
+                        for name, inner in pairs:
+                            name = name.strip()
+                            top3 = [s.strip() for s in inner.split(',')]
+                            chats_results.setdefault(pk, {})[name] = {'top3': top3, 'time_seconds': None}
                 else:
                     brackets = re.findall(r"\[([^\]]+)\]", resp)
                     user_msgs = [m for m in msgs if m['role'] == 'user']
@@ -660,6 +696,8 @@ def main(argv=None):
                         help='Optional path to fzn_parser_outputs.json (defaults to mznc2025_probs/fzn_parser_outputs.json)')
     parser.add_argument('--temperature', type=float, default=None,
                         help='Sampling temperature for the conversation (provider support varies). Default: provider default')
+    parser.add_argument('--with-reasoning', action='store_true', default=False,
+                        help='If set, ask for a bracketed top-3 list followed by a short explanation, and store it in the output JSON.')
     args = parser.parse_args(argv)
 
     # Backwards compatibility: allow --significative-only as an alias for --solver-set significative.
@@ -718,6 +756,8 @@ def main(argv=None):
 
     if getattr(args, 'include_problem_desc', False):
         name += '_Pdesc'
+    if getattr(args, 'with_reasoning', False):
+        name += '_reason'
     if getattr(args, 'include_solver_desc', False):
         name += '_Sdesc'
     # (solver set already encoded in base when non-default)

@@ -68,6 +68,8 @@ parser.add_argument('--include-solver-desc', action='store_true', default=False,
                     help='If set, include solver descriptions (from a JSON map) in the prompt in addition to solver names.')
 parser.add_argument('--solver-desc-file', type=str, default=None,
                     help='Optional path to JSON file with solver descriptions. Defaults to test/data/freeSolversDescription.json')
+parser.add_argument('--with-reasoning', action='store_true', default=False,
+                    help='If set, ask the model for a bracketed top-3 list followed by a short explanation, and store it in the output JSON.')
 args = parser.parse_args()
 
 # Backwards compatibility: allow --significative-only as an alias for --solver-set significative.
@@ -290,7 +292,10 @@ def get_allowed_total_tokens_for_model(model_id, model_label, fallback_budget=25
 
 
 def run_single_query(provider, model_id, prob_key, inst_label, prompt, query_func, temperature=None):
-    """Executes one LLM query with retry handling."""
+    """Executes one LLM query with retry handling.
+
+    Returns (prob_key, inst_label, top3, duration, raw_response, reasoning, error).
+    """
     retry_count = 0
     while True:
         try:
@@ -305,7 +310,8 @@ def run_single_query(provider, model_id, prob_key, inst_label, prompt, query_fun
             duration = time.time() - start
             match = re.search(r"\[([^\]]+)\]", response)
             llm_top3 = [s.strip() for s in match.group(1).split(',')] if match else []
-            return (prob_key, inst_label, llm_top3, round(duration, 3), None)
+            reasoning = (response[match.end():].strip() if match else response.strip())
+            return (prob_key, inst_label, llm_top3, round(duration, 3), response, reasoning, None)
         except Exception as e:
             err_text = str(e)
             # log the exception with context
@@ -317,13 +323,13 @@ def run_single_query(provider, model_id, prob_key, inst_label, prompt, query_fun
             should_retry, delay, is_503_like = handle_api_error(e)
             retry_count += 1 if should_retry else 0
             if is_503_like and retry_count > 3:
-                return (prob_key, inst_label, None, None, f"503 after 3 retries: {err_text}")
+                return (prob_key, inst_label, None, None, None, None, f"503 after 3 retries: {err_text}")
             if "413" in err_text and retry_count > 3:
-                return (prob_key, inst_label, None, None, f"413 too large after 3 retries: {err_text}")
+                return (prob_key, inst_label, None, None, None, None, f"413 too large after 3 retries: {err_text}")
             if should_retry:
                 time.sleep(delay)
                 continue
-            return (prob_key, inst_label, None, None, f"Non-retryable: {err_text}")
+            return (prob_key, inst_label, None, None, None, None, f"Non-retryable: {err_text}")
 
 
 def find_full_script(script_path):
@@ -351,7 +357,7 @@ def process_model(provider, model_id, model_label, query_func):
     if model_id in NON_TESTABLE_MODELS or model_id in IGNORED_MODELS:
         return provider, model_id, {}
 
-    solver_prompt = get_solver_prompt(solver_list, name_only=True)
+    solver_prompt = get_solver_prompt(solver_list, name_only=True, with_reasoning=args.with_reasoning)
     solver_desc_text = build_solver_description_text(solver_list, SOLVER_DESC_MAP)
 
     model_results = {}
@@ -495,15 +501,19 @@ def process_model(provider, model_id, model_label, query_func):
 
         for future in as_completed(futures):
             prob_key, inst_label = futures[future]
-            prob_key, inst_label, llm_top3, duration, err = future.result()
+            prob_key, inst_label, llm_top3, duration, raw_response, reasoning, err = future.result()
             pbar.update(1)
 
             if err:
                 continue
-            model_results.setdefault(prob_key, {})[inst_label] = {
+            entry = {
                 "top3": llm_top3,
-                "time_seconds": duration
+                "time_seconds": duration,
             }
+            if args.with_reasoning:
+                entry["reasoning"] = reasoning
+                entry["raw_response"] = raw_response
+            model_results.setdefault(prob_key, {})[inst_label] = entry
 
     return provider, model_id, model_results
 
@@ -685,6 +695,8 @@ if args.use_fzn_parser_outputs:
     _suffix_parts.append("fzn")
 if args.include_solver_desc:
     _suffix_parts.append("solverdesc")
+if args.with_reasoning:
+    _suffix_parts.append("reason")
 if args.temperature is not None:
     # 0.2 -> 0p2, 0.0 -> 0, 0.80 -> 0p8
     t = f"{float(args.temperature):g}".replace('.', 'p')
