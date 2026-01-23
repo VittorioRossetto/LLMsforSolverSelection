@@ -1,0 +1,998 @@
+{
+  "counts": {
+    "merged_groups": 42,
+    "original": 294,
+    "unified": 198
+  },
+  "drop_leading_types": false,
+  "groups": {
+    "all_different": [
+      "all_different"
+    ],
+    "all_equal": [
+      "all_equal"
+    ],
+    "alternative": [
+      "alternative"
+    ],
+    "among": [
+      "among"
+    ],
+    "arg_sort": [
+      "arg_sort"
+    ],
+    "array": [
+      "array_float_maximum",
+      "array_int_maximum"
+    ],
+    "array_bool_and": [
+      "array_bool_and"
+    ],
+    "array_bool_or": [
+      "array_bool_or"
+    ],
+    "array_bool_xor": [
+      "array_bool_xor"
+    ],
+    "array_int_element": [
+      "array_bool_element",
+      "array_float_element",
+      "array_int_element",
+      "array_set_element",
+      "array_var_bool_element",
+      "array_var_float_element",
+      "array_var_int_element",
+      "array_var_set_element"
+    ],
+    "array_int_minimum": [
+      "array_float_minimum",
+      "array_int_minimum"
+    ],
+    "array_int_union": [
+      "array_int_union"
+    ],
+    "array_opt_int_union": [
+      "array_opt_int_union"
+    ],
+    "array_set_intersect": [
+      "array_set_intersect"
+    ],
+    "array_set_union": [
+      "array_set_union"
+    ],
+    "array_var": [
+      "array_var_bool_element2d_nonshifted",
+      "array_var_float_element2d_nonshifted",
+      "array_var_int_element2d_nonshifted",
+      "array_var_set_element2d_nonshifted"
+    ],
+    "array_var_int_element_nonshifted": [
+      "array_var_bool_element_nonshifted",
+      "array_var_float_element_nonshifted",
+      "array_var_int_element_nonshifted",
+      "array_var_set_element_nonshifted"
+    ],
+    "at_least": [
+      "at_least_int",
+      "at_least_int_reif",
+      "at_least_set",
+      "at_least_set_reif"
+    ],
+    "at_most": [
+      "at_most_int",
+      "at_most_int_reif",
+      "at_most_set",
+      "at_most_set_reif"
+    ],
+    "at_most1": [
+      "at_most1"
+    ],
+    "bin_packing": [
+      "bin_packing"
+    ],
+    "bin_packing_capa": [
+      "bin_packing_capa"
+    ],
+    "bin_packing_load": [
+      "bin_packing_load"
+    ],
+    "bool2int": [
+      "bool2int"
+    ],
+    "bool_and": [
+      "bool_and"
+    ],
+    "bool_clause": [
+      "bool_clause"
+    ],
+    "bool_clause_reif": [
+      "bool_clause_reif"
+    ],
+    "bool_eq": [
+      "bool_eq",
+      "float_eq"
+    ],
+    "bool_eq_reif": [
+      "bool_eq_reif",
+      "float_eq_reif"
+    ],
+    "bool_le": [
+      "bool_le",
+      "float_le"
+    ],
+    "bool_le_reif": [
+      "bool_le_reif",
+      "float_le_reif"
+    ],
+    "bool_lin_le": [
+      "bool_lin_le",
+      "float_lin_le"
+    ],
+    "bool_or": [
+      "bool_or"
+    ],
+    "bool_xor": [
+      "bool_xor"
+    ],
+    "bounded_dpath": [
+      "bounded_dpath"
+    ],
+    "bounded_path": [
+      "bounded_path"
+    ],
+    "circuit": [
+      "circuit"
+    ],
+    "connected": [
+      "connected"
+    ],
+    "cost_mdd": [
+      "cost_mdd"
+    ],
+    "cost_regular": [
+      "cost_regular"
+    ],
+    "count": [
+      "count",
+      "count_eq"
+    ],
+    "count_geq": [
+      "count_geq"
+    ],
+    "count_gt": [
+      "count_gt"
+    ],
+    "count_leq": [
+      "count_leq"
+    ],
+    "count_lt": [
+      "count_lt"
+    ],
+    "count_neq": [
+      "count_neq"
+    ],
+    "cumulative": [
+      "cumulative"
+    ],
+    "cumulatives": [
+      "cumulatives"
+    ],
+    "cumulatives_decomp": [
+      "cumulatives_decomp"
+    ],
+    "dag": [
+      "dag"
+    ],
+    "dconnected": [
+      "dconnected"
+    ],
+    "diffn": [
+      "diffn"
+    ],
+    "diffn_k": [
+      "diffn_k"
+    ],
+    "diffn_nonstrict": [
+      "diffn_nonstrict"
+    ],
+    "diffn_nonstrict_k": [
+      "diffn_nonstrict_k"
+    ],
+    "dijunctive": [
+      "dijunctive"
+    ],
+    "disjoint": [
+      "all_disjoint",
+      "disjoint"
+    ],
+    "disjunctive_strict": [
+      "disjunctive_strict"
+    ],
+    "distribute": [
+      "distribute"
+    ],
+    "dpath": [
+      "dpath"
+    ],
+    "dreachable": [
+      "dreachable"
+    ],
+    "dsteiner": [
+      "dsteiner"
+    ],
+    "dtree": [
+      "dtree"
+    ],
+    "exactly": [
+      "exactly_int",
+      "exactly_int_reif",
+      "exactly_set",
+      "exactly_set_reif"
+    ],
+    "float_acos": [
+      "float_acos"
+    ],
+    "float_acosh": [
+      "float_acosh"
+    ],
+    "float_asin": [
+      "float_asin"
+    ],
+    "float_asinh": [
+      "float_asinh"
+    ],
+    "float_atan": [
+      "float_atan"
+    ],
+    "float_atanh": [
+      "float_atanh"
+    ],
+    "float_ceil": [
+      "float_ceil"
+    ],
+    "float_cos": [
+      "float_cos"
+    ],
+    "float_cosh": [
+      "float_cosh"
+    ],
+    "float_div": [
+      "float_div"
+    ],
+    "float_dom": [
+      "float_dom"
+    ],
+    "float_exp": [
+      "float_exp"
+    ],
+    "float_floor": [
+      "float_floor"
+    ],
+    "float_in": [
+      "float_in"
+    ],
+    "float_lin_le_reif": [
+      "float_lin_le_reif"
+    ],
+    "float_lin_lt": [
+      "float_lin_lt"
+    ],
+    "float_lin_lt_reif": [
+      "float_lin_lt_reif"
+    ],
+    "float_ln": [
+      "float_ln"
+    ],
+    "float_log10": [
+      "float_log10"
+    ],
+    "float_log2": [
+      "float_log2"
+    ],
+    "float_ne_reif": [
+      "float_ne_reif"
+    ],
+    "float_pow": [
+      "float_pow"
+    ],
+    "float_round": [
+      "float_round"
+    ],
+    "float_sin": [
+      "float_sin"
+    ],
+    "float_sinh": [
+      "float_sinh"
+    ],
+    "float_sqrt": [
+      "float_sqrt"
+    ],
+    "float_tan": [
+      "float_tan"
+    ],
+    "float_tanh": [
+      "float_tanh"
+    ],
+    "geost": [
+      "geost"
+    ],
+    "geost_bb": [
+      "geost_bb"
+    ],
+    "geost_nonoverlap_k": [
+      "geost_nonoverlap_k"
+    ],
+    "geost_smallest_bb": [
+      "geost_smallest_bb"
+    ],
+    "global_cardinality": [
+      "global_cardinality"
+    ],
+    "global_cardinality_closed": [
+      "global_cardinality_closed"
+    ],
+    "global_cardinality_low_up": [
+      "global_cardinality_low_up"
+    ],
+    "global_cardinality_low_up_closed": [
+      "global_cardinality_low_up_closed"
+    ],
+    "increasing": [
+      "increasing"
+    ],
+    "increasing_int": [
+      "increasing_bool",
+      "increasing_bool_reif",
+      "increasing_float",
+      "increasing_float_reif",
+      "increasing_int",
+      "increasing_int_reif",
+      "increasing_set",
+      "increasing_set_reif"
+    ],
+    "increasing_int_opt": [
+      "increasing_float_opt",
+      "increasing_int_opt"
+    ],
+    "increasing_int_opt_reif": [
+      "increasing_float_opt_reif",
+      "increasing_int_opt_reif"
+    ],
+    "int2float": [
+      "int2float"
+    ],
+    "int_abs": [
+      "float_abs",
+      "int_abs"
+    ],
+    "int_div": [
+      "int_div"
+    ],
+    "int_eq": [
+      "int_eq"
+    ],
+    "int_eq_reif": [
+      "int_eq_reif"
+    ],
+    "int_le": [
+      "int_le"
+    ],
+    "int_le_reif": [
+      "int_le_reif"
+    ],
+    "int_lin_eq": [
+      "bool_lin_eq",
+      "float_lin_eq",
+      "int_lin_eq"
+    ],
+    "int_lin_eq_reif": [
+      "float_lin_eq_reif",
+      "int_lin_eq_reif"
+    ],
+    "int_lin_le": [
+      "int_lin_le"
+    ],
+    "int_lin_le_reif": [
+      "int_lin_le_reif"
+    ],
+    "int_lin_ne": [
+      "float_lin_ne",
+      "int_lin_ne"
+    ],
+    "int_lin_ne_reif": [
+      "float_lin_ne_reif",
+      "int_lin_ne_reif"
+    ],
+    "int_lt": [
+      "bool_lt",
+      "float_lt",
+      "int_lt"
+    ],
+    "int_lt_reif": [
+      "bool_lt_reif",
+      "float_lt_reif",
+      "int_lt_reif"
+    ],
+    "int_max": [
+      "float_max",
+      "int_max"
+    ],
+    "int_min": [
+      "float_min",
+      "int_min"
+    ],
+    "int_mod": [
+      "int_mod"
+    ],
+    "int_ne": [
+      "bool_not",
+      "float_ne",
+      "int_ne"
+    ],
+    "int_ne_reif": [
+      "int_ne_reif"
+    ],
+    "int_plus": [
+      "float_plus",
+      "int_plus"
+    ],
+    "int_pow": [
+      "int_pow"
+    ],
+    "int_pow_fixed": [
+      "int_pow_fixed"
+    ],
+    "int_set_channel": [
+      "int_set_channel"
+    ],
+    "int_times": [
+      "float_times",
+      "int_times"
+    ],
+    "inverse_in_range": [
+      "inverse_in_range"
+    ],
+    "inverse_set": [
+      "inverse_set"
+    ],
+    "knapsack": [
+      "knapsack"
+    ],
+    "lex_chain_less": [
+      "lex_chain_less"
+    ],
+    "lex_chain_lesseq": [
+      "lex_chain_lesseq"
+    ],
+    "lex_less": [
+      "lex_less_bool",
+      "lex_less_bool_reif",
+      "lex_less_float",
+      "lex_less_float_reif",
+      "lex_less_int",
+      "lex_less_int_reif",
+      "lex_less_set",
+      "lex_less_set_reif"
+    ],
+    "lex_lesseq": [
+      "lex_lesseq_bool",
+      "lex_lesseq_bool_reif",
+      "lex_lesseq_float",
+      "lex_lesseq_float_reif",
+      "lex_lesseq_int",
+      "lex_lesseq_int_reif",
+      "lex_lesseq_set",
+      "lex_lesseq_set_reif"
+    ],
+    "link_set_to_booleans": [
+      "link_set_to_booleans"
+    ],
+    "mdd": [
+      "mdd"
+    ],
+    "mdd_nondet": [
+      "mdd_nondet"
+    ],
+    "member_int": [
+      "member_bool",
+      "member_bool_reif",
+      "member_float",
+      "member_float_reif",
+      "member_int",
+      "member_int_reif",
+      "set_member",
+      "set_member_reif"
+    ],
+    "member_set": [
+      "member_set",
+      "member_set_reif"
+    ],
+    "network_flow": [
+      "network_flow"
+    ],
+    "network_flow_cost": [
+      "network_flow_cost"
+    ],
+    "neural_net": [
+      "neural_net"
+    ],
+    "on_restart_complete": [
+      "on_restart_complete"
+    ],
+    "on_restart_last_val": [
+      "on_restart_last_val_bool",
+      "on_restart_last_val_float",
+      "on_restart_last_val_int",
+      "on_restart_last_val_set"
+    ],
+    "on_restart_sol": [
+      "on_restart_sol_bool",
+      "on_restart_sol_float",
+      "on_restart_sol_int",
+      "on_restart_sol_set"
+    ],
+    "on_restart_status": [
+      "on_restart_status"
+    ],
+    "on_restart_uniform": [
+      "on_restart_uniform_float",
+      "on_restart_uniform_int"
+    ],
+    "partition_set": [
+      "partition_set"
+    ],
+    "path": [
+      "path"
+    ],
+    "piecewise_linear": [
+      "piecewise_linear"
+    ],
+    "range": [
+      "range"
+    ],
+    "reachable": [
+      "reachable"
+    ],
+    "regular": [
+      "regular"
+    ],
+    "regular_nfa": [
+      "regular_nfa"
+    ],
+    "roots": [
+      "roots"
+    ],
+    "seq_precede_chain": [
+      "seq_precede_chain"
+    ],
+    "set": [
+      "set_subset_reif",
+      "set_superset_reif"
+    ],
+    "set_card": [
+      "set_card"
+    ],
+    "set_diff": [
+      "set_diff"
+    ],
+    "set_eq": [
+      "set_eq"
+    ],
+    "set_eq_reif": [
+      "set_eq_reif"
+    ],
+    "set_in": [
+      "float_set_in",
+      "set_in"
+    ],
+    "set_in_reif": [
+      "set_in_reif"
+    ],
+    "set_intersect": [
+      "set_intersect"
+    ],
+    "set_le": [
+      "set_le"
+    ],
+    "set_le_reif": [
+      "set_le_reif"
+    ],
+    "set_lt": [
+      "set_lt"
+    ],
+    "set_lt_reif": [
+      "set_lt_reif"
+    ],
+    "set_ne": [
+      "set_ne"
+    ],
+    "set_ne_reif": [
+      "set_ne_reif"
+    ],
+    "set_subset": [
+      "set_subset"
+    ],
+    "set_superset": [
+      "set_superset"
+    ],
+    "set_symdiff": [
+      "set_symdiff"
+    ],
+    "set_union": [
+      "set_union"
+    ],
+    "sliding_sum": [
+      "sliding_sum"
+    ],
+    "span": [
+      "span"
+    ],
+    "steiner": [
+      "steiner"
+    ],
+    "strict_lex2": [
+      "strict_lex2"
+    ],
+    "strictly_increasing": [
+      "strictly_increasing_float_opt_reif",
+      "strictly_increasing_int_opt_reif"
+    ],
+    "strictly_increasing_int": [
+      "strictly_increasing_float",
+      "strictly_increasing_float_opt",
+      "strictly_increasing_float_reif",
+      "strictly_increasing_int",
+      "strictly_increasing_int_opt",
+      "strictly_increasing_int_reif",
+      "strictly_increasing_set",
+      "strictly_increasing_set_reif"
+    ],
+    "subcircuit": [
+      "subcircuit"
+    ],
+    "subgraph": [
+      "subgraph"
+    ],
+    "sum_pred": [
+      "sum_pred"
+    ],
+    "sum_set": [
+      "sum_set"
+    ],
+    "symmetric_all_different": [
+      "symmetric_all_different"
+    ],
+    "table_bool": [
+      "table_bool",
+      "table_bool_reif"
+    ],
+    "table_int": [
+      "table_int"
+    ],
+    "table_int_reif": [
+      "table_int_reif"
+    ],
+    "tree": [
+      "tree"
+    ],
+    "value_precede": [
+      "value_precede"
+    ],
+    "value_precede_chain": [
+      "value_precede_chain"
+    ],
+    "var_perm_sym": [
+      "var_perm_sym"
+    ],
+    "var_sqr_sym": [
+      "var_sqr_sym"
+    ],
+    "write": [
+      "write"
+    ],
+    "writes": [
+      "writes"
+    ],
+    "writes_seq": [
+      "writes_seq"
+    ]
+  },
+  "input": "tools/fzn_descriptions.json",
+  "output": "tools/fzn_descriptions_unified.json",
+  "rename_map": {
+    "all_different": "all_different",
+    "all_disjoint": "disjoint",
+    "all_equal": "all_equal",
+    "alternative": "alternative",
+    "among": "among",
+    "arg_sort": "arg_sort",
+    "array_bool_and": "array_bool_and",
+    "array_bool_element": "array_int_element",
+    "array_bool_or": "array_bool_or",
+    "array_bool_xor": "array_bool_xor",
+    "array_float_element": "array_int_element",
+    "array_float_maximum": "array",
+    "array_float_minimum": "array_int_minimum",
+    "array_int_element": "array_int_element",
+    "array_int_maximum": "array",
+    "array_int_minimum": "array_int_minimum",
+    "array_int_union": "array_int_union",
+    "array_opt_int_union": "array_opt_int_union",
+    "array_set_element": "array_int_element",
+    "array_set_intersect": "array_set_intersect",
+    "array_set_union": "array_set_union",
+    "array_var_bool_element": "array_int_element",
+    "array_var_bool_element2d_nonshifted": "array_var",
+    "array_var_bool_element_nonshifted": "array_var_int_element_nonshifted",
+    "array_var_float_element": "array_int_element",
+    "array_var_float_element2d_nonshifted": "array_var",
+    "array_var_float_element_nonshifted": "array_var_int_element_nonshifted",
+    "array_var_int_element": "array_int_element",
+    "array_var_int_element2d_nonshifted": "array_var",
+    "array_var_int_element_nonshifted": "array_var_int_element_nonshifted",
+    "array_var_set_element": "array_int_element",
+    "array_var_set_element2d_nonshifted": "array_var",
+    "array_var_set_element_nonshifted": "array_var_int_element_nonshifted",
+    "at_least_int": "at_least",
+    "at_least_int_reif": "at_least",
+    "at_least_set": "at_least",
+    "at_least_set_reif": "at_least",
+    "at_most1": "at_most1",
+    "at_most_int": "at_most",
+    "at_most_int_reif": "at_most",
+    "at_most_set": "at_most",
+    "at_most_set_reif": "at_most",
+    "bin_packing": "bin_packing",
+    "bin_packing_capa": "bin_packing_capa",
+    "bin_packing_load": "bin_packing_load",
+    "bool2int": "bool2int",
+    "bool_and": "bool_and",
+    "bool_clause": "bool_clause",
+    "bool_clause_reif": "bool_clause_reif",
+    "bool_eq": "bool_eq",
+    "bool_eq_reif": "bool_eq_reif",
+    "bool_le": "bool_le",
+    "bool_le_reif": "bool_le_reif",
+    "bool_lin_eq": "int_lin_eq",
+    "bool_lin_le": "bool_lin_le",
+    "bool_lt": "int_lt",
+    "bool_lt_reif": "int_lt_reif",
+    "bool_not": "int_ne",
+    "bool_or": "bool_or",
+    "bool_xor": "bool_xor",
+    "bounded_dpath": "bounded_dpath",
+    "bounded_path": "bounded_path",
+    "circuit": "circuit",
+    "connected": "connected",
+    "cost_mdd": "cost_mdd",
+    "cost_regular": "cost_regular",
+    "count": "count",
+    "count_eq": "count",
+    "count_geq": "count_geq",
+    "count_gt": "count_gt",
+    "count_leq": "count_leq",
+    "count_lt": "count_lt",
+    "count_neq": "count_neq",
+    "cumulative": "cumulative",
+    "cumulatives": "cumulatives",
+    "cumulatives_decomp": "cumulatives_decomp",
+    "dag": "dag",
+    "dconnected": "dconnected",
+    "diffn": "diffn",
+    "diffn_k": "diffn_k",
+    "diffn_nonstrict": "diffn_nonstrict",
+    "diffn_nonstrict_k": "diffn_nonstrict_k",
+    "dijunctive": "dijunctive",
+    "disjoint": "disjoint",
+    "disjunctive_strict": "disjunctive_strict",
+    "distribute": "distribute",
+    "dpath": "dpath",
+    "dreachable": "dreachable",
+    "dsteiner": "dsteiner",
+    "dtree": "dtree",
+    "exactly_int": "exactly",
+    "exactly_int_reif": "exactly",
+    "exactly_set": "exactly",
+    "exactly_set_reif": "exactly",
+    "float_abs": "int_abs",
+    "float_acos": "float_acos",
+    "float_acosh": "float_acosh",
+    "float_asin": "float_asin",
+    "float_asinh": "float_asinh",
+    "float_atan": "float_atan",
+    "float_atanh": "float_atanh",
+    "float_ceil": "float_ceil",
+    "float_cos": "float_cos",
+    "float_cosh": "float_cosh",
+    "float_div": "float_div",
+    "float_dom": "float_dom",
+    "float_eq": "bool_eq",
+    "float_eq_reif": "bool_eq_reif",
+    "float_exp": "float_exp",
+    "float_floor": "float_floor",
+    "float_in": "float_in",
+    "float_le": "bool_le",
+    "float_le_reif": "bool_le_reif",
+    "float_lin_eq": "int_lin_eq",
+    "float_lin_eq_reif": "int_lin_eq_reif",
+    "float_lin_le": "bool_lin_le",
+    "float_lin_le_reif": "float_lin_le_reif",
+    "float_lin_lt": "float_lin_lt",
+    "float_lin_lt_reif": "float_lin_lt_reif",
+    "float_lin_ne": "int_lin_ne",
+    "float_lin_ne_reif": "int_lin_ne_reif",
+    "float_ln": "float_ln",
+    "float_log10": "float_log10",
+    "float_log2": "float_log2",
+    "float_lt": "int_lt",
+    "float_lt_reif": "int_lt_reif",
+    "float_max": "int_max",
+    "float_min": "int_min",
+    "float_ne": "int_ne",
+    "float_ne_reif": "float_ne_reif",
+    "float_plus": "int_plus",
+    "float_pow": "float_pow",
+    "float_round": "float_round",
+    "float_set_in": "set_in",
+    "float_sin": "float_sin",
+    "float_sinh": "float_sinh",
+    "float_sqrt": "float_sqrt",
+    "float_tan": "float_tan",
+    "float_tanh": "float_tanh",
+    "float_times": "int_times",
+    "geost": "geost",
+    "geost_bb": "geost_bb",
+    "geost_nonoverlap_k": "geost_nonoverlap_k",
+    "geost_smallest_bb": "geost_smallest_bb",
+    "global_cardinality": "global_cardinality",
+    "global_cardinality_closed": "global_cardinality_closed",
+    "global_cardinality_low_up": "global_cardinality_low_up",
+    "global_cardinality_low_up_closed": "global_cardinality_low_up_closed",
+    "increasing": "increasing",
+    "increasing_bool": "increasing_int",
+    "increasing_bool_reif": "increasing_int",
+    "increasing_float": "increasing_int",
+    "increasing_float_opt": "increasing_int_opt",
+    "increasing_float_opt_reif": "increasing_int_opt_reif",
+    "increasing_float_reif": "increasing_int",
+    "increasing_int": "increasing_int",
+    "increasing_int_opt": "increasing_int_opt",
+    "increasing_int_opt_reif": "increasing_int_opt_reif",
+    "increasing_int_reif": "increasing_int",
+    "increasing_set": "increasing_int",
+    "increasing_set_reif": "increasing_int",
+    "int2float": "int2float",
+    "int_abs": "int_abs",
+    "int_div": "int_div",
+    "int_eq": "int_eq",
+    "int_eq_reif": "int_eq_reif",
+    "int_le": "int_le",
+    "int_le_reif": "int_le_reif",
+    "int_lin_eq": "int_lin_eq",
+    "int_lin_eq_reif": "int_lin_eq_reif",
+    "int_lin_le": "int_lin_le",
+    "int_lin_le_reif": "int_lin_le_reif",
+    "int_lin_ne": "int_lin_ne",
+    "int_lin_ne_reif": "int_lin_ne_reif",
+    "int_lt": "int_lt",
+    "int_lt_reif": "int_lt_reif",
+    "int_max": "int_max",
+    "int_min": "int_min",
+    "int_mod": "int_mod",
+    "int_ne": "int_ne",
+    "int_ne_reif": "int_ne_reif",
+    "int_plus": "int_plus",
+    "int_pow": "int_pow",
+    "int_pow_fixed": "int_pow_fixed",
+    "int_set_channel": "int_set_channel",
+    "int_times": "int_times",
+    "inverse_in_range": "inverse_in_range",
+    "inverse_set": "inverse_set",
+    "knapsack": "knapsack",
+    "lex_chain_less": "lex_chain_less",
+    "lex_chain_lesseq": "lex_chain_lesseq",
+    "lex_less_bool": "lex_less",
+    "lex_less_bool_reif": "lex_less",
+    "lex_less_float": "lex_less",
+    "lex_less_float_reif": "lex_less",
+    "lex_less_int": "lex_less",
+    "lex_less_int_reif": "lex_less",
+    "lex_less_set": "lex_less",
+    "lex_less_set_reif": "lex_less",
+    "lex_lesseq_bool": "lex_lesseq",
+    "lex_lesseq_bool_reif": "lex_lesseq",
+    "lex_lesseq_float": "lex_lesseq",
+    "lex_lesseq_float_reif": "lex_lesseq",
+    "lex_lesseq_int": "lex_lesseq",
+    "lex_lesseq_int_reif": "lex_lesseq",
+    "lex_lesseq_set": "lex_lesseq",
+    "lex_lesseq_set_reif": "lex_lesseq",
+    "link_set_to_booleans": "link_set_to_booleans",
+    "mdd": "mdd",
+    "mdd_nondet": "mdd_nondet",
+    "member_bool": "member_int",
+    "member_bool_reif": "member_int",
+    "member_float": "member_int",
+    "member_float_reif": "member_int",
+    "member_int": "member_int",
+    "member_int_reif": "member_int",
+    "member_set": "member_set",
+    "member_set_reif": "member_set",
+    "network_flow": "network_flow",
+    "network_flow_cost": "network_flow_cost",
+    "neural_net": "neural_net",
+    "on_restart_complete": "on_restart_complete",
+    "on_restart_last_val_bool": "on_restart_last_val",
+    "on_restart_last_val_float": "on_restart_last_val",
+    "on_restart_last_val_int": "on_restart_last_val",
+    "on_restart_last_val_set": "on_restart_last_val",
+    "on_restart_sol_bool": "on_restart_sol",
+    "on_restart_sol_float": "on_restart_sol",
+    "on_restart_sol_int": "on_restart_sol",
+    "on_restart_sol_set": "on_restart_sol",
+    "on_restart_status": "on_restart_status",
+    "on_restart_uniform_float": "on_restart_uniform",
+    "on_restart_uniform_int": "on_restart_uniform",
+    "partition_set": "partition_set",
+    "path": "path",
+    "piecewise_linear": "piecewise_linear",
+    "range": "range",
+    "reachable": "reachable",
+    "regular": "regular",
+    "regular_nfa": "regular_nfa",
+    "roots": "roots",
+    "seq_precede_chain": "seq_precede_chain",
+    "set_card": "set_card",
+    "set_diff": "set_diff",
+    "set_eq": "set_eq",
+    "set_eq_reif": "set_eq_reif",
+    "set_in": "set_in",
+    "set_in_reif": "set_in_reif",
+    "set_intersect": "set_intersect",
+    "set_le": "set_le",
+    "set_le_reif": "set_le_reif",
+    "set_lt": "set_lt",
+    "set_lt_reif": "set_lt_reif",
+    "set_member": "member_int",
+    "set_member_reif": "member_int",
+    "set_ne": "set_ne",
+    "set_ne_reif": "set_ne_reif",
+    "set_subset": "set_subset",
+    "set_subset_reif": "set",
+    "set_superset": "set_superset",
+    "set_superset_reif": "set",
+    "set_symdiff": "set_symdiff",
+    "set_union": "set_union",
+    "sliding_sum": "sliding_sum",
+    "span": "span",
+    "steiner": "steiner",
+    "strict_lex2": "strict_lex2",
+    "strictly_increasing_float": "strictly_increasing_int",
+    "strictly_increasing_float_opt": "strictly_increasing_int",
+    "strictly_increasing_float_opt_reif": "strictly_increasing",
+    "strictly_increasing_float_reif": "strictly_increasing_int",
+    "strictly_increasing_int": "strictly_increasing_int",
+    "strictly_increasing_int_opt": "strictly_increasing_int",
+    "strictly_increasing_int_opt_reif": "strictly_increasing",
+    "strictly_increasing_int_reif": "strictly_increasing_int",
+    "strictly_increasing_set": "strictly_increasing_int",
+    "strictly_increasing_set_reif": "strictly_increasing_int",
+    "subcircuit": "subcircuit",
+    "subgraph": "subgraph",
+    "sum_pred": "sum_pred",
+    "sum_set": "sum_set",
+    "symmetric_all_different": "symmetric_all_different",
+    "table_bool": "table_bool",
+    "table_bool_reif": "table_bool",
+    "table_int": "table_int",
+    "table_int_reif": "table_int_reif",
+    "tree": "tree",
+    "value_precede": "value_precede",
+    "value_precede_chain": "value_precede_chain",
+    "var_perm_sym": "var_perm_sym",
+    "var_sqr_sym": "var_sqr_sym",
+    "write": "write",
+    "writes": "writes",
+    "writes_seq": "writes_seq"
+  }
+}

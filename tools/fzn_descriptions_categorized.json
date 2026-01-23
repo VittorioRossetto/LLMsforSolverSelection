@@ -1,0 +1,407 @@
+{
+  "_meta": {
+    "categorized_entries": 199,
+    "category_counts": {
+      "4.2.2.1 All-Different and related constraints": 4,
+      "4.2.2.10 Scheduling constraints": 5,
+      "4.2.2.11 Graph constraints": 18,
+      "4.2.2.12 Extensional constraints": 6,
+      "4.2.2.13 Machine learning constraints": 1,
+      "4.2.2.14 Deprecated constraints": 2,
+      "4.2.2.2 Lexicographic constraints": 8,
+      "4.2.2.3 Sorting constraints": 2,
+      "4.2.2.4 Channeling constraints": 4,
+      "4.2.2.5 Counting constraints": 11,
+      "4.2.2.6 Array-related constraints": 3,
+      "4.2.2.7 Set-related constraints": 3,
+      "4.2.2.8 Mathematical constraints": 5,
+      "4.2.2.9 Packing constraints": 12,
+      "4.2.3.1 Integer FlatZinc builtins": 24,
+      "4.2.3.10 FlatZinc builtins added in MiniZinc 2.3.3": 1,
+      "4.2.3.11 FlatZinc builtins added in MiniZinc 2.5.2": 1,
+      "4.2.3.12 FlatZinc builtins added in MiniZinc 2.7.1": 3,
+      "4.2.3.13 Deprecated FlatZinc builtins": 1,
+      "4.2.3.2 Bool FlatZinc builtins": 17,
+      "4.2.3.3 Set FlatZinc builtins": 19,
+      "4.2.3.4 Float FlatZinc builtins": 42,
+      "4.2.3.5 FlatZinc builtins added in MiniZinc 2.0.0": 3,
+      "4.2.3.6 FlatZinc builtins added in MiniZinc 2.0.2": 1,
+      "4.2.3.7 FlatZinc builtins added in MiniZinc 2.1.0": 2,
+      "4.2.3.8 FlatZinc builtins added in MiniZinc 2.1.1": 0,
+      "4.2.3.9 FlatZinc builtins added in MiniZinc 2.2.1": 1
+    },
+    "multi_category_entries": 20,
+    "uncategorized_entries": 26,
+    "unified_entries": 198
+  },
+  "categories": {
+    "4.2.2.1 All-Different and related constraints": {
+      "all_different": "Constrains the array of objects 'x' to be all different.",
+      "all_equal": "Constrains the array of objects 'x' to be all equal.",
+      "disjoint": "Requires that sets s1 and s2 do not intersect.",
+      "symmetric_all_different": "Requires the array of integers x to be all different, and for all i, x[i]=j x[j]=i."
+    },
+    "4.2.2.10 Scheduling constraints": {
+      "alternative": "Alternative constraint for optional tasks. The task with start time s0 and duration d0 spans the optional tasks with start times s[i] and durations d[i]), and at most one of those tasks can occur.",
+      "cumulative": "Requires that a set of tasks given by start times s, durations d, and resource requirements r, never require more than a global resource bound b at any one time.",
+      "cumulatives": "min_m is the first machine (which is the minimum, of the index set of b). For native implementations, you can subtract (min_m - 1) from the m array values to obtain 1-based machine numbers.",
+      "disjunctive_strict": "Requires that a set of tasks given by start times s and durations d do not overlap in time. Tasks with duration 0 CANNOT be scheduled at any time, but only when no other task is running.",
+      "span": "Span constraint for optional tasks. Task (s0,d0) spans the optional tasks (s[i],d[i]) in the array arguments."
+    },
+    "4.2.2.11 Graph constraints": {
+      "bounded_dpath": "Constrains the subgraph ns and es of a given directed graph to be a path from s to t of weight K.",
+      "bounded_path": "Constrains the subgraph ns and es of a given undirected graph to be a path from s to t of weight K.",
+      "circuit": "Constrains the elements of x to define a circuit where x[i] = j means that j is the successor of i.",
+      "connected": "Constrains the subgraph ns and es of a given undirected graph to be connected.",
+      "dag": "Constrains the subgraph ns and es of a given directed graph to be a DAG.",
+      "dconnected": "Constrains the subgraph ns and es of a given directed graph to be connected.",
+      "dpath": "Constrains the subgraph ns and es of a given directed graph to be a path from s to t.",
+      "dreachable": "Constrains the subgraph ns and es of a given directed graph to be reachable from r.",
+      "dsteiner": "Constrains the subgraph ns and es of a given directed graph to be a weighted spanning tree rooted at r of weight W.",
+      "dtree": "Constrains the subgraph ns and es of a given directed graph to be a tree rooted at r.",
+      "network_flow": "Defines a network flow constraint. args: arc: a directed arc of the flow network. Arc i connects node arc[i,1] to node arc[i,2]. balance: the amount of flow added or removed by each node. If the balance is positive then flow is added by the node, and it is removed when it is negative, i.e., balance = output - input.",
+      "network_flow_cost": "Defines a network flow constraint with cost.",
+      "path": "Constrains the subgraph ns and es of a given undirected graph to be a path from s to t.",
+      "reachable": "Constrains the subgraph ns and es of a given undirected graph to be reachable from r.",
+      "steiner": "Constrains the set of edges es of a given undirected graph to be a weighted spanning tree of weight W.",
+      "subcircuit": "Constrains the elements of x to define a subcircuit where x[i] = j means that j is the successor of i and x[i] = i means that i is not in the circuit.",
+      "subgraph": "Constrains that ns and es is a subgraph of a given directed graph.",
+      "tree": "Constrains the subgraph ns and es of a given undirected graph to be a tree rooted at r."
+    },
+    "4.2.2.12 Extensional constraints": {
+      "cost_mdd": "Requires that x defines a path in the cost MDD with total edge weight totalcost.",
+      "cost_regular": "The sequence of values in array x (which must all be in the range 1..S) is accepted by the DFA of Q states with input 1..S and transition function d (which maps (1..Q, 1..S) -> 0..Q)) and initial state q0 (which must be in 1..Q) and accepting states F (which all must be in 1..Q). We reserve state 0 to be an always failing state. Each edge has an associated cost c, and C is the sum of costs taken on the accepting path for x.",
+      "mdd": "Requires that x defines a path from root to true node T through the (deterministic) Multivalued Decision Diagram (MDD) defined by the parameters. The MDD must be deterministic, i.e., there cannot be two edges with the same label leaving the same node.",
+      "mdd_nondet": "Requires that x defines a path from root to true node T through the (nondeterministic) Multivalued Decision Diagram (MDD) defined by the parameters. The MDD can be nondeterministic, i.e., there can be two edges with the same label leaving the same node.",
+      "regular": "Deprecated call",
+      "regular_nfa": "The sequence of values in array x is accepted by the NFA with transition function d, initial state q0 and accepting states F. The transition function maps states (from enumerated type State) and values (from type Val) to sets of states."
+    },
+    "4.2.2.13 Machine learning constraints": {
+      "neural_net": "Constrain the output layer of a neural net to take the value defined by the input layer."
+    },
+    "4.2.2.14 Deprecated constraints": {
+      "global_cardinality_low_up": "Requires that for all i, the value cover[i] appears at least lbound[i] and at most ubound[i] times in the array x.",
+      "global_cardinality_low_up_closed": "Requires that for all i, the value cover[i] appears at least lbound[i] and at most ubound[i] times in the array x. The elements of x must take their values from cover."
+    },
+    "4.2.2.2 Lexicographic constraints": {
+      "lex_chain_less": "Requires that the columns of matrix a are lexicographically sorted, strictly increasing.",
+      "lex_chain_lesseq": "Requires that the columns of matrix a are lexicographically sorted, non-decreasing.",
+      "seq_precede_chain": "Requires that i precedes i+1 in the array x for all positive i or Requires that i appears in a set in array x before i+1 for all positive i.",
+      "strict_lex2": "Require adjacent rows and adjacent columns in the array x to be lexicographically ordered. Adjacent rows and adjacent columns cannot be equal.",
+      "value_precede": "Requires that s precede t in the array x. Precedence means that if any element of x is equal to t, then another element of x with a lower index is equal to s.",
+      "value_precede_chain": "Requires that c[i] precedes c[i +1] in the array x. Precedence means that if any element of x is equal to c[i +1], then another element of x with a lower index is equal to c[i].",
+      "var_perm_sym": "Requires that the array x is lex least under the given list of permutations p",
+      "var_sqr_sym": "Requires that the square array x is lex least under the 7 symmetries: 3 rotations and 4 reflections"
+    },
+    "4.2.2.3 Sorting constraints": {
+      "arg_sort": "Constrains p to be the permutation which causes x to be in sorted order hence x[p[i]] <= x[p[i+1]]. he permutation is the stable sort hence x[p[i]] = x[p[i+1]] -> p[i] < p[i+1].",
+      "increasing": "Requires that the array 'x' is in increasing order (duplicates allowed)"
+    },
+    "4.2.2.4 Channeling constraints": {
+      "int_set_channel": "Requires that array of int variables x and array of set variables y are related such that (x[i] = j) <->(i in y[j]).",
+      "inverse_in_range": "If the i th variable of the collection X is assigned to j and if j is in the index set of Y then the j th variable of the collection Y is assigned to i. Conversely, if the j th variable of the collection Y is assigned to i and if i is in the index set of X then the i th variable of the collection X is assigned to j.",
+      "inverse_set": "Constrains two arrays of set of int variables, f and invf, so that a j in f[i] iff i in invf[j]. All the values in each array’s sets must be within the index set of the other array.",
+      "link_set_to_booleans": "Constrains the array of Booleans b to be a representation of the set s: i in s <-> b[i]. The index set of b must be a superset of the possible values of s."
+    },
+    "4.2.2.5 Counting constraints": {
+      "among": "Requires exactly n variables in x to take one of the values in v.",
+      "at_most1": "Requires that each pair of sets in s overlap in at most one element.",
+      "count": "Constrains c to be the number of occurrences of y in x.",
+      "count_geq": "Constrains c to be greater than or equal to the number of occurrences of y in x.",
+      "count_gt": "Constrains c to be strictly greater than the number of occurrences of y in x.",
+      "count_leq": "Constrains c to be less than or equal to the number of occurrences of y in x.",
+      "count_lt": "Constrains c to be strictly less than the number of occurrences of y in x.",
+      "count_neq": "Constrains c to be not equal to the number of occurrences of y in x.",
+      "distribute": "Requires that card[i] is the number of occurrences of value[i] in base. The values in value need not be distinct.",
+      "global_cardinality": "Requires that the number of occurrences of cover[i] in x is counts[i].",
+      "global_cardinality_closed": "Requires that the number of occurrences of cover[i] in x is counts[i]. The elements of x must take their values from cover."
+    },
+    "4.2.2.6 Array-related constraints": {
+      "write": "Creates a new array O from an input array I with a change at position i to take value v I is an array of values O is an array of values with same index set as I i is an index for I v is the value to write",
+      "writes": "Creates a new array O from an input array I with a simultaneous change at positions P to values V I is an array of input values O is an array of integers with same index set as I P is an array of index values in I V is an array of values to write",
+      "writes_seq": "Creates a new array O from an input array I with a sequence of changes at positions P to take values V I is an array of input values O is an array of output values with same index set as I P is an array of indices in I V is an array of values to write"
+    },
+    "4.2.2.7 Set-related constraints": {
+      "disjoint": "Requires that sets s1 and s2 do not intersect.",
+      "partition_set": "Constrains the sets in array S to partition the universe.",
+      "roots": "Requires that x[i] in t for all i in s"
+    },
+    "4.2.2.8 Mathematical constraints": {
+      "piecewise_linear": "Constrains y(x) to be the piecewise-linear function on the provided point-value sequence. The array xi defines the points, and vi the corresponding values.",
+      "range": "Requires that the image of function x (represented as an array) on set of values s is t. ub(s) must be a subset of index_set(x) otherwise an assertion failure will occur.",
+      "sliding_sum": "Requires that in each subsequence vs[i], …, vs[i + seq - 1] the sum of the values belongs to the interval [low, up].",
+      "sum_pred": "Requires that the sum of cs[i1]..cs[iN] equals s, where i1..iN are the elements of the i th set in sets.",
+      "sum_set": "Requires that the sum of the weights ws[i1]..ws[iN] equals s, where vs[i1]..vs[iN] are the elements appearing in set x"
+    },
+    "4.2.2.9 Packing constraints": {
+      "bin_packing": "Requires that each item i with weight w[i], be put into bin[i] such that the sum of the weights of the items in each bin does not exceed the capacity c.",
+      "bin_packing_capa": "Requires that each item i with weight w[i], be put into bin[i] such that the sum of the weights of the items in each bin does not exceed the capacity c[b].",
+      "bin_packing_load": "Requires that each item i with weight w[i], be put into bin[i] such that the sum of the weights of the items in each bin does not exceed the capacity load[b].",
+      "diffn": "Constrains rectangles i, given by their origins (x[i], y[i]) and sizes (dx[i], dy[i]), to be non-overlapping. Zero-width rectangles can still not overlap with any other rectangle.",
+      "diffn_k": "Constrains k-dimensional boxes to be non-overlapping. For each box i and dimension j, box_posn[i, j] is the base position of the box in dimension j, and box_size[i, j] is the size in that dimension. Boxes whose size is 0 in any dimension still cannot overlap with any other box.",
+      "diffn_nonstrict": "Constrains rectangles i, given by their origins (x[i], y[i]) and sizes (dx[i], dy[i]), to be non-overlapping. Zero-width rectangles can be packed anywhere.",
+      "diffn_nonstrict_k": "Constrains k-dimensional boxes to be non-overlapping. For each box i and dimension j, box_posn[i, j] is the base position of the box in dimension j, and box_size[i, j] is the size in that dimension. Boxes whose size is 0 in at least one dimension can be packed anywhere.",
+      "geost": "A global non-overlap constraint for k dimensional objects. It enforces that no two objects overlap.",
+      "geost_bb": "A global non-overlap constraint for k dimensional objects. It enforces that no two objects overlap, and that all objects fit within a global k dimensional bounding box.",
+      "geost_nonoverlap_k": "A non-overlap constraint for two k dimensional objects. It enforces that there is at least one dimension where the objects occupy a different space.",
+      "geost_smallest_bb": "A global non-overlap constraint for k dimensional objects. It enforces that no two objects overlap, and that all objects fit within a global k dimensional bounding box. In addition, it enforces that the bounding box is the smallest one containing all objects, i.e., each of the 2k boundaries is touched by at least by one object.",
+      "knapsack": "Requires that items are packed in a knapsack with certain weight and profit restrictions."
+    },
+    "4.2.3.1 Integer FlatZinc builtins": {
+      "array_int_element": "Constrains as[b] = c",
+      "int_abs": "Constrains b to be the absolute value of a",
+      "int_div": "Constrains a / b = c, where c is rounded to the value closest to zero (i.e., truncated).",
+      "int_eq": "Constrains a to be equal to b",
+      "int_eq_reif": "Constrains (a = b) \\(\\leftrightarrow\\) r",
+      "int_le": "Constrains a to be less than or equal to b",
+      "int_le_reif": "Constrains (a ≤ b) \\(\\leftrightarrow\\) r",
+      "int_lin_eq": "Constrains \\({\\bf c} = \\sum_i {\\bf as}[i]*{\\bf bs}[i]\\)",
+      "int_lin_eq_reif": "Constrains \\({\\bf r} \\leftrightarrow ({\\bf c} = \\sum_i {\\bf as}[i]*{\\bf bs}[i])\\)",
+      "int_lin_le": "Constrains \\(\\sum\\) as[i]* bs[i] ≤ c",
+      "int_lin_le_reif": "Constrains r \\(\\leftrightarrow\\) (\\(\\sum\\) as[i]* bs[i] ≤ c)",
+      "int_lin_ne": "Constrains \\({\\bf c} \\neq \\sum_i {\\bf as}[i]*{\\bf bs}[i]\\)",
+      "int_lin_ne_reif": "Constrains \\({\\bf r} \\leftrightarrow ({\\bf c} \\neq \\sum_i {\\bf as}[i]*{\\bf bs}[i])\\)",
+      "int_lt": "Constrains a < b",
+      "int_lt_reif": "Constrains r \\(\\leftrightarrow\\) (a < b)",
+      "int_max": "Constrains max(a, b) = c",
+      "int_min": "Constrains min(a, b) = c",
+      "int_mod": "Constrains a % b = c",
+      "int_ne": "Constrains a ≠ b",
+      "int_ne_reif": "r \\(\\leftrightarrow\\) (a ≠ b)",
+      "int_plus": "Constrains a + b = c",
+      "int_pow": "Constrains z = \\({\\bf x} ^ {{\\bf y}}\\), {bf z} is constrained to 1 div pow(x, abs(y)) when \\({\\bf y} < 0\\)",
+      "int_times": "Constrains a * b = c",
+      "set_in": "Constrains x \\(\\in\\) S"
+    },
+    "4.2.3.10 FlatZinc builtins added in MiniZinc 2.3.3": {
+      "set_in": "Constrains x \\(\\in\\) S"
+    },
+    "4.2.3.11 FlatZinc builtins added in MiniZinc 2.5.2": {
+      "array_var": "Element constraint on 2d array with MiniZinc index set, constrains x[idx1, idx2] = c This can be overridden in a solver that can perform the index calculation more efficiently than using a MiniZinc decomposition."
+    },
+    "4.2.3.12 FlatZinc builtins added in MiniZinc 2.7.1": {
+      "float_ceil": "Constrains \\({\\bf y} = \\lceil{ {\\bf x}} \\rceil\\)",
+      "float_floor": "Constrains \\({\\bf y} = \\lfloor{ {\\bf x}} \\rfloor\\)",
+      "float_round": "Constrains that y is the nearest integer to x"
+    },
+    "4.2.3.13 Deprecated FlatZinc builtins": {
+      "array_bool_or": "Constrains \\({\\bf r} \\leftrightarrow \\bigvee_i {\\bf as}[i]\\)"
+    },
+    "4.2.3.2 Bool FlatZinc builtins": {
+      "array_bool_and": "Constrains \\({\\bf r} \\leftrightarrow \\bigwedge_i {\\bf as}[i]\\)",
+      "array_bool_xor": "Constrains \\(\\oplus_i\\ {\\bf as}[i]\\)",
+      "array_int_element": "Constrains as[b] = c",
+      "bool2int": "Constrains \\({\\bf b} \\in \\{0,1\\}\\) and \\({\\bf a} \\leftrightarrow {\\bf b}=1\\)",
+      "bool_and": "Constrains \\({\\bf r} \\leftrightarrow {\\bf a} \\land {\\bf b}\\)",
+      "bool_clause": "Constrains \\(\\bigvee_i {\\bf as}[i] \\lor \\bigvee_j \\lnot {\\bf bs}[j]\\)",
+      "bool_eq": "Constrains a = b",
+      "bool_eq_reif": "Constrains r \\(\\leftrightarrow\\) (a = b)",
+      "bool_le": "Constrains a ≤ b",
+      "bool_le_reif": "Constrains r \\(\\leftrightarrow\\) (a ≤ b)",
+      "bool_lin_le": "Constrains \\(\\sum_i {\\bf as}[i]*{\\bf bs}[i] \\leq {\\bf c}\\)",
+      "bool_or": "Constrains \\({\\bf r} \\leftrightarrow {\\bf a} \\lor {\\bf b}\\)",
+      "bool_xor": "Constrains \\({\\bf r} \\leftrightarrow {\\bf a} \\oplus {\\bf b}\\)",
+      "int_lin_eq": "Constrains \\({\\bf c} = \\sum_i {\\bf as}[i]*{\\bf bs}[i]\\)",
+      "int_lt": "Constrains a < b",
+      "int_lt_reif": "Constrains r \\(\\leftrightarrow\\) (a < b)",
+      "int_ne": "Constrains a ≠ b"
+    },
+    "4.2.3.3 Set FlatZinc builtins": {
+      "array_int_element": "Constrains as[b] = c",
+      "set": "Constrains \\({\\bf r} \\leftrightarrow ({\\bf x} \\subseteq {\\bf y})\\)",
+      "set_card": "Constrains x = | S |",
+      "set_diff": "Constrains r = x \\(\\setminus\\) y",
+      "set_eq": "Constrains x = y",
+      "set_eq_reif": "Constrains r \\(\\leftrightarrow\\) (x = y)",
+      "set_in": "Constrains x \\(\\in\\) S",
+      "set_in_reif": "Constrains \\({\\bf r} \\leftrightarrow ({\\bf x} \\in {\\bf S})\\)",
+      "set_intersect": "Constrains r = x \\(\\cap\\) y",
+      "set_le": "Constrains x ≤ y (lexicographic order of the sorted lists of elements)",
+      "set_le_reif": "Constrains \\({\\bf r} \\leftrightarrow ({\\bf x} \\leq {\\bf y})\\) (lexicographic order of the sorted lists of elements)",
+      "set_lt": "Constrains x < y (lexicographic order of the sorted lists of elements)",
+      "set_lt_reif": "Constrains \\({\\bf r} \\leftrightarrow ({\\bf x} < {\\bf y})\\) (lexicographic order of the sorted lists of elements)",
+      "set_ne": "Constrains x ≠ y",
+      "set_ne_reif": "Constrains r \\(\\leftrightarrow\\) (x ≠ y)",
+      "set_subset": "Constrains x \\(\\subseteq\\) y",
+      "set_superset": "Constrains x \\(\\supseteq\\) y",
+      "set_symdiff": "Constrains r to be the symmetric difference of x and y",
+      "set_union": "Constrains r = x \\(\\cup\\) y"
+    },
+    "4.2.3.4 Float FlatZinc builtins": {
+      "array_int_element": "Constrains as[b] = c",
+      "bool_eq": "Constrains a = b",
+      "bool_eq_reif": "Constrains r \\(\\leftrightarrow\\) (a = b)",
+      "bool_le": "Constrains a ≤ b",
+      "bool_le_reif": "Constrains r \\(\\leftrightarrow\\) (a ≤ b)",
+      "bool_lin_le": "Constrains \\(\\sum_i {\\bf as}[i]*{\\bf bs}[i] \\leq {\\bf c}\\)",
+      "float_acos": "Constrains b = acos(a)",
+      "float_acosh": "Constrains b = acosh(a)",
+      "float_asin": "Constrains b = asin(a)",
+      "float_asinh": "Constrains b = asinh(a)",
+      "float_atan": "Constrains b = atan(a)",
+      "float_atanh": "Constrains b = atanh(a)",
+      "float_cos": "Constrains b = cos(a)",
+      "float_cosh": "Constrains b = cosh(a)",
+      "float_div": "Constrains a / b = c",
+      "float_exp": "Constrains b = exp(a)",
+      "float_lin_le_reif": "Constrains \\({\\bf r} \\leftrightarrow (\\sum_i {\\bf as}[i]*{\\bf bs}[i] \\leq {\\bf c})\\)",
+      "float_lin_lt": "Constrains \\(\\sum_i {\\bf as}[i]*{\\bf bs}[i] < {\\bf c}\\)",
+      "float_lin_lt_reif": "Constrains \\({\\bf r} \\leftrightarrow (\\sum_i {\\bf as}[i]*{\\bf bs}[i] < {\\bf c})\\)",
+      "float_ln": "Constrains b = ln(a)",
+      "float_log10": "Constrains b = log<sub>10</sub>(a)",
+      "float_log2": "Constrains b = log<sub>2</sub>(a)",
+      "float_ne_reif": "Constrains r \\(\\leftrightarrow\\) (a ≠ b)",
+      "float_pow": "Constrains z = \\({\\bf x} ^ {{\\bf y}}\\)",
+      "float_sin": "Constrains b = sin(a)",
+      "float_sinh": "Constrains b = sinh(a)",
+      "float_sqrt": "Constrains \\({\\bf b} = \\sqrt{{\\bf a}}\\)",
+      "float_tan": "Constrains b = tan(a)",
+      "float_tanh": "Constrains b = tanh(a)",
+      "int2float": "Constrains y = x",
+      "int_abs": "Constrains b to be the absolute value of a",
+      "int_lin_eq": "Constrains \\({\\bf c} = \\sum_i {\\bf as}[i]*{\\bf bs}[i]\\)",
+      "int_lin_eq_reif": "Constrains \\({\\bf r} \\leftrightarrow ({\\bf c} = \\sum_i {\\bf as}[i]*{\\bf bs}[i])\\)",
+      "int_lin_ne": "Constrains \\({\\bf c} \\neq \\sum_i {\\bf as}[i]*{\\bf bs}[i]\\)",
+      "int_lin_ne_reif": "Constrains \\({\\bf r} \\leftrightarrow ({\\bf c} \\neq \\sum_i {\\bf as}[i]*{\\bf bs}[i])\\)",
+      "int_lt": "Constrains a < b",
+      "int_lt_reif": "Constrains r \\(\\leftrightarrow\\) (a < b)",
+      "int_max": "Constrains max(a, b) = c",
+      "int_min": "Constrains min(a, b) = c",
+      "int_ne": "Constrains a ≠ b",
+      "int_plus": "Constrains a + b = c",
+      "int_times": "Constrains a * b = c"
+    },
+    "4.2.3.5 FlatZinc builtins added in MiniZinc 2.0.0": {
+      "array": "Constrains m to be the maximum value in array x .",
+      "array_int_minimum": "Constrains m to be the minimum value in array x .",
+      "bool_clause_reif": "Reified clause constraint. Constrains \\({\\bf b} \\leftrightarrow \\bigvee_i {\\bf as}[i] \\lor \\bigvee_j \\lnot {\\bf bs}[j]\\)"
+    },
+    "4.2.3.6 FlatZinc builtins added in MiniZinc 2.0.2": {
+      "array_var_int_element_nonshifted": "Element constraint on array with MiniZinc index set, constrains x[idx] = c This can be overridden in a solver that can perform the index calculation more efficiently than using a MiniZinc decomposition."
+    },
+    "4.2.3.7 FlatZinc builtins added in MiniZinc 2.1.0": {
+      "float_dom": "Constrains the domain of x using the values in as, using each pair of values as[2* i -1].. as[2* i] for i in 1.. n /2 as a possible range",
+      "float_in": "Constrains \\({\\bf a} \\in\\ [ {\\bf b}, {\\bf c} ]\\)"
+    },
+    "4.2.3.9 FlatZinc builtins added in MiniZinc 2.2.1": {
+      "int_pow_fixed": "Constrains z = \\({\\bf x} ^ {{\\bf y}}\\), {bf z} is constrained to 1 div pow(x, abs(y)) when \\({\\bf y} < 0\\) *"
+    }
+  },
+  "multi_category": {
+    "array_int_element": [
+      "4.2.3.1 Integer FlatZinc builtins",
+      "4.2.3.2 Bool FlatZinc builtins",
+      "4.2.3.3 Set FlatZinc builtins",
+      "4.2.3.4 Float FlatZinc builtins"
+    ],
+    "bool_eq": [
+      "4.2.3.2 Bool FlatZinc builtins",
+      "4.2.3.4 Float FlatZinc builtins"
+    ],
+    "bool_eq_reif": [
+      "4.2.3.2 Bool FlatZinc builtins",
+      "4.2.3.4 Float FlatZinc builtins"
+    ],
+    "bool_le": [
+      "4.2.3.2 Bool FlatZinc builtins",
+      "4.2.3.4 Float FlatZinc builtins"
+    ],
+    "bool_le_reif": [
+      "4.2.3.2 Bool FlatZinc builtins",
+      "4.2.3.4 Float FlatZinc builtins"
+    ],
+    "bool_lin_le": [
+      "4.2.3.2 Bool FlatZinc builtins",
+      "4.2.3.4 Float FlatZinc builtins"
+    ],
+    "disjoint": [
+      "4.2.2.1 All-Different and related constraints",
+      "4.2.2.7 Set-related constraints"
+    ],
+    "int_abs": [
+      "4.2.3.1 Integer FlatZinc builtins",
+      "4.2.3.4 Float FlatZinc builtins"
+    ],
+    "int_lin_eq": [
+      "4.2.3.1 Integer FlatZinc builtins",
+      "4.2.3.2 Bool FlatZinc builtins",
+      "4.2.3.4 Float FlatZinc builtins"
+    ],
+    "int_lin_eq_reif": [
+      "4.2.3.1 Integer FlatZinc builtins",
+      "4.2.3.4 Float FlatZinc builtins"
+    ],
+    "int_lin_ne": [
+      "4.2.3.1 Integer FlatZinc builtins",
+      "4.2.3.4 Float FlatZinc builtins"
+    ],
+    "int_lin_ne_reif": [
+      "4.2.3.1 Integer FlatZinc builtins",
+      "4.2.3.4 Float FlatZinc builtins"
+    ],
+    "int_lt": [
+      "4.2.3.1 Integer FlatZinc builtins",
+      "4.2.3.2 Bool FlatZinc builtins",
+      "4.2.3.4 Float FlatZinc builtins"
+    ],
+    "int_lt_reif": [
+      "4.2.3.1 Integer FlatZinc builtins",
+      "4.2.3.2 Bool FlatZinc builtins",
+      "4.2.3.4 Float FlatZinc builtins"
+    ],
+    "int_max": [
+      "4.2.3.1 Integer FlatZinc builtins",
+      "4.2.3.4 Float FlatZinc builtins"
+    ],
+    "int_min": [
+      "4.2.3.1 Integer FlatZinc builtins",
+      "4.2.3.4 Float FlatZinc builtins"
+    ],
+    "int_ne": [
+      "4.2.3.1 Integer FlatZinc builtins",
+      "4.2.3.2 Bool FlatZinc builtins",
+      "4.2.3.4 Float FlatZinc builtins"
+    ],
+    "int_plus": [
+      "4.2.3.1 Integer FlatZinc builtins",
+      "4.2.3.4 Float FlatZinc builtins"
+    ],
+    "int_times": [
+      "4.2.3.1 Integer FlatZinc builtins",
+      "4.2.3.4 Float FlatZinc builtins"
+    ],
+    "set_in": [
+      "4.2.3.1 Integer FlatZinc builtins",
+      "4.2.3.10 FlatZinc builtins added in MiniZinc 2.3.3",
+      "4.2.3.3 Set FlatZinc builtins"
+    ]
+  },
+  "uncategorized": {
+    "array_int_union": "Constrain y to be the set of the elements in x",
+    "array_opt_int_union": "Constrain y to be the set of the non-absent elements in x",
+    "array_set_intersect": "Constrain z to be the intersection of the elements in x. False if x is empty.",
+    "array_set_union": "Constrain z to be the union of the elements in x",
+    "at_least": "Requires at least 'n' variables in 'x' to take the value 'v'.",
+    "at_most": "Requires at most 'n' variables in 'x' to take the value 'v'.",
+    "cumulatives_decomp": "Decomposition provided by Mats Carlsson",
+    "dijunctive": "Requires that a set of tasks given by start times s and durations d do not overlap in time. Tasks with duration 0 can be scheduled at any time, even in the middle of other tasks.",
+    "exactly": "Requires exactly 'n' variables in 'x' to take the value 'v'.",
+    "increasing_int": "Requires that the array 'x' is in increasing order (duplicates are allowed).",
+    "increasing_int_opt": "Requires that the array 'x' is in increasing order",
+    "increasing_int_opt_reif": "Requires that the array 'x' is in increasing order iff b is true",
+    "lex_less": "Requires that the array 'x' is strictly lexicographically less than array 'y'. Compares them from first to last element, regardless of indices",
+    "lex_lesseq": "Requires that the array 'x' is lexicographically less than or equal to array 'y'. Compares them from first to last element, regardless of indices",
+    "member_int": "Requires that 'y' occurs in the array or set 'x'.",
+    "member_set": "Requires that 'y' occurs in the array of set 'x'.",
+    "on_restart_complete": "Abandon and mark search as complete when argument variable is assigned `true'.",
+    "on_restart_last_val": "Set `out` to be a the last assigned value of `input` on each restart",
+    "on_restart_sol": "Set `out` to be a the last solution value of `input` on each restart",
+    "on_restart_status": "Set the variable `s` to one of the following numbers before solving and after each restart to reflect the result of searching since the last restart: - 1 (START) -> The solver has not yet been restarted - 2 (UNKNOWN) -> No solution has been found since the last restart - 3 (UNSAT) -> The search space was (provably) exhausted and no solution was found since the last restart - 4 (SAT) -> A solution was found since the last restart - 5 (OPT) -> The (provably) optimal solution for the search space was found since the last restart",
+    "on_restart_uniform": "Set `out` to be a random value between `low` and `high` (inclusive) from a uniform distribution",
+    "strictly_increasing": "Requires that the array 'x' is in strict increasing order iff b is true",
+    "strictly_increasing_int": "Requires that the array 'x' is in strict increasing order",
+    "table_bool": "A table constraint: table(x, t) represents the constraint x in t where we consider each row in t to be a tuple and t as a set of tuples.",
+    "table_int": "A table constraint table(x, t) represents the constraint x in t where we consider each row in t to be a tuple and t as a set of tuples.",
+    "table_int_reif": "Reified version We only support special cases of a few variables. The approach is to add the Boolean variable to the list of variables and create an extended table. The extended table covers all combinations of assignments to the original variables, and every entry in it is padded with a value that depends on whether that entry occurs in the original table. For example, the original table constraint x y 2 3 5 8 4 1 reified with a Boolean b is turned into a table constraint of the form x y b 2 3 true 5 8 true 4 1 true ... false ... false % for all other pairs (x,y) ... false"
+  }
+}
