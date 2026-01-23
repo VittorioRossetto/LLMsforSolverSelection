@@ -40,8 +40,10 @@ BEST = 'openai/gpt-oss-120b'
 
 # --- Argument parsing ---
 parser = argparse.ArgumentParser(description="Benchmark LLM solver recommendations on MiniZinc problems.")
-parser.add_argument('--solver-set', choices=['minizinc', 'all', 'free'], default='free',
-                    help="Solver set: 'minizinc', 'all', or 'free' (default).")
+parser.add_argument('--solver-set', choices=['minizinc', 'all', 'free', 'significative'], default='free',
+                    help="Solver set: 'minizinc', 'all', 'free' (default), or 'significative'.")
+parser.add_argument('--significative-only', action='store_true', default=False,
+                    help="Deprecated: use --solver-set significative. If set, restrict solver selection to SIGNIFICATIVE_SOLVERS.")
 parser.add_argument('--script-version', choices=['uncommented', 'commented'], default='uncommented',
                     help="MiniZinc script version to use.")
 parser.add_argument('--max-workers-models', type=int, default=5,
@@ -56,26 +58,44 @@ parser.add_argument('--dry-run', action='store_true', default=False,
                     help="If set, print planned models and instance counts and exit without querying LLMs.")
 parser.add_argument('--include-problem-desc', action='store_true', default=False,
                     help="If set, include the problem description (from problems_with_descriptions.json) at the start of each prompt.")
+parser.add_argument('--use-fzn-parser-outputs', action='store_true', default=False,
+                    help="If set, build the prompt from fzn_parser_outputs.json (FlatZinc parser summaries) instead of sending the MiniZinc model + data.")
+parser.add_argument('--fzn-parser-json', type=str, default=None,
+                    help="Optional path to fzn_parser_outputs.json. Defaults to mznc2025_probs/fzn_parser_outputs.json under the repo root.")
 parser.add_argument('--temperature', type=float, default=None,
                     help='Sampling temperature for each question (provider support varies). Default: provider default')
+parser.add_argument('--include-solver-desc', action='store_true', default=False,
+                    help='If set, include solver descriptions (from a JSON map) in the prompt in addition to solver names.')
+parser.add_argument('--solver-desc-file', type=str, default=None,
+                    help='Optional path to JSON file with solver descriptions. Defaults to test/data/freeSolversDescription.json')
 args = parser.parse_args()
 
+# Backwards compatibility: allow --significative-only as an alias for --solver-set significative.
+if getattr(args, 'significative_only', False):
+    args.solver_set = 'significative'
+
 # --- Solver set selection ---
-if args.solver_set == 'all':
-    solver_list = ALL_SOLVERS
-    print("Using ALL_SOLVERS set.")
-elif args.solver_set == 'free':
-    solver_list = FREE_SOLVERS
-    print("Using FREE_SOLVERS set.")
+if args.solver_set == 'significative':
+    solver_list = SIGNIFICATIVE_SOLVERS
+    print("Using SIGNIFICATIVE_SOLVERS set.")
 else:
-    solver_list = MINIZINC_SOLVERS
-    print("Using MINIZINC_SOLVERS set.")
+    if args.solver_set == 'all':
+        solver_list = ALL_SOLVERS
+        print("Using ALL_SOLVERS set.")
+    elif args.solver_set == 'free':
+        solver_list = FREE_SOLVERS
+        print("Using FREE_SOLVERS set.")
+    else:
+        solver_list = MINIZINC_SOLVERS
+        print("Using MINIZINC_SOLVERS set.")
 
 print(f"Script version: {args.script_version}")
 print(f"Parallel model workers: {args.max_workers_models}")
 print(f"Parallel instance workers: {args.max_workers_instances}")
 if args.top_only:
     print("Filtering to TOP_MODELS only.")
+if args.use_fzn_parser_outputs:
+    print("Prompt mode: using fzn_parser_outputs summaries (no MiniZinc model/data).")
 
 # --- Load problems ---
 repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -84,6 +104,41 @@ problems = load_problems(dataset_path)
 results = {}
 
 # --- Helpers ---
+def load_solver_descriptions(path=None):
+    """Load a JSON mapping solver_name -> description.
+
+    Prefers an explicit path if provided, otherwise falls back to
+    test/data/freeSolversDescription.json.
+    """
+    alt = os.path.join(os.path.dirname(__file__), 'data', 'freeSolversDescription.json')
+    for candidate in [path, alt]:
+        if candidate and os.path.exists(candidate):
+            try:
+                with open(candidate, 'r') as f:
+                    data = json.load(f)
+                return data if isinstance(data, dict) else None
+            except Exception:
+                logger.exception(f"Failed to load solver descriptions from {candidate}")
+                return None
+    return None
+
+
+def build_solver_description_text(solver_list, solver_desc_map=None) -> str:
+    """Build a human-readable list of solvers with descriptions.
+
+    Returns an empty string if solver_desc_map is missing.
+    """
+    if not solver_desc_map:
+        return ""
+    lines = [f"- {s}: {solver_desc_map.get(s, '')}" for s in solver_list]
+    return "Solvers and descriptions:\n" + "\n".join(lines) + "\n"
+
+
+SOLVER_DESC_MAP = load_solver_descriptions(args.solver_desc_file) if args.include_solver_desc else None
+if args.include_solver_desc and not SOLVER_DESC_MAP:
+    print("Warning: --include-solver-desc was set but no solver description map was loaded; continuing without descriptions.")
+
+
 def handle_api_error(e):
     msg = str(e).lower()
     delay, should_retry, is_503_like = None, False, False
@@ -146,6 +201,68 @@ def truncate_script_to_budget(script: str, allowed_tokens: int):
     # ensure we end on a newline and add a clear truncation marker as a comment
     truncated = truncated.rstrip() + "\n% [TRUNCATED: script shortened to fit model context]\n"
     return truncated, True
+
+
+def truncate_text_to_budget(text: str, allowed_tokens: int, truncation_marker: str = "\n[TRUNCATED]\n"):
+    """Truncate arbitrary text to approximately allowed_tokens.
+
+    Returns (new_text, was_truncated).
+    """
+    if allowed_tokens <= 0:
+        return ("[Removed due to token limits]\n", True)
+    current_tokens = estimate_tokens(text)
+    if current_tokens <= allowed_tokens:
+        return text, False
+    allowed_chars = max(20, allowed_tokens * 4)
+    truncated = text[:allowed_chars]
+    truncated = truncated.rstrip() + truncation_marker
+    return truncated, True
+
+
+def load_fzn_parser_outputs(json_path: str) -> dict:
+    try:
+        with open(json_path, 'r') as f:
+            data = json.load(f)
+        if isinstance(data, dict):
+            return data
+        return {}
+    except Exception:
+        logger.exception(f"Failed to load fzn parser outputs from {json_path}")
+        return {}
+
+
+def instance_key_from_path(inst_path: str) -> str | None:
+    """Return a repo-relative key matching fzn_parser_outputs.json entries.
+
+    The fzn parser outputs are keyed like "black-hole/layout_14.json".
+    We normalize absolute instance paths by stripping known dataset roots.
+    """
+    if not inst_path:
+        return None
+    candidates = []
+    for root in [
+        os.path.join(repo_root, 'mznc2025_probs'),
+        os.path.join(repo_root, 'mznc2025_probs_sanitized'),
+    ]:
+        try:
+            rel = os.path.relpath(inst_path, root)
+            if not rel.startswith('..') and rel != '.':
+                candidates.append(rel)
+        except Exception:
+            pass
+    if candidates:
+        # Prefer the shortest relative form.
+        return sorted(candidates, key=len)[0]
+    # fallback: last two segments (problem-dir/filename)
+    parts = inst_path.replace('\\', '/').split('/')
+    if len(parts) >= 2:
+        return '/'.join(parts[-2:])
+    return None
+
+
+FZN_PARSER_JSON_DEFAULT = os.path.join(repo_root, 'mznc2025_probs', 'fzn_parser_outputs.json')
+FZN_PARSER_JSON_PATH = args.fzn_parser_json or FZN_PARSER_JSON_DEFAULT
+FZN_PARSER_OUTPUTS = load_fzn_parser_outputs(FZN_PARSER_JSON_PATH) if args.use_fzn_parser_outputs else {}
 
 
 # Load model context windows once
@@ -234,6 +351,9 @@ def process_model(provider, model_id, model_label, query_func):
     if model_id in NON_TESTABLE_MODELS or model_id in IGNORED_MODELS:
         return provider, model_id, {}
 
+    solver_prompt = get_solver_prompt(solver_list, name_only=True)
+    solver_desc_text = build_solver_description_text(solver_list, SOLVER_DESC_MAP)
+
     model_results = {}
     problem_instance_pairs = []
 
@@ -280,7 +400,7 @@ def process_model(provider, model_id, model_label, query_func):
             else:
                 inst_label = 'base'
             instance_content = ''
-            if inst:
+            if inst and (not args.use_fzn_parser_outputs):
                 try:
                     with open(inst, 'r') as f:
                         instance_content = f.read()
@@ -288,42 +408,88 @@ def process_model(provider, model_id, model_label, query_func):
                     instance_content = f"[Error reading {inst}: {e}]"
                     logger.exception(f"Error reading instance file {inst} for problem {prob_key}: {e}")
 
-            solver_prompt = get_solver_prompt(solver_list, name_only=True)
+            if args.use_fzn_parser_outputs:
+                if not inst:
+                    # No instance file => no fzn parser entry to look up
+                    logger.warning(f"Skipping fzn-parser prompt for {prob_key}/{inst_label}: no instance file")
+                    pbar.update(1)
+                    continue
+                inst_key = instance_key_from_path(inst)
+                fzn_desc = FZN_PARSER_OUTPUTS.get(inst_key)
+                if not fzn_desc:
+                    logger.warning(f"Missing fzn parser output for instance key={inst_key} (path={inst})")
+                    pbar.update(1)
+                    continue
 
-            # Estimate tokens for non-script parts (problem description + instance data + solver prompt)
-            non_script_text = "\n\n"
-            if args.include_problem_desc:
-                prob_meta = problems.get(prob_key, {})
-                prob_desc = prob_meta.get('description', '')
-                if prob_desc:
-                    non_script_text += f"Problem description:\n{prob_desc}\n\n"
-            if instance_content:
-                non_script_text += f"MiniZinc data:\n{instance_content}\n\n"
-            non_script_text += solver_prompt
-            non_script_tokens = estimate_tokens(non_script_text)
+                # Build prompt: (optional problem desc) + fzn summary + (optional solver descriptions) + solver prompt.
+                prompt = ""
+                if args.include_problem_desc:
+                    prob_meta = problems.get(prob_key, {})
+                    prob_desc = prob_meta.get('description', '')
+                    if prob_desc:
+                        prompt += f"Problem description:\n{prob_desc}\n\n"
 
-            # Compute allowed tokens for the script portion and truncate if needed
-            allowed_script_tokens = allowed_total_tokens - non_script_tokens
-            if allowed_script_tokens < 0:
-                allowed_script_tokens = 0
+                prompt += f"Given this description of a MiniZinc problem:\n{str(fzn_desc).strip()}\n\n"
+                if solver_desc_text:
+                    prompt += solver_desc_text + "\n"
+                prompt += solver_prompt
 
-            safe_script, was_truncated = truncate_script_to_budget(script, allowed_script_tokens)
-            if was_truncated:
-                # add a short marker to the prompt explaining truncation
-                trunc_note = "% [Model script truncated to fit model context window]\n"
+                # Optional safety: truncate the fzn description if the prompt is too big.
+                prompt_tokens = estimate_tokens(prompt)
+                if prompt_tokens > allowed_total_tokens:
+                    # Keep solver prompt + solver descriptions intact; truncate only the fzn description chunk.
+                    fixed_tail = (solver_desc_text + "\n" if solver_desc_text else "") + solver_prompt
+                    fixed_tokens = estimate_tokens(fixed_tail)
+                    prefix = ""
+                    if args.include_problem_desc and prob_desc:
+                        prefix = f"Problem description:\n{prob_desc}\n\n"
+                    prefix += "Given this description of a MiniZinc problem:\n"
+                    prefix_tokens = estimate_tokens(prefix)
+                    allowed_desc_tokens = allowed_total_tokens - fixed_tokens - prefix_tokens
+                    if allowed_desc_tokens < 0:
+                        allowed_desc_tokens = 0
+                    safe_desc, _ = truncate_text_to_budget(str(fzn_desc).strip(), allowed_desc_tokens, truncation_marker="\n[TRUNCATED: fzn summary shortened to fit model context]\n")
+                    prompt = prefix + safe_desc + "\n\n" + fixed_tail
+
             else:
-                trunc_note = ""
+                # Estimate tokens for non-script parts (problem description + instance data + solver prompt)
+                non_script_text = "\n\n"
+                if args.include_problem_desc:
+                    prob_meta = problems.get(prob_key, {})
+                    prob_desc = prob_meta.get('description', '')
+                    if prob_desc:
+                        non_script_text += f"Problem description:\n{prob_desc}\n\n"
+                if instance_content:
+                    non_script_text += f"MiniZinc data:\n{instance_content}\n\n"
+                if solver_desc_text:
+                    non_script_text += solver_desc_text + "\n"
+                non_script_text += solver_prompt
+                non_script_tokens = estimate_tokens(non_script_text)
 
-            prompt = f"\n\nMiniZinc model:\n{safe_script}\n\n"
-            # Optionally include the problem description (short) at the top of the prompt
-            if args.include_problem_desc:
-                prob_meta = problems.get(prob_key, {})
-                prob_desc = prob_meta.get('description', '')
-                if prob_desc:
-                    prompt = f"Problem description:\n{prob_desc}\n\n" + prompt
-            if instance_content:
-                prompt += f"MiniZinc data:\n{instance_content}\n\n"
-            prompt += trunc_note + solver_prompt
+                # Compute allowed tokens for the script portion and truncate if needed
+                allowed_script_tokens = allowed_total_tokens - non_script_tokens
+                if allowed_script_tokens < 0:
+                    allowed_script_tokens = 0
+
+                safe_script, was_truncated = truncate_script_to_budget(script, allowed_script_tokens)
+                if was_truncated:
+                    # add a short marker to the prompt explaining truncation
+                    trunc_note = "% [Model script truncated to fit model context window]\n"
+                else:
+                    trunc_note = ""
+
+                prompt = f"\n\nMiniZinc model:\n{safe_script}\n\n"
+                # Optionally include the problem description (short) at the top of the prompt
+                if args.include_problem_desc:
+                    prob_meta = problems.get(prob_key, {})
+                    prob_desc = prob_meta.get('description', '')
+                    if prob_desc:
+                        prompt = f"Problem description:\n{prob_desc}\n\n" + prompt
+                if instance_content:
+                    prompt += f"MiniZinc data:\n{instance_content}\n\n"
+                if solver_desc_text:
+                    prompt += solver_desc_text + "\n"
+                prompt += trunc_note + solver_prompt
 
             futures[executor.submit(run_single_query, provider, model_id, prob_key, inst_label, prompt, query_func, args.temperature)] = (prob_key, inst_label)
 
@@ -406,6 +572,7 @@ if args.dry_run:
     print('\nDry-run complete — no LLM queries were made. Remove --dry-run to execute.')
     # --- Dry-run truncation diagnostic: simulate truncation per selected model ---
     print('\nDry-run truncation diagnostic: simulating which tasks would be truncated')
+    solver_desc_text = build_solver_description_text(solver_list, SOLVER_DESC_MAP)
     trunc_examples_to_show = 5
     for prov, mid, mlabel, _ in all_models:
         allowed_total_tokens, model_budget = get_allowed_total_tokens_for_model(mid, mlabel)
@@ -443,20 +610,39 @@ if args.dry_run:
                             instance_content = ''
 
                 solver_prompt = get_solver_prompt(solver_list, name_only=True)
-                non_script_text = "\n\n"
-                if instance_content:
-                    non_script_text += f"MiniZinc data:\n{instance_content}\n\n"
-                non_script_text += solver_prompt
-                non_script_tokens = estimate_tokens(non_script_text)
-                allowed_script_tokens = allowed_total_tokens - non_script_tokens
-                if allowed_script_tokens < 0:
-                    allowed_script_tokens = 0
+                if args.use_fzn_parser_outputs:
+                    if inst_name == 'base':
+                        continue
+                    if not inst_path:
+                        continue
+                    inst_key = instance_key_from_path(inst_path)
+                    fzn_desc = FZN_PARSER_OUTPUTS.get(inst_key)
+                    if not fzn_desc:
+                        continue
+                    prompt_text = f"Given this description of a MiniZinc problem:\n{str(fzn_desc).strip()}\n\n"
+                    if solver_desc_text:
+                        prompt_text += solver_desc_text + "\n"
+                    prompt_text += solver_prompt
+                    prompt_tokens = estimate_tokens(prompt_text)
+                    if prompt_tokens > allowed_total_tokens:
+                        truncated_tasks.append((prob_key, inst_name, prompt_tokens, allowed_total_tokens, inst_key))
+                else:
+                    non_script_text = "\n\n"
+                    if instance_content:
+                        non_script_text += f"MiniZinc data:\n{instance_content}\n\n"
+                    if solver_desc_text:
+                        non_script_text += solver_desc_text + "\n"
+                    non_script_text += solver_prompt
+                    non_script_tokens = estimate_tokens(non_script_text)
+                    allowed_script_tokens = allowed_total_tokens - non_script_tokens
+                    if allowed_script_tokens < 0:
+                        allowed_script_tokens = 0
 
-                orig_script_tokens = estimate_tokens(script_text)
-                # determine if truncation would occur
-                _, was_truncated = truncate_script_to_budget(script_text, allowed_script_tokens)
-                if was_truncated:
-                    truncated_tasks.append((prob_key, inst_name, orig_script_tokens, non_script_tokens, allowed_script_tokens))
+                    orig_script_tokens = estimate_tokens(script_text)
+                    # determine if truncation would occur
+                    _, was_truncated = truncate_script_to_budget(script_text, allowed_script_tokens)
+                    if was_truncated:
+                        truncated_tasks.append((prob_key, inst_name, orig_script_tokens, non_script_tokens, allowed_script_tokens))
                 # small optimization: if truncated tasks grows large, keep scanning but only store first N
                 if len(truncated_tasks) > 200:
                     # avoid unbounded memory use on pathological repos
@@ -466,8 +652,12 @@ if args.dry_run:
         else:
             print(f" - {prov}:{mid} -> {len(truncated_tasks)} tasks would be truncated (model budget={model_budget} tokens). Examples:")
             for ex in truncated_tasks[:trunc_examples_to_show]:
-                pk, iname, orig_toks, non_script_toks, allowed_toks = ex
-                print(f"    {pk}/{iname}: script_tokens~{orig_toks}, non_script_tokens~{non_script_toks}, allowed_script_tokens~{allowed_toks}")
+                if args.use_fzn_parser_outputs:
+                    pk, iname, prompt_toks, allowed_toks, inst_key = ex
+                    print(f"    {pk}/{iname}: prompt_tokens~{prompt_toks}, allowed_total_tokens~{allowed_toks}, key={inst_key}")
+                else:
+                    pk, iname, orig_toks, non_script_toks, allowed_toks = ex
+                    print(f"    {pk}/{iname}: script_tokens~{orig_toks}, non_script_tokens~{non_script_toks}, allowed_script_tokens~{allowed_toks}")
 
     print('\nDry-run complete — no LLM queries were made. Remove --dry-run to execute.')
     sys.exit(0)
@@ -491,11 +681,17 @@ if args.top_only:
     _suffix_parts.append("top")
 if args.include_problem_desc:
     _suffix_parts.append("desc")
+if args.use_fzn_parser_outputs:
+    _suffix_parts.append("fzn")
+if args.include_solver_desc:
+    _suffix_parts.append("solverdesc")
 if args.temperature is not None:
     # 0.2 -> 0p2, 0.0 -> 0, 0.80 -> 0p8
     t = f"{float(args.temperature):g}".replace('.', 'p')
     _suffix_parts.append(f"T{t}")
 _suffix = ("_" + "_".join(_suffix_parts)) if _suffix_parts else ""
+
+# Name output according to the effective solver set.
 output_file = f"testOutputFree/LLMsuggestions_{args.solver_set}_{args.script_version}{_suffix}.json"
 
 # Ensure output directory exists (benchmark_chat does this; keep consistent)

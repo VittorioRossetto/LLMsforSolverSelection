@@ -540,7 +540,7 @@ def parse_fzn(path):
 # Descriptions
 # ============================================================
 
-def describe_objective_function(model: "FlatZincModel", max_depth: int = 2, max_len: int = 800) -> Optional[str]:
+def describe_objective_function(model: "FlatZincModel", max_depth: int = 2, max_len: int = 100) -> Optional[str]:
     """Best-effort symbolic objective formulation.
 
     FlatZinc only gives an objective variable plus constraints; there is no
@@ -982,7 +982,7 @@ def _domain_text_for_array(model: "FlatZincModel", name: str) -> str:
         return "domain unknown"
     lo = min(d.min_value for d in doms)
     hi = max(d.max_value for d in doms)
-    return f"element domain [{lo}, {hi}]"
+    return f"domain [{lo}, {hi}]"
 
 
 def describe_search(search, model: Optional["FlatZincModel"] = None):
@@ -1025,8 +1025,8 @@ def describe_search(search, model: Optional["FlatZincModel"] = None):
                     constraints_txt += f"( {', '.join(examples)} )"
 
                 text = (
-                    f"integer search on 1 {vtype} variable with {domain_txt}, "
-                    f"involved in {constraints_txt}, {strategy_txt}"
+                    f"integer search on 1 {vtype} variable with {domain_txt}, {strategy_txt}"
+                    # f"involved in {constraints_txt}, {strategy_txt}"
                 )
                 return text
 
@@ -1043,15 +1043,13 @@ def describe_search(search, model: Optional["FlatZincModel"] = None):
                 if c_count > 0 and examples:
                     constraints_txt += f"( {', '.join(examples)} )"
 
+                origin_clause = f"(from 1 array, {length_txt})"
                 if isinstance(n_vars, int):
-                    subject = f"{n_vars} {elem_type} variables (from 1 array, {length_txt})"
+                    subject = f"{n_vars} {elem_type} variables"
                 else:
-                    subject = f"{elem_type} variables from 1 array ({length_txt})"
+                    subject = f"{elem_type} variables"
 
-                text = (
-                    f"integer search on {subject} with {domain_txt}, "
-                    f"involved in {constraints_txt}, {strategy_txt}"
-                )
+                text = f"integer search on {subject} with {domain_txt}, {origin_clause}, {strategy_txt}"
                 return text
 
         return f"integer search on {vars_}, {strategy_txt}"
@@ -1335,6 +1333,7 @@ def describe_constraints(model):
     token_re = re.compile(r"\b[A-Za-z]\w*\b")
 
     for c in model.constraints:
+        
         if isinstance(c, dict):
             ctype = c.get("type")
             args = c.get("args", "")
@@ -1372,17 +1371,6 @@ def describe_constraints(model):
             arity = 0
         arity_sums[ctype] += arity
 
-    # Heuristic classification: fixed-arity constraints are treated as "primitive"; others as "global".
-    # FlatZinc global constraints typically accept arrays (variable arity), e.g., all_different, element,
-    # linear constraints, clauses, and scheduling constraints like cumulative.
-    fixed_arity = {
-        "int_eq",       # binary
-        "int_ne",       # binary
-        "int_le",       # binary
-        "bool2int",     # unary + int
-        "int_times",    # ternary
-    }
-
     def _to_parenthetical(desc: str) -> str:
         desc = (desc or "").strip()
         if desc.endswith("."):
@@ -1405,26 +1393,10 @@ def describe_constraints(model):
             f"({_to_parenthetical(desc)})"
         )
 
-    total = sum(counts.values())
-    primitives: List[str] = []
-    globals_: List[str] = []
-    for ctype, count in sorted(counts.items()):
-        if ctype in fixed_arity:
-            primitives.append(_fmt_line(ctype, count))
-        else:
-            globals_.append(_fmt_line(ctype, count))
-
+    # Return a single unified list (sorted by constraint type).
     lines: List[str] = []
-    if globals_:
-        lines.append("Global constraints:")
-        lines.extend(globals_)
-    if primitives:
-        if lines:
-            lines.append("")
-        lines.append("Non-global constraints:")
-        lines.extend(primitives)
-
-    # lines.append(f"\nTotal constraints: {total}")
+    for ctype, count in sorted(counts.items()):
+        lines.append(_fmt_line(ctype, count))
     return "\n".join(lines)
 
 # ============================================================

@@ -61,6 +61,43 @@ def estimate_tokens(text: str) -> int:
     return max(1, int(len(text) / 4))
 
 
+def load_fzn_parser_outputs(json_path: str) -> dict:
+    try:
+        with open(json_path, 'r') as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        logger.exception(f"Failed to load fzn parser outputs from {json_path}")
+        return {}
+
+
+def instance_key_from_path(inst_path: str) -> str | None:
+    """Return a repo-relative key matching fzn_parser_outputs.json entries.
+
+    fzn_parser_outputs.json keys look like "black-hole/layout_14.json".
+    This normalizes absolute instance paths by stripping known dataset roots.
+    """
+    if not inst_path:
+        return None
+    candidates = []
+    for root in [
+        os.path.join(repo_root, 'mznc2025_probs'),
+        os.path.join(repo_root, 'mznc2025_probs_sanitized'),
+    ]:
+        try:
+            rel = os.path.relpath(inst_path, root)
+            if not rel.startswith('..') and rel != '.':
+                candidates.append(rel)
+        except Exception:
+            pass
+    if candidates:
+        return sorted(candidates, key=len)[0]
+    parts = inst_path.replace('\\', '/').split('/')
+    if len(parts) >= 2:
+        return '/'.join(parts[-2:])
+    return None
+
+
 # --- load problems (sanitized dataset) ---
 dataset_path = os.path.join(repo_root, "mznc2025_probs_sanitized", "problems_with_descriptions.json")
 problems = load_problems(dataset_path)
@@ -406,13 +443,24 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
     else:
         if getattr(args, 'include_solver_desc', False):
             solver_desc_map = load_solver_descriptions(args.solver_desc_file if hasattr(args, 'solver_desc_file') else None)
-            solver_desc_text = build_solver_description_text(get_solver_list(args.solver_set if hasattr(args, 'solver_set') else 'free'), solver_desc_map)
+            solver_desc_text = build_solver_description_text(solver_list, solver_desc_map)
         else:
             solver_desc_text = ''
-    common_instruction = "For each instance above, output a single line: instance_name: [solver1, solver2, solver3]"
+    if getattr(args, 'use_fzn_parser_outputs', False):
+        # solver_list_text already instructs bracket-only answers; keep user message minimal
+        common_instruction = ""
+    else:
+        common_instruction = "For each instance above, output a single line: instance_name: [solver1, solver2, solver3]"
+
+    # load fzn parser outputs if requested
+    fzn_outputs = {}
+    if getattr(args, 'use_fzn_parser_outputs', False):
+        default_path = os.path.join(repo_root, 'mznc2025_probs', 'fzn_parser_outputs.json')
+        fzn_path = getattr(args, 'fzn_parser_json', None) or default_path
+        fzn_outputs = load_fzn_parser_outputs(fzn_path)
 
     # collect chats across all problems so we can run them in parallel per model
-    all_chats = []  # list of tuples (prob_key, [messages])
+    all_chats = []  # list of tuples (prob_key, inst_label, [messages])
     for prob_key, prob in problems.items():
         script_path = prob.get('script_commented' if args.script_version == 'commented' else 'script', '')
         full_script_path = os.path.join(repo_root, script_path.lstrip('./')) if script_path else None
@@ -435,6 +483,18 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
                         content = ''
                         logger.exception(f"Error reading instance file {inst_path} for problem {prob_key}: {e}")
                     inst_label = os.path.splitext(fname)[0]
+
+                    # fzn-parser mode: ignore raw instance content; use the parser summary instead
+                    if getattr(args, 'use_fzn_parser_outputs', False):
+                        inst_key = instance_key_from_path(inst_path)
+                        fzn_desc = fzn_outputs.get(inst_key) if inst_key else None
+                        if not fzn_desc:
+                            logger.warning(f"Missing fzn parser output for instance key={inst_key} (path={inst_path})")
+                            continue
+                        content = str(fzn_desc).strip()
+                        insts.append((inst_label, content))
+                        continue
+
                     # optionally include precomputed features for this instance
                     feat_text = ''
                     if getattr(args, 'include_features', False):
@@ -459,28 +519,51 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
 
         # optionally include problem description as a system message at the start
         prob_desc = prob.get('description', '') if getattr(args, 'include_problem_desc', False) else ''
-        # when features-only mode is active we intentionally omit the model
-        effective_script_text = '' if getattr(args, 'features_only', False) else script_text
-        chats = pack_instances_into_chats(solver_list_text, solver_desc_text, common_instruction, effective_script_text, insts, allowed_total_tokens, prob_desc)
-        for c in chats:
-            all_chats.append((prob_key, c))
+
+        if getattr(args, 'use_fzn_parser_outputs', False):
+            # One chat per description (per instance).
+            for inst_label, fzn_desc in insts:
+                msgs = []
+                if solver_list_text:
+                    msgs.append({'role': 'system', 'content': solver_list_text})
+                if solver_desc_text:
+                    msgs.append({'role': 'system', 'content': solver_desc_text})
+                if prob_desc:
+                    msgs.append({'role': 'system', 'content': "Problem description:\n" + prob_desc + "\n"})
+                user_content = "Given this description of a MiniZinc problem:\n" + fzn_desc + "\n"
+                if common_instruction:
+                    user_content += "\n" + common_instruction
+                msgs.append({'role': 'user', 'content': user_content})
+                all_chats.append((prob_key, inst_label, msgs))
+        else:
+            # when features-only mode is active we intentionally omit the model
+            effective_script_text = '' if getattr(args, 'features_only', False) else script_text
+            chats = pack_instances_into_chats(solver_list_text, solver_desc_text, common_instruction, effective_script_text, insts, allowed_total_tokens, prob_desc)
+            for c in chats:
+                all_chats.append((prob_key, None, c))
 
     total_chats = len(all_chats)
     if args.dry_run:
         print(f"{provider}:{model_id} -> total chats to send: {total_chats}")
         # show a few samples
-        for i, (pk, msgs) in enumerate(all_chats[:10]):
-            print(f"  sample {i+1}: problem={pk}, messages={len(msgs)}")
+        for i, (pk, inst_label, msgs) in enumerate(all_chats[:10]):
+            if inst_label:
+                print(f"  sample {i+1}: problem={pk} instance={inst_label}, messages={len(msgs)}")
+            else:
+                print(f"  sample {i+1}: problem={pk}, messages={len(msgs)}")
         # print an example chat (safe-truncated) to help debugging prompt packing
         if all_chats:
-            ex_pk, ex_msgs = all_chats[0]
+            ex_pk, ex_inst, ex_msgs = all_chats[0]
             print("\nExample chat messages (first chat):")
             for m in ex_msgs:
                 content = m.get('content','')
                 # show at most 2000 chars per message to keep dry-run readable
                 snippet = content if len(content) <= 2000 else content[:2000] + '\n...[truncated]'
                 print(f"--- role: {m.get('role')} ---\n{snippet}\n")
-            print(f"(Example corresponds to problem: {ex_pk})\n")
+            if ex_inst:
+                print(f"(Example corresponds to problem: {ex_pk} instance: {ex_inst})\n")
+            else:
+                print(f"(Example corresponds to problem: {ex_pk})\n")
         return provider, model_id, {}
 
     chats_results = {}
@@ -488,11 +571,11 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
     with ThreadPoolExecutor(max_workers=args.max_workers_instances) as executor, \
          tqdm(total=total_chats, desc=f"{provider}/{model_id}", leave=False) as pbar:
 
-        future_to_chat = {executor.submit(resilient_send_chat, msgs, provider, model_id, query_func, args.temperature): (pk, msgs)
-                  for pk, msgs in all_chats}
+        future_to_chat = {executor.submit(resilient_send_chat, msgs, provider, model_id, query_func, args.temperature): (pk, inst_label, msgs)
+              for pk, inst_label, msgs in all_chats}
 
         for fut in as_completed(future_to_chat):
-            pk, msgs = future_to_chat[fut]
+            pk, inst_label, msgs = future_to_chat[fut]
             pbar.update(1)
             try:
                 resp = fut.result()
@@ -508,22 +591,29 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
                     logger.exception(f"Blocking retry also failed for provider={provider} model={model_id} problem={pk}: {e2}")
                     continue
 
-            pairs = re.findall(r"([^:\n]+)\s*:\s*\[([^\]]+)\]", resp)
-            if pairs:
-                for name, inner in pairs:
-                    name = name.strip()
-                    top3 = [s.strip() for s in inner.split(',')]
-                    chats_results.setdefault(pk, {})[name] = {'top3': top3, 'time_seconds': None}
+            if getattr(args, 'use_fzn_parser_outputs', False):
+                # Expect a single bracketed list response.
+                match = re.search(r"\[([^\]]+)\]", resp)
+                top3 = [s.strip() for s in match.group(1).split(',')] if match else []
+                name = inst_label or 'unknown'
+                chats_results.setdefault(pk, {})[name] = {'top3': top3, 'time_seconds': None}
             else:
-                brackets = re.findall(r"\[([^\]]+)\]", resp)
-                user_msgs = [m for m in msgs if m['role'] == 'user']
-                for idx, um in enumerate(user_msgs):
-                    first_line = um['content'].splitlines()[0]
-                    name = first_line.replace('Instance:','').strip()
-                    if idx < len(brackets):
-                        chats_results.setdefault(pk, {})[name] = {'top3': [s.strip() for s in brackets[idx].split(',')], 'time_seconds': None}
-                    else:
-                        chats_results.setdefault(pk, {})[name] = {'top3': None, 'error': 'no parsed response'}
+                pairs = re.findall(r"([^:\n]+)\s*:\s*\[([^\]]+)\]", resp)
+                if pairs:
+                    for name, inner in pairs:
+                        name = name.strip()
+                        top3 = [s.strip() for s in inner.split(',')]
+                        chats_results.setdefault(pk, {})[name] = {'top3': top3, 'time_seconds': None}
+                else:
+                    brackets = re.findall(r"\[([^\]]+)\]", resp)
+                    user_msgs = [m for m in msgs if m['role'] == 'user']
+                    for idx, um in enumerate(user_msgs):
+                        first_line = um['content'].splitlines()[0]
+                        name = first_line.replace('Instance:','').strip()
+                        if idx < len(brackets):
+                            chats_results.setdefault(pk, {})[name] = {'top3': [s.strip() for s in brackets[idx].split(',')], 'time_seconds': None}
+                        else:
+                            chats_results.setdefault(pk, {})[name] = {'top3': None, 'error': 'no parsed response'}
 
     return 'chat', model_id, chats_results
 
@@ -533,12 +623,16 @@ def get_solver_list(setname):
         return ALL_SOLVERS
     if setname == 'minizinc':
         return MINIZINC_SOLVERS
+    if setname == 'significative':
+        return SIGNIFICATIVE_SOLVERS
     return FREE_SOLVERS
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description='Chat-batching benchmark runner')
-    parser.add_argument('--solver-set', choices=['minizinc', 'all', 'free'], default='free')
+    parser.add_argument('--solver-set', choices=['minizinc', 'all', 'free', 'significative'], default='free')
+    parser.add_argument('--significative-only', action='store_true', default=False,
+                        help='Deprecated: use --solver-set significative')
     parser.add_argument('--script-version', choices=['uncommented', 'commented'], default='uncommented')
     parser.add_argument('--max-workers-models', type=int, default=5)
     parser.add_argument('--dry-run', action='store_true')
@@ -560,9 +654,25 @@ def main(argv=None):
                         help='Send only instance features to the model (omit model and instance data)')
     parser.add_argument('--model-and-features', action='store_true',
                         help='Send the problem model as system message and instance features as the instance content (omit raw instance data)')
+    parser.add_argument('--use-fzn-parser-outputs', action='store_true',
+                        help='Send only FlatZinc parser summaries (from fzn_parser_outputs.json), one chat per instance description')
+    parser.add_argument('--fzn-parser-json', type=str, default=None,
+                        help='Optional path to fzn_parser_outputs.json (defaults to mznc2025_probs/fzn_parser_outputs.json)')
     parser.add_argument('--temperature', type=float, default=None,
                         help='Sampling temperature for the conversation (provider support varies). Default: provider default')
     args = parser.parse_args(argv)
+
+    # Backwards compatibility: allow --significative-only as an alias for --solver-set significative.
+    if getattr(args, 'significative_only', False):
+        args.solver_set = 'significative'
+
+    # guardrail: fzn mode is mutually exclusive with feature/model packing modes
+    if getattr(args, 'use_fzn_parser_outputs', False) and (
+        getattr(args, 'include_features', False)
+        or getattr(args, 'features_only', False)
+        or getattr(args, 'model_and_features', False)
+    ):
+        raise SystemExit('Error: --use-fzn-parser-outputs cannot be combined with --include-features/--features-only/--model-and-features')
 
     # load mzn2feat features if requested (cached globally)
     global MZN2FEAT
@@ -591,8 +701,13 @@ def main(argv=None):
             models.append((provider, mid, mlabel, qf))
 
     # compute output filename early so we can write incremental results
+    # Keep backwards-compat names for the default 'free' set; otherwise include the set name.
     base = 'data/testOutputFree/LLMsuggestions'
-    if getattr(args, 'features_only', False):
+    if getattr(args, 'solver_set', 'free') != 'free':
+        base += f"_{args.solver_set}"
+    if getattr(args, 'use_fzn_parser_outputs', False):
+        name = base + '_chat_fzn'
+    elif getattr(args, 'features_only', False):
         name = base + '_featOnly'
     elif getattr(args, 'model_and_features', False):
         name = base + '_modelFeat'
@@ -605,6 +720,7 @@ def main(argv=None):
         name += '_Pdesc'
     if getattr(args, 'include_solver_desc', False):
         name += '_Sdesc'
+    # (solver set already encoded in base when non-default)
 
     # Ensure temperature sweeps do not overwrite each other: include temp in filename.
     if getattr(args, 'temperature', None) is not None:

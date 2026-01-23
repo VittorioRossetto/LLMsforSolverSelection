@@ -1,10 +1,70 @@
 import json
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
+try:
+    import matplotlib.pyplot as plt  # type: ignore
+except ModuleNotFoundError:  # pragma: no cover
+    plt = None
+
+try:
+    import seaborn as sns  # type: ignore
+except ModuleNotFoundError:  # pragma: no cover
+    sns = None
 from itertools import chain
 import numpy as np
 import os
+
+
+def _require_plotting():
+    if plt is None or sns is None:
+        raise ModuleNotFoundError(
+            "Plotting requires matplotlib and seaborn. Install with: pip install matplotlib seaborn"
+        )
+
+
+def get_significative_solvers() -> list[str]:
+    """Return the project's SIGNIFICATIVE_SOLVERS list.
+
+    Best-effort: import from utils.py if available; otherwise fall back to a
+    local copy to keep notebooks usable when paths differ.
+    """
+    try:
+        from utils import SIGNIFICATIVE_SOLVERS  # type: ignore
+        return list(SIGNIFICATIVE_SOLVERS)
+    except Exception:
+        return [
+            "cbc-free",
+            "choco-solver__cp_-free",
+            "choco-solver__cp_-par",
+            "choco-solver__cp-sat_-free",
+            "cp_optimizer-free",
+            "cplex-free",
+            "gurobi-free",
+            "highs-free",
+            "izplus-free",
+            "jacop-free",
+            "pumpkin-free",
+            "scip-free",
+            "sicstus_prolog-free",
+        ]
+
+
+def filter_to_solvers(df: pd.DataFrame, solvers: list[str] | set[str] | None, *, solver_col: str) -> pd.DataFrame:
+    """Filter a dataframe to rows whose solver column is in `solvers`.
+
+    If `solvers` is None or empty, returns df unchanged.
+    """
+    if df is None or not isinstance(df, pd.DataFrame) or df.empty:
+        return df
+    if not solvers:
+        return df
+    allowed = set(str(s).strip() for s in solvers if str(s).strip())
+    if not allowed:
+        return df
+    if solver_col not in df.columns:
+        return df
+    out = df.copy()
+    out[solver_col] = out[solver_col].astype(str).str.strip()
+    return out[out[solver_col].isin(allowed)].copy()
 
 # --- Flatten LLMResults into dataframe ---
 def ResultsFlattener(LLMResults):
@@ -88,6 +148,11 @@ def mznResultsFlattener(MznResults):
 
 # --- Function to calculate score and add it to the df for singke solver performances on each solver ---
 def scoreComputation(scored_df):
+    """Compute MiniZinc-style scores per (Problem, Instance, Solver).
+
+    Note: If you want to restrict scoring to a solver subset (e.g.
+    SIGNIFICATIVE_SOLVERS), filter `scored_df` first using `filter_to_solvers(...)`.
+    """
     # Normalize Status column
     scored_df['Status'] = scored_df['Status'].astype(str).str.upper()
 
@@ -106,7 +171,8 @@ def scoreComputation(scored_df):
             worst = group['Objective'].min()
         return pd.Series({'best': best, 'worst': worst})
 
-    agg = valid_objs.groupby(['Problem', 'Instance']).apply(best_worst).reset_index()
+    # Pandas 2.3+: avoid deprecation warning about grouping columns in apply.
+    agg = valid_objs.groupby(['Problem', 'Instance']).apply(best_worst, include_groups=False).reset_index()
 
     # Merge back to the main dataframe
     scored_df = scored_df.merge(agg, on=['Problem', 'Instance'], how='left')
@@ -157,13 +223,31 @@ def scoreComputation(scored_df):
     scored_df['ComputedScore'] = scored_df.apply(compute_score, axis=1)
     return scored_df
 
+
+def scoreComputation_subset(scored_df: pd.DataFrame, allowed_solvers: list[str] | set[str] | None = None) -> pd.DataFrame:
+    """Convenience wrapper: compute scores using only `allowed_solvers`.
+
+    This restricts both:
+    - which solver rows are scored
+    - and which solvers contribute to per-instance best/worst.
+    """
+    filtered = filter_to_solvers(scored_df, allowed_solvers, solver_col='Solver')
+    if filtered is None or filtered.empty:
+        return filtered
+    return scoreComputation(filtered)
+
 # --- Compute scores of LLM answers based on single solvers score ---
-def compute_llm_scores(llm_df, scored_df):
+def compute_llm_scores(llm_df, scored_df, allowed_solvers: list[str] | set[str] | None = None):
     llm_expanded = llm_df.copy()
 
     llm_expanded = llm_expanded[llm_expanded['top3_list'].notnull()].copy()
     llm_expanded = llm_expanded.explode('top3_list').rename(columns={'top3_list': 'Solver'})
     llm_expanded['Solver'] = llm_expanded['Solver'].astype(str).str.strip()
+
+    # Optional: restrict evaluation to a solver subset (e.g., SIGNIFICATIVE_SOLVERS).
+    if allowed_solvers:
+        llm_expanded = filter_to_solvers(llm_expanded, allowed_solvers, solver_col='Solver')
+        scored_df = filter_to_solvers(scored_df, allowed_solvers, solver_col='Solver')
 
     # Standardize matching keys
     llm_expanded['problem'] = llm_expanded['problem'].astype(str)
@@ -203,12 +287,17 @@ def compute_llm_scores(llm_df, scored_df):
     return llm_summary
 
 # --- Compute scores of LLM answers for best solver based on single solvers score ---
-def compute_top1_llm_scores(llm_df, scored_df):
+def compute_top1_llm_scores(llm_df, scored_df, allowed_solvers: list[str] | set[str] | None = None):
     # --- Extract Top-1 predictions only ---
     llm_top1 = llm_df.copy()
     llm_top1 = llm_top1[llm_top1['top1'].notnull()].copy()
     llm_top1 = llm_top1.rename(columns={'top1': 'Solver'})
     llm_top1['Solver'] = llm_top1['Solver'].astype(str)
+
+    # Optional: restrict evaluation to a solver subset.
+    if allowed_solvers:
+        llm_top1 = filter_to_solvers(llm_top1, allowed_solvers, solver_col='Solver')
+        scored_df = filter_to_solvers(scored_df, allowed_solvers, solver_col='Solver')
 
     # --- Standardize key names and merge with solver scores ---
     scored_df['Problem'] = scored_df['Problem'].astype(str)
@@ -241,8 +330,17 @@ def compute_top1_llm_scores(llm_df, scored_df):
     return llm_top1_summary, llmTSD_scored
 
 # --- Function to compute Closed Gap for LLM suggestions ---
-def compute_closed_gap(llm_top1_scored, scored_df):
-    SBS_SOLVER = 'or-tools_cp-sat-free'
+def compute_closed_gap(llm_top1_scored, scored_df, allowed_solvers: list[str] | set[str] | None = None, sbs_solver: str | None = 'or-tools_cp-sat-free'):
+    """Compute Closed Gap for Top-1 LLM suggestions.
+
+    If `allowed_solvers` is provided, SBS/VBS are computed only over that subset.
+
+    If `sbs_solver` is None, SBS is chosen automatically as the single solver with
+    the highest total ComputedScore within the (possibly filtered) scored_df.
+    """
+
+    if allowed_solvers:
+        scored_df = filter_to_solvers(scored_df, allowed_solvers, solver_col='Solver')
 
     cg_results = []
 
@@ -255,7 +353,14 @@ def compute_closed_gap(llm_top1_scored, scored_df):
     vbs_total = vbs_df['VBS_Score'].sum()
 
     # Compute SBS score over all instances (not limited to model coverage)
-    sbs_total = scored_df.loc[scored_df['Solver'] == SBS_SOLVER, 'ComputedScore'].sum()
+    if sbs_solver is None:
+        totals = scored_df.groupby('Solver', as_index=False)['ComputedScore'].sum()
+        if not totals.empty:
+            sbs_solver = str(totals.sort_values('ComputedScore', ascending=False).iloc[0]['Solver'])
+        else:
+            sbs_solver = ''
+
+    sbs_total = scored_df.loc[scored_df['Solver'] == sbs_solver, 'ComputedScore'].sum()
 
     for (prov, mod), group in llm_top1_scored.groupby(['provider', 'model']):
         # Instances this model actually made predictions for
@@ -297,6 +402,7 @@ def singleSolverScore(scored_df):
 
 # --- Plot comparison of LLM variants ---
 def plot_llm_variant_comparison(summaries, variant_names, label):
+    _require_plotting()
     combined_df = pd.DataFrame()
     for summary, name in zip(summaries, variant_names):
         temp_df = summary.copy()
