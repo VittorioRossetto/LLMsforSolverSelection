@@ -640,16 +640,19 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
                             name = name.strip()
                             top3 = [s.strip() for s in inner.split(',')]
                             chats_results.setdefault(pk, {})[name] = {'top3': top3, 'time_seconds': None}
-                else:
-                    brackets = re.findall(r"\[([^\]]+)\]", resp)
-                    user_msgs = [m for m in msgs if m['role'] == 'user']
-                    for idx, um in enumerate(user_msgs):
-                        first_line = um['content'].splitlines()[0]
-                        name = first_line.replace('Instance:','').strip()
-                        if idx < len(brackets):
-                            chats_results.setdefault(pk, {})[name] = {'top3': [s.strip() for s in brackets[idx].split(',')], 'time_seconds': None}
-                        else:
-                            chats_results.setdefault(pk, {})[name] = {'top3': None, 'error': 'no parsed response'}
+                    else:
+                        brackets = re.findall(r"\[([^\]]+)\]", resp)
+                        user_msgs = [m for m in msgs if m['role'] == 'user']
+                        for idx, um in enumerate(user_msgs):
+                            first_line = um['content'].splitlines()[0]
+                            name = first_line.replace('Instance:','').strip()
+                            if idx < len(brackets):
+                                chats_results.setdefault(pk, {})[name] = {
+                                    'top3': [s.strip() for s in brackets[idx].split(',')],
+                                    'time_seconds': None,
+                                }
+                            else:
+                                chats_results.setdefault(pk, {})[name] = {'top3': None, 'error': 'no parsed response'}
 
     return 'chat', model_id, chats_results
 
