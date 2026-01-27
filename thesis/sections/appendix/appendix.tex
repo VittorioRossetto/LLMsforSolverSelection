@@ -427,4 +427,136 @@
     \caption{Histograms to visualize the difference between first LLM variants and single solvers}
 \end{figure}
 
+\begin{table}[h]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{l c p{10cm}}
+            \hline
+            Category & Number & Description (summary) \\
+            \hline
+            Variables & 27 & Counts of variables (including constants, aliases, defined and introduced variables), ratios involving $N_V$ and $N_C$, and statistics of domain size, degree, and domain/degree ratio. \\
+            Domains & 18 & Counts and ratios of variables by type (Boolean, integer, float, set) and constraints by type (Boolean, integer, float, set, array). \\
+            Constraints & 27 & Total $N_C$, ratios with $N_V$, annotation usage, and statistics of constraint domain, degree, and domain/degree ratio. \\
+            Global constraints & 29 & Total number and ratio of global constraints, plus counts per equivalence class of Gecode-supported globals. \\
+            Graphs & 20 & Statistics on structural properties of the constraint graph and variable graph (degree, clustering coefficient, diameter). \\
+            Solving & 11 & Information from the solve item, including labeled variables, goal type, and counts of search and heuristic annotations. \\
+            Objective & 12 & Domain, degree, and graph-related measures of the objective variable, including normalized and standardized forms relative to global domain and degree statistics. \\
+            \hline
+            Static total & 144 & Extracted from the FlatZinc model via syntactic and structural analysis. \\
+            \hline
+            Dynamic & 11 & Runtime indicators from short Gecode executions: solutions found, propagations, nodes, failures, search depth, memory usage, and timing measures for translation and feature extraction. \\
+            \hline
+        \end{tabular}
+    }
+    \caption{The table shows a quick explanation of the features that can be extracted using the tool mzn2feat~\cite{mzn2feat}, divided per category, and counted.}
+    \label{tab:FeatDescriptions}
+\end{table}
+
+\clearpage
+\begin{lstlisting}[
+    style=featstyle,
+    caption={Example output using \texttt{mzn2feat}~\cite{mzn2feat} pretty print option on \texttt{EchoSched.mzn}, instance \texttt{14-10-0-2\_1}.},
+    label={lst:mzn2feat-features},
+    basicstyle=\ttfamily\scriptsize\color{darkred}
+]
+IDENTIFIER               VALUE                             DESCRIPTION
+===========================================================================================================
+c_avg_deg_cons       3.11367                Average of the constraints degree
+c_avg_dom_cons       20.3934                Average of the constraints domain
+c_avg_domdeg_cons    5.85385                Average of the ratio constraints domain/degree
+c_bounds_d           0                      No of constraints using 'boundsD' annotation
+c_bounds_r           0                      No of constraints using 'boundsR' annotation
+c_bounds_z           0                      No of constraints using 'boundsZ' or 'bounds' annotation
+c_cv_deg_cons        0.963493               Coefficient of Variation of constraints degree
+c_cv_dom_cons        1.50739                Coefficient of Variation of constraints domain
+c_cv_domdeg_cons     0.566571               Coefficient of Variation of the ratio constraints domain/degree
+c_domain             0                      No of constraints using 'domain' annotation
+c_ent_deg_cons       1.60699                Entropy of constraints degree
+c_ent_dom_cons       5.54008                Entropy of constraints domain
+c_ent_domdeg_cons    2.58764                Entropy of the ratio constraints domain/degree
+c_logprod_deg_cons   6021.66                Logarithm of the product of constraints degree
+c_logprod_dom_cons   14249.3                Logarithm of the product of constraints domain
+c_max_deg_cons       141                    Maximum of the constraints degree
+c_max_dom_cons       1724.64                Maximum of the constraints domain
+c_max_domdeg_cons    12.2315                Maximum of the ratio constraints domain/degree
+c_min_deg_cons       1                      Minimum of the constraints degree
+c_min_dom_cons       1                      Minimum of the constraints domain
+c_min_domdeg_cons    1                      Minimum of the ratio constraints domain/degree
+c_num_cons           3906                   Total no of constraints
+c_priority           0                      No of constraints using 'priority' annotation
+c_ratio_cons         1.49426                Ratio no of constraints / no of variables
+c_sum_ari_cons       13031                  Sum of constraints arity
+c_sum_dom_cons       79656.6                Sum of constraints domain
+c_sum_domdeg_cons    22865.2                Sum of the ratio constraints domain/degree
+d_array_cons         1                      No of array constraints
+d_bool_cons          910                    No of boolean constraints
+d_bool_vars          1820                   No of boolean variables
+d_float_cons         0                      No of float constraints
+d_float_vars         0                      No of float variables
+d_int_cons           2591                   No of integer constraints
+d_int_vars           794                    No of integer variables
+d_ratio_array_cons   0.000256016            Ratio array constraints / total no of constraints
+d_ratio_bool_cons    0.232975               Ratio boolean constraints / total no of constraints
+d_ratio_bool_vars    0.696251               Ratio boolean variables / total no of variables
+d_ratio_float_cons   0                      Ratio float constraints / total no of constraints
+d_ratio_float_vars   0                      Ratio float variables / total no of variables
+d_ratio_int_cons     0.663338               Ratio integer constraints / total no of constraints
+d_ratio_int_vars     0.303749               Ratio integer variables / total no of variables
+d_ratio_set_cons     0                      Ratio set constraints / total no of constraints
+d_ratio_set_vars     0                      Ratio set variables / total no of variables
+d_set_cons           0                      No of set constraints
+d_set_vars           0                      No of set variables
+gc_diff_globs        1                      No of different global constraints
+gc_global_cons       404                    Total no of global constraints
+gc_ratio_diff        0.00247525             Ratio different global constraints / no of global constraints
+gc_ratio_globs       0.103431               Ratio no of global constraints / total no of constraints
+o_deg                1                      Degree of the objective variable
+o_deg_avg            0.214932               Ratio degree of the objective variable / average of var degree
+o_deg_cons           0.000256016            Ratio degree of the objective variable / number of constraints
+o_deg_std            -0.442948              Standardization of the degree of the objective variable
+o_dom                6685                   Domain size of the objective variable
+o_dom_avg            12.79                  Ratio domain of the objective variable / average of var domain
+o_dom_deg            6685                   Ratio domain of the objective variable / degree of the obj var
+o_dom_std            4.13516                Standardization of the domain of the objective variable
+s_bool_search        0                      Number of 'bool_search' annotations
+s_first_fail         1                      Number of 'int_search' annotations
+s_goal               2                      Solve goal (1 = satisfy, 2 = minimize, 3 = maximize)
+s_indomain_max       0                      Number of 'indomain_max' annotations
+s_indomain_min       1                      Number of 'indomain_min' annotations
+s_input_order        0                      Number of 'input_order' annotations
+s_int_search         1                      Number of 'int_search' annotations
+s_labeled_vars       1                      Number of variables to be assigned
+s_other_val          0                      Number of other value search heuristics
+s_other_var          0                      Number of other variable search heuristics
+s_set_search         0                      Number of 'set_search' annotations
+v_avg_deg_vars       4.65264                Average of the variables degree
+v_avg_dom_vars       522.674                Average of the variables domain
+v_avg_domdeg_vars    141.005                Average of the ratio variables domain/degree
+v_cv_deg_vars        1.77237                Coefficient of Variation of variables degree
+v_cv_dom_vars        2.85116                Coefficient of Variation of variables degree
+v_cv_domdeg_vars     3.94885                Coefficient of Variation of the ratio variables domain/degree
+v_def_vars           2334                   Number of defined variables
+v_ent_deg_vars       1.0029                 Entropy of variables degree
+v_ent_dom_vars       2.09955                Entropy of variables domain
+v_ent_domdeg_vars    1.83264                Entropy of the ratio variables domain/degree
+v_intro_vars         2753                   Number of introduced variables
+v_logprod_deg_vars   3665.47                Logarithm of the product of variables degree
+v_logprod_dom_vars   6788.52                Logarithm of the product of variables domain
+v_max_deg_vars       36                     Maximum of the variables degree
+v_max_dom_vars       6685                   Maximum of the variables domain
+v_max_domdeg_vars    6685                   Maximum of the ratio variables domain/degree
+v_min_deg_vars       0                      Minimum of the variables degree
+v_min_dom_vars       2                      Minimum of the variables domain
+v_min_domdeg_vars    0.1                    Minimum of the ratio variables domain/degree
+v_num_aliases        700                    Number of alias variables
+v_num_consts         10                     Number of constant variables
+v_num_vars           2614                   Total no of variables variables
+v_ratio_bounded      0.271614               Ratio (aliases + constants) / total no of variables
+v_ratio_vars         0.669227               Ratio no of variables / no of constraints
+v_sum_deg_vars       12162                  Sum of variables degree
+v_sum_dom_vars       1.36627e+06            Sum of variables domain
+v_sum_domdeg_vars    368586                 Sum of the ratio variables domain/degree
+\end{lstlisting}
+
+
 \end{document}

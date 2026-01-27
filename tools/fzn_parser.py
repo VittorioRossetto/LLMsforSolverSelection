@@ -2,6 +2,7 @@
 import sys
 import re
 import json
+import argparse
 from pathlib import Path
 from collections import defaultdict
 from statistics import mean
@@ -64,6 +65,7 @@ CONSTRAINT_TEXT = {
 
 
 _FZN_DESCRIPTIONS_CACHE: Optional[Dict[str, str]] = None
+_FZN_CATEGORIZED_CACHE: Optional[Tuple[Dict[str, List[str]], Dict[str, str]]] = None
 
 
 def _load_fzn_constraint_descriptions() -> Dict[str, str]:
@@ -108,6 +110,87 @@ def _load_fzn_constraint_descriptions() -> Dict[str, str]:
 
     _FZN_DESCRIPTIONS_CACHE = mapping
     return _FZN_DESCRIPTIONS_CACHE
+
+
+def _load_fzn_constraint_categories() -> Tuple[Dict[str, List[str]], Dict[str, str]]:
+    """Load categorized constraint descriptions.
+
+    Returns:
+      - constraint_to_categories: constraint_name -> list of category names
+      - constraint_to_description: constraint_name -> description
+
+    The file format is expected to be:
+      {
+        "categories": {
+          "Some category": {"constraint_name": "desc", ...},
+          ...
+        }
+      }
+
+    Best-effort: if missing/malformed, returns ({}, {}).
+    """
+    global _FZN_CATEGORIZED_CACHE
+    if _FZN_CATEGORIZED_CACHE is not None:
+        return _FZN_CATEGORIZED_CACHE
+
+    path = Path(__file__).with_name("fzn_descriptions_categorized.json")
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        _FZN_CATEGORIZED_CACHE = ({}, {})
+        return _FZN_CATEGORIZED_CACHE
+
+    constraint_to_categories: Dict[str, List[str]] = defaultdict(list)
+    constraint_to_description: Dict[str, str] = {}
+
+    if isinstance(data, dict):
+        cats = data.get("categories")
+        if isinstance(cats, dict):
+            for category_name, mapping in cats.items():
+                if not isinstance(category_name, str) or not category_name.strip():
+                    continue
+                if not isinstance(mapping, dict):
+                    continue
+                cat = category_name.strip()
+                for ctype, desc in mapping.items():
+                    key = str(ctype).strip()
+                    val = str(desc).strip()
+                    if not key or not val:
+                        continue
+                    if cat not in constraint_to_categories[key]:
+                        constraint_to_categories[key].append(cat)
+                    # Keep the first description we see for a constraint.
+                    constraint_to_description.setdefault(key, val)
+
+        # Some entries are explicitly listed as multi-category.
+        multi = data.get("multi_category")
+        if isinstance(multi, dict):
+            for ctype, cat_list in multi.items():
+                key = str(ctype).strip()
+                if not key:
+                    continue
+                if isinstance(cat_list, list):
+                    for cat in cat_list:
+                        cat = str(cat).strip()
+                        if not cat:
+                            continue
+                        if cat not in constraint_to_categories[key]:
+                            constraint_to_categories[key].append(cat)
+
+        # Some entries are called out as uncategorized.
+        unc = data.get("uncategorized")
+        if isinstance(unc, dict):
+            for ctype, desc in unc.items():
+                key = str(ctype).strip()
+                val = str(desc).strip()
+                if not key or not val:
+                    continue
+                if "Uncategorized" not in constraint_to_categories[key]:
+                    constraint_to_categories[key].append("Uncategorized")
+                constraint_to_description.setdefault(key, val)
+
+    _FZN_CATEGORIZED_CACHE = (dict(constraint_to_categories), constraint_to_description)
+    return _FZN_CATEGORIZED_CACHE
 
 
 def _resolve_constraint_description(
@@ -159,6 +242,44 @@ def _resolve_constraint_description(
         desc = _get(candidate)
         if desc:
             return desc
+
+    return None
+
+
+def _resolve_key_in_mapping(ctype: str, mapping: Dict[str, object]) -> Optional[str]:
+    """Resolve `ctype` to a key that exists in `mapping`.
+
+    This is similar to `_resolve_constraint_description` but returns the matched
+    key rather than the description, and it first tries the full name after
+    stripping a leading `fzn_`.
+    """
+    ctype = (ctype or "").strip()
+    if not ctype or not mapping:
+        return None
+
+    keys = set(mapping.keys())
+    if ctype in keys:
+        return ctype
+
+    # Try stripping the common FlatZinc prefix.
+    candidates: List[str] = []
+    if ctype.startswith("fzn_"):
+        candidates.append(ctype[len("fzn_") :])
+    candidates.append(ctype)
+
+    for base in candidates:
+        base = (base or "").strip()
+        if not base:
+            continue
+        if base in keys:
+            return base
+
+        parts = [p for p in base.split("_") if p]
+        while len(parts) >= 2:
+            parts = parts[:-1]
+            cand = "_".join(parts)
+            if cand in keys:
+                return cand
 
     return None
 
@@ -1315,10 +1436,11 @@ def describe_variables_detailed(model):
         return "\n".join(header + [""] + lines)
     return "\n".join(header)
 
-def describe_constraints(model):
+def describe_constraints(model, categorize: bool = False):
     counts = defaultdict(int)
     arity_sums = defaultdict(int)
     fzn_desc = _load_fzn_constraint_descriptions()
+    categorized_map, categorized_desc = _load_fzn_constraint_categories() if categorize else ({}, {})
 
     def _is_constant_scalar(v: dict) -> bool:
         d = v.get("domain")
@@ -1380,8 +1502,14 @@ def describe_constraints(model):
         return desc
 
     def _fmt_line(ctype: str, count: int) -> str:
+        # Prefer categorized descriptions (exact match), then the generic resolver.
+        desc = None
+        if categorize and categorized_desc:
+            key = _resolve_key_in_mapping(ctype, categorized_desc)
+            desc = categorized_desc.get(key) if key else None
         desc = (
-            _resolve_constraint_description(ctype, fzn_desc)
+            (desc or "").strip()
+            or _resolve_constraint_description(ctype, fzn_desc)
             or CONSTRAINT_TEXT.get(ctype)
             or f"Constraints of type {ctype} restrict relationships between variables"
         )
@@ -1393,17 +1521,59 @@ def describe_constraints(model):
             f"({_to_parenthetical(desc)})"
         )
 
-    # Return a single unified list (sorted by constraint type).
+    if not categorize:
+        # Return a single unified list (sorted by constraint type).
+        lines: List[str] = []
+        for ctype, count in sorted(counts.items()):
+            lines.append(_fmt_line(ctype, count))
+        return "\n".join(lines)
+
+    # Categorized view: group constraint types under the categories from
+    # fzn_descriptions_categorized.json. Avoid double-counting types that appear
+    # in multiple categories by assigning a single primary category.
+    def _primary_category(ctype: str) -> str:
+        key = _resolve_key_in_mapping(ctype, categorized_map) if categorized_map else None
+        cats = categorized_map.get(key) or []
+        if not cats:
+            return "Uncategorized"
+        # Deterministic choice.
+        return sorted(cats)[0]
+
+    category_to_types: Dict[str, List[str]] = defaultdict(list)
+    for ctype in counts.keys():
+        category_to_types[_primary_category(ctype)].append(ctype)
+
+    def _category_header(cat: str) -> str:
+        types = category_to_types.get(cat, [])
+        total = sum(counts[t] for t in types)
+        total_arity = sum(arity_sums.get(t, 0) for t in types)
+        avg = (total_arity / total) if total else 0.0
+        t_plural = "type" if len(types) == 1 else "types"
+        c_plural = "constraint" if total == 1 else "constraints"
+        return f"{cat}: {len(types)} {t_plural}, {total} {c_plural} (avg arity {avg:.2f})"
+
     lines: List[str] = []
-    for ctype, count in sorted(counts.items()):
-        lines.append(_fmt_line(ctype, count))
+    # Keep Uncategorized last for readability.
+    cats_sorted = sorted([c for c in category_to_types.keys() if c != "Uncategorized"])
+    if "Uncategorized" in category_to_types:
+        cats_sorted.append("Uncategorized")
+
+    for cat in cats_sorted:
+        lines.append(_category_header(cat))
+        for ctype in sorted(category_to_types.get(cat, [])):
+            lines.append(_fmt_line(ctype, counts[ctype]))
+        lines.append("")
+
+    # Trim trailing blank line.
+    while lines and not lines[-1].strip():
+        lines.pop()
     return "\n".join(lines)
 
 # ============================================================
 # Output
 # ============================================================
 
-def summarize(model):
+def summarize(model, categorize_constraints: bool = False):
     # print("=" * 60)
     # print("PROBLEM SUMMARY")
     # print("=" * 60)
@@ -1423,7 +1593,7 @@ def summarize(model):
     print(describe_variables_detailed(model))
 
     print("\nConstraints:")
-    print(describe_constraints(model))
+    print(describe_constraints(model, categorize=categorize_constraints))
 
     # print("=" * 60)
 
@@ -1432,9 +1602,14 @@ def summarize(model):
 # ============================================================
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python fzn_parser.py model.fzn")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(description="Parse and summarize a FlatZinc (.fzn) model")
+    parser.add_argument("fzn", help="Path to the .fzn file")
+    parser.add_argument(
+        "--categorize-constraints",
+        action="store_true",
+        help="Group constraints by category from fzn_descriptions_categorized.json",
+    )
+    args = parser.parse_args()
 
-    model = parse_fzn(sys.argv[1])
-    summarize(model)
+    model = parse_fzn(args.fzn)
+    summarize(model, categorize_constraints=args.categorize_constraints)

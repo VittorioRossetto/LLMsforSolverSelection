@@ -22,10 +22,12 @@ PROBS_DIR="$PROBS_DIR_DEFAULT"
 OUT_JSON="$PROBS_DIR_DEFAULT/fzn_parser_outputs.json"
 ONLY_SUBDIR=""
 ALLOW_UNBOUNDED_VARS=0
+CATEGORIZE_CONSTRAINTS=0
 
 usage() {
   cat <<EOF
 Usage: $(basename "$0") [--probs-dir DIR] [--out JSON] [--only SUBDIR] [--minizinc BIN] [--stdlib DIR] [--python PY] [--allow-unbounded-vars]
+                       [--categorize-constraints]
 
 Defaults:
   --probs-dir  $PROBS_DIR_DEFAULT
@@ -41,6 +43,7 @@ Notes:
     3) otherwise, the first *.mzn not ending with _commented.mzn
   - Keys in the output JSON are "<subfolder>/<instance_filename>".
   - --allow-unbounded-vars forwards the MiniZinc/Gecode flag of the same name.
+  - --categorize-constraints forwards the parser flag of the same name.
 EOF
 }
 
@@ -64,6 +67,8 @@ while [[ $# -gt 0 ]]; do
       PYTHON_BIN="$2"; shift 2 ;;
     --allow-unbounded-vars)
       ALLOW_UNBOUNDED_VARS=1; shift 1 ;;
+    --categorize-constraints)
+      CATEGORIZE_CONSTRAINTS=1; shift 1 ;;
     -h|--help)
       usage; exit 0 ;;
     *)
@@ -188,7 +193,11 @@ run_one_subdir() {
 
     echo "  [parse] $key" >&2
     # Capture all output, including possible errors.
-    parser_out="$($PYTHON_BIN "$PARSER" "$fzn_path" 2>&1 || true)"
+    parser_flags=()
+    if [[ "$CATEGORIZE_CONSTRAINTS" -eq 1 ]]; then
+      parser_flags+=(--categorize-constraints)
+    fi
+    parser_out="$($PYTHON_BIN "$PARSER" "$fzn_path" "${parser_flags[@]}" 2>&1 || true)"
     printf "%s" "$parser_out" | json_set_from_stdin "$OUT_JSON" "$key"
   done
 }

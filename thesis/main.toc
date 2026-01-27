@@ -24,7 +24,7 @@
 \contentsline {subsubsection}{Solver Description and Problem Description}{15}{section*.20}%
 \contentsline {subsubsection}{Basic Tests Evaluation}{15}{section*.22}%
 \contentsline {subsection}{\numberline {1.2.4}Feature Employment}{16}{subsection.1.2.4}%
-\contentsline {subsubsection}{Features Description}{17}{section*.24}%
+\contentsline {subsubsection}{Tool Description}{17}{section*.24}%
 \contentsline {subsubsection}{Testing and Results}{17}{section*.25}%
-\contentsline {chapter}{Appendix}{19}{chapter*.26}%
-\contentsline {chapter}{Bibliography}{29}{chapter*.46}%
+\contentsline {chapter}{Appendix}{19}{chapter*.27}%
+\contentsline {chapter}{Bibliography}{31}{chapter*.48}%

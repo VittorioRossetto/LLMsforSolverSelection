@@ -568,10 +568,76 @@ In the last section, we exposed the importance of textual informations, and givi
 
 Another problem is the one concerning script dimensions: programs with longer scripts need some techniques like sanitization, as previously stated in \Cref{sec:scriptMan}, these type of technique, makes it possible to work with longer scripts and context data. But is still penalizing towards longer problems, raising the risk of hallucination~\cite{LLMhallucination}, due to the forced removal of elements in data, leaving incomplete arrays as input.
 
-
 For these tasks we decided to employ a feature-extractor~\cite{mzn2feat}, which allows to extract an extensive set of 95 features from a Constraint (Satisfaction/Optimization) Problem defined in possibly different modelling languages: MiniZinc, FlatZinc or XCSP. Designed to be independent from the particular machine on which it is run as well as from the specific global redefinitions of a given solver. The employed version was already used in other projects~\cite{splitAndBounds}~\cite{SUNNY-CP}~\cite{multicoreCS}.
 
-\subsubsection{Features Description}
-\dots
+\subsubsection{Tool Description}
+The tool mzn2feat is designed to extract a set of 155 features from a MiniZinc model. Of these, 144 are static features derived through syntactic analysis of the source problem instance, while 11 are dynamic features obtained via a short execution of the Gecode solver. Due to the complexity of the MiniZinc language, particularly the presence of control-flow constructs, direct extraction of syntactic features from MiniZinc models is nontrivial. To address this, models are first compiled into FlatZinc, a lower-level language whose syntax is largely a subset of MiniZinc. This translation is performed using the \texttt{mzn2fzn} tool provided within the MiniZinc toolchain.
+
+The compilation step employs Gecode-specific redefinitions of global constraints. This preserves information about the presence and type of global constraints without decomposing them into primitive constraints. Such preservation is relevant because, in the absence of solver-specific redefinitions, certain global constraints (e.g., \texttt{alldifferent}) are typically decomposed into sets of simpler constraints, from which the original high-level constraint cannot be uniquely reconstructed.
+
+Static feature extraction from the resulting FlatZinc model is performed using \texttt{fzn2feat}, a parser implemented with Flex and Bison. Dynamic features are obtained by executing the Gecode FlatZinc interpreter (\texttt{fz}) for a fixed time budget of two seconds on the compiled model.
+
+In summary, given a MiniZinc model $M$, the mzn2feat workflow consists of three stages. First, $M$ is translated into a FlatZinc model $F_M$ using Gecode global constraint redefinitions. Second, static features are extracted from $F_M$ via \texttt{fzn2feat}. Third, dynamic features are extracted from $F_M$ through a bounded run of the Gecode interpreter. The static feature extraction stage is applicable to any FlatZinc model, although solver-specific redefinitions that are not recognized may be ignored. The static and dynamic feature extraction procedures are independent, allowing them to be executed in parallel or in arbitrary order. For example, static feature computation may be omitted if the instance is solved during the dynamic feature collection phase.
+
+For a better understanding of all of the features, refer to \Cref{tab:FeatDescriptions} for the description by category, and to \ref{lst:mzn2feat-features} as an example output.
 
 \subsubsection{Testing and Results}
+To understand the potential of the feature extractor we tried to use the pretty-print output (like the one in \ref{lst:mzn2feat-features}) combined with the context informations given until now.
+So we tried testing:
+\begin{itemize}
+    \item Only \texttt{mzn2feat} output.
+    \item \texttt{mzn2feat} output and problem text description.
+    \item \texttt{mzn2feat} output, problem text description and solvers text description.
+\end{itemize}
+And then tried those setup, adding first the \texttt{.mzn} problems only, and finally also the sanitized data scripts (\texttt{.dzn}/\texttt{.json}).
+\begin{table}[!ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{llll}
+        \hline
+            Variant & Single Score & Parallel Score & Closed Gap \\ \hline
+            Features + Solver Description + Problem Description & 75.659731 & 83.731582 & -0.108399 \\ 
+            Features + Solver Description & 75.390197 & 82.994278 & -0.130793 \\ 
+            Features + Problem Description & 74.829813 & 83.289246 & -0.177354 \\ 
+            Features & 73.600955 & 82.259760 & -0.279455 \\ 
+            Features + .mzn + Problem Description & 71.916389 & 78.530605 & -0.419420 \\ 
+            Features + .mzn & 70.368365 & 78.371276 & -0.548041 \\ 
+            Features + .mzn + Instance Data & 68.422708 & 74.803213 & -0.709699 \\ 
+            Features + .mzn + Instance Data + Solver Description & 63.585459 & 66.346631 & -1.111610 \\ 
+            Features + .mzn + Instance Data + Problem Description & 62.516550 & 69.284744 & -1.200422 \\ 
+            Features + .mzn + Solver Description & 61.687990 & 66.874762 & -1.269264 \\ 
+            Features + .mzn + Solver Description + Problem Description & 58.576543 & 64.774159 & -1.527784 \\ 
+            Features + .mzn + Instance Data + Solver Description + Problem Description & 54.188182 & 59.410873 & -1.892398 \\ \hline
+        \end{tabular}
+    }
+    \caption{Test with all the possible combinations involving features extracted using \texttt{mzn2feat}~\cite{mzn2feat}, all the tests have been made using \texttt{gpt-oss-120b} as it's the only model that produced a positive closed gap until this point. Columns are calculated as in \Cref{tab:combinedAllLLM}.}
+    \label{tab:combinedFeatVars}
+\end{table}
+
+As displayed in \Cref{tab:combinedFeatVars}, the best performing instances are the ones combining features and textual informations, while adding \texttt{.mzn} or instance data is consistently lowering score, most probably because of some problems explained earlier such ar context rot~\cite{ContextRot}.
+
+% \begin{figure}[ht]
+%     \centering
+%     \begin{subfigure}[t]{0.32\textwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{allVarPar.png}
+%         \caption{All feature variants performances in ``Parallel Score'', as calculated in \Cref{tab:combinedAllLLM}.}
+%         \label{fig:allFVarPar}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[t]{0.32\textwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{allVarSin.png}
+%         \caption{All feature variants performances in ``Single Score'', as calculated in \Cref{tab:combinedAllLLM}.}
+%         \label{fig:allFVarSin}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[t]{0.32\textwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{allVarcg.png}
+%         \caption{All feature variants performances in ``Closed Gap'', as calculated in \Cref{tab:combinedAllLLM}.}
+%         \label{fig:allFVarCg}
+%     \end{subfigure}
+%     \caption{Histograms displaying the performaces of all the feature variants in ``Single Score'' evaluation, ``Parallel Score'' evaluation and ``Closed Gap'' evaluation, all performed using \texttt{gpt-oss-120b}.}
+%     \label{fig:histoFVar1}
+% \end{figure}
