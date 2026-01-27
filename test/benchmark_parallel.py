@@ -59,9 +59,12 @@ parser.add_argument('--dry-run', action='store_true', default=False,
 parser.add_argument('--include-problem-desc', action='store_true', default=False,
                     help="If set, include the problem description (from problems_with_descriptions.json) at the start of each prompt.")
 parser.add_argument('--use-fzn-parser-outputs', action='store_true', default=False,
-                    help="If set, build the prompt from fzn_parser_outputs.json (FlatZinc parser summaries) instead of sending the MiniZinc model + data.")
+                    help="If set, build the prompt from FlatZinc parser summaries instead of sending the MiniZinc model + data.")
+parser.add_argument('--fzn-parser-mode', choices=['plain', 'categorized'], default='plain',
+                help="When using --use-fzn-parser-outputs, choose which parser summary file to use. "
+                    "'plain' uses fzn_parser_outputs.json; 'categorized' uses fzn_parser_outputs_categorized.json.")
 parser.add_argument('--fzn-parser-json', type=str, default=None,
-                    help="Optional path to fzn_parser_outputs.json. Defaults to mznc2025_probs/fzn_parser_outputs.json under the repo root.")
+                    help="Optional path to the fzn parser outputs JSON. If omitted, the default depends on --fzn-parser-mode under mznc2025_probs/.")
 parser.add_argument('--temperature', type=float, default=None,
                     help='Sampling temperature for each question (provider support varies). Default: provider default')
 parser.add_argument('--include-solver-desc', action='store_true', default=False,
@@ -97,7 +100,10 @@ print(f"Parallel instance workers: {args.max_workers_instances}")
 if args.top_only:
     print("Filtering to TOP_MODELS only.")
 if args.use_fzn_parser_outputs:
-    print("Prompt mode: using fzn_parser_outputs summaries (no MiniZinc model/data).")
+    if getattr(args, 'fzn_parser_mode', 'plain') == 'categorized':
+        print("Prompt mode: using categorized fzn_parser_outputs summaries (no MiniZinc model/data).")
+    else:
+        print("Prompt mode: using fzn_parser_outputs summaries (no MiniZinc model/data).")
 
 # --- Load problems ---
 repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -262,9 +268,22 @@ def instance_key_from_path(inst_path: str) -> str | None:
     return None
 
 
-FZN_PARSER_JSON_DEFAULT = os.path.join(repo_root, 'mznc2025_probs', 'fzn_parser_outputs.json')
-FZN_PARSER_JSON_PATH = args.fzn_parser_json or FZN_PARSER_JSON_DEFAULT
-FZN_PARSER_OUTPUTS = load_fzn_parser_outputs(FZN_PARSER_JSON_PATH) if args.use_fzn_parser_outputs else {}
+FZN_PARSER_JSON_DEFAULT_PLAIN = os.path.join(repo_root, 'mznc2025_probs', 'fzn_parser_outputs.json')
+FZN_PARSER_JSON_DEFAULT_CATEGORIZED = os.path.join(repo_root, 'mznc2025_probs', 'fzn_parser_outputs_categorized.json')
+
+if args.use_fzn_parser_outputs:
+    if args.fzn_parser_json:
+        FZN_PARSER_JSON_PATH = args.fzn_parser_json
+    else:
+        FZN_PARSER_JSON_PATH = (
+            FZN_PARSER_JSON_DEFAULT_CATEGORIZED
+            if getattr(args, 'fzn_parser_mode', 'plain') == 'categorized'
+            else FZN_PARSER_JSON_DEFAULT_PLAIN
+        )
+    FZN_PARSER_OUTPUTS = load_fzn_parser_outputs(FZN_PARSER_JSON_PATH)
+else:
+    FZN_PARSER_JSON_PATH = None
+    FZN_PARSER_OUTPUTS = {}
 
 
 # Load model context windows once
@@ -692,7 +711,10 @@ if args.top_only:
 if args.include_problem_desc:
     _suffix_parts.append("desc")
 if args.use_fzn_parser_outputs:
-    _suffix_parts.append("fzn")
+    if getattr(args, 'fzn_parser_mode', 'plain') == 'categorized':
+        _suffix_parts.append("fzncat")
+    else:
+        _suffix_parts.append("fzn")
 if args.include_solver_desc:
     _suffix_parts.append("solverdesc")
 if args.with_reasoning:

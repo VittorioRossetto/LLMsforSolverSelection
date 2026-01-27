@@ -20,6 +20,7 @@ PYTHON_DEFAULT="${PYTHON:-python3}"
 
 PROBS_DIR="$PROBS_DIR_DEFAULT"
 OUT_JSON="$PROBS_DIR_DEFAULT/fzn_parser_outputs.json"
+OUT_JSON_EXPLICIT=0
 ONLY_SUBDIR=""
 ALLOW_UNBOUNDED_VARS=0
 CATEGORIZE_CONSTRAINTS=0
@@ -44,6 +45,8 @@ Notes:
   - Keys in the output JSON are "<subfolder>/<instance_filename>".
   - --allow-unbounded-vars forwards the MiniZinc/Gecode flag of the same name.
   - --categorize-constraints forwards the parser flag of the same name.
+  - If --categorize-constraints is set and --out is not provided, the default output
+    changes to <probs-dir>/fzn_parser_outputs_categorized.json.
 EOF
 }
 
@@ -56,7 +59,7 @@ while [[ $# -gt 0 ]]; do
     --probs-dir)
       PROBS_DIR="$2"; shift 2 ;;
     --out)
-      OUT_JSON="$2"; shift 2 ;;
+      OUT_JSON="$2"; OUT_JSON_EXPLICIT=1; shift 2 ;;
     --only)
       ONLY_SUBDIR="$2"; shift 2 ;;
     --minizinc)
@@ -78,6 +81,12 @@ while [[ $# -gt 0 ]]; do
       ;;
   esac
 done
+
+# If categorized output is requested and the user didn't pick an explicit output path,
+# avoid overwriting the standard output JSON.
+if [[ "$CATEGORIZE_CONSTRAINTS" -eq 1 && "$OUT_JSON_EXPLICIT" -eq 0 ]]; then
+  OUT_JSON="$PROBS_DIR/fzn_parser_outputs_categorized.json"
+fi
 
 if [[ ! -d "$PROBS_DIR" ]]; then
   echo "Problems dir not found: $PROBS_DIR" >&2
