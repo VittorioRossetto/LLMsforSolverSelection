@@ -1,30 +1,40 @@
 \babel@toc {english}{}\relax 
 \contentsline {chapter}{Introduction}{i}{chapter*.1}%
-\contentsline {chapter}{\numberline {1}Experimental Evaluation}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Methodology}{1}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}Provider Choice}{1}{subsection.1.1.1}%
-\contentsline {subsection}{\numberline {1.1.2}Large Language Models Selection}{3}{subsection.1.1.2}%
-\contentsline {subsection}{\numberline {1.1.3}Prompt General Structure}{3}{subsection.1.1.3}%
-\contentsline {subsubsection}{Output Structure}{4}{section*.5}%
-\contentsline {subsection}{\numberline {1.1.4}Problem Selection}{4}{subsection.1.1.4}%
-\contentsline {subsection}{\numberline {1.1.5}Test Metrics}{5}{subsection.1.1.5}%
-\contentsline {subsubsection}{Metric for Solver Score}{6}{section*.7}%
-\contentsline {subsubsection}{Closed Gap}{7}{section*.9}%
-\contentsline {subsection}{\numberline {1.1.6}Experiment Setup}{8}{subsection.1.1.6}%
-\contentsline {subsubsection}{Script Manipulation}{8}{section*.10}%
-\contentsline {subsubsection}{Custom Delays}{9}{section*.11}%
-\contentsline {section}{\numberline {1.2}Experiments}{10}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Preliminary tests}{10}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Single Request Experiments}{11}{subsection.1.2.2}%
-\contentsline {subsubsection}{Base Setup}{11}{section*.13}%
-\contentsline {subsubsection}{Problem Description}{12}{section*.15}%
-\contentsline {subsection}{\numberline {1.2.3}Multi-turn Experiments}{13}{subsection.1.2.3}%
-\contentsline {subsubsection}{Setup Explanation}{14}{section*.17}%
-\contentsline {subsubsection}{Solvers Description}{14}{section*.18}%
-\contentsline {subsubsection}{Solver Description and Problem Description}{15}{section*.20}%
-\contentsline {subsubsection}{Basic Tests Evaluation}{15}{section*.22}%
-\contentsline {subsection}{\numberline {1.2.4}Feature Employment}{16}{subsection.1.2.4}%
-\contentsline {subsubsection}{Tool Description}{17}{section*.24}%
-\contentsline {subsubsection}{Testing and Results}{17}{section*.25}%
-\contentsline {chapter}{Appendix}{19}{chapter*.27}%
-\contentsline {chapter}{Bibliography}{31}{chapter*.48}%
+\contentsline {chapter}{\numberline {1}Technical Background}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Constraint Programming}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}CP Solvers}{2}{subsection.1.1.1}%
+\contentsline {subsubsection}{Portfolio Solvers}{2}{section*.3}%
+\contentsline {subsection}{\numberline {1.1.2}MiniZinc}{2}{subsection.1.1.2}%
+\contentsline {subsubsection}{Specifying a Problem}{3}{section*.4}%
+\contentsline {subsubsection}{MiniZinc Challenge}{3}{section*.5}%
+\contentsline {chapter}{\numberline {2}Experimental Evaluation}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Methodology}{5}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Provider Choice}{5}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Large Language Models Selection}{7}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Prompt General Structure}{7}{subsection.2.1.3}%
+\contentsline {subsubsection}{Output Structure}{8}{section*.8}%
+\contentsline {subsection}{\numberline {2.1.4}Problem Selection}{8}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}Test Metrics}{9}{subsection.2.1.5}%
+\contentsline {subsubsection}{Metric for Solver Score}{10}{section*.10}%
+\contentsline {subsubsection}{Closed Gap}{11}{section*.12}%
+\contentsline {subsection}{\numberline {2.1.6}Experiment Setup}{12}{subsection.2.1.6}%
+\contentsline {subsubsection}{Script Manipulation}{12}{section*.13}%
+\contentsline {subsubsection}{Custom Delays}{13}{section*.14}%
+\contentsline {section}{\numberline {2.2}Experiments}{14}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Preliminary tests}{14}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Single Request Experiments}{15}{subsection.2.2.2}%
+\contentsline {subsubsection}{Base Setup}{15}{section*.16}%
+\contentsline {subsubsection}{Problem Description}{16}{section*.18}%
+\contentsline {subsection}{\numberline {2.2.3}Multi-turn Experiments}{17}{subsection.2.2.3}%
+\contentsline {subsubsection}{Setup Explanation}{18}{section*.20}%
+\contentsline {subsubsection}{Solvers Description}{18}{section*.21}%
+\contentsline {subsubsection}{Solver Description and Problem Description}{19}{section*.23}%
+\contentsline {subsubsection}{Basic Tests Evaluation}{19}{section*.25}%
+\contentsline {subsection}{\numberline {2.2.4}Feature Employment}{20}{subsection.2.2.4}%
+\contentsline {subsubsection}{Tool Description}{21}{section*.27}%
+\contentsline {subsubsection}{Testing and Results}{21}{section*.28}%
+\contentsline {subsection}{\numberline {2.2.5}Sampling Temperature Tuning}{22}{subsection.2.2.5}%
+\contentsline {subsubsection}{Choosing Sampling Temperatures}{23}{section*.30}%
+\contentsline {subsubsection}{Testing and Results}{23}{section*.32}%
+\contentsline {chapter}{Appendix}{25}{chapter*.33}%
+\contentsline {chapter}{Bibliography}{37}{chapter*.54}%

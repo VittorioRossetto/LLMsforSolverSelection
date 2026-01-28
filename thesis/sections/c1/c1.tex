@@ -573,7 +573,7 @@ For these tasks we decided to employ a feature-extractor~\cite{mzn2feat}, which 
 \subsubsection{Tool Description}
 The tool mzn2feat is designed to extract a set of 155 features from a MiniZinc model. Of these, 144 are static features derived through syntactic analysis of the source problem instance, while 11 are dynamic features obtained via a short execution of the Gecode solver. Due to the complexity of the MiniZinc language, particularly the presence of control-flow constructs, direct extraction of syntactic features from MiniZinc models is nontrivial. To address this, models are first compiled into FlatZinc, a lower-level language whose syntax is largely a subset of MiniZinc. This translation is performed using the \texttt{mzn2fzn} tool provided within the MiniZinc toolchain.
 
-The compilation step employs Gecode-specific redefinitions of global constraints. This preserves information about the presence and type of global constraints without decomposing them into primitive constraints. Such preservation is relevant because, in the absence of solver-specific redefinitions, certain global constraints (e.g., \texttt{alldifferent}) are typically decomposed into sets of simpler constraints, from which the original high-level constraint cannot be uniquely reconstructed.
+The compilation step employs Gecode-specific redefinitions of global constraints. This preserves information about the presence and type of global constraints without decomposing them into primitive constraints. Such preservation is relevant because, in the absence of solver-specific redefinitions, certain global constraints (e.g., \texttt{alldifferent}) when decomposed into sets of simpler constraints, from which the original high-level constraint cannot be uniquely reconstructed.
 
 Static feature extraction from the resulting FlatZinc model is performed using \texttt{fzn2feat}, a parser implemented with Flex and Bison. Dynamic features are obtained by executing the Gecode FlatZinc interpreter (\texttt{fz}) for a fixed time budget of two seconds on the compiled model.
 
@@ -616,6 +616,8 @@ And then tried those setup, adding first the \texttt{.mzn} problems only, and fi
 
 As displayed in \Cref{tab:combinedFeatVars}, the best performing instances are the ones combining features and textual informations, while adding \texttt{.mzn} or instance data is consistently lowering score, most probably because of some problems explained earlier such ar context rot~\cite{ContextRot}.
 
+It should also be noted that The best performing variants are all right behind the best performing one from previous tests but still, the best 3 reached an higher score than the second best ``simple'' variant.
+
 % \begin{figure}[ht]
 %     \centering
 %     \begin{subfigure}[t]{0.32\textwidth}
@@ -641,3 +643,59 @@ As displayed in \Cref{tab:combinedFeatVars}, the best performing instances are t
 %     \caption{Histograms displaying the performaces of all the feature variants in ``Single Score'' evaluation, ``Parallel Score'' evaluation and ``Closed Gap'' evaluation, all performed using \texttt{gpt-oss-120b}.}
 %     \label{fig:histoFVar1}
 % \end{figure}
+
+\subsection{Sampling Temperature Tuning}
+The testing of this initial phase involved the use of sampling temperature tuning. Sampling temperature is a hyperparameter of an LLM used in a temperature-based sampling process. It controls the randomness of the model's output at inference time~\cite{TempDef}.
+
+During each step of an LLM's decoding process, the LLM uses the previous tokens to choose the next output token. The final layer of the LLM uses a softmax function to convert raw scores (logits) into probabilities.
+
+In greedy sampling, the model will always choose the most likely next token. However, for probabilistic sampling, the next token is selected
+from a probability distribution.
+
+Temperature sampling is a modification to the softmax function, which adjusts the resulting probability mass functions. In this modified softmax function, $v_k$ is the k-th vocabulary token, $l_k$ is the token's logit, and $\tau$ is a constant temperature:
+\[
+\Pr(v_k) = \frac{e^{l_k / \tau}}{\sum_i e^{l_i / \tau}}
+\]
+
+A lower temperature makes the output of the LLM more deterministic, thus favoring the most likely predictions. This conservativeness is captured by the model's tendency to produce more repetitive, focused, and less diverse output based on the patterns most commonly seen in the training data~\cite{NNetKnowledge}~\cite{ContextualTemp}.
+
+A higher temperature increases the randomness of the output, thus favoring more ``creative'' predictions. This creativity is captured by the model's willingness to explore more unconventional and less likely outputs. Higher temperatures can lead to novel text, diverse ideas, and creative solutions to problems~\cite{NNetKnowledge}~\cite{ContextualTemp}.
+
+In the context of problem-solving, temperature can be seen as a trade-off between exploring possible solutions within the solution space and exploiting probable solutions; lower temperatures tend to exploit probable solutions, whereas higher temperatures explore the solution space more broadly.
+
+\subsubsection{Choosing Sampling Temperatures}
+
+Low sampling temperatures are recommended for tasks requiring precision and factual accuracy, such as technical writing, code generation, or question-answering~\cite{PromptingWithLLM}. However, higher temperatures are recommended for tasks requiring creativity, such as writ-
+ing poetry, creating stories, or brainstorming.
+
+Higher temperatures also increase the probability of model hallucination where an LLM produces statisticallyprobable responses that are factually incorrect or nonsensical. As a result, optimal temperature selection is also a balance between creativity and hallucination~\cite{LLMhallucination}.
+
+As for tests with features employment, the only large language model that will be employed for testing is \texttt{gpt-oss-120b}. Being the LLM employed via Groq API~\cite{GroqAPI}, we decided to opt for the temperature pre-sets displayed in \Cref{tab:tempSets}, also indicated in the documentations~\cite{GroqAPIdoc}, as a testing ground. 
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{lll}
+    \hline
+        Scenario & Temp & Comments \\ \hline
+        Factual Q\&A & 0.2 & Keeps dates \& numbers stable \\ 
+        Data extraction (JSON) & 0.0 & Deterministic keys/values \\ 
+        Creative copywriting & 0.8 & Vivid language, fresh ideas \\ 
+        Brainstorming list & 0.7 & Variety without nonsense \\ 
+        Long-form code & 0.3 & Fewer hallucinated APIs \\ \hline
+    \end{tabular}
+    \caption{Temperature setting suggestions from Groq documentation~\cite{GroqAPIdoc}. In the leftmost column is presented the basic scenario in wich the following settings are more indicated, followed by the sampling temperature value, and finally a short comment on the expected behaviour from the LLM with the given setting.}
+    \label{tab:tempSets}
+\end{table}
+
+\subsubsection{Testing and Results}
+As anticipated, the tests were all made only using \texttt{gpt-oss-120b} for LLM. Temperature sampling tests were made on the 5 best performing variants, namely:
+\begin{enumerate}
+    \item \texttt{.mzn} scripts, instance data and text description for both solvers and problems.
+    \item Features extracted through \texttt{mzn2feat} and text description for both solvers and problems.
+    \item Features extracted through \texttt{mzn2feat} and text description for solvers.
+    \item Features extracted through \texttt{mzn2feat} and text description for problems.
+    \item \texttt{.mzn} scripts and instance data
+\end{enumerate}
+
+The limitation to those variants only, was simply due to resources limitations from the rate limits on the model. 
+
