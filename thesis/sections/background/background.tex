@@ -45,5 +45,73 @@ The model and data may be in separate files. Data files can only contain assignm
 \subsubsection{MiniZinc Challenge}
 Comparing constraint programming systems is fraught with difficulty and in reality an impossible task. The reason is that there are so many components to a modern CP system, only some of which are implemented by some systems. To claim that one CP system is ``better'' than another is a bold claim, since there is almost certainly some problem for which the ``worse'' system allows a stronger model, or a better search, and performs better.
 
+MiniZinc makes a good attempt to handle the most obvious obstacle: there are hundreds of potential global constraints, most handled by few or no systems. 
+A standard input language for solvers gives us the capability to compare different solvers.
+Hence, every year since 2008 the MiniZinc Challenge has been comparing different solvers that support MiniZinc~\cite{PhilMznChallenge}.
+
+The aim of the challenge is to compare various constraint solving technology on the same problems sets. The focus is on finite domain propagation solvers. An auxiliary aim is to build up a library of interesting problem models, which can be used to compare solvers and solving technologies.
+
+Challenge participants provide a FlatZinc or MiniZinc solver and global constraint definitions specialized for their solver. Each solver is run on 100 MiniZinc model instances. For FlatZinc solvers, the minizinc compiler runs on the MiniZinc model and instance using the provided global constraint definitions to create a FlatZinc file. The resultant FlatZinc file is then given as input to the provided FlatZinc solver. For MiniZinc solvers, the MiniZinc model and data are input to the provided solver. Points are awarded for solving problems, speed of solution, and goodness of solutions (for optimization problems)~\cite{PhilMznChallenge}.
+
+\section{Large Language Models}
+Large Language Models (LLMs) are neural network models trained to process and generate natural language by learning statistical patterns over large text corpora.
+
+LLMs are the culmination of decades of progress in natural language processing (NLP) and machine learning research, and their development is largely responsible for the explosion of artificial intelligence advancements across the late 2010s and 2020s. Popular LLMs have become household names, bringing generative AI to the forefront of the public interest. LLMs are also used widely in enterprises, with organizations investing heavily across numerous business functions and use cases~\cite{LLMsIBM}.
+
+LLMs are built on a type of neural network architecture called a transformer~\cite{TransformerArchitecture}, which employs self-attention mechanisms to model dependencies among tokens in a sequence. Formally, given an input sequence \(x_1, \dots, x_n\), the model estimates the conditional distribution
+\[
+P(x_{n+1} \mid x_1, \dots, x_n),
+\]
+and text generation proceeds autoregressively by repeatedly sampling from this distribution.
+
+Training is typically divided into a large-scale pretraining phase followed by alignment stages. During pretraining, the model learns general linguistic and semantic representations through self-supervised objectives. Alignment techniques, such as supervised fine-tuning and reinforcement learning from feedback, adapt the model to follow instructions, respect constraints, and produce outputs that better match user expectations.
+
+To better explain the concept, we can say LLMs work as giant statistical prediction machines that repeatedly predict the next word in a sequence. They learn patterns in their text and generate language that follows those patterns~\cite{LLMsIBM}.
+
+\subsection{Inference and Decoding}
+
+At inference time, the model produces logits \(l_k\) over the vocabulary, which are transformed into probabilities using a softmax function~\cite{InfeerenceTrainingLLMs}. Decoding strategies determine how the next token is selected from this distribution.
+
+Modern LLMs typically generate text in a left-to-right, token-by-token fashion. For each prefix, the model computes a probability distribution of the next token over a fixed vocabulary. A decoding method defines how the generated token sequence is derived from these probability estimations. Deterministic approaches, select the most probable token at each step, while stochastic approaches introduce controlled randomness~\cite{LLMDecoding}. 2026-02-02-15-30-00.png
+
+Some notable deterministic approaches are: Greedy Search, which is limited to selecting the token with highest probability at each time step or Beam Search~\cite{BeamSearch}, which maintains a beam of the $k$ most probable sequences at each time step, where the hyperparameter $k$ is referred to as the beam width.
+
+Some notable stochastic methods are: Temperature Sampling samples tokens from the estimated next-token distributions. The skewness of distributions can be controlled using a temperature hyperparameter $\tau$, or Top-p Sampling, which only considers the minimal set of most probable tokens that cover a specified percentage p of the distribution.
+
+A central practical constraint is the context window, which limits the total number of tokens that can be processed jointly as input and output. This constraint directly influences prompt design, the amount of contextual information that can be provided, and the feasibility of maintaining conversational state.
+
+\subsection{Prompting and Interaction}
+
+LLMs are typically controlled through prompting, where task instructions and contextual data are encoded in the input. 
+
+Prompt engineering has emerged as an indispensable technique for extending the capabilities of large language models (LLMs) and vision-language models (VLMs). This approach leverages task-specific instructions, known as prompts, to enhance model efficacy without modifying the core model parameters. Rather than updating the model parameters, prompts allow seamless integration of pre-trained models into downstream tasks by eliciting desired model behaviors solely based on the given prompt. 
+
+Prompts can be natural language instructions that provide context to guide the model or learned vector representations that activate relevant knowledge.
+This burgeoning field has enabled success across various applications, from question-answering to common sense reasoning~\cite{prompting}. 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{../../promptEngineering.png}
+    \caption{Visual breakdown of prompt engineering components: LLMs trained on extensive data, instruction and context as pivotal elements shaping the prompt, and a user input interface~\cite{prompting}.}
+    \label{fig:promptEng}
+\end{figure}
+
+Some notable prompt engineering techniques are: Zero-Shot Prompting which offers a paradigm shift in leveraging large LLMs. This technique removes the need for extensive training data, instead relying on carefully crafted prompts that guide the model toward novel tasks, or Few-Shot Prompting which provides models with a few input-output examples to induce an understanding of a given task, unlike zero-shot prompting, where no examples are supplied~\cite{ZeroFewShot}.
+
+Interaction may occur in a single-request mode, in which each task is processed independently, or in a multi-turn mode, where previous exchanges remain within the context window.
+
+Prompt structure plays a significant role in model performance, particularly in technical tasks involving structured inputs, strict output formats, or long problem descriptions. The representation of information affects both the interpretability of the prompt and the effective use of the context window.
+
+\subsection{Application Programming Interfaces}
+
+In practical settings, LLMs are accessed through Application Programming Interfaces (APIs). An application programming interface, or API, enables commercial, military or private entities to make the data and functionality of their applications or systems available to external third-party developers, commercial partners, and internal departments within their own organizations. The usage of a defined interface enables services and products to interact with one another and benefit from each other's information and features. This interface is manipulated and programmed by developers to interact with other software, services or systems; they are not required to understand how a specific API is developed, and neither are the software's end-users. In short, an API is a contract between pieces of applications serving the main software once integrated into the source code of the main application~\cite{APIS}.
+
+An LLM API provides a standardized mechanism for submitting input messages and receiving model outputs, together with configurable inference parameters such as temperature. API-based access introduces operational constraints, including limits on the number of requests or tokens processed within a given time interval, as well as maximum context sizes per interaction. But enables the use of complex LLMs without the need of high computational power. 
+
+\subsection{Relevance to Solver Selection}
+In this research, the aim is to test the potential of LLMs when used for solver selection. Where the prompt is engineered in order to help the LLM evaluate all the characteristics of a problem, to make a decision that is as functional as possible. 
+
+When applied to solver selection, an LLM functions as a decision component that maps problem representations to solver choices. Its performance depends on both theoretical aspects, such as its ability to model complex input-output relationships, and practical factors, including prompt formulation, context management, and API-level parameters.
+
 
 \end{document}

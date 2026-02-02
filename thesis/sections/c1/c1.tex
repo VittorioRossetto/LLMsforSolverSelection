@@ -165,7 +165,7 @@ Each problem is a combination of a \texttt{.mzn} file containing the Minizinc~\c
 \label{sec:metrics}
 In order to actually evaluate model performance, it is necessary to chose a standard metric for answer evaluation, other than that, it is necessary to have a metric to evaluate how an AS controlled by the given LLM would perform against the current Single Best Solver (SBS).
 
-Before analysing the evaluation metrics, we must first define the systems to which these metrics will be applied. Namely, the solvers. In our context, a solver is a program that takes as input the description of a computational problem in a given language and returns an observable outcome providing zero or more solutions for the given problem.  For example, for decision problems, the outcome may be simply ``yes`` or ``no`` while for optimization problems, we might be interested in the best solutions found along the search. An evaluation metric, or performance metric, is a function mapping the outcome of a solver on a given instance to a number representing ``how good`` the solver is on this instance. An evaluation metric is often not just defined by the output of the solver. Indeed, it can be influenced by other actors, such as the computational resources available, the problems on which we evaluate the solver, and the other solvers involved in the evaluation. For example, it is often unavoidable to set a \texttt{timeout} \(\tau\) on the solver's execution when there is no guarantee of termination in a reasonable amount of time (e.g. NP-hard problems). Timeouts make the evaluation feasible but inevitably couple the evaluation metric to the execution context. For this reason, the evaluation of a meta-solver should also consider the scenario that encompasses the solvers to evaluate, the instances used for the validation, and the timeout. Formally, at least for the purposes of this paper, we can define a scenario as a triple (\(\mathcal{I}, \mathcal{S},\tau\)), where: \(\mathcal{I}\) is a set of problem instances, \(\mathcal{S}\) is a set of individual solvers, \(\tau \in (0,+\infty) \) is a timeout such that the outcome of solvers \(s \in \mathcal{S}\) Solver instance \(i \in \mathcal{I}\) is always measured in the time interval [\(0,\tau\)].
+Before analyzing the evaluation metrics, we must first define the systems to which these metrics will be applied. Namely, the solvers. In our context, a solver is a program that takes as input the description of a computational problem in a given language and returns an observable outcome providing zero or more solutions for the given problem.  For example, for decision problems, the outcome may be simply ``yes`` or ``no`` while for optimization problems, we might be interested in the best solutions found along the search. An evaluation metric, or performance metric, is a function mapping the outcome of a solver on a given instance to a number representing ``how good`` the solver is on this instance. An evaluation metric is often not just defined by the output of the solver. Indeed, it can be influenced by other actors, such as the computational resources available, the problems on which we evaluate the solver, and the other solvers involved in the evaluation. For example, it is often unavoidable to set a \texttt{timeout} \(\tau\) on the solver's execution when there is no guarantee of termination in a reasonable amount of time (e.g. NP-hard problems). Timeouts make the evaluation feasible but inevitably couple the evaluation metric to the execution context. For this reason, the evaluation of a meta-solver should also consider the scenario that encompasses the solvers to evaluate, the instances used for the validation, and the timeout. Formally, at least for the purposes of this paper, we can define a scenario as a triple (\(\mathcal{I}, \mathcal{S},\tau\)), where: \(\mathcal{I}\) is a set of problem instances, \(\mathcal{S}\) is a set of individual solvers, \(\tau \in (0,+\infty) \) is a timeout such that the outcome of solvers \(s \in \mathcal{S}\) Solver instance \(i \in \mathcal{I}\) is always measured in the time interval [\(0,\tau\)].
 Evaluating meta-solvers over heterogeneous scenarios (\(\mathcal{I}_1, \mathcal{S}_1,\tau_1\)), (\(\mathcal{I}_2, \mathcal{S}_2,\tau_2\)), \dots, is complicated by the fact that the sets of instances \(\mathcal{I}_k\), the sets of solvers \(\mathcal{S}_k\) and the timeouts \(\tau_k\) can be very different. And things could get even more complicated in scenarios including optimization problems.
 
 For those objectives two separate metrics were chosen
@@ -302,7 +302,7 @@ To this end, we designed an automated testing pipeline that parallelizes executi
 
 Despite preliminary prompt engineering and model filtering, several MiniZinc models, particularly their associated data files, still exceed the providers' rate limits. Since these limits are strict, additional mechanisms were required to prevent limit violations while still allowing evaluation over the complete instance set.
 
-\subsubsection{Script Manipulation}
+\subsubsection{Script Sanitization}
 \label{sec:scriptMan}
 
 The most direct way to address oversized requests is to reduce their length. As the prompt itself was already minimal, this required direct manipulation of the MiniZinc model (\texttt{.mzn}) and data files.
@@ -344,8 +344,13 @@ Its code is inspected. Errors $413$ and $429$ indicate that a rate limit has bee
 
 \section{Experiments}
 
-In this section we are gonna show and explain al the experiments that led to the final choice of the context information and overall setup of the agentic solver.
-\dots structure description \dots
+This section presents the initial experimental study aimed at assessing the potential of LLMs for solver selection and identifying effective prompting strategies and contextual representations.
+
+The first subsection reports results obtained with the most basic configuration, using only raw scripts and instance data, intended to estimate the baseline performance of all candidate LLMs. These results are used to select the five best-performing models for subsequent analysis. The second subsection examines refined prompt formulations based on sanitized scripts and the inclusion of problem descriptions, using a single-request setup in which each instance is handled independently.
+
+The third subsection investigates multi-turn experiments, where prompts are enriched with solver descriptions and combined problem-solver descriptions. This setup leverages conversational state to reduce redundancy and mitigate rate-limit constraints inherent to single-request configurations. From this stage onward, experiments are conducted only with the best-performing model.
+
+The fourth subsection evaluates the use of structured contextual representations derived from a feature extraction tool~\cite{mzn2feat}, in combination with the prompt strategies developed earlier. Finally, the fifth subsection analyzes the effect of sampling temperature tuning by testing multiple temperature values on the five most effective configuration variants identified across the study.
 
 \subsection{Preliminary tests}
 \label{sec:initTests}
@@ -563,7 +568,7 @@ To give results another point of view, the performance of each agentic solver co
 In \Cref{tab:comparisanVarPar} and \Cref{fig:comparisanVarPar} are shown the performance of all the configurations, scored with parallel-solvers evaluation, when put agains single solvers from the open category.
 On the other hand, looking at \Cref{tab:comparisanVarSin} and \Cref{fig:comparisanVarSin}, the resulting score of single-solver evaluation of all the variants is put against all the single solvers from free category.
 
-\subsection{Feature Employment}
+\subsection{Feature Extraction}
 In the last section, we exposed the importance of textual informations, and giving a richer context to the LLM instead of relying on its understanding of a \texttt{.mzn} script. Even though a closed gap was already reached in previous experiments, relying on context information such as the problem description is a strong limitation for the solver, given those data need to be supervised, if not entirely rewritten by hand, due to the high variability, especially when extracted on new problems. This limitation highlights the necessity of a mean to extract informations automatically, in a controlled and predictable way.
 
 Another problem is the one concerning script dimensions: programs with longer scripts need some techniques like sanitization, as previously stated in \Cref{sec:scriptMan}, these type of technique, makes it possible to work with longer scripts and context data. But is still penalizing towards longer problems, raising the risk of hallucination~\cite{LLMhallucination}, due to the forced removal of elements in data, leaving incomplete arrays as input.
@@ -573,23 +578,23 @@ For these tasks we decided to employ a feature-extractor~\cite{mzn2feat}, which 
 \subsubsection{Tool Description}
 The tool mzn2feat is designed to extract a set of 155 features from a MiniZinc model. Of these, 144 are static features derived through syntactic analysis of the source problem instance, while 11 are dynamic features obtained via a short execution of the Gecode solver. Due to the complexity of the MiniZinc language, particularly the presence of control-flow constructs, direct extraction of syntactic features from MiniZinc models is nontrivial. To address this, models are first compiled into FlatZinc, a lower-level language whose syntax is largely a subset of MiniZinc. This translation is performed using the \texttt{mzn2fzn} tool provided within the MiniZinc toolchain.
 
-The compilation step employs Gecode-specific redefinitions of global constraints. This preserves information about the presence and type of global constraints without decomposing them into primitive constraints. Such preservation is relevant because, in the absence of solver-specific redefinitions, certain global constraints (e.g., \texttt{alldifferent}) when decomposed into sets of simpler constraints, from which the original high-level constraint cannot be uniquely reconstructed.
+The compilation step employs Gecode-specific~\cite{Gecode} redefinitions of global constraints. This preserves information about the presence and type of global constraints without decomposing them into primitive constraints. Such preservation is relevant because, in the absence of solver-specific redefinitions, certain global constraints (e.g., \texttt{alldifferent}) when decomposed into sets of simpler constraints, from which the original high-level constraint cannot be uniquely reconstructed.
 
 Static feature extraction from the resulting FlatZinc model is performed using \texttt{fzn2feat}, a parser implemented with Flex and Bison. Dynamic features are obtained by executing the Gecode FlatZinc interpreter (\texttt{fz}) for a fixed time budget of two seconds on the compiled model.
 
-In summary, given a MiniZinc model $M$, the mzn2feat workflow consists of three stages. First, $M$ is translated into a FlatZinc model $F_M$ using Gecode global constraint redefinitions. Second, static features are extracted from $F_M$ via \texttt{fzn2feat}. Third, dynamic features are extracted from $F_M$ through a bounded run of the Gecode interpreter. The static feature extraction stage is applicable to any FlatZinc model, although solver-specific redefinitions that are not recognized may be ignored. The static and dynamic feature extraction procedures are independent, allowing them to be executed in parallel or in arbitrary order. For example, static feature computation may be omitted if the instance is solved during the dynamic feature collection phase.
+In summary, given a MiniZinc model $M$, the mzn2feat workflow consists of three stages. First, $M$ is translated into a FlatZinc model $F_M$ using Gecode global constraint redefinitions. Second, static features are extracted from $F_M$ via \texttt{fzn2feat}. Third, dynamic features are extracted from $F_M$ through a bounded run of the Gecode interpreter. The static feature extraction stage is applicable to any FlatZinc model, although solver-specific redefinitions that are not recognized may be ignored. The static and dynamic feature extraction procedures are independent, allowing them to be executed in parallel or in arbitrary order. For example, static feature computation may be omitted if the instance is solved during the dynamic feature collection phase~\cite{mzn2feat}.
 
 For a better understanding of all of the features, refer to \Cref{tab:FeatDescriptions} for the description by category, and to \ref{lst:mzn2feat-features} as an example output.
 
 \subsubsection{Testing and Results}
-To understand the potential of the feature extractor we tried to use the pretty-print output (like the one in \ref{lst:mzn2feat-features}) combined with the context informations given until now.
-So we tried testing:
+To evaluate the effectiveness of feature-based representations, the pretty-printed \texttt{mzn2feat} output (e.g., \ref{lst:mzn2feat-features}) was incorporated into the prompt under several configurations:
 \begin{itemize}
     \item Only \texttt{mzn2feat} output.
     \item \texttt{mzn2feat} output and problem text description.
     \item \texttt{mzn2feat} output, problem text description and solvers text description.
 \end{itemize}
-And then tried those setup, adding first the \texttt{.mzn} problems only, and finally also the sanitized data scripts (\texttt{.dzn}/\texttt{.json}).
+Each configuration was further extended by incrementally adding the \texttt{.mzn} model and, subsequently, instance data (\texttt{.dzn}/\texttt{.json}).
+
 \begin{table}[!ht]
     \centering
     \resizebox{\textwidth}{!}{
@@ -614,9 +619,9 @@ And then tried those setup, adding first the \texttt{.mzn} problems only, and fi
     \label{tab:combinedFeatVars}
 \end{table}
 
-As displayed in \Cref{tab:combinedFeatVars}, the best performing instances are the ones combining features and textual informations, while adding \texttt{.mzn} or instance data is consistently lowering score, most probably because of some problems explained earlier such ar context rot~\cite{ContextRot}.
+Results are reported in \Cref{tab:combinedFeatVars}. Configurations combining feature representations with textual descriptions consistently achieve higher scores than those including raw \texttt{.mzn} scripts or instance data. The addition of full model code or data is associated with systematic score reductions across both single and parallel evaluations, most probably because of some problems explained earlier such ar context rot~\cite{ContextRot}.
 
-It should also be noted that The best performing variants are all right behind the best performing one from previous tests but still, the best 3 reached an higher score than the second best ``simple'' variant.
+The highest-performing configurations in this group are those combining features with solver and/or problem descriptions. Although these variants do not exceed the best-performing configuration identified in earlier experiments, the top three feature-based setups achieve higher scores than the second-best configuration among the ``simple'' variants.
 
 % \begin{figure}[ht]
 %     \centering
@@ -665,12 +670,9 @@ In the context of problem-solving, temperature can be seen as a trade-off betwee
 
 \subsubsection{Choosing Sampling Temperatures}
 
-Low sampling temperatures are recommended for tasks requiring precision and factual accuracy, such as technical writing, code generation, or question-answering~\cite{PromptingWithLLM}. However, higher temperatures are recommended for tasks requiring creativity, such as writ-
-ing poetry, creating stories, or brainstorming.
+In practical applications, lower temperatures are typically associated with tasks emphasizing consistency and structural correctness, whereas higher temperatures are used in contexts where output diversity is beneficial~\cite{PromptingWithLLM}. Increased stochasticity, however, can also raise the likelihood of incoherent or factually incorrect outputs~\cite{LLMhallucination}. Temperature selection therefore constitutes a trade-off between determinism and diversity.
 
-Higher temperatures also increase the probability of model hallucination where an LLM produces statisticallyprobable responses that are factually incorrect or nonsensical. As a result, optimal temperature selection is also a balance between creativity and hallucination~\cite{LLMhallucination}.
-
-As for tests with features employment, the only large language model that will be employed for testing is \texttt{gpt-oss-120b}. Being the LLM employed via Groq API~\cite{GroqAPI}, we decided to opt for the temperature pre-sets displayed in \Cref{tab:tempSets}, also indicated in the documentations~\cite{GroqAPIdoc}, as a testing ground. 
+Temperature sweeps were conducted only for \texttt{gpt-oss-120b}, the model accessed through the Groq API~\cite{GroqAPI}. The tested values were based on the preset recommendations in the provider documentation~\cite{GroqAPIdoc} (Table~\ref{tab:tempSets}).
 
 \begin{table}[!ht]
     \centering
@@ -688,7 +690,7 @@ As for tests with features employment, the only large language model that will b
 \end{table}
 
 \subsubsection{Testing and Results}
-As anticipated, the tests were all made only using \texttt{gpt-oss-120b} for LLM. Temperature sampling tests were made on the 5 best performing variants, namely:
+As anticipated, the tests were all made only using \texttt{gpt-oss-120b} for LLM. Due to rate-limit constraints, temperature tuning was restricted to the five best-performing configuration variants identified earlier:
 \begin{enumerate}
     \item \texttt{.mzn} scripts, instance data and text description for both solvers and problems.
     \item Features extracted through \texttt{mzn2feat} and text description for both solvers and problems.
@@ -696,6 +698,73 @@ As anticipated, the tests were all made only using \texttt{gpt-oss-120b} for LLM
     \item Features extracted through \texttt{mzn2feat} and text description for problems.
     \item \texttt{.mzn} scripts and instance data
 \end{enumerate}
+\begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{lllll}
+        \hline
+            Variant & Temperature & Single Score & Parallel Score & Closed Gap \\ \hline
+            \textbf{Features + Solvers Descripton} & \textbf{0.3} & \textbf{78.032} & 82.873 & \textbf{0.089} \\ 
+            \textbf{Features + Solvers Descripton} & \textbf{0.7} & \textbf{77.896} & 83.767 & \textbf{0.077} \\ 
+            Scripts + Solvers Descripton + Problem Description & 0.0 & 76.971 & 82.042 & 0.001 \\ 
+            Features + Solvers Descripton + Problem Description & 0.3 & 76.529 & 82.959 & -0.036 \\ 
+            Features + Solvers Descripton & 0.2 & 76.326 & 84.044 & -0.053 \\ 
+            Features + Problem Description & 0.2 & 76.298 & 83.363 & -0.055 \\ 
+            Features + Solvers Descripton + Problem Description & 0.2 & 76.156 & 83.763 & -0.067 \\ 
+            Features + Solvers Descripton + Problem Description & 0.0 & 75.860 & 83.146 & -0.092 \\ 
+            Features + Problem Description & 0.8 & 75.676 & 83.009 & -0.107 \\ 
+            Features + Solvers Descripton & 0.0 & 75.477 & 83.444 & -0.124 \\ 
+            Features + Solvers Descripton + Problem Description & 0.8 & 74.909 & 82.419 & -0.171 \\ 
+            Scripts + Solvers Descripton + Problem Description & 0.3 & 74.907 & 80.042 & -0.171 \\ 
+            Features + Solvers Descripton & 0.8 & 74.464 & 84.421 & -0.208 \\ 
+            Scripts & 0.8 & 74.460 & 83.222 & -0.208 \\ 
+            Scripts & 0.2 & 74.456 & 83.119 & -0.208 \\ 
+            Scripts & 0.7 & 73.459 & 82.540 & -0.291 \\ 
+            Scripts & 0.3 & 73.456 & 84.261 & -0.291 \\ 
+            Scripts & 0.0 & 73.269 & 83.602 & -0.307 \\ 
+            Features + Solvers Descripton + Problem Description & 0.7 & 73.224 & 80.845 & -0.311 \\ 
+            Features + Problem Description & 0.0 & 73.114 & 81.456 & -0.320 \\ 
+            Scripts + Solvers Descripton + Problem Description & 0.8 & 72.894 & 80.875 & -0.338 \\ 
+            Features + Problem Description & 0.3 & 72.678 & 82.393 & -0.356 \\ 
+            Scripts + Solvers Descripton + Problem Description & 0.2 & 71.717 & 82.042 & -0.436 \\ 
+            Features + Problem Description & 0.7 & 71.235 & 81.896 & -0.476 \\ 
+            Scripts + Solvers Descripton + Problem Description & 0.7 & 69.890 & 79.042 & -0.588 \\ \hline
+        \end{tabular}
+    }
+    \caption{Sampling-temperature sweep on the best-performing variants using \texttt{gpt-oss-120b}. ``Scripts'' in ``Variant'' column refers to \texttt{.mzn} script and instance data script. Score columns are calculated as in \Cref{tab:combinedAllLLM}.}
+    \label{tab:combinedFeatVarsTemp}
+\end{table}
 
-The limitation to those variants only, was simply due to resources limitations from the rate limits on the model. 
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{tempHM3.png}
+        \caption{All temperature variants performances in ``Parallel Score'', as calculated in \Cref{tab:combinedAllLLM}.}
+        \label{fig:hmTempPar}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{tempHM1.png}
+        \caption{All feature variants performances in ``Single Score'', as calculated in \Cref{tab:combinedAllLLM}.}
+        \label{fig:hmTempSin}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{tempHMcg.png}
+        \caption{All feature variants performances in ``Closed Gap'', as calculated in \Cref{tab:combinedAllLLM}.}
+        \label{fig:hmTempCg}
+    \end{subfigure}
+    \caption{Heatmaps displaying the performaces of all the combinations of temperatures with the five best performing variants in ``Single Score'' evaluation, ``Parallel Score'' evaluation and ``Closed Gap'' evaluation, all performed using \texttt{gpt-oss-120b}.}
+    \label{fig:hmTemp}
+\end{figure}
+
+As displayed in \Cref{tab:combinedFeatVarsTemp} and in \Cref{fig:hmTemp}, in parallel-solver evaluation, temperature variation produces only moderate changes. Although some configurations yield higher parallel scores than their counterparts with no temperature configuration, all remain below the performance of \texttt{or-tools\_cp-sat-par}.
+
+In the single-solver evaluation, temperature has a more pronounced effect. Configurations based on raw scripts show limited sensitivity to temperature, with only marginal improvements in ``Scripts'' configuration, and a decreas in scores for ``Scripts + Solvers Descripton + Problem Description''. In contrast, feature-based configurations exhibit clearer trends: temperatures in the range 0.2-0.3 are associated with improved single-solver scores. Notably, the ``Features + Solvers Description'' configuration achieves positive closed-gap values at $\tau$=0.3 and $\tau$=0.7, indicating performance above the SBS baseline under those settings, displaying highest scores yet.
+
+
+
 

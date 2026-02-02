@@ -10,7 +10,7 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PY=python3
 SCRIPT_CHAT="$REPO_ROOT/test/benchmark_chat.py"
 SCRIPT_PAR="$REPO_ROOT/test/benchmark_parallel.py"
-MZN2FEAT_FILE="test/data/mzn2feat_all_features.json"
+MZN2FEAT_FILE="$REPO_ROOT/test/data/mzn2feat_all_features.json"
 LOG_DIR="$REPO_ROOT/logs/feature_runs"
 SUMMARY_LOG="$LOG_DIR/summary.log"
 
@@ -22,6 +22,12 @@ if [ "${EXEC_REAL:-0}" = "1" ]; then
 fi
 
 declare -a CONFIGS=(
+
+  # --- fzn_parser output runs (significative solvers only) ---
+  # Without solver descriptions
+  "fznSig|--solver-set significative --use-fzn-parser-outputs"
+  # With solver descriptions
+  "fznSig_Sdesc|--solver-set significative --use-fzn-parser-outputs --include-solver-desc"
 
   # # All feature configurations
   # "featOnly|--features-only --include-features"
@@ -43,16 +49,17 @@ declare -a CONFIGS=(
   # "base|"
   #"base_Pdesc_Sdesc|--include-problem-desc --include-solver-desc"
   # "featOnly_Pdesc|--features-only --include-features --include-problem-desc"
-   "featOnly_Sdesc|--features-only --include-features --include-solver-desc"
+  # "featOnly_Sdesc|--features-only --include-features --include-solver-desc"
   # "featOnly_Pdesc_Sdesc|--features-only --include-features --include-problem-desc --include-solver-desc"
+  
 )
 
 # Temperature sweep for each configuration (passed through to benchmark_chat.py)
 declare -a TEMPS=(
   # "0.2"
   # "0.0"
-  "0.8"
-  "0.3"
+  # "0.8"
+  # "0.3"
   "0.7"
 )
 
