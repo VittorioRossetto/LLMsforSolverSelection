@@ -120,20 +120,29 @@ or nothing at all \ldots
 \clearpage{\pagestyle{empty}\cleardoublepage}
 
 \chapter{Technical Background}
-\rhead[\fancyplain{}{\bfseries Technical Background}]{\fancyplain{}{\bfseries\thepage}}
+\label{chap:techBg}
+\rhead[\fancyplain{}{\bfseries TECHNICAL BACKGROUND}]{\fancyplain{}{\bfseries\thepage}}
 \lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
 \pagenumbering{arabic}
 \subfile{sections/background/background.tex}
 
 \chapter{Methodology}
-\rhead[\fancyplain{}{\bfseries Methodology}]{\fancyplain{}{\bfseries\thepage}}
+\label{chap:methodology}
+\rhead[\fancyplain{}{\bfseries METHODOLOGY}]{\fancyplain{}{\bfseries\thepage}}
 \lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
 \subfile{sections/c1/c1.tex}
 
 \chapter{Experimental Evaluation}
+\label{chap:expEval}
 \rhead[\fancyplain{}{\bfseries EXPERIMENTAL EVALUATION}]{\fancyplain{}{\bfseries\thepage}}
 \lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
 \subfile{sections/experiments/experiments.tex}
+
+\chapter{A FlatZinc Parser: fzn2nl}
+\label{chap:parser}
+\rhead[\fancyplain{}{\bfseries FLATZINC PARSER}]{\fancyplain{}{\bfseries\thepage}}
+\lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
+\subfile{sections/parserDesc/parserDesc.tex}
 
 \chapter*{Appendix}
 \rhead[\fancyplain{}{\bfseries APPENDIX}]{\fancyplain{}{\bfseries\thepage}}
@@ -152,7 +161,7 @@ or nothing at all \ldots
 %%%%%%% Technical Background %%%%%%%
 \bibitem{CPholygrail} R. Bart$\acute{a}$k, ``Constraint Programming: In Pursuit of the Holy Grail'', Jan. 1999.
 \bibitem{holygrail} E. C. Freuder, ``In Pursuit of the Holy Grail'', Constraints, vol. 2, no. 1, pp. 57-61, Apr. 1997, doi: https://doi.org/10.1023/a:1009749006768.
-\bibitem{MiniZinc}N. Nethercote, P. J. Stuckey, R. Becket, S. Brand, G. J. Duck, and G. Tack, "MiniZinc: Towards a Standard CP Modelling Language," Springer eBooks, pp. 529-543, Oct. 2007, doi: https://doi.org/10.1007/978-3-540-74970-7\_38.
+\bibitem{MiniZinc}N. Nethercote, P. J. Stuckey, R. Becket, S. Brand, G. J. Duck, and G. Tack, ``MiniZinc: Towards a Standard CP Modelling Language'', Springer eBooks, pp. 529-543, Oct. 2007, doi: https://doi.org/10.1007/978-3-540-74970-7\_38.
 \bibitem{SeaPearl} F. Chalumeau, I. Coulon, Q. Cappart, and L.-M. Rousseau, ``SeaPearl: A Constraint Programming Solver guided by Reinforcement Learning'', arXiv.org, Apr. 20, 2021. https://arxiv.org/abs/2102.09193
 \bibitem{PortfolioSolvers} R. Amadini, M. Gabbrielli, and J. Mauro, ``Why CP Portfolio Solvers Are (under)Utilized? Issues and Challenges'', Lecture Notes in Computer Science, pp. 349-364, 2015, doi: \url{https://doi.org/10.1007/978-3-319-27436-2_21}.
 \bibitem{AlgPortfolio} Gomes, C.P., Selman, B.: ``Algorithm portfolios''. Artif. Intell. 126(1-2), 43-62 (2001)

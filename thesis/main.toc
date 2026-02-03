@@ -4,41 +4,43 @@
 \contentsline {section}{\numberline {1.1}Constraint Programming}{1}{section.1.1}%
 \contentsline {subsection}{\numberline {1.1.1}CP Solvers}{2}{subsection.1.1.1}%
 \contentsline {subsubsection}{Portfolio Solvers}{2}{section*.3}%
-\contentsline {subsection}{\numberline {1.1.2}MiniZinc}{2}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.2}MiniZinc}{3}{subsection.1.1.2}%
 \contentsline {subsubsection}{Specifying a Problem}{3}{section*.4}%
-\contentsline {subsubsection}{MiniZinc Challenge}{3}{section*.5}%
-\contentsline {section}{\numberline {1.2}Large Language Models}{4}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Inference and Decoding}{4}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Prompting and Interaction}{5}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}Application Programming Interfaces}{6}{subsection.1.2.3}%
-\contentsline {subsection}{\numberline {1.2.4}Relevance to Solver Selection}{6}{subsection.1.2.4}%
-\contentsline {chapter}{\numberline {2}Methodology}{7}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Provider Choice}{7}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Large Language Models Selection}{9}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Prompt General Structure}{9}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Output Structure}{10}{subsection.2.3.1}%
-\contentsline {section}{\numberline {2.4}Problem Selection}{10}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Test Metrics}{11}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Metric for Solver Score}{12}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}Closed Gap}{13}{subsection.2.5.2}%
-\contentsline {section}{\numberline {2.6}Experiment Setup}{14}{section.2.6}%
-\contentsline {subsection}{\numberline {2.6.1}Script Sanitization}{14}{subsection.2.6.1}%
-\contentsline {subsection}{\numberline {2.6.2}Custom Delays}{15}{subsection.2.6.2}%
-\contentsline {chapter}{\numberline {3}Experimental Evaluation}{17}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Preliminary tests}{17}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Single Request Experiments}{19}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Base Setup}{19}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Problem Description}{19}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3}Multi-turn Experiments}{21}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Setup Explanation}{21}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Solvers Description}{22}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Solver Description and Problem Description}{23}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}Basic Tests Evaluation}{23}{subsection.3.3.4}%
-\contentsline {section}{\numberline {3.4}Feature Extraction}{24}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Tool Description}{25}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Testing and Results}{25}{subsection.3.4.2}%
-\contentsline {section}{\numberline {3.5}Sampling Temperature Tuning}{26}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Choosing Sampling Temperatures}{27}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Testing and Results}{28}{subsection.3.5.2}%
-\contentsline {chapter}{Appendix}{31}{chapter*.21}%
-\contentsline {chapter}{Bibliography}{47}{chapter*.48}%
+\contentsline {subsubsection}{A MiniZinc Example}{3}{section*.5}%
+\contentsline {subsubsection}{MiniZinc Challenge}{4}{section*.8}%
+\contentsline {section}{\numberline {1.2}Large Language Models}{5}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Inference and Decoding}{5}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Prompting and Interaction}{6}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Application Programming Interfaces}{7}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Relevance to Solver Selection}{7}{subsection.1.2.4}%
+\contentsline {chapter}{\numberline {2}Methodology}{9}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Provider Choice}{9}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Large Language Models Selection}{11}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Prompt General Structure}{11}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Output Structure}{12}{subsection.2.3.1}%
+\contentsline {section}{\numberline {2.4}Problem Selection}{12}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Test Metrics}{13}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Metric for Solver Score}{14}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Closed Gap}{15}{subsection.2.5.2}%
+\contentsline {section}{\numberline {2.6}Experiment Setup}{16}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Script Sanitization}{16}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}Custom Delays}{17}{subsection.2.6.2}%
+\contentsline {chapter}{\numberline {3}Experimental Evaluation}{19}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Preliminary tests}{19}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Single Request Experiments}{21}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Base Setup}{21}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Problem Description}{21}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Multi-turn Experiments}{23}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Setup Explanation}{23}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Solvers Description}{24}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Solver Description and Problem Description}{25}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Basic Tests Evaluation}{25}{subsection.3.3.4}%
+\contentsline {section}{\numberline {3.4}Feature Extraction}{26}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Tool Description}{27}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Testing and Results}{27}{subsection.3.4.2}%
+\contentsline {section}{\numberline {3.5}Sampling Temperature Tuning}{28}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Choosing Sampling Temperatures}{29}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Testing and Results}{30}{subsection.3.5.2}%
+\contentsline {chapter}{\numberline {4}A FlatZinc Parser: fzn2nl}{33}{chapter.4}%
+\contentsline {chapter}{Appendix}{35}{chapter*.24}%
+\contentsline {chapter}{Bibliography}{51}{chapter*.51}%

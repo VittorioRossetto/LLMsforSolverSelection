@@ -3,7 +3,9 @@
 
 In this chapter, the main intention is to give the reader an initial knowledge base on all the theoretical concepts and all the components that had been utilized in the development of this research.
 
-\dots spiegazione per sezione \dots
+In the first section we will provide a description of constraint programming (CP) itself, starting from a general definition, delving deeper in the description of CP solvers, and then we are gonna provide a brief description of MiniZinc, a CP modelling language, in wich all the tested problems are coded.
+
+In the second section we will provide an high level description of what large language models (LLMs) are and how they work, starting from the implementation of inference and decoding, passing to prompting techniques and prompt engineering, finally explaining the use of Application Programming Interfaces (APIs) as a communication mean.
 
 \section{Constraint Programming}
 Constraint programming (CP) is an emergent software technology for declarative description and effective solving of large, particularly combinatorial, problems especially in areas of planning and scheduling~\cite{CPholygrail}.
@@ -41,6 +43,39 @@ A MiniZinc problem specification has two parts: (a) the model, which describes
 the structure of a class of problems; and (b) the data, which specifies one particular problem within this class. The pairing of a model with a particular data set is a model instance (sometimes abbreviated to instance).
 
 The model and data may be in separate files. Data files can only contain assignments to parameters declared in the model. A user specifies data files on the command line, rather than naming them in the model file, so that the model file is not tied to any particular data file~\cite{MiniZinc}.
+
+\subsubsection{A MiniZinc Example}
+Each MiniZinc model is a sequence of items, which may appear in any order.
+Consider the MiniZinc model and example data for a restricted job shop scheduling problem in \Cref{fig:minizincModelEx} and \Cref{fig:minizincDataEx}.
+
+Line 0 is a comment, introduced by the ``\%'' character.
+
+Lines 1-5 are ``variable declaration items''. Line 1 declares \texttt{size} to be an integer parameter, i.e. a variable that is fixed in the model. Line 20 (in the data file) is an ``assignment item'' that defines the value of \texttt{size} for this instance. Variable declaration items can include assignments, as in line 3. Line 4 declares \texttt{s} to be a 2D array of ``decision variables''. Line 5 is an integer variable with a restricted range. Decision variables are distinguished by the \texttt{var} prefix.
+
+Lines 7-8 show a user-defined ``predicate item'', \texttt{no\_overlap}, which constrains two tasks given by start time and duration so that they do not overlap in time.
+
+Lines 10-17 show a ``constraint item''. It uses the built-in \texttt{forall} to loop over each job, and ensure that: (line 12) the tasks are in order; (line 13) they finish before end; and (lines 14-16) that no two tasks in the same column overlap in time. Multiple constraint items are allowed, they are implicitly conjoined.
+
+Line 19 shows a \texttt{solve item}. Every model must include exactly one solve
+item. Here we are interested in minimizing the end time. We can also maximize
+a variable or just look for any solution (\texttt{solve satisfy}).
+
+There is one kind of MiniZinc item not shown by this example: ``include items''.
+They facilitate the creation of multi-file models and the use of library files~\cite{MiniZinc}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{minizincModelEx.png}
+    \caption{MiniZinc model (\texttt{jobshop.mzn}) for the job shop problem(the portrayed example was taken from ~\cite{MiniZinc}).}
+    \label{fig:minizincModelEx}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{minizincDataEx.png}
+    \caption{MiniZinc data (\texttt{jobshop2x2.dzn}) for the job shop problem (the portrayed example was taken from ~\cite{MiniZinc}).}
+    \label{fig:minizincDataEx}
+\end{figure}
+
 
 \subsubsection{MiniZinc Challenge}
 Comparing constraint programming systems is fraught with difficulty and in reality an impossible task. The reason is that there are so many components to a modern CP system, only some of which are implemented by some systems. To claim that one CP system is ``better'' than another is a bold claim, since there is almost certainly some problem for which the ``worse'' system allows a stronger model, or a better search, and performs better.

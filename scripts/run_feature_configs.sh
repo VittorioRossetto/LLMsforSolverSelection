@@ -25,7 +25,7 @@ declare -a CONFIGS=(
 
   # --- fzn_parser output runs (significative solvers only) ---
   # Without solver descriptions
-  "fznSig|--solver-set significative --use-fzn-parser-outputs"
+  # "fznSig|--solver-set significative --use-fzn-parser-outputs"
   # With solver descriptions
   "fznSig_Sdesc|--solver-set significative --use-fzn-parser-outputs --include-solver-desc"
 
@@ -56,10 +56,10 @@ declare -a CONFIGS=(
 
 # Temperature sweep for each configuration (passed through to benchmark_chat.py)
 declare -a TEMPS=(
-  # "0.2"
-  # "0.0"
-  # "0.8"
-  # "0.3"
+  "0.2"
+  "0.0"
+  "0.8"
+  "0.3"
   "0.7"
 )
 
