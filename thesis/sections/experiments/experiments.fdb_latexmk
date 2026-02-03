@@ -1,0 +1,17 @@
+# Fdb version 4
+["pdflatex"] 1770092488.49225 "/home/vro5/Coding/AgenticSolvers/thesis/sections/experiments/experiments.tex" "sections/experiments/experiments.pdf" "experiments" 1770092488.74309 2
+  "../../main.tex" 0 -1 0 ""
+  "/home/vro5/Coding/AgenticSolvers/thesis/sections/experiments/experiments.tex" 1770092487.56957 36400 5b261d8f55baeff6acf05866df9d9929 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/import/import.sty" 1586645574 6201 0ad8b5da8e12f60a88d546b2198a56f2 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/subfiles/subfiles.cls" 1605478891 1507 57de335d88fde4e5c924dfed577fdb74 ""
+  "/usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf" 1749313668 42213 4e2ca030e8e2640502016e9e45868dcb ""
+  "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1765244711 3635690 72b742e7b2d6d2d3f8eab86c4cae7102 ""
+  "/usr/local/texlive/2025/texmf.cnf" 1765244631.9966 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
+  "sections/experiments/../../main.tex" 1770089090.44159 12813 6d65a007f04074868073f3929297db6f ""
+  "sections/experiments/experiments.aux" 1770092480.21706 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "sections/experiments/experiments.tex" 1770092487.56957 36400 5b261d8f55baeff6acf05866df9d9929 ""
+  (generated)
+  "sections/experiments/experiments.aux"
+  "sections/experiments/experiments.log"
+  "sections/experiments/experiments.pdf"
+  (rewritten before read)
