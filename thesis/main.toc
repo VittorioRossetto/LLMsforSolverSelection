@@ -7,7 +7,7 @@
 \contentsline {subsection}{\numberline {1.1.2}MiniZinc}{2}{subsection.1.1.2}%
 \contentsline {subsubsection}{Specifying a Problem}{3}{section*.4}%
 \contentsline {subsubsection}{MiniZinc Challenge}{3}{section*.5}%
-\contentsline {section}{\numberline {1.2}Large Language Models}{3}{section.1.2}%
+\contentsline {section}{\numberline {1.2}Large Language Models}{4}{section.1.2}%
 \contentsline {subsection}{\numberline {1.2.1}Inference and Decoding}{4}{subsection.1.2.1}%
 \contentsline {subsection}{\numberline {1.2.2}Prompting and Interaction}{5}{subsection.1.2.2}%
 \contentsline {subsection}{\numberline {1.2.3}Application Programming Interfaces}{6}{subsection.1.2.3}%
