@@ -1,6 +1,96 @@
 \documentclass[../../main]{subfiles}
 \begin{document}
 
-From the study explained in the course of \Cref{chap:expEval} some insights emerged, first 
+From the study explained in the course of \Cref{chap:expEval} some important insights emerged. First and foremost, the limitation over token per request and over token in a context window is a problem that we only managed to work around with the techniques explained in \Cref{sec:expSetup}, before adding the use of a feature extractor (\Cref{sec:features}).
+
+Another limitation in LLMs, as briefly explained in \Cref{sec:LLM}, is that they work only with statistic prediction, based on their previous knowledge, this approach clearly creates gaps when the LLM is questioned with a completely new problem. To surpass this limitation, we needed a way to standardize all the problems so that an LLM can evaluate directly based on the problem characteristics.
+
+The use of structured input, extracted from the problem scripts, proved to be a viable solution to these problems, showing the highest score yet. But while the results obtained with \texttt{mzn2feat} proved to be consistent, we still believed there could be a better way to formalize the problem for an LLM.
+
+The idea explained in the course of this chapter, was to create a \texttt{FlatZinc} parser, that taken a file as input, produces a deterministic natural language description of the problem, exposing its main characteristics, in a way that is best suitable for an LLM. 
+
+\dots Descrizione per sezione \dots
+
+\section{Motivation}
+
+Large language models (LLMs) encode vast amounts of pre-trained knowledge in their parameters, but updating them as real-world information evolves remains a challenge. 
+Parametric knowledge of LLMs remains mostly static~\cite{FTLLMallucination} after the pre-training stage, whereas knowledge in the world continues to change. 
+
+Even within the pre-training data, knowledge from recent years can conflict earlier knowledge. But, the auto-regressive training objective biases LLMs toward surfacing more frequent but not necessarily recent knowledge~\cite{knowledgeCutoffsLLM}. This problem surfaces primarily when the LLM is confronted with more indirect questions, given that updates in real world lead to more nuanced and complex inference-time errors (\Cref{fig:indirectProbing})~\cite{MemorizationVSReasoning}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\linewidth]{IndirectProbing.png}
+    \caption{Example of LLM that is continued pre-trained on updated knowledge surfacing updates in the direct probing but failing under indirect probing settings (example image was taken from~\cite{MemorizationVSReasoning}).}
+    \label{fig:indirectProbing}
+\end{figure}
+
+In our setup, the LLM acts as the reasoning brain behind solver selection, so we need a way to give it a description of the problem that is as direct as possible. While not favoring ``old'' problems. 
+
+The most simple solution under those constraints is to create a deterministic description of each problem, providing enough knowledge for reasonable choice while hiding most recognizable traits of well-known problems.
+
+Large Language Models (LLMs) have demonstrated remarkable capabilities in natural language understanding and generation. However, they often struggle with complex reasoning tasks and are prone to hallucination. And while structured data, rich in logical and relational information, has the potential to enhance the reasoning abilities of LLMs. Still, its integration poses a challenge due to the risk of overwhelming LLMs with excessive tokens and irrelevant context information~\cite{LLMwStructData}.
+
+Those information lead to the development of \texttt{fzn2nl}, a parser that taken as input a \texttt{FlatZinc} file, directly translates its parameters to a structured natural language description of the given problem.
+
+\section{System Architecture}
+\label{sec:parserArch}
+The production of a viable natural language description with \texttt{fzn2nl} is made through four main phases: compilation, first of all, we need to translate the MiniZinc problem script and its relative data (\texttt{.dzn} or \texttt{.json}) into FlatZinc, then the produced \texttt{.fzn} is tokenized, to extract each of its single components, those components are parsed to understand their inner meaning, and finally the final natural language description is generated out of this main components.
+
+\subsection{Compilation}
+\label{sec:parserCompilation}
+In order to compile FlatZinc files, it is necessary to use the ``MiniZinc Compiler''~\cite{mznCompiler}. 
+
+Constraint problems formulated in MiniZinc are solved by translating them to a simpler, solver-specific subset of MiniZinc, called FlatZinc.
+The complexities in the translation arise from the need to simultaneously (a) unroll array comprehensions (and other loops), (b) replace predicate and function applications by their body, and (c) flatten expressions.
+
+% Once common subexpression elimination (CSE) is taken into account, it's not feasible to perform these separately. In order to have names for common subexpressions, expressions need to be flattened. And in order to take advantage of functions, for CSE we cannot replace predicate and function applications without flattening to generate these names. And without replacing predicate and function application by their body we are unable to see all the loops to unroll.
+
+The translation algorithm generates a flat model equivalent to the original model as a global set of constraints $S$. The translation uses full reification to create the model~\cite{MiniZincwFunctions}. Common subexpression elimination is implemented using a technique similar to hash-consing in Lisp~\cite{LISP}. 
+
+\subsubsection{FlatZinc Limitation}
+\label{sec:fznLimits}
+As previously stated, Flatzinc is solver-specific, which is a clear limitation in our use case. FlatZinc solvers specify the set of global constraints they handle through dedicated propagators. When a given global constraint (e.g., \texttt{alldifferent} or \texttt{circuit}) is supported natively by the target solver, it is preserved in the compiled FlatZinc model and processed using the solver's specialized filtering algorithms. Otherwise, the MiniZinc compiler replaces the global constraint with an equivalent decomposition into more primitive constraints expressed in the solver's supported constraint language.
+
+As a consequence, constraint programming solvers such as Gecode~\cite{Gecode} typically retain many global constraints in their high-level form, exploiting dedicated propagation mechanisms. In contrast, solvers based on alternative paradigms, such as linear programming or mixed-integer linear programming (e.g., Gurobi~\cite{Gurobi}), require these constraints to be reformulated as sets of linear constraints, thereby losing the original global structure in favor of a representation compatible with their underlying solving technology~\cite{CPvsMILPsolvers}.
+
+Given that, by translating a FlatZinc file with a specific solver, and serving its analysis to an LLM, we are indirectly pushing the LLM towards the solver used for translation, or one of the same category, therefore invalidating the reasoning process.
+
+\subsubsection{Custom Compiler}
+In order to solve the problem of solver-specific translation, we had to modify the MiniZinc compiler, in order to produce a pseudo-FlatZinc that is not directly dependant on solvers, at the cost of not being actually solvable.
+
+As stated in \Cref{sec:fznLimits}, the difference between the use of one solver over the other is relative to the different propagation of global constraint. 
+
+So, in order to eliminate this distinction, we simply eliminated propagation as a whole, changing MiniZinc compiler code to completely avoid the substitution of predicates by their body. 
+
+For example:
+
+\begin{lstlisting}
+include "arg_max.mzn";
+predicate fzn_maximum_arg_bool_opt(array [int] of var opt bool: x, var int: z) =
+    let {
+        array [index_set(x)] of var 0..2: dx = array1d(index_set(x), [(xi + 1) default 0 | xi in x]);
+    } in maximum_arg(dx, z);
+\end{lstlisting}
+
+Became:
+
+\begin{lstlisting}
+include "arg_max.mzn";
+predicate fzn_maximum_arg_bool_opt(array [int] of var opt bool: x, var int: z);  
+\end{lstlisting}
+
+Clearly, with this change, the FlatZinc is no longer directly solvable, but since our only need is for it to be non solver-specific and understandable when ``explained'' to an LLM, this is not a problem.
+
+
+
+
+
+
+
+
+
+
+
 
 \end{document}

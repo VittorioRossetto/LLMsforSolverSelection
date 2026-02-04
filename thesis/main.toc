@@ -7,12 +7,12 @@
 \contentsline {subsection}{\numberline {1.1.2}MiniZinc}{3}{subsection.1.1.2}%
 \contentsline {subsubsection}{Specifying a Problem}{3}{section*.4}%
 \contentsline {subsubsection}{A MiniZinc Example}{3}{section*.5}%
-\contentsline {subsubsection}{MiniZinc Challenge}{4}{section*.8}%
+\contentsline {subsubsection}{MiniZinc Challenge}{5}{section*.8}%
 \contentsline {section}{\numberline {1.2}Large Language Models}{5}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Inference and Decoding}{5}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.1}Inference and Decoding}{6}{subsection.1.2.1}%
 \contentsline {subsection}{\numberline {1.2.2}Prompting and Interaction}{6}{subsection.1.2.2}%
 \contentsline {subsection}{\numberline {1.2.3}Application Programming Interfaces}{7}{subsection.1.2.3}%
-\contentsline {subsection}{\numberline {1.2.4}Relevance to Solver Selection}{7}{subsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.2.4}Relevance to Solver Selection}{8}{subsection.1.2.4}%
 \contentsline {chapter}{\numberline {2}Methodology}{9}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Provider Choice}{9}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Large Language Models Selection}{11}{section.2.2}%
@@ -42,5 +42,10 @@
 \contentsline {subsection}{\numberline {3.5.1}Choosing Sampling Temperatures}{29}{subsection.3.5.1}%
 \contentsline {subsection}{\numberline {3.5.2}Testing and Results}{30}{subsection.3.5.2}%
 \contentsline {chapter}{\numberline {4}A FlatZinc Parser: fzn2nl}{33}{chapter.4}%
-\contentsline {chapter}{Appendix}{35}{chapter*.24}%
-\contentsline {chapter}{Bibliography}{51}{chapter*.51}%
+\contentsline {section}{\numberline {4.1}Motivation}{33}{section.4.1}%
+\contentsline {section}{\numberline {4.2}System Architecture}{34}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Compilation}{35}{subsection.4.2.1}%
+\contentsline {subsubsection}{FlatZinc Limitation}{35}{section*.25}%
+\contentsline {subsubsection}{Custom Compiler}{35}{section*.26}%
+\contentsline {chapter}{Appendix}{37}{chapter*.27}%
+\contentsline {chapter}{Bibliography}{53}{chapter*.54}%

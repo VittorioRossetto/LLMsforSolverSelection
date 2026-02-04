@@ -208,6 +208,7 @@ In \Cref{tab:comparisanVarPar} and \Cref{fig:comparisanVarPar} are shown the per
 On the other hand, looking at \Cref{tab:comparisanVarSin} and \Cref{fig:comparisanVarSin}, the resulting score of single-solver evaluation of all the variants is put against all the single solvers from free category.
 
 \section{Feature Extraction}
+\label{sec:features}
 In the last sections, we exposed the importance of textual information, and giving a richer context to the LLM instead of relying on its understanding of a \texttt{.mzn} script. Even though a positive closed gap was already reached in previous experiments, relying on context information such as the problem description is a strong limitation for the solver, given those data need to be supervised, if not entirely rewritten by hand, due to the high variability, especially when extracted on new problems. This limitation highlights the necessity of a mean to extract information automatically, in a controlled and predictable way.
 
 Another problem is the one concerning script dimensions: programs with longer scripts need some techniques like sanitization, as previously stated in \Cref{sec:scriptMan}, these type of technique, makes it possible to work with longer scripts and context data. But is still penalizing towards longer problems, raising the risk of hallucination~\cite{LLMhallucination}and context rot~\cite{ContextRot}, due to the forced removal of elements in data, leaving incomplete arrays as input.
@@ -317,11 +318,12 @@ An ablation study on temperature was conducted only for \texttt{gpt-oss-120b}, t
     \begin{tabular}{lll}
     \hline
         Scenario & Temp & Comments \\ \hline
-        Factual Q\&A & 0.2 & Keeps dates \& numbers stable \\ 
-        Data extraction (JSON) & 0.0 & Deterministic keys/values \\ 
-        Creative copywriting & 0.8 & Vivid language, fresh ideas \\ 
+        Data extraction (JSON) & 0.0 & Deterministic keys/values \\
+        Factual Q\&A & 0.2 & Keeps dates \& numbers stable \\         
+        Long-form code & 0.3 & Fewer hallucinated APIs \\ 
         Brainstorming list & 0.7 & Variety without nonsense \\ 
-        Long-form code & 0.3 & Fewer hallucinated APIs \\ \hline
+        Creative copywriting & 0.8 & Vivid language, fresh ideas \\ 
+        \hline
     \end{tabular}
     \caption{Temperature setting suggestions from Groq documentation~\cite{GroqAPIdoc}. In the leftmost column is presented the basic scenario in wich the following settings are more indicated, followed by the sampling temperature value, and finally a short comment on the expected behaviour from the LLM with the given setting.}
     \label{tab:tempSets}

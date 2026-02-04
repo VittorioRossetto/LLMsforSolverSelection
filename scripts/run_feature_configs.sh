@@ -56,9 +56,9 @@ declare -a CONFIGS=(
 
 # Temperature sweep for each configuration (passed through to benchmark_chat.py)
 declare -a TEMPS=(
-  "0.2"
-  "0.0"
-  "0.8"
+  # "0.2"
+  # "0.0"
+  # "0.8"
   "0.3"
   "0.7"
 )
