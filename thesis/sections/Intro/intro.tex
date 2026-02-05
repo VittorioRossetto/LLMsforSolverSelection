@@ -1,6 +1,16 @@
 \documentclass[../../main]{subfiles}
 \begin{document}
 
-This is the introduction
+This thesis presents a systematic investigation of the use of Large Language Models (LLMs) within the domain of Constraint Programming (CP), more specifically on the task of solver selection. The objective is to assess whether general-purpose language models can effectively support or enhance decision processes that have traditionally relied on handcrafted algorithmic strategies.
+
+Large Language Models are neural network architectures trained on large-scale text corpora to model statistical regularities in natural language. They represent the outcome of sustained advances in natural language processing and machine learning, and have recently demonstrated strong performance across a wide range of reasoning and generation tasks. Despite their broad adoption in general-purpose applications, their role in specialized technical domains such as constraint programming, and specifically in automated solver selection, remains unexplored.
+
+Constraint Programming is a declarative paradigm for solving combinatorial problems, particularly those arising in planning, scheduling, and resource allocation. Problems are modeled in terms of variables, domains, and constraints, and are processed by ``solvers'', i.e., software systems that search for assignments satisfying the constraints and, in optimization settings, improving a given objective function. Different solvers rely on distinct underlying technologies and heuristics, leading to performance variability across problem classes. Selecting an appropriate solver for a given instance is therefore a central challenge.
+
+The research presented in this thesis investigates the concept of ``agentic solvers'', in which LLMs are used as decision-making components to orchestrate a portfolio of solvers. This idea is inspired by portfolio-based approaches, where multiple solvers are available and a central strategy determines which ones to execute for a given instance. Traditional portfolio methods rely on complex, domain-specific algorithms. In contrast, this work explores whether general-purpose LLMs, given suitable contextual information, can approximate or surpass these approaches without task-specific retraining.
+
+The structure of the thesis is as follows. Chapter~1 provides the technical background required for the remainder of the work, covering constraint programming, solver technologies, and the fundamentals of LLMs and their interaction through APIs. Chapter~2 describes the experimental methodology, evaluation metrics, and design choices underlying the study. Chapter~3 presents the core experimental results, beginning with baseline tests based on minimal problem representations, and progressively enriching the context with textual descriptions, structured features extracted from problem instances, and finally the implementation of temperature tuning. Chapter~4 introduces a complementary tool developed during this research, \texttt{fzn2nl}, which translates FlatZinc models into natural language descriptions, and finally we tested LLM performance when operating directly on such generated representations.
+
+
 
 \end{document}

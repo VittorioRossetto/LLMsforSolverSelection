@@ -21,11 +21,9 @@ As stated by E. C. Freuder thirty years ago,
 ``Constraint Programming represents one of the closest approaches computer science has yet made to the Holy Grail of programming: the user states the problem, the computer solves it.''~\cite{holygrail}.
 \end{displayquote}
 
-\subsection{CP Solvers}
+\subsection{Solvers}
 In the courses of this research paper, we will often talk about ``Solvers''.
-A CP solver is defined as a system or program that manipulates constraints to find solutions that satisfy specified conditions. It can utilize various approaches to enhance flexibility and customization within specific constraint domains, particularly finite domains.
-
-% So, given that a CP model is a tuple $\langle X, D, C, O \rangle$ where $X$ is the set of variables we are trying to assign a value to, $D(x)$ is the domain associated with each variable $x \in X$, $C$ is the set of constraints that the variables must respect, and $O$ is an objective function, the goal of the solver is to assign a value for each variable $x \in X$ from $D(x)$ that satisfies all the constraints in $C$ and optimizes the objective function $O$~\cite{SeaPearl}.
+A solver is defined as a system or program that manipulates constraints to find solutions that satisfy specified conditions. It can utilize various approaches to enhance flexibility and customization within specific constraint domains, particularly finite domains.
 
 So, given that a CP model can be defined as a tuple
 \[
@@ -47,6 +45,18 @@ s^* = \arg\min_{s \in S} O(s) \quad \text{or} \quad s^* = \arg\max_{s \in S} O(s
 \)
 depending on whether the problem is a minimization or maximization task.
 
+Different solver families address problems of the above form using distinct mathematical abstractions and algorithmic techniques.
+
+\subsubsection{Constraint Programming (CP) solvers.}
+CP solvers operate directly on variables with finite or structured domains and a heterogeneous set of constraints. Their core mechanisms include constraint propagation, which removes inconsistent values from variable domains, and systematic search, typically implemented as backtracking with heuristics. CP solvers natively support rich global constraints, for which specialized filtering algorithms exploit problem structure~\cite{CPvsMILPsolvers}. A well known example of a CP solver is Gecode~\cite{Gecode}.
+
+\subsubsection{Linear Programming (LP) solvers.}
+LP solvers address problems where variables are continuous and constraints are linear equalities or inequalities. A Linear Programming model, solver rely on algorithms such as the simplex method or interior-point methods~\cite{simplexintPLP}. LP solvers do not directly handle discrete domains or non-linear/global constraints; when applied to CP-style models, constraints must be reformulated into linear form and integrality is typically relaxed. An example of a well known LP solver could be HiGHS~\cite{HiGHS}
+
+\subsubsection{Mixed-Integer Linear Programming (MILP) solvers.}
+MILP solvers extend LP by allowing some or all variables to be restricted to integer domains.
+
+They combine LP relaxations with branch-and-bound~\cite{BBAlg} or branch-and-cut~\cite{BCAlg} search. MILP solvers are well suited for problems with strong linear structure and arithmetic relations but may require the decomposition or linearization of high-level combinatorial constraints. Global constraints common in CP must therefore be encoded using auxiliary variables and linear constraints. An example of a MILP solver is Gurobi~\cite{Gurobi}.
 
 \subsubsection{Portfolio Solvers}
 Solving combinatorial search problems is hard, and there exist nowadays plenty of techniques and constraint solvers for performing this task. It has become clear that different solvers are better when solving different problem instances, even within the same problem class. It has also been shown that a single, arbitrarily efficient solver can be significantly outperformed by using a portfolio of possibly on-average slower solvers~\cite{PortfolioSolvers}.

@@ -6,8 +6,11 @@
                                         %report: thesis/book style
 \documentclass[12pt,a4paper,openright,twoside]{book}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% font encoding
+\usepackage[T1]{fontenc}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% language package
-\usepackage[english]{babel}
+\usepackage[english,italian]{babel}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% input encoding
 \usepackage[latin1]{inputenc}
@@ -89,6 +92,11 @@
 \setlength{\headheight}{14.49998pt}
 \addtolength{\topmargin}{-2.49998pt}
 
+% Prevent duplicate hyperref page anchors across unnumbered title pages
+\hypersetup{pageanchor=false}
+
+\input{sections/frontPage/frontespizio.tex}
+
 \begin{titlepage}
 \thispagestyle{empty}
 \topmargin=6.5cm
@@ -100,6 +108,8 @@ or nothing at all \ldots
 \newpage
 \clearpage{\pagestyle{empty}\cleardoublepage}
 \end{titlepage}
+
+\hypersetup{pageanchor=true}
 
 \pagenumbering{roman}
 \chapter*{Introduction}
@@ -164,6 +174,10 @@ or nothing at all \ldots
 \bibitem{holygrail} E. C. Freuder, ``In Pursuit of the Holy Grail'', Constraints, vol. 2, no. 1, pp. 57-61, Apr. 1997, doi: https://doi.org/10.1023/a:1009749006768.
 \bibitem{MiniZinc}N. Nethercote, P. J. Stuckey, R. Becket, S. Brand, G. J. Duck, and G. Tack, ``MiniZinc: Towards a Standard CP Modelling Language'', Springer eBooks, pp. 529-543, Oct. 2007, doi: https://doi.org/10.1007/978-3-540-74970-7\_38.
 \bibitem{SeaPearl} F. Chalumeau, I. Coulon, Q. Cappart, and L.-M. Rousseau, ``SeaPearl: A Constraint Programming Solver guided by Reinforcement Learning'', arXiv.org, Apr. 20, 2021. https://arxiv.org/abs/2102.09193
+\bibitem{simplexintPLP} Szabo, Zsuzsanna \& Kovacs, Marta. ``ON INTERIOR-POINT METHODS AND SIMPLEX METHOD IN LINEAR PROGRAMMING''. Analele Stiintifice ale Universitatii Ovidius Constanta, Seria Matematica. 11. (2003).
+\bibitem{HiGHS} ``HiGHS - High-performance parallel linear optimization software'', Highs.dev, 2024. https://highs.dev/
+\bibitem{BBAlg} D. R. Morrison, S. H. Jacobson, J. J. Sauppe, and E. C. Sewell, ``Branch-and-bound algorithms: A survey of recent advances in searching, branching, and pruning'', Discrete Optimization, vol. 19, pp. 79-102, Feb. 2016, doi: https://doi.org/10.1016/j.disopt.2016.01.005.
+\bibitem{BCAlg} J. Wang and Y. Yang, ``Branch-cut algorithm with fast search ability for the shortest branch-cuts based on modified GA'', Journal of Modern Optics, vol. 66, no. 5, pp. 473-485, Nov. 2018, doi: https://doi.org/10.1080/09500340.2018.1548663.
 \bibitem{PortfolioSolvers} R. Amadini, M. Gabbrielli, and J. Mauro, ``Why CP Portfolio Solvers Are (under)Utilized? Issues and Challenges'', Lecture Notes in Computer Science, pp. 349-364, 2015, doi: \url{https://doi.org/10.1007/978-3-319-27436-2_21}.
 \bibitem{AlgPortfolio} Gomes, C.P., Selman, B.: ``Algorithm portfolios''. Artif. Intell. 126(1-2), 43-62 (2001)
 \bibitem{AlgSelProb} Rice, J.R.: ``The algorithm selection problem''. Adv. Comput. 15, 65-118 (1976)
