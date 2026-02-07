@@ -1,13 +1,13 @@
 \documentclass[../../main]{subfiles}
 \begin{document}
 
-From the study explained in the course of \Cref{chap:expEval} some important insights emerged. First and foremost, the limitation over token per request and over token in a context window is a problem that we only managed to work around with the techniques explained in \Cref{sec:expSetup}, before adding the use of a feature extractor (\Cref{sec:features}).
+From the study explained in the course of \Cref{chap:expEval} some important insights emerged. First and foremost, the limitation over token per request and over token per context window is a problem that we only managed to work around with the techniques explained in \Cref{sec:expSetup}, before adding the use of a feature extractor (\Cref{sec:features}).
 
 Another limitation in LLMs, as briefly explained in \Cref{sec:LLM}, is that they work only with statistic prediction, based on their previous knowledge, this approach clearly creates gaps when the LLM is questioned with a completely new problem. To surpass this limitation, we needed a way to standardize all the problems so that an LLM can evaluate directly based on the problem characteristics.
 
-The use of structured input, extracted from the problem scripts, proved to be a viable solution to these problems, showing the highest score yet. But while the results obtained with \texttt{mzn2feat} proved to be consistent, we still believed there could be a better way to formalize the problem for an LLM.
+The use of structured input, extracted from the problem scripts, proved to be a viable solution to these problems, showing the highest score yet. But while the results obtained with \texttt{mzn2feat} proved to be consistent, we still believed there could be a better way to formalize MiniZinc problems for an LLM.
 
-The idea explained in the course of this chapter, was to create a \texttt{FlatZinc} parser, that taken a file as input, produces a deterministic natural language description of the problem, exposing its main characteristics, in a way that is best suitable for an LLM. 
+The development of \texttt{fzn2nl}~\cite{fzn2nl}, was born from the idea to create a \texttt{FlatZinc} parser, that taken a file as input, produces a deterministic natural language description of the problem, exposing its main characteristics, in a way that is best suitable for an LLM. 
 
 \dots Descrizione per sezione \dots
 
@@ -16,39 +16,35 @@ The idea explained in the course of this chapter, was to create a \texttt{FlatZi
 Large language models (LLMs) encode vast amounts of pre-trained knowledge in their parameters, but updating them as real-world information evolves remains a challenge. 
 Parametric knowledge of LLMs remains mostly static~\cite{FTLLMallucination} after the pre-training stage, whereas knowledge in the world continues to change. 
 
-Even within the pre-training data, knowledge from recent years can conflict earlier knowledge. But, the auto-regressive training objective biases LLMs toward surfacing more frequent but not necessarily recent knowledge~\cite{knowledgeCutoffsLLM}. This problem surfaces primarily when the LLM is confronted with more indirect questions, given that updates in real world lead to more nuanced and complex inference-time errors (\Cref{fig:indirectProbing})~\cite{MemorizationVSReasoning}.
+Even within the pre-training data, knowledge from recent years can conflict earlier knowledge. But, the auto-regressive training objective biases LLMs toward surfacing more frequent but not necessarily recent knowledge~\cite{knowledgeCutoffsLLM}. This problem surfaces primarily when the LLM is confronted with more indirect questions, given that updates in real world lead to nuanced and complex changings in model knowledge (\Cref{fig:indirectProbing})~\cite{MemorizationVSReasoning}.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.5\linewidth]{IndirectProbing.png}
-    \caption{Example of LLM that is continued pre-trained on updated knowledge surfacing updates in the direct probing but failing under indirect probing settings (example image was taken from~\cite{MemorizationVSReasoning}).}
+    \caption{Example of LLM that is pre-trained on updated knowledge surfacing updates in the direct probing but failing under indirect probing settings (example image was taken from~\cite{MemorizationVSReasoning}).}
     \label{fig:indirectProbing}
 \end{figure}
 
-In our setup, the LLM acts as the reasoning brain behind solver selection, so we need a way to give it a description of the problem that is as direct as possible. While not favoring ``old'' problems. 
+In our setup, the LLM acts as the reasoning brain behind solver selection, so we need a way to give it a description of the problem that is as direct as possible, to actively avoid favoring ``old'' problems. 
 
-The most simple solution under those constraints is to create a deterministic description of each problem, providing enough knowledge for reasonable choice while hiding most recognizable traits of well-known problems.
+The most simple solution under those constraints is to create a deterministic description of each problem, providing enough knowledge for reasonable choice while hiding most recognizable traits of well-known problems (retrievable from the code).
 
 Large Language Models (LLMs) have demonstrated remarkable capabilities in natural language understanding and generation. However, they often struggle with complex reasoning tasks and are prone to hallucination. And while structured data, rich in logical and relational information, has the potential to enhance the reasoning abilities of LLMs. Still, its integration poses a challenge due to the risk of overwhelming LLMs with excessive tokens and irrelevant context information~\cite{LLMwStructData}.
 
 Those information lead to the development of \texttt{fzn2nl}, a parser that taken as input a \texttt{FlatZinc} file, directly translates its parameters to a structured natural language description of the given problem.
 
-\section{System Architecture}
-\label{sec:parserArch}
-The production of a viable natural language description with \texttt{fzn2nl} is made through four main phases: compilation, first of all, we need to translate the MiniZinc problem script and its relative data (\texttt{.dzn} or \texttt{.json}) into FlatZinc, then the produced \texttt{.fzn} is tokenized, to extract each of its single components, those components are parsed to understand their inner meaning, and finally the final natural language description is generated out of this main components.
-
-\subsection{Compilation}
+\section{FlatZinc Compiler}
 \label{sec:parserCompilation}
 In order to compile FlatZinc files, it is necessary to use the ``MiniZinc Compiler''~\cite{mznCompiler}. 
 
-Constraint problems formulated in MiniZinc are solved by translating them to a simpler, solver-specific subset of MiniZinc, called FlatZinc.
+Constraint problems formulated in MiniZinc are solved by translating them to a simpler, solver-specific subset of MiniZinc, called FlatZinc, with the use of the ``MiniZinc Compiler''~\cite{mznCompiler}.
 The complexities in the translation arise from the need to simultaneously (a) unroll array comprehensions (and other loops), (b) replace predicate and function applications by their body, and (c) flatten expressions.
 
 % Once common subexpression elimination (CSE) is taken into account, it's not feasible to perform these separately. In order to have names for common subexpressions, expressions need to be flattened. And in order to take advantage of functions, for CSE we cannot replace predicate and function applications without flattening to generate these names. And without replacing predicate and function application by their body we are unable to see all the loops to unroll.
 
-The translation algorithm generates a flat model equivalent to the original model as a global set of constraints $S$. The translation uses full reification to create the model~\cite{MiniZincwFunctions}. Common subexpression elimination is implemented using a technique similar to hash-consing in Lisp~\cite{LISP}. 
+The translation algorithm generates a flat model equivalent to the original model as a global set of constraints. The translation uses full reification to create the model~\cite{MiniZincwFunctions}. Common subexpression elimination is implemented using a technique similar to hash-consing in Lisp~\cite{LISP}. 
 
-\subsubsection{FlatZinc Limitation}
+\subsection{FlatZinc Limitation}
 \label{sec:fznLimits}
 As previously stated, Flatzinc is solver-specific, which is a clear limitation in our use case. FlatZinc solvers specify the set of global constraints they handle through dedicated propagators. When a given global constraint (e.g., \texttt{alldifferent} or \texttt{circuit}) is supported natively by the target solver, it is preserved in the compiled FlatZinc model and processed using the solver's specialized filtering algorithms. Otherwise, the MiniZinc compiler replaces the global constraint with an equivalent decomposition into more primitive constraints expressed in the solver's supported constraint language.
 
@@ -56,8 +52,8 @@ As a consequence, constraint programming solvers such as Gecode~\cite{Gecode} ty
 
 Given that, by translating a FlatZinc file with a specific solver, and serving its analysis to an LLM, we are indirectly pushing the LLM towards the solver used for translation, or one of the same category, therefore invalidating the reasoning process.
 
-\subsubsection{Custom Compiler}
-In order to solve the problem of solver-specific translation, we had to modify the MiniZinc compiler, in order to produce a pseudo-FlatZinc that is not directly dependant on solvers, at the cost of not being actually solvable.
+\subsection{Custom Compiler}
+In order to solve the problem of solver-specific translation, we had to modify the MiniZinc compiler, to produce a pseudo-FlatZinc that is not directly dependant on solvers, at the cost of not being actually solvable.
 
 As stated in \Cref{sec:fznLimits}, the difference between the use of one solver over the other is relative to the different propagation of global constraint. 
 
@@ -65,7 +61,7 @@ So, in order to eliminate this distinction, we simply eliminated propagation as 
 
 For example:
 
-\begin{lstlisting}
+\begin{lstlisting}[style=minizincstyle]
 include "arg_max.mzn";
 predicate fzn_maximum_arg_bool_opt(array [int] of var opt bool: x, var int: z) =
     let {
@@ -75,12 +71,163 @@ predicate fzn_maximum_arg_bool_opt(array [int] of var opt bool: x, var int: z) =
 
 Became:
 
-\begin{lstlisting}
+\begin{lstlisting}[style=minizincstyle]
 include "arg_max.mzn";
 predicate fzn_maximum_arg_bool_opt(array [int] of var opt bool: x, var int: z);  
 \end{lstlisting}
 
 Clearly, with this change, the FlatZinc is no longer directly solvable, but since our only need is for it to be non solver-specific and understandable when ``explained'' to an LLM, this is not a problem.
+
+For the sake of explanation, we'll use the job shop problem as an example, as defined in \Cref{fig:minizincModelEx} and \Cref{fig:minizincDataEx}. Using the compiler as defined in this section, the resulting FlatZinc is the one displayed in \Cref{fig:fznExample}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{fznExample.png}
+    \caption{FlatZinc resulting from the compilation of the program in \Cref{fig:minizincModelEx} with the data in \Cref{fig:minizincDataEx}, using the compiler defined in \Cref{sec:parserCompilation}}
+    \label{fig:fznExample}
+\end{figure}
+
+\section{System Architecture}
+\label{sec:fzn2nlArch}
+The production of a viable natural language description with \texttt{fzn2nl} is made through a single-pass pipeline: first of all, the program takes a FlatZinc file as input, then this file is parsed, in order to extract variables, arrays, constraints, solve directive, and search annotations (when present) into an internal model object. The program then computes descriptive statistics on both variables and constraints, and reconstruct the objective structure. All of the parsed artifacts are mapped into readable sentences and grouped summaries. Finally, the system produces a report as output, consisting of problem description, variables description and constraint description.
+
+\subsection{Parser}
+The architecture of the implemented parser for this project, follows a modular design, separating data representation from syntactic extraction and higher-level semantic enrichment. 
+
+\subsubsection{Core Data Structures}
+
+The central abstraction is the \texttt{FlatZincModel} class, which acts as a container for all extracted elements. It maintains dictionaries for scalar variables and arrays, a list of constraints, a map of definition dependencies, and metadata concerning the problem type, objective function, and search annotation.
+
+Scalar variables are stored in a dictionary indexed by name. Each entry records the declared type (integer or Boolean), an optional domain, and an origin flag distinguishing user-declared variables from compiler-introduced ones. Domains are represented by an immutable \texttt{Domain} data class containing minimum and maximum bounds, together with a derived mean value. 
+
+Arrays are stored separately from scalar variables. For each array, the parser records element type, whether elements are decision variables, index range length (when statically inferable), and the list of items when explicitly provided.
+
+Constraints are stored as structured dictionaries containing the constraint type, argument string, annotation string, reconstructed textual rendering, and any variables declared via \texttt{defines\_var} annotations, preserving sufficient information for both textual reporting and dependency reconstruction.
+
+\subsubsection{Parsing Strategy}
+
+The parser operates in a single pass over the file contents, using regular expressions for high-level pattern detection and auxiliary scanning procedures for balanced parenthesis handling. The overall workflow can be described as follows.
+
+First, scalar variable declarations are extracted using line-anchored regular expressions. The parser distinguishes between standard integer and Boolean declarations and explicit domain specifications, such as interval domains (e.g., \texttt{1..10}) or set domains (e.g., \texttt{\{1,3,5\}}). Domains are interpreted conservatively: when a set is provided, only its minimum and maximum values are retained.
+
+Second, array declarations are parsed independently. The index range is analyzed to determine the array length when specified as a closed interval. If an initializer is present, its elements are collected in textual form. This design avoids premature semantic interpretation while preserving structural information.
+
+Third, constraints are parsed using a hybrid approach. A regular expression identifies occurrences of the keyword \texttt{constraint} followed by a constraint symbol. Since FlatZinc arguments may contain nested parentheses, a dedicated balanced-call extractor is used to recover the full argument list safely. Trailing annotations are preserved, and any \texttt{defines\_var} markers are recorded. A secondary pass constructs a definition map from variables to the constraints that define them.
+
+Finally, the \texttt{solve} statement is parsed to determine whether the problem is a satisfaction or optimization instance. If a search annotation is present, a recursive routine interprets common patterns such as \texttt{int\_search} and \texttt{seq\_search}. The resulting structure encodes variable selection strategy, value selection strategy, completeness mode, and, in the case of sequential search, the list of phases.
+
+A heuristic mechanism is implemented to distinguish user-defined variables from those introduced during compilation. The detection combines name-based patterns (e.g., identifiers containing \texttt{INTRODUCED}) with annotation-based indicators (e.g., \texttt{is\_defined\_var}). Although not formally guaranteed to be complete, this approach is robust across common FlatZinc toolchains and enables analyses restricted to original model variables.
+
+Beyond syntactic parsing, the architecture includes lightweight analytical utilities. For example, a degree computation function estimates, for each scalar variable, the number of constraints in which it appears. This is achieved by tokenizing constraint argument strings and counting occurrences of known variable identifiers. While approximate, this metric provides a structural indicator of variable centrality in the constraint graph.
+
+The architecture deliberately avoids constructing a full abstract syntax tree of the FlatZinc language. Instead, it adopts a pragmatic intermediate representation that captures structural information sufficient for meta-analysis and feature extraction. Balanced-parenthesis scanning is used selectively to overcome the limitations of purely regular-expression-based parsing, particularly in constraint arguments and search annotations.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Example of Parser Execution on a FlatZinc Instance}
+To better explain the functioning of the parser, we'll explain how it would behave when given the FlatZinc script defined in \Cref{fig:fznExample} as input.
+The parser first processes scalar variable declarations. The following integer decision variables are identified in the lines 1-6:
+
+\begin{itemize}
+\item \texttt{X\_INTRODUCED\_1\_} with domain $[0,7]$,
+\item \texttt{X\_INTRODUCED\_2\_} with domain $[2,9]$,
+\item \texttt{X\_INTRODUCED\_3\_} with domain $[0,7]$,
+\item \texttt{X\_INTRODUCED\_4\_} with domain $[3,10]$,
+\item \texttt{end} with domain $[7,14]$.
+\end{itemize}
+
+In addition, four Boolean variables are declared in the lines 7-10:
+
+\[
+\texttt{X\_INTRODUCED\_10\_},\;
+\texttt{X\_INTRODUCED\_12\_},\;
+\texttt{X\_INTRODUCED\_14\_},\;
+\texttt{X\_INTRODUCED\_15\_}.
+\]
+
+All variables whose identifiers contain the substring \texttt{INTRODUCED} are classified as compiler-introduced by the heuristic detection mechanism. The Boolean variables are also annotated with \texttt{var\_is\_introduced} and \texttt{is\_defined\_var}, which reinforces this classification. The variable \texttt{end}, although not matching the naming pattern, is treated as user-defined since no introduction annotation is present.
+
+Each integer domain expressed as an interval is converted into a \texttt{Domain} object storing the minimum and maximum bounds. Boolean variables are internally represented with domain $[0,1]$.
+
+Two array declarations are parsed.
+
+The first, in line 1,
+\[
+\texttt{array [1..2] of int: X\_INTRODUCED\_8\_ = [1,-1];}
+\]
+is recognized as a fixed integer array of length $2$. Its elements are stored as the literals $1$ and $-1$. Since its name matches the introduction pattern, it is classified as compiler-introduced.
+
+The second, in line 11,
+\[
+\texttt{array [1..4] of var int: X\_INTRODUCED\_0\_ = [...]},
+\]
+is recognized as an array of integer decision variables of length $4$. The stored items correspond to the scalar variables
+\[
+\texttt{X\_INTRODUCED\_1\_},\;
+\texttt{X\_INTRODUCED\_2\_},\;
+\texttt{X\_INTRODUCED\_3\_},\;
+\texttt{X\_INTRODUCED\_4\_}.
+\]
+The array is marked as containing decision variables (\texttt{is\_var = true}) and as compiler-introduced.
+
+The parser then extracts all constraint declarations. Each constraint is represented internally by its type, argument string, annotations, and any variables declared through \texttt{defines\_var}.
+
+Four linear inequality constraints of type \texttt{int\_lin\_le} are identified, in lines 12,13,15 and 16. Each uses the coefficient array \texttt{X\_INTRODUCED\_8\_} and a pair of integer variables. For example,
+\[
+\texttt{int\_lin\_le(X\_INTRODUCED\_8\_, [X\_INTRODUCED\_1\_, X\_INTRODUCED\_2\_], -2)}
+\]
+
+would result as:
+\[
+\begin{aligned}
+\{\\
+\quad &\texttt{"type"}:\; \texttt{"int\_lin\_le"},\\
+\quad &\texttt{"args"}:\; \parbox[t]{0.72\textwidth}{\ttfamily%
+"X\_INTRODUCED\_8\_,\newline%
+[X\_INTRODUCED\_1\_, X\_INTRODUCED\_2\_],\newline%
+-2"},\\
+\quad &\texttt{"ann"}:\; \texttt{""},\;\text{\scriptsize (empty string, since no trailing annotation is present)}\\
+\quad &\texttt{"text"}:\; \parbox[t]{0.72\textwidth}{\ttfamily%
+"int\_lin\_le(X\_INTRODUCED\_8\_,\newline%
+[X\_INTRODUCED\_1\_, X\_INTRODUCED\_2\_],\newline%
+-2)"},\\
+\quad &\texttt{"defines"}:\; [\,]\;\text{\scriptsize (empty since the constraint does not contain \texttt{defines\_var} annotation)}\\
+\}
+\end{aligned}
+\]
+
+Two \texttt{bool\_clause} constraints are parsed, respectively at lines 14 and 17. Each clause contains a list of Boolean variables and an empty negative literal list, corresponding to a disjunction over the given positive literals.
+
+Four reified linear constraints of type \texttt{int\_lin\_le\_reif} are also extracted, at lines 18-21. Each includes a trailing annotation of the form
+\[
+\texttt{:: defines\_var(X\_INTRODUCED\_k\_)}.
+\]
+During post-processing, the parser builds a definition map associating each of the Boolean variables
+\[
+\texttt{X\_INTRODUCED\_10\_},\;
+\texttt{X\_INTRODUCED\_12\_},\;
+\texttt{X\_INTRODUCED\_14\_},\;
+\texttt{X\_INTRODUCED\_15\_}
+\]
+with the corresponding reified constraint that defines it.
+
+The final statement,
+\[
+\texttt{solve minimize end;}
+\]
+is parsed as an optimization directive. The model is classified as a minimization problem, with objective variable \texttt{end}. No search annotation is provided; therefore, the \texttt{search} field in the internal representation remains \texttt{None}.
+
+To sum up everything, after parsing, the internal model contains:
+
+\begin{itemize}
+\item nine scalar decision variables (five integer and four Boolean),
+\item two arrays (one constant integer array and one array of decision variables),
+\item ten constraints,
+\item four entries in the definition map linking Boolean variables to reified linear constraints,
+\item problem type set to \texttt{minimize} with objective variable \texttt{end}.
+\end{itemize}
+
+
+
 
 
 

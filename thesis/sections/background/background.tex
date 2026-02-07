@@ -3,18 +3,18 @@
 
 In this chapter, the main intention is to give the reader an initial knowledge base on all the theoretical concepts and all the components that had been utilized in the development of this research.
 
-In the first section we will provide a description of constraint programming (CP) itself, starting from a general definition, delving deeper in the description of CP solvers, and then we are gonna provide a brief description of MiniZinc, a CP modelling language, in wich all the tested problems are coded.
+In the first section we will provide a description of CP itself, starting from a general definition, delving deeper in the description of CP solvers, and then we are gonna provide a brief description of MiniZinc, a CP modelling language, in wich all the tested problems are coded.
 
 In the second section we will provide an high level description of what large language models (LLMs) are and how they work, starting from the implementation of inference and decoding, passing to prompting techniques and prompt engineering, finally explaining the use of Application Programming Interfaces (APIs) as a communication mean.
 
 \section{Constraint Programming}
-Constraint programming (CP) is a software technology for declarative description and effective solving of large, particularly combinatorial, problems especially in areas of planning and scheduling~\cite{CPholygrail}.
+CP is a software technology for declarative description and effective solving of large, particularly combinatorial, problems especially in areas of planning and scheduling~\cite{CPholygrail}.
 
 A constraint can be thought of intuitively as a formalization of dependencies in physical worlds and their mathematical abstractions. A constraint is a logical relation among several unknowns (or variables), each taking a value in a given domain. The constraint thus restricts the possible values that variables can take; it represents partial information about the variables of interest. Constraints can also be heterogeneous, so they can bind unknowns from different domains, for example a length (number) with a word (string). The important feature of constraints is their declarative manner, i.e., they specify what relationship must hold without specifying a computational procedure to enforce that relationship~\cite{CPholygrail}.
 
 Constraints arise naturally in most areas of human endeavor. They are the natural medium of expression for formalizing regularities that underlie the computational and (natural or designed) physical worlds and their mathematical abstractions. 
 
-Constraint programming is the study of computational systems based on constraints. The idea of constraint programming is to solve problems by stating constraints (requirements) about the problem area and, consequently, finding a solution satisfying all the constraints.
+CP is the study of computational systems based on constraints. The idea of CP is to solve problems by stating constraints (requirements) about the problem area and, consequently, finding a solution satisfying all the constraints.
 
 As stated by E. C. Freuder thirty years ago,
 \begin{displayquote}
@@ -22,41 +22,50 @@ As stated by E. C. Freuder thirty years ago,
 \end{displayquote}
 
 \subsection{Solvers}
-In the courses of this research paper, we will often talk about ``Solvers''.
-A solver is defined as a system or program that manipulates constraints to find solutions that satisfy specified conditions. It can utilize various approaches to enhance flexibility and customization within specific constraint domains, particularly finite domains.
 
-So, given that a CP model can be defined as a tuple
+Throughout this thesis, the term solver denotes a system that, given a formal problem specification, computes assignments satisfying a set of constraints and, when required, optimizes an objective function.
+
+A constraint-based model can be formalized as a tuple
+\[
+\langle X, D, C \rangle,
+\]
+where \(X\) is a finite set of decision variables, \(D(x)\) denotes the domain associated with each variable \(x \in X\), and \(C\) is a set of constraints defined over subsets of \(X\). A solution is an assignment
+\[
+s : X \rightarrow \bigcup_{x \in X} D(x)
+\]
+such that \(s(x) \in D(x)\) for all \(x \in X\) and all constraints in \(C\) are satisfied~\cite{SeaPearl}.
+
+This formulation corresponds to a ``Constraint Satisfaction Problem'' (CSP). The objective in a CSP is to determine whether at least one feasible assignment exists, or to enumerate all feasible assignments.
+
+A ``Constraint Optimization Problem'' (COP) extends the CSP by introducing an objective function. Formally, a COP can be defined as
 \[
 \langle X, D, C, O \rangle,
 \]
-where \(X\) is a finite set of decision variables, \(D(x)\) denotes the domain associated with each variable \(x \in X\), \(C\) is a set of constraints over subsets of \(X\), and \(O\) is an optional objective function. A solution is an assignment \(s : X \rightarrow \bigcup_{x \in X} D(x)\) such that \(s(x) \in D(x)\) for all \(x \in X\) and all constraints in \(C\) are satisfied~\cite{SeaPearl}.
-
-This general formulation encompasses two main problem classes.
-
-A ``Constraint Satisfaction Problem'' (CSP) is obtained when no objective function is defined. Formally, a CSP is the tuple
-\(
-\langle X, D, C \rangle,
-\)
-and the goal is to determine whether there exists at least one assignment satisfying all constraints, or to enumerate such assignments.
-
-A ``Constraint Optimization Problem'' (COP) extends the CSP by introducing an objective function \(O : S \rightarrow \mathbb{R}\), where \(S\) is the set of feasible assignments. The goal is to find a feasible assignment \(s^*\) such that
-\(
-s^* = \arg\min_{s \in S} O(s) \quad \text{or} \quad s^* = \arg\max_{s \in S} O(s),
-\)
+where \(O : S \rightarrow \mathbb{R}\) is an objective function defined over the set \(S\) of feasible assignments. The goal is to compute an optimal solution
+\[
+s^* = \arg\min_{s \in S} O(s)
+\quad \text{or} \quad
+s^* = \arg\max_{s \in S} O(s),
+\]
 depending on whether the problem is a minimization or maximization task.
 
-Different solver families address problems of the above form using distinct mathematical abstractions and algorithmic techniques.
+Different solver families address CSPs and COPs using distinct mathematical abstractions and algorithmic techniques.
 
-\subsubsection{Constraint Programming (CP) solvers.}
-CP solvers operate directly on variables with finite or structured domains and a heterogeneous set of constraints. Their core mechanisms include constraint propagation, which removes inconsistent values from variable domains, and systematic search, typically implemented as backtracking with heuristics. CP solvers natively support rich global constraints, for which specialized filtering algorithms exploit problem structure~\cite{CPvsMILPsolvers}. A well known example of a CP solver is Gecode~\cite{Gecode}.
+\subsubsection{Constraint Programming (CP) solvers}
 
-\subsubsection{Linear Programming (LP) solvers.}
-LP solvers address problems where variables are continuous and constraints are linear equalities or inequalities. A Linear Programming model, solver rely on algorithms such as the simplex method or interior-point methods~\cite{simplexintPLP}. LP solvers do not directly handle discrete domains or non-linear/global constraints; when applied to CP-style models, constraints must be reformulated into linear form and integrality is typically relaxed. An example of a well known LP solver could be HiGHS~\cite{HiGHS}
+Constraint Programming solvers operate directly on variables with finite or structured domains and heterogeneous constraints. Their fundamental mechanisms are constraint propagation, which removes inconsistent values from variable domains, and systematic search, typically implemented via backtracking guided by variable- and value-ordering heuristics. CP solvers natively support high-level global constraints equipped with specialized filtering algorithms that exploit combinatorial structure~\cite{CPvsMILPsolvers}. A representative example is Gecode~\cite{Gecode}.
 
-\subsubsection{Mixed-Integer Linear Programming (MILP) solvers.}
-MILP solvers extend LP by allowing some or all variables to be restricted to integer domains.
+\subsubsection{Linear and Mixed-Integer Linear Programming solvers}
 
-They combine LP relaxations with branch-and-bound~\cite{BBAlg} or branch-and-cut~\cite{BCAlg} search. MILP solvers are well suited for problems with strong linear structure and arithmetic relations but may require the decomposition or linearization of high-level combinatorial constraints. Global constraints common in CP must therefore be encoded using auxiliary variables and linear constraints. An example of a MILP solver is Gurobi~\cite{Gurobi}.
+Linear Programming (LP) and Mixed-Integer Linear Programming (MILP) solvers address optimization problems in which the objective function and the constraints are linear. A standard LP formulation is
+\[
+\min \{ c^\top x \mid Ax \le b,\; x \in \mathbb{R}^n \},
+\]
+where \(x \in \mathbb{R}^n\) is a vector of continuous decision variables, \(c \in \mathbb{R}^n\) defines the linear objective function, and \(Ax \le b\) represents a system of linear inequalities.
+
+LP solvers assume continuous domains and rely on algorithms such as the simplex method and interior-point methods~\cite{simplexintPLP}. They do not natively support discrete decision variables or high-level combinatorial constraints; such constructs must be reformulated as linear expressions over continuous variables.
+
+Mixed-Integer Linear Programming extends this framework by restricting some or all variables to integer domains, i.e., \(x_i \in \mathbb{Z}\) for selected indices. MILP solvers typically combine LP relaxations with tree-based search procedures such as branch-and-bound and branch-and-cut~\cite{BBAlg,BCAlg}. This hybrid approach enables the treatment of discrete decisions within a linear modeling framework, although global or non-linear constraints must generally be encoded through auxiliary variables and additional linear constraints. Examples of solvers in this family include HiGHS~\cite{HiGHS} and Gurobi~\cite{Gurobi}.
 
 \subsubsection{Portfolio Solvers}
 Solving combinatorial search problems is hard, and there exist nowadays plenty of techniques and constraint solvers for performing this task. It has become clear that different solvers are better when solving different problem instances, even within the same problem class. It has also been shown that a single, arbitrarily efficient solver can be significantly outperformed by using a portfolio of possibly on-average slower solvers~\cite{PortfolioSolvers}.

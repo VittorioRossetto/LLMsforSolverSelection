@@ -10,7 +10,7 @@
 \usepackage[T1]{fontenc}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% language package
-\usepackage[english,italian]{babel}
+\usepackage[italian,english]{babel}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% input encoding
 \usepackage[latin1]{inputenc}
@@ -31,7 +31,6 @@
 \evensidemargin=20pt
 
 \usepackage{graphicx}
-% Make image paths work both when compiling main.tex and individual subfiles.
 \graphicspath{{\subfix{images/}}}
 
 \usepackage{csquotes}
@@ -47,6 +46,29 @@
 \usepackage{xcolor}
 \definecolor{darkred}{RGB}{139,0,0}
 \usepackage{listings}
+% MiniZinc syntax highlighting (opt-in per listing via style=minizincstyle)
+\lstdefinelanguage{MiniZinc}{
+    morekeywords={
+        annotation,array,bool,case,constraint,else,endif,enum,exists,false,float,
+        forall,function,if,include,in,int,let,list,minimize,maximize,of,opt,output,
+        par,predicate,record,satisfy,set,solve,then,true,tuple,var,where
+    },
+    sensitive=true,
+    morecomment=[l]{\%},
+    morestring=[b]",
+    morestring=[b]'
+}
+\lstdefinestyle{minizincstyle}{
+    language=MiniZinc,
+    basicstyle=\ttfamily\color{black},
+    keywordstyle=\bfseries\color{blue!70!black},
+    commentstyle=\itshape\color{gray!70!black},
+    stringstyle=\color{darkred},
+    showstringspaces=false,
+    columns=fullflexible,
+    keepspaces=true,
+    breaklines=true
+}
 \lstset{
     breaklines=true,
     basicstyle=\ttfamily\color{darkred},
@@ -79,7 +101,7 @@
 
 \geometry{margin=2cm} 
 
-\hyphenation{} % empty or add English words if needed
+\hyphenation{} 
 
 \pagestyle{fancy}\addtolength{\headwidth}{20pt}
 \renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
@@ -120,6 +142,10 @@ or nothing at all \ldots
 \subfile{sections/Intro/intro.tex}
 
 \clearpage{\pagestyle{empty}\cleardoublepage}
+% Switch to Arabic numbering for the Table of Contents and the rest of the thesis,
+\pagenumbering{arabic}
+\rhead[\fancyplain{}{\bfseries CONTENTS}]{\fancyplain{}{\bfseries\thepage}}
+\lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries CONTENTS}}
 \tableofcontents
 
 % \clearpage{\pagestyle{empty}\cleardoublepage}
@@ -134,7 +160,6 @@ or nothing at all \ldots
 \label{chap:techBg}
 \rhead[\fancyplain{}{\bfseries TECHNICAL BACKGROUND}]{\fancyplain{}{\bfseries\thepage}}
 \lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
-\pagenumbering{arabic}
 \subfile{sections/background/background.tex}
 
 \chapter{Methodology}
@@ -149,11 +174,11 @@ or nothing at all \ldots
 \lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
 \subfile{sections/experiments/experiments.tex}
 
-\chapter{A FlatZinc Parser: fzn2nl}
-\label{chap:parser}
-\rhead[\fancyplain{}{\bfseries FLATZINC PARSER}]{\fancyplain{}{\bfseries\thepage}}
-\lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
-\subfile{sections/parserDesc/parserDesc.tex}
+% \chapter{A FlatZinc Parser: fzn2nl}
+% \label{chap:parser}
+% \rhead[\fancyplain{}{\bfseries FLATZINC PARSER}]{\fancyplain{}{\bfseries\thepage}}
+% \lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
+% \subfile{sections/parserDesc/parserDesc.tex}
 
 \chapter*{Appendix}
 \rhead[\fancyplain{}{\bfseries APPENDIX}]{\fancyplain{}{\bfseries\thepage}}
@@ -220,6 +245,7 @@ or nothing at all \ldots
 \bibitem{PromptingWithLLM} R. Wang, H. Wang, F. Mi, Y. Chen, R. Xu, and K.-F. Wong, ``Self-Critique Prompting with Large Language Models for Inductive Instructions'', arXiv.org, May 23, 2023. https://arxiv.org/abs/2305.13733 (accessed Mar. 05, 2024).
 \bibitem{GroqAPIdoc} ``Prompt Basics - GroqDocs'', GroqDocs, 2026. https://console.groq.com/docs/prompting
 %%%%%%%%%%% Parser %%%%%%%%%%%
+\bibitem{fzn2nl} Vittorio Rossetto, ``GitHub - VittorioRossetto/fzn2nl'', GitHub, 2025. https://github.com/VittorioRossetto/fzn2nl (accessed Feb. 06, 2026).
 \bibitem{MemorizationVSReasoning} A. O. Li and T. Goyal, ``Memorization vs. Reasoning: Updating LLMs with New Knowledge'', arXiv (Cornell University), Apr. 2025, doi: https://doi.org/10.48550/arxiv.2504.12523.
 \bibitem{FTLLMallucination} Z. Gekhman et al., ``Does Fine-Tuning LLMs on New Knowledge Encourage Hallucinations?'', arXiv (Cornell University), May 2024, doi: https://doi.org/10.48550/arxiv.2405.05904.
 \bibitem{knowledgeCutoffsLLM} J. Cheng, M. Marone, O. Weller, D. Lawrie, D. Khashabi, and V. Durme, ``Dated Data: Tracing Knowledge Cutoffs in Large Language Models'', arXiv (Cornell University), Mar. 2024, doi: https://doi.org/10.48550/arxiv.2403.12958.
