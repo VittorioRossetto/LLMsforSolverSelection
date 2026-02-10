@@ -1,4 +1,22 @@
 {
-    "work-task-variation/generated-seed-8-length-12-open-10-workers-10-block-15" : "[choco-solver__cp_-par, choco-solver__cp-sat_-free, cp_optimizer-free]",
-    "tsptw/n20w140.005": ""
+    "work-task-variation" : "[choco-solver__cp_-par, choco-solver__cp-sat_-free, cp_optimizer-free]",
+    "tsptw": "[choco-solver__cp_-par, cp_optimizer-free, choco-solver__cp-sat_-free]",
+    "tower" : "[choco-solver__cp_-par, choco-solver__cp-sat_-free, cp_optimizer-free]",
+    "stripboard" : "[choco-solver__cp_-par, choco-solver__cp-sat_-free, cp_optimizer-free]",
+    "skill-allocation" : "[choco-solver__cp-sat_-free, cp_optimizer-free, jacop-free]",
+    "proteindesign12" : "[choco-solver__cp_-par, cp_optimizer-free, choco-solver__cp-sat_-free]",
+    "products-and-shelves" : "[cp_optimizer-free, choco-solver__cp_-par, choco-solver__cp-sat_-free]",
+    "ihtc-2024-marte" : "[cp_optimizer-free, choco-solver__cp-sat_-free, scip-free]",
+    "ihtc-2024-kletzander" : "[cp_optimizer-free, choco-solver__cp-sat_-free, choco-solver__cp_-par]",
+    "hitori" : "[cp_optimizer-free, choco-solver__cp-sat_-free, scip-free]",
+    "groupsplitter" : "[cp_optimizer-free, choco-solver__cp-sat_-free, scip-free]",
+    "fbd1" : "[cp_optimizer-free, choco-solver__cp_-par, jacop-free]",
+    "cgt" : "[cp_optimizer-free, choco-solver__cp_-par, scip-free]",
+    "carpet-cutting" : "[cp_optimizer-free, choco-solver__cp_-par, jacop-free]",
+    "black-hole" : "[cp_optimizer-free, choco-solver__cp_-par, jacop-free]",
+    "atsp" : "[cp_optimizer-free, choco-solver__cp-sat_-free, scip-free]",
+    "EchoSched" : "[choco-solver__cp-sat_-free, cp_optimizer-free, scip-free]",
+    "gt-sort" : "[choco-solver__cp_-free, jacop-free, cp_optimizer-free]",
+    "mondoku" : "[cp_optimizer-free, choco-solver__cp_-par, jacop-free]",
+    "is" : "[cp_optimizer-free, choco-solver__cp_-par, choco-solver__cp-sat_-free]"
 }
