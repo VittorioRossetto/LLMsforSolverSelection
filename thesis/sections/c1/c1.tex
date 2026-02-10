@@ -1,20 +1,14 @@
 \documentclass[../../main]{subfiles}
 \begin{document}
 
-In this chapter, the focus is on outlining the foundational decisions required to establish an initial benchmark. This benchmark serves as the basis for refining subsequent experiments and assessing both the current capabilities and future potential of the solver.
+In this chapter, we outline the decisions for an initial benchmark, which serves as the basis for refining subsequent experiments and assessing both the current capabilities and future potential of the solver.
 
-The section is structured into four sections, each addressing a key preliminary choice. The first section discusses the selection of large language models used as candidates for the agentic component. The second details the initial prompt-engineering strategy needed to define a clean, consistent prompt format for evaluation. The third presents the rationale behind the selection of benchmark problems used to test model performance. The fifth explains the metrics adopted to evaluate how effectively each model could operate as a meta-solver. The final section explains the pre-processing methods adopted the make automatic testing possible.
+The chapter is structured into four sections, each addressing a key preliminary choice. The first section discusses the selection of LLMs used for testing. The second details the initial prompt-engineering strategy needed to define a clean, consistent prompt format for evaluation. The third presents the rationale behind the selection of benchmark problems used to test model performance. The fifth explains the metrics adopted to evaluate the testing results. The final section explains the pre-processing methods adopted the make automatic testing possible.
 
-\section{Provider Choice} 
-To build the proposed Agentic Solver (AS), the first requirement is the
-availability of an LLM capable of orchestrating the system and acting as the
-agent. Given the limited computational resources available during the testing
-phase, we had to rely on externally hosted LLMs accessed through
-usage-based APIs. The selection prioritized generous free tiers, permissive rate
-limits, and straightforward integration. This led to the choice of the
-following providers:
+\section{Provider Choice}
+First of all, we needed to understand which LLMs we could use for the algorithm selection. Given the limited computational resources available during the testing phase, we had to rely on externally hosted LLMs accessed through usage-based APIs. The selection prioritized generous free tiers, permissive rate limits, and straightforward integration. This led to the choice of the following providers:
 \begin{itemize}
-    \item \texttt{Gemini API v1, GeminiAPI}, offered by Google DeepMind. Gemini is a family of large language models with multiple sizes and capabilities. This provider selected for its strong reasoning abilities, robust tool-use features, and overall high-quality text generation. For the purpose of this research, the version v1~\cite{GeminiAPIver} was prefered as it is more stable and our only concern is its text generation capability.
+    \item \texttt{Gemini API v1, GeminiAPI}, offered by Google DeepMind. Gemini is a family of LLMs with multiple sizes and capabilities. This provider selected for its strong reasoning abilities, robust tool-use features, and overall high-quality text generation. For the purpose of this research, the version v1~\cite{GeminiAPIver} was prefered as it is more stable and our only concern is its text generation capability.
 
     \item \texttt{Groq API, GroqAPI}, provided by Groq. Groq offers
     high-performance inference solutions through its specialized hardware
@@ -22,9 +16,9 @@ following providers:
     lightweight interface, enabling fast and low-latency experimentation.
 \end{itemize}
 
-Both APIs were selected for their ease of use, flexibility, overall performance,
-and, critically, their comparatively generous rate limits relative to competing
-services, in \Cref{tab:rate_limits_gemini} and \Cref{tab:rate_limits_groq} are displayed rate limits of both APIs. From the leftmost column of the table, there are: Model containing the names of each one of the available LLMs (for the purpose of this paper, only text generation models were selected), moving to the right \textit{RPM} contains the maximum number of requests in a minute, \textit{RPD} contains the maximum number of requests per day, \textit{TPM} contains the maximum number of requested tokens per minute, and finally \textit{TPD} contains the maximum number of tokens per day.
+Both APIs were selected for their ease of use, flexibility, overall performance, and, critically, their comparatively generous rate limits relative to competing services. In \Cref{tab:rate_limits_gemini} and \Cref{tab:rate_limits_groq} are displayed rate limits of both APIs. 
+
+From the leftmost column of the table, there are: Model containing the names of each one of the available LLMs (for the purpose of this paper, only text generation models were selected), moving to the right \textit{RPM} contains the maximum number of requests in a minute, \textit{RPD} contains the maximum number of requests per day, \textit{TPM} contains the maximum number of requested tokens per minute, and finally \textit{TPD} contains the maximum number of tokens per day.
 
 \begin{table}[ht]
     \centering
@@ -78,7 +72,7 @@ services, in \Cref{tab:rate_limits_gemini} and \Cref{tab:rate_limits_groq} are d
 
 \section{Large Language Models Selection}
 
-Both providers offer a broad set of LLMs with varying capabilities and constraints, so an initial filtering step was required. Several options were excluded immediately because they are not designed for text generation, which is essential for the proposed AS. In particular, \texttt{playai-tts} and \texttt{playai-tts-arabic} are text-to-speech LLMs available only on Groq's platform and therefore unsuitable for remote testing.
+Both providers offer a broad set of LLMs with varying capabilities and constraints, so an initial filtering step was required. Several options were excluded immediately because they are not designed for text generation. In particular, \texttt{playai-tts} and \texttt{playai-tts-arabic} are text-to-speech LLMs, and therefore unsuitable for testing.
 
 Additional LLMs were removed because they are currently decommissioned or unavailable: \texttt{deepseek-r1-distill-llama-70b}, \texttt{gemini-2.0-flash-lite}, and \texttt{gemma2-9b-it}.
 
@@ -95,11 +89,10 @@ evaluation phase.
 
 \section{Prompt General Structure}
 \label{sec:promptStruct}
-To determine which LLM would be best suited for building an AS, it was necessary to design a consistent prompt format to query each model.
-The primary objective was to define a structure that was as short and clean as possible, for two main
-reasons:
+To determine which LLM would be best suited for algorithm selection, it was necessary to design a consistent prompt format to query each model.
+The primary objective was to define a structure that was as short and clean as possible, for two main reasons:
 \begin{itemize}
-    \item Minimize prompt-induced bias: A highly descriptive or too long and complex prompt could influence LLMs negatively. As we could encounter problems as ``context rot``~\cite{ContextRot} - a progressive decay in accuracy as prompts grow longer.
+    \item Minimize prompt-induced bias: A highly descriptive or too long and complex prompt could influence LLMs negatively. As we could encounter problems as ``context rot''~\cite{ContextRot} - a progressive decay in accuracy as prompts grow longer.
     \item Reduce token usage: Since the testing setup depends on API limits, keeping the prompt compact minimizes token consumption.
 \end{itemize}
 
@@ -111,7 +104,7 @@ Large or verbose responses also impose practical limitations on the available co
 
 For these reasons, the output format was fixed as an array of three strings:
 \[
-[``1^{st}\text{Solver}``,\ ``2^{nd}\text{Solver}``,\ ``3^{rd}\text{Solver}``]
+[``1^{st}\text{Solver}'',\ ``2^{nd}\text{Solver}'',\ ``3^{rd}\text{Solver}'']
 \]
 
 Selecting the top three solvers enables two forms of evaluation:
@@ -132,10 +125,7 @@ After all of this considerations, the resulting prompt structure is the one disp
 
 \section{Problem Selection}
 \label{sec:probSelection}
-A crucial component of the testing pipeline is the problem selection.
-Consistent and meaningful evaluation requires a set of benchmark problems that
-are reliable, diverse, and representative of real solver behavior. To meet
-these requirements, the problem set should satisfy the following criteria:
+A crucial component of the testing pipeline is the problem selection. Consistent and meaningful evaluation requires a set of benchmark problems that are reliable, diverse, and representative of real solver behavior. To meet these requirements, the problem set should satisfy the following criteria:
 \begin{itemize}
     \item Extensive prior testing: The problems must be validated and
     associated with reliable solver performance data, preferably obtained from
@@ -150,25 +140,25 @@ these requirements, the problem set should satisfy the following criteria:
     that solver selection is non-trivial and the LLM's reasoning abilities are
     meaningfully tested.
 \end{itemize}
-Following these criteria, the selected benchmark was the problem set from the
-\textit{MiniZinc Challenge 2025, PhilMznChallenge, MznProblems, MznResults25}. These problems are specifically curated
-to benchmark the strongest solvers of the year and therefore represent an ideal
-test bed for evaluating the proposed Agentic Solver.
+Following these criteria, the selected benchmark was the problem set from the MiniZinc Challenge 2025\cite{PhilMznChallenge, MznProblems, MznResults25}. These problems are specifically curated to benchmark the strongest solvers of the year and therefore represent an ideal test bed for algorithm selection.
 
 The problem set contains twenty problems: 1 satisfaction problem, 3 maximization problems, 16 minimization problems.
 
-Each problem is a combination of a \texttt{.mzn} file containing the Minizinc~\cite{MiniZinc} model made of the high-level description of the problem (variables, constraints and objective function). Every problem also is also accompanied by five corresponding data instances each of them contained either in a \texttt{.dzn} or a \texttt{.json} file containing specific parameters and constants, yielding a total of
-100 testable, diverse, and complex scenarios.
+Each problem is a combination of a \texttt{.mzn} file containing the Minizinc~\cite{MiniZinc} model, containing variables, constraints and objective function. Every problem is also accompanied by five corresponding data instances, each of them contained either in a \texttt{.dzn} or a \texttt{.json} file containing specific parameters and constants, yielding a total of 100 testable, diverse, and complex scenarios.
 
 \section{Test Metrics}
 \label{sec:metrics}
-In order to actually evaluate model performance, it is necessary to chose a standard metric for answer evaluation, other than that, it is necessary to have a metric to evaluate how an AS controlled by the given LLM would perform against the current Single Best Solver (SBS).
+In order to actually evaluate LLM performance, it is necessary to chose a standard metric for answer evaluation, other than that, it is necessary to have a metric to evaluate how each given LLM would perform against the current Single Best Solver (SBS).
 
-Before analyzing the evaluation metrics, we must first define the systems to which these metrics will be applied. Namely, the solvers. In our context, a solver is a program that takes as input the description of a computational problem in a given language and returns an observable outcome providing zero or more solutions for the given problem.  For example, for decision problems, the outcome may be simply ``yes`` or ``no`` while for optimization problems, we might be interested in the best solutions found along the search. An evaluation metric, or performance metric, is a function mapping the outcome of a solver on a given instance to a number representing ``how good`` the solver is on this instance. An evaluation metric is often not just defined by the output of the solver. Indeed, it can be influenced by other actors, such as the computational resources available, the problems on which we evaluate the solver, and the other solvers involved in the evaluation. For example, it is often unavoidable to set a \texttt{timeout} \(\tau\) on the solver's execution when there is no guarantee of termination in a reasonable amount of time (e.g. NP-hard problems). Timeouts make the evaluation feasible but inevitably couple the evaluation metric to the execution context. For this reason, the evaluation of a meta-solver should also consider the scenario that encompasses the solvers to evaluate, the instances used for the validation, and the timeout. Formally, at least for the purposes of this paper, we can define a scenario as a triple (\(\mathcal{I}, \mathcal{S},\tau\)), where: \(\mathcal{I}\) is a set of problem instances, \(\mathcal{S}\) is a set of individual solvers, \(\tau \in (0,+\infty) \) is a timeout such that the outcome of solvers \(s \in \mathcal{S}\) Solver instance \(i \in \mathcal{I}\) is always measured in the time interval [\(0,\tau\)].
+Before analyzing the evaluation metrics, we must first define the systems to which these metrics will be applied. Namely, the solvers. In our context, a solver is a program that takes as input the description of a computational problem in a MiniZinc, with relative data, and returns an observable outcome providing zero or more solutions for the given problem.  
+
+For example, for decision problems, the outcome may be simply ``yes'' or ``no'' while for optimization problems, we might be interested in the best solutions found along the search. An evaluation metric, or performance metric, is a function mapping the outcome of a solver on a given instance to a number representing ``how good'' the solver is on this instance. 
+
+An evaluation metric is often not just defined by the output of the solver. Indeed, it can be influenced by other actors, such as the computational resources available, the problems on which we evaluate the solver, and the other solvers involved in the evaluation. For example, it is often unavoidable to set a \texttt{timeout} \(\tau\) on the solver's execution when there is no guarantee of termination in a reasonable amount of time (e.g. NP-hard problems). Timeouts make the evaluation feasible but inevitably couple the evaluation metric to the execution context. For this reason, the evaluation of a meta-solver should also consider the scenario that encompasses the solvers to evaluate, the instances used for the validation, and the timeout. Formally, at least for the purposes of this paper, we can define a scenario as a triple (\(\mathcal{I}, \mathcal{S},\tau\)), where: \(\mathcal{I}\) is a set of problem instances, \(\mathcal{S}\) is a set of individual solvers, \(\tau \in (0,+\infty) \) is a timeout such that the outcome of solvers \(s \in \mathcal{S}\) Solver instance \(i \in \mathcal{I}\) is always measured in the time interval [\(0,\tau\)].
+
 Evaluating meta-solvers over heterogeneous scenarios (\(\mathcal{I}_1, \mathcal{S}_1,\tau_1\)), (\(\mathcal{I}_2, \mathcal{S}_2,\tau_2\)), \dots, is complicated by the fact that the sets of instances \(\mathcal{I}_k\), the sets of solvers \(\mathcal{S}_k\) and the timeouts \(\tau_k\) can be very different. And things could get even more complicated in scenarios including optimization problems.
 
 For those objectives two separate metrics were chosen
-
 
 \subsection{Metric for Solver Score}
 
@@ -252,14 +242,15 @@ The parameter used for score calculation in testing are: $T=1200000$ (1200000ms 
 \subsection{Closed Gap}
 \label{sec:closedGap}
 Once the evaluation metric for solver score has been defined, we also need a comparative metric after score calculation.
-For this objective, we have chosen to use \textit{closed-gap, evaluationMetaSolvers} as the evaluation metric. 
-Which is a relative and meta-solver-specific measure, adopted in the 2015 ICON and 2017 OASC ~\cite{lindauer2019}
-challenges to handle the disparate nature of the scenarios, is the 
-closed gap score. This metric assigns to a meta-solver a value in $(-\infty, 1]$ 
+For this objective, we have chosen to use closed-gap (CG)~\cite{evaluationMetaSolvers} as the evaluation metric. 
+CG is a relative and meta-solver-specific measure, adopted in the 2015 ICON and 2017 OASC ~\cite{lindauer2019}
+challenges to handle the disparate nature of the scenarios. 
+
+CG assigns to a meta-solver a value in $(-\infty, 1]$ 
 proportional to how much it closes the gap between the best individual solver available, 
 or single best solver (SBS), and the virtual best solver (VBS), i.e., an 
 oracle-like meta-solver always selecting the best individual solver. The closed gap is 
-actually a ``meta-metric``, defined in terms of another evaluation metric $m$ to minimize, which in this case is the scoring metric defined earlier. 
+actually a ``meta-metric'', defined in terms of another evaluation metric $m$ to minimize, which in this case is the scoring metric defined earlier. 
 Formally, if $(I, S, \tau)$ is a scenario then 
 \[
 m(i, \mathrm{VBS}, \tau) = \min \{ m(i, s, \tau) \mid s \in S \}
@@ -270,7 +261,7 @@ and
 \mathrm{SBS} = \arg\min_{s \in S} \sum_{i \in I} m(i, s, \tau).
 \]
 
-With these definitions, \textit{Closed-gap} can be defined as follows: Let ($\mathcal{I}, S, \tau$) be a scenario and 
+With these definitions, CG can be defined as follows: Let ($\mathcal{I}, S, \tau$) be a scenario and 
 \[
 m : \mathcal{I} \times \bigl(S \cup \{S, \mathrm{VBS}\}\bigr) \times [0,\tau] \to \mathbb{R}
 \]
@@ -281,14 +272,14 @@ Let
 m_\sigma \;=\; \sum_{i\in\mathcal{I}} m(i,\sigma,\tau)
 \qquad\text{for }\sigma\in\{S,\mathrm{SBS},\mathrm{VBS}\}.
 \]
-The closed gap of $S$ with respect to $m$ on that scenario is
+The CG of $S$ with respect to $m$ on that scenario is
 \[
 \frac{m_{\mathrm{SBS}} - m_S}{\,m_{\mathrm{SBS}} - m_{\mathrm{VBS}}\,}.
 \]
 
 \noindent
 
-The assumption $m_{\mathrm{VBS}} > m_{\mathrm{SBS}}$ is required, i.e., no single-solver can be the $\mathrm{VBS}$ (otherwise, no algorithm selection would be needed, given that its objective is to reach the $\mathrm{VBS}$). Unlike other scores, the closed gap is designed specifically for meta-solvers. Applying it to individual solvers would
+The assumption $m_{\mathrm{VBS}} > m_{\mathrm{SBS}}$ is required, i.e., no single-solver can be the $\mathrm{VBS}$ (otherwise, no algorithm selection would be needed, given that its objective is to reach the $\mathrm{VBS}$). Unlike other scores, CG is designed specifically for meta-solvers. Applying it to individual solvers would
 assign~0 to the $\mathrm{SBS}$ and a negative score to the remaining solvers,
 proportional to their performance difference with respect to the $\mathrm{SBS}$ and
 the gap $m_{\mathrm{SBS}} - m_{\mathrm{VBS}}$, which makes little sense for
@@ -299,20 +290,20 @@ individual solvers, as it wouldn't reflect their actual performance overall.
 We have defined both the structure of the queries posed to the LLMs (\Cref{sec:probSelection}) and the way in which these queries are formulated (\Cref{sec:promptStruct}). The remaining challenge is to evaluate them automatically over the full set of selected instances.
 To this end, we designed an automated testing pipeline that parallelizes execution by assigning one thread per LLM. For each model, requests are issued sequentially, with five requests per problem, each containing a MiniZinc model and a single instance encoded as shown in \Cref{fig:promptEx}.
 
-Despite preliminary prompt engineering and model filtering, several MiniZinc models, particularly their associated data files, still exceed the providers' rate limits. Since these limits are strict, additional mechanisms were required to prevent limit violations while still allowing evaluation over the complete instance set.
+Despite preliminary prompt engineering and model filtering, several MiniZinc models, particularly their associated data files, still exceed the providers' rate limits. Given this limitation, additional mechanisms were required to prevent limit violations while still allowing evaluation over the complete instance set.
 
 \subsection{Script Sanitization}
 \label{sec:scriptMan}
 
 The most direct way to address oversized requests is to reduce their length. As the prompt itself was already minimal, this required direct manipulation of the MiniZinc model (\texttt{.mzn}) and data files.
 
-A first step consisted in removing all non-essential elements, such as comments (starting with \texttt{\%} ~\cite{MiniZinc}), tabs, and unnecessary whitespace. While this helps reduce token usage and standardizes script formatting, it is insufficient on its own. The main contributor to token overflow is the presence of large data arrays, which not only increase message length but may also pollute the context, ``distracting`` the LLM from the most relevant information~\cite{LLMdistract}.
+A first step consisted in removing all non-essential elements, such as comments (starting with \texttt{\%} ~\cite{MiniZinc}), tabs, and unnecessary whitespace. While this helps reduce token usage and standardizes script formatting, it is insufficient on its own. The main contributor to token overflow is the presence of large data arrays, which not only increase message length but may also pollute the context, ``distracting'' the LLM from the most relevant information~\cite{LLMdistract}.
 
 To mitigate this issue, data arrays were truncated to a fixed maximum length of 30 elements, with an inline comment indicating the original size:
 \[ 
 [e_1,e_2,\dots,e_{30} \texttt{// array too long to display, dimensions: (150)} ]
 \]
-While effective for simple arrays of scalar values, this approach does not account for the complexity of individual elements and performs poorly on more structured data. For this reason, a second truncation mechanism was introduced based on raw character length. Arrays exceeding 90 characters were truncated accordingly, using the same annotation to preserve information about the original size. 
+While effective for simple arrays of scalar values, this approach does not account for the complexity of individual elements and performs poorly on more structured data. For this reason, a second truncation mechanism was introduced based on raw character length. Arrays exceeding 120 characters were truncated accordingly, using the same annotation to preserve information about the original size. 
 
 \subsection{Custom Delays}
 Since each experiment involves multiple problems and multiple sequential requests per LLM, rate limits can still be exceeded even when individual requests are within bounds. To handle this, custom delays were introduced into the experiment orchestration logic.
@@ -327,7 +318,7 @@ Error code: 413 - Request too large for model `openai/gpt-oss-120b` in organizat
 Error code: 429 - Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01k9qqesvte4d9h5jnhmzvbmy4` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 193047, Requested 10632. Please try again in 26m29.328s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing
 \end{lstlisting}
 
-Its code is inspected. Errors $413$ and $429$ indicate that a rate limit has been exceeded. The error message is then parsed to identify the specific limit involved. If the limit concerns tokens per minute (TPM) or requests per minute (RPM), the system pauses execution for 60 seconds before retrying. If the exceeded limit is tokens per day (TPD) or requests per day (RPD), the message is further analyzed to extract the cooldown duration, typically expressed in the form $XXh,XXm,XX.XXs$ where $h$ stands for hours, $m$ for minutes and $s$ for seconds. The required delay is then  computed from this value, after which the request is retried.
+Its code is inspected. Errors $413$ and $429$ indicate that a rate limit has been exceeded. The error message is then parsed to identify the specific limit involved. If the limit concerns tokens per minute (TPM) or requests per minute (RPM), the system pauses execution for 60 seconds before retrying. If the exceeded limit is tokens per day (TPD) or requests per day (RPD), the message is further analyzed to extract the cooldown duration, expressed in the form $XXh,XXm,XX.XXs$ where $h$ stands for hours, $m$ for minutes and $s$ for seconds. The required delay is then computed from this value, after which the request is retried.
 
 % WebApp per richieste singole(?)
 % primi test con tutti gli LLM senza manipolare script, dicendo alla fine che da qua in poi si testano solo i primi 5 

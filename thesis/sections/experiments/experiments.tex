@@ -1,13 +1,13 @@
 \documentclass[../../main]{subfiles}
 \begin{document}
 
-This chapter presents the initial experimental study aimed at assessing the potential of LLMs for solver selection and identifying effective prompting strategies and contextual representations.
+This chapter presents the initial experimental study aimed at assessing the potential of LLMs for algorithm selection and identifying effective prompting strategies and contextual representations.
 
 The first section reports results obtained with the most basic configuration, using only raw scripts and instance data, intended to estimate the baseline performance of all candidate LLMs. These results are used to select the five best-performing models for subsequent analysis. The second section examines refined prompt formulations based on sanitized scripts and the inclusion of problem descriptions, using a single-request setup in which each instance is handled independently.
 
 The third section investigates multi-turn experiments, where prompts are enriched with solver descriptions and combined problem-solver descriptions. This setup leverages conversational state to reduce redundancy and mitigate rate-limit constraints inherent to single-request configurations. From this stage onward, experiments are conducted only with the best-performing model.
 
-The fourth section evaluates the use of structured contextual representations derived from a feature extraction tool~\cite{mzn2feat}, in combination with the prompt strategies developed earlier. Finally, the fifth section analyzes the effect of sampling temperature tuning by testing multiple temperature values on the five most effective configuration variants identified across the study.
+The fourth section evaluates the use of structured contextual representations derived from a feature extraction tool~\cite{mzn2feat}, in combination with the prompt strategies developed earlier. Finally, the fifth section analyzes the effect of sampling temperature tuning~\cite{ContextualTemp} by testing multiple temperature values on the five most effective configuration variants identified across the study.
 
 \section{Preliminary tests}
 \label{sec:initTests}
@@ -74,7 +74,7 @@ As shown in \Cref{tab:combinedBase} and \Cref{tab:base3}, performance in the par
 Greater variability emerges in the single-solver evaluation (\Cref{tab:base1}). In this case, only \texttt{gpt-oss-120b} consistently outperforms all individual solvers other than the SBS in the free category (\texttt{or-tools\_cp-sat-free}), as will be later reported in \Cref{tab:comparisanVarSin} and \Cref{fig:comparisanVarSin}. The remaining LLMs still achieve competitive results compared to most standalone solvers, but a significant performance gap remains, as highlighted by the closed-gap scores, also reported more in depth in \Cref{tab:basecg}.
 
 \subsection{Problem Description}
-The results of the baseline experiments indicate that further improvements to the Agentic Solver are necessary. A natural approach is to provide the LLM with additional contextual information. However, as discussed previously, excessively large contexts can be counterproductive, potentially distracting the model and degrading performance rather than improving it~\cite{ContextRot,LLMdistract}. This trade-off motivates a more careful investigation into which types of information are most beneficial for LLM-based solver selection.
+The results of the baseline experiments indicate that further improvements are necessary. A natural approach is to provide the LLM with additional contextual information. However, as discussed previously, excessively large contexts can be counterproductive, potentially distracting the model and degrading performance rather than improving it~\cite{ContextRot,LLMdistract}. This trade-off motivates a more careful investigation into which types of information are most beneficial for LLM-based solver selection.
 
 As a first step, we augmented the prompt with a concise problem description (PD): a short textual summary of the MiniZinc model's semantics. These descriptions were automatically generated using another LLM (\texttt{GPT-5.1}) and subsequently refined manually to correct minor inaccuracies, e.g.:
 \begin{itemize}
@@ -139,10 +139,10 @@ In our experiments, the \texttt{system} role is used to convey all invariant and
 
 An additional advantage of the multi-turn setup is that it enables the handling of larger instance data by distributing content across multiple messages, while relying on the LLM's ability to retain previously supplied information within the same conversation. As a result, the system can accommodate longer and more complex inputs without exceeding rate limits.
 
-\subsection{Solvers Description} % Aggiungere descrizioni solver in appendiceeee
-The increased efficiency of the multi-turn setup also makes it possible to enrich the contextual information with new textual data: solver descriptions. For each solver under consideration, a short textual description was generated and provided to the LLM within the \texttt{system} prompt, with the aim of improving the model's awareness of the available solver options and their respective characteristics.
+\subsection{Solvers Description} 
+The increased efficiency of the multi-turn setup also makes it possible to enrich the contextual information with new textual data: solver descriptions Examples can be found in: . For each solver under consideration, a short textual description was generated and provided to the LLM within the \texttt{system} prompt, with the aim of improving the model's awareness of the available solver options and their respective characteristics.
 
-To better understand the importance of this information, we experimented with two different configurations: one in which solver descriptions were combined with all previously provided contextual elements, and another in which the solvers descriptions constituted the only additional textual information alongside the MiniZinc model and the instance data. This design allows us to assess the contribution of solver-specific knowledge to the overall performance of the Agentic Solver.
+To better understand the importance of this information, we experimented with two different configurations: one in which solver descriptions were combined with all previously provided contextual elements, and another in which the solvers descriptions constituted the only additional textual information alongside the MiniZinc model and the instance data. This design allows us to assess the contribution of solver-specific knowledge to the overall performance of LLMs.
 
 \begin{table}[!ht]
     \centering
@@ -191,7 +191,7 @@ In the parallel-solver evaluation, this configuration yields the highest scores 
 In the single-solver evaluation, \texttt{moonshotai/kimi-k2-instruct-0905} continues to default to selecting the SBS exclusively. Nevertheless, improvements emerge for two other models, namely \texttt{gemini-2.5-flash} and \texttt{gpt-oss-120b}. In particular, \texttt{gpt-oss-120b} achieves the first strictly positive closed-gap score, surpassing \texttt{or-tools\_cp-sat-free}.
 
 \subsection{Basic Tests Evaluation}
-In this initial testing phase, a positive closed gap has been achieved, showing an agentic solver with better performance than the single best solver. Moreover, when we put the performance respect to the ``non-best solvers``, these primitive configurations of agentic solvers still hold fairly competitive results.
+In this initial testing phase, a positive closed gap has been achieved, showing an algorithm selection process with better performance than always choosing the single best solver. Moreover, when we put the performance respect to the ``non-best solvers``, these primitive configurations still hold fairly competitive results.
 
 To better display single LLMs performances, all variants scores are put together against one another, using histograms for better visualization in \Cref{fig:histoVarPar} for parallel-solver evaluation, \Cref{fig:histoVarSin} for single-solver evaluation and \Cref{fig:histoVarCg} for closed gap evaluation.
 
@@ -203,7 +203,7 @@ To better display single LLMs performances, all variants scores are put together
 \end{figure}
 
 
-To give results another point of view, the performance of each agentic solver configuration is displayed against the single solvers of the corresponding category.
+To give results another point of view, the performance of each configuration is displayed against the single solvers of the corresponding category.
 In \Cref{tab:comparisanVarPar} and \Cref{fig:comparisanVarPar} are shown the performance of all the configurations, scored with parallel-solvers evaluation, when put agains single solvers from the open category.
 On the other hand, looking at \Cref{tab:comparisanVarSin} and \Cref{fig:comparisanVarSin}, the resulting score of single-solver evaluation of all the variants is put against all the single solvers from free category.
 
@@ -262,32 +262,6 @@ Each configuration was further extended by incrementally adding the \texttt{.mzn
 Results are reported in \Cref{tab:combinedFeatVars}. Configurations combining feature representations with textual descriptions consistently achieve higher scores than those including raw \texttt{.mzn} scripts or instance data. The addition of full model code or data is associated with systematic score reductions across both single and parallel evaluations, most probably because of some problems explained earlier such as context rot~\cite{ContextRot}.
 
 The highest-performing configurations in this group are those combining features with solver and/or problem descriptions. Although these variants do not exceed the best-performing configuration identified in earlier experiments, the top three feature-based setups achieve higher scores than the second-best configuration among the variants proposed in \Cref{sec:SdescPdesc}.
-
-% \begin{figure}[ht]
-%     \centering
-%     \begin{subfigure}[t]{0.32\textwidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{allVarPar.png}
-%         \caption{All feature variants performances in ``Parallel Score'', as calculated in \Cref{tab:combinedAllLLM}.}
-%         \label{fig:allFVarPar}
-%     \end{subfigure}
-%     \hfill
-%     \begin{subfigure}[t]{0.32\textwidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{allVarSin.png}
-%         \caption{All feature variants performances in ``Single Score'', as calculated in \Cref{tab:combinedAllLLM}.}
-%         \label{fig:allFVarSin}
-%     \end{subfigure}
-%     \hfill
-%     \begin{subfigure}[t]{0.32\textwidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{allVarcg.png}
-%         \caption{All feature variants performances in ``Closed Gap'', as calculated in \Cref{tab:combinedAllLLM}.}
-%         \label{fig:allFVarCg}
-%     \end{subfigure}
-%     \caption{Histograms displaying the performaces of all the feature variants in ``Single Score'' evaluation, ``Parallel Score'' evaluation and ``Closed Gap'' evaluation, all performed using \texttt{gpt-oss-120b}.}
-%     \label{fig:histoFVar1}
-% \end{figure}
 
 \section{Sampling Temperature Tuning}
 The testing of this initial phase involved the use of sampling temperature tuning. Sampling temperature is a hyperparameter of an LLM used in a temperature-based sampling process. It controls the randomness of the model's output at inference time~\cite{TempDef}.

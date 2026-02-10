@@ -1,0 +1,4 @@
+{
+    "work-task-variation/generated-seed-8-length-12-open-10-workers-10-block-15" : "[choco-solver__cp_-par, choco-solver__cp-sat_-free, cp_optimizer-free]",
+    "tsptw/n20w140.005": ""
+}

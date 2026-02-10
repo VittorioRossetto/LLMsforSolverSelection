@@ -1,14 +1,14 @@
 \documentclass[../../main]{subfiles}
 \begin{document}
 
-In this chapter, the main intention is to give the reader an initial knowledge base on all the theoretical concepts and all the components that had been utilized in the development of this research.
+In this chapter, we give the reader an initial knowledge base on all the theoretical concepts, and all the components that had been utilized in the development of this research.
 
-In the first section we will provide a description of CP itself, starting from a general definition, delving deeper in the description of CP solvers, and then we are gonna provide a brief description of MiniZinc, a CP modelling language, in wich all the tested problems are coded.
+In the first section we will provide a description of CP itself, starting from a general definition, delving deeper in the description of CP solvers, and then we are gonna provide a brief description of MiniZinc, a CP modelling language, in which all the tested problems are coded.
 
 In the second section we will provide an high level description of what large language models (LLMs) are and how they work, starting from the implementation of inference and decoding, passing to prompting techniques and prompt engineering, finally explaining the use of Application Programming Interfaces (APIs) as a communication mean.
 
 \section{Constraint Programming}
-CP is a software technology for declarative description and effective solving of large, particularly combinatorial, problems especially in areas of planning and scheduling~\cite{CPholygrail}.
+CP is a paradigm for declarative description and effective solving of large, particularly combinatorial, problems especially in areas of planning and scheduling~\cite{CPholygrail}.
 
 A constraint can be thought of intuitively as a formalization of dependencies in physical worlds and their mathematical abstractions. A constraint is a logical relation among several unknowns (or variables), each taking a value in a given domain. The constraint thus restricts the possible values that variables can take; it represents partial information about the variables of interest. Constraints can also be heterogeneous, so they can bind unknowns from different domains, for example a length (number) with a word (string). The important feature of constraints is their declarative manner, i.e., they specify what relationship must hold without specifying a computational procedure to enforce that relationship~\cite{CPholygrail}.
 
@@ -16,16 +16,16 @@ Constraints arise naturally in most areas of human endeavor. They are the natura
 
 CP is the study of computational systems based on constraints. The idea of CP is to solve problems by stating constraints (requirements) about the problem area and, consequently, finding a solution satisfying all the constraints.
 
-As stated by E. C. Freuder thirty years ago,
-\begin{displayquote}
-``Constraint Programming represents one of the closest approaches computer science has yet made to the Holy Grail of programming: the user states the problem, the computer solves it.''~\cite{holygrail}.
-\end{displayquote}
+% As stated by E. C. Freuder thirty years ago,
+% \begin{displayquote}
+% ``Constraint Programming represents one of the closest approaches computer science has yet made to the Holy Grail of programming: the user states the problem, the computer solves it.''~\cite{holygrail}.
+% \end{displayquote}
 
 \subsection{Solvers}
 
 Throughout this thesis, the term solver denotes a system that, given a formal problem specification, computes assignments satisfying a set of constraints and, when required, optimizes an objective function.
 
-A constraint-based model can be formalized as a tuple
+A ``Constraint Satisfaction Problem'' (CSP) can be formalized as a tuple
 \[
 \langle X, D, C \rangle,
 \]
@@ -35,13 +35,13 @@ s : X \rightarrow \bigcup_{x \in X} D(x)
 \]
 such that \(s(x) \in D(x)\) for all \(x \in X\) and all constraints in \(C\) are satisfied~\cite{SeaPearl}.
 
-This formulation corresponds to a ``Constraint Satisfaction Problem'' (CSP). The objective in a CSP is to determine whether at least one feasible assignment exists, or to enumerate all feasible assignments.
+The objective in a CSP is to determine whether at least one feasible assignment exists, or to enumerate all feasible assignments.
 
 A ``Constraint Optimization Problem'' (COP) extends the CSP by introducing an objective function. Formally, a COP can be defined as
 \[
-\langle X, D, C, O \rangle,
+\langle X, D, C, f \rangle,
 \]
-where \(O : S \rightarrow \mathbb{R}\) is an objective function defined over the set \(S\) of feasible assignments. The goal is to compute an optimal solution
+where \(f : S \rightarrow \mathbb{R}\) is an objective function defined over the set \(S\) of feasible assignments. The goal is to compute an optimal solution
 \[
 s^* = \arg\min_{s \in S} O(s)
 \quad \text{or} \quad
@@ -72,7 +72,7 @@ Solving combinatorial search problems is hard, and there exist nowadays plenty o
 
 Algorithm portfolios~\cite{AlgPortfolio} can be seen as instances of the more general Algorithm Selection problem~\cite{AlgSelProb} where, as reported in~\cite{AlgSelCSP}, the algorithm selection is performed case-by-case for each problem to solve. Within the context of constraint solving, a portfolio approach enables to combine a number $m > 1$ of different constituent solvers $s_1, \dots, s_m$ in order to create a globally better constraint solver, dubbed a portfolio solver. When a new, unseen problem $p$ comes, the portfolio solver tries to predict the best constituent solver(s) $s_{i_1}, \dots, s_{i_k}$ (with $1 \leq i_j \leq m$ for $j = 1, \dots, k$) for solving $p$ and then runs them on $p$. Properly selecting and scheduling the solvers is a crucial step for the performance of a portfolio solver, and it is usually performed by exploiting Machine Learning techniques based on features extracted from the problem $p$ to solve.
 
-In the course of this research thesis, starting from the idea behind portfolio solvers, we will try to evaluate the performances of an agentic solver that uses pre-trained large language model as its agent to understand if this could be a viable solution to the algorithm selection problem~\cite{AlgSelProb}, following the new paradigm proposed in~\cite{fromPFStoAS}.
+In the course of this research thesis, starting from the idea behind portfolio solvers, we will try to evaluate the performances of a pre-trained large language model to understand if this could be a viable solution to the algorithm selection problem~\cite{AlgSelProb}, avoiding the cost of training for portfolio solvers, following the new paradigm proposed in~\cite{fromPFStoAS}.
 
 \subsection{MiniZinc}
 MiniZinc is a simple but expressive CP modelling language which is suitable for modelling problems for a range of solvers and a reasonable compromise between many design possibilities.
@@ -81,13 +81,12 @@ Born from the necessity of a standard modelling language for constraint programm
 
 For these reasons all of the problems employed for testing in the course of this research paper were written using MiniZinc.
 
-\subsubsection{Specifying a Problem}
+\subsubsection{A MiniZinc Example}
 A MiniZinc problem specification has two parts: (a) the model, which describes
 the structure of a class of problems; and (b) the data, which specifies one particular problem within this class. The pairing of a model with a particular data set is a model instance (sometimes abbreviated to instance).
 
 The model and data may be in separate files. Data files can only contain assignments to parameters declared in the model. A user specifies data files on the command line, rather than naming them in the model file, so that the model file is not tied to any particular data file~\cite{MiniZinc}.
 
-\subsubsection{A MiniZinc Example}
 Each MiniZinc model is a sequence of items, which may appear in any order.
 Consider the MiniZinc model and example data for a restricted job shop scheduling problem in \Cref{fig:minizincModelEx} and \Cref{fig:minizincDataEx}.
 
@@ -121,7 +120,7 @@ They facilitate the creation of multi-file models and the use of library files~\
 
 
 \subsubsection{MiniZinc Challenge}
-Comparing constraint programming systems is fraught with difficulty and in reality an impossible task. The reason is that there are so many components to a modern CP system, only some of which are implemented by some systems. To claim that one CP system is ``better'' than another is a bold claim, since there is almost certainly some problem for which the ``worse'' system allows a stronger model, or a better search, and performs better.
+Comparing constraint programming systems is fraught with difficulty. The reason is that there are so many components to a modern CP system, only some of which are implemented by some systems. To claim that one CP system is ``better'' than another is a bold claim, since there is almost certainly some problem for which the ``worse'' system allows a stronger model, or a better search, and performs better.
 
 MiniZinc makes a good attempt to handle the most obvious obstacle: there are hundreds of potential global constraints, most handled by few or no systems. 
 A standard input language, gives us the capability to compare different solvers.
