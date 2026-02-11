@@ -140,6 +140,7 @@ In our experiments, the \texttt{system} role is used to convey all invariant and
 An additional advantage of the multi-turn setup is that it enables the handling of larger instance data by distributing content across multiple messages, while relying on the LLM's ability to retain previously supplied information within the same conversation. As a result, the system can accommodate longer and more complex inputs without exceeding rate limits.
 
 \subsection{Solvers Description} 
+\label{sec:sDesc}
 The increased efficiency of the multi-turn setup also makes it possible to enrich the contextual information with new textual data: solver descriptions Examples can be found in: . For each solver under consideration, a short textual description was generated and provided to the LLM within the \texttt{system} prompt, with the aim of improving the model's awareness of the available solver options and their respective characteristics.
 
 To better understand the importance of this information, we experimented with two different configurations: one in which solver descriptions were combined with all previously provided contextual elements, and another in which the solvers descriptions constituted the only additional textual information alongside the MiniZinc model and the instance data. This design allows us to assess the contribution of solver-specific knowledge to the overall performance of LLMs.
@@ -264,6 +265,7 @@ Results are reported in \Cref{tab:combinedFeatVars}. Configurations combining fe
 The highest-performing configurations in this group are those combining features with solver and/or problem descriptions. Although these variants do not exceed the best-performing configuration identified in earlier experiments, the top three feature-based setups achieve higher scores than the second-best configuration among the variants proposed in \Cref{sec:SdescPdesc}.
 
 \section{Sampling Temperature Tuning}
+\label{sec:sampTemp}
 The testing of this initial phase involved the use of sampling temperature tuning. Sampling temperature is a hyperparameter of an LLM used in a temperature-based sampling process. It controls the randomness of the model's output at inference time~\cite{TempDef}.
 
 During each step of an LLM's decoding process, the LLM uses the previous tokens to choose the next output token. The final layer of the LLM uses a softmax function to convert raw scores (logits) into probabilities.
@@ -352,13 +354,17 @@ As anticipated, the tests were all made only using \texttt{gpt-oss-120b} for LLM
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{tempHMcg.png}   
-    \caption{Heatmap displaying the performace of all the combinations of temperatures with the five best performing variants in ``Closed Gap'' evaluation calculated as in \Cref{tab:combinedAllLLM}, all tests were performed using \texttt{gpt-oss-120b}.}
+    \caption{Heatmap displaying the performance of all the combinations of temperatures with the five best performing variants in ``Closed Gap'' evaluation calculated as in \Cref{tab:combinedAllLLM}, all tests were performed using \texttt{gpt-oss-120b}.}
     \label{fig:hmTempCg}
 \end{figure}
 
 As displayed in \Cref{tab:combinedFeatVarsTemp} and in \Cref{fig:hmTempPar}, in parallel-solver evaluation, temperature variation produces only moderate changes. Although some configurations yield higher parallel scores than their counterparts with no temperature configuration, all remain below the performance of \texttt{or-tools\_cp-sat-par} (displayed in \Cref{tab:comparisanVarPar}).
 
 In the single-solver evaluation (\Cref{fig:hmTempSin}), temperature has a more pronounced effect. Configurations based on raw scripts show limited sensitivity to temperature, with only marginal improvements with configuration 5, and a decrease in scores for configuration 1. In contrast, feature-based configurations exhibit clearer trends: temperatures in the range 0.2-0.3 are associated with improved single-solver scores. Notably, configuration 3 achieves positive closed-gap values at $\tau$=0.3 and $\tau$=0.7, displayed in \Cref{fig:hmTempCg}, indicating performance above the SBS baseline under those settings, displaying highest scores yet.
+
+\section{Significative Solver Set}
+Throughout the course of these experiments, we manage to surpass the SBS by 1.07, reaching a closed gap of 0.08, as displayed in \Cref{tab:combinedFeatVarsTemp}.
+Still, the improvement is marginal, that's because the SBS, namely \texttt{or-tools\_cp-sat-free} is widely dominant, to the point that always suggesting it wouldn't be a limiting strategy in terms of performance, as shown in \Cref{tab:combinedSdesc}. 
 
 
 \end{document}

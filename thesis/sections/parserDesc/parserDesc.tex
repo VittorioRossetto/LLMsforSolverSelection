@@ -57,15 +57,13 @@ In order to solve the problem of solver-specific translation, we had to modify t
 
 As stated in \Cref{sec:fznLimits}, the difference between the use of one solver over the other is relative to the different propagation of global constraint. 
 
-So, in order to eliminate this distinction, we simply eliminated propagation as a whole, changing MiniZinc compiler code to completely avoid the substitution of predicates by their body. 
-
-For example:
+So, in order to eliminate this distinction, we simply eliminated propagation as a whole, changing MiniZinc compiler code to completely avoid the substitution of predicates by their body. For example:
 
 \begin{lstlisting}[style=minizincstyle]
 include "arg_max.mzn";
 predicate fzn_maximum_arg_bool_opt(array [int] of var opt bool: x, var int: z) =
     let {
-        array [index_set(x)] of var 0..2: dx = array1d(index_set(x), [(xi + 1) default 0 | xi in x]);
+        array[index_set(x)] of var 0..2: dx = array1d(index_set(x), [(xi + 1) default 0 | xi in x]);
     } in maximum_arg(dx, z);
 \end{lstlisting}
 
@@ -87,7 +85,7 @@ For the sake of explanation, we'll use the job shop problem as an example, as de
     \label{fig:fznExample}
 \end{figure}
 
-\section{System Architecture}
+\section{System Functioning}
 \label{sec:fzn2nlArch}
 The production of a viable natural language description with \texttt{fzn2nl} is made through a single-pass pipeline: first of all, the program takes a FlatZinc file as input, then this file is parsed, in order to extract variables, arrays, constraints, solve directive, and search annotations (when present) into an internal model object. The program then computes descriptive statistics on both variables and constraints, and reconstruct the objective structure. All of the parsed artifacts are mapped into readable sentences and grouped summaries. Finally, the system produces a report as output, consisting of problem description, variables description and constraint description.
 
@@ -216,28 +214,103 @@ The final statement,
 \]
 is parsed as an optimization directive. The model is classified as a minimization problem, with objective variable \texttt{end}. No search annotation is provided; therefore, the \texttt{search} field in the internal representation remains \texttt{None}.
 
-To sum up everything, after parsing, the internal model contains:
+% To sum up everything, after parsing, the internal model contains:
 
-\begin{itemize}
-\item nine scalar decision variables (five integer and four Boolean),
-\item two arrays (one constant integer array and one array of decision variables),
-\item ten constraints,
-\item four entries in the definition map linking Boolean variables to reified linear constraints,
-\item problem type set to \texttt{minimize} with objective variable \texttt{end}.
-\end{itemize}
+% \begin{itemize}
+% \item nine scalar decision variables (five integer and four Boolean),
+% \item two arrays (one constant integer array and one array of decision variables),
+% \item ten constraints,
+% \item four entries in the definition map linking Boolean variables to reified linear constraints,
+% \item problem type set to \texttt{minimize} with objective variable \texttt{end}.
+% \end{itemize}
 
+\subsection{Mapping to Natural Language}
 
+Once the FlatZinc instance has been parsed into the internal \texttt{FlatZincModel} representation, \texttt{fzn2nl} performs a deterministic mapping step that turns the extracted structures into a natural language report.
 
+The mapping stage is implemented as a set of specialized formatters, each targeting a distinct part of the FlatZinc model. Rather than generating free-form text, each formatter follows fixed templates and uses controlled vocabularies defined in dedicated mapping tables.
 
+\paragraph{Constraint descriptions and categorization}
+FlatZinc constraints are reported primarily by type. For each constraint type, the mapper aggregates the total number of occurrences in the instance, and the constraint arity. Since FlatZinc arguments can contain arrays, the arity estimate expands known arrays of decision variables into their element variables when possible, and otherwise falls back to array length when statically inferable.
 
+To attach a human-readable explanation to each constraint type, \texttt{fzn2nl} uses a layered description lookup, adding a description corpus extracted from MiniZinc/FlatZinc documentation and  an optional categorized version of the same corpus, which allows constraint types to be grouped under conceptual families such as scheduling, graph, counting, and packing constraints.
 
+The resolver is robust to common naming variations introduced by compilation and library predicates. For example, when a constraint is prefixed by \texttt{fzn\_} or carries suffixes such as \texttt{\_reif}, the resolver progressively strips prefix and trailing tokens to find a meaningful base description.
 
+\paragraph{Search-annotation mapping}
+When the \texttt{solve} item includes an explicit search annotation, the parser extracts it into a structured object (e.g., \texttt{int\_search} or \texttt{seq\_search}). The natural language mapper then translates the search parameters using controlled vocabularies. For sequential searches, the report enumerates phases and describes each phase with the same template.
 
+When the internal model object is available, \texttt{fzn2nl} enrich search descriptions, mentioning a domain range and providing simple structural context such as whether the target is a scalar or an array and how many elements are involved.
 
+\paragraph{Objective-function reconstruction and abstraction}
+FlatZinc explicitly specifies only the optimization direction (minimize or maximize) and an objective variable. The high-level expression for that variable is typically not present as a single expression, but it can be reconstructed in a best-effort way using compilation annotations such as \texttt{defines\_var}. \texttt{fzn2nl} builds a shallow expression tree by following the chain of defining constraints for the objective variable and rendering common arithmetic constructs (e.g., \texttt{int\_plus}, \texttt{int\_minus}, \dots). If reconstruction is not possible, the report falls back to describing the objective variable alone.
 
+The objective expression is additionally rewritten into an abstract form, by replacing variable names with placeholders (e.g., $a,b,c,\dots$). This preserves the algebraic structure of the objective while hiding FlatZinc-specific naming patterns (such as \texttt{X\_INTRODUCED\_k\_}). The abstract expression is also length-limited to ensure the report remains concise.
 
+\paragraph{Variable statistics}
+Finally, \texttt{fzn2nl} maps variables and arrays into summary statistics. The mapper separates user-declared and compiler-introduced variables, distinguishes between integer and Boolean variables, and summarizes known finite integer domains via simple bucketed distributions. Arrays of decision variables are treated as collections of element variables when their elements are explicitly listed; otherwise the mapper falls back to counting by array length when available.
 
+Following the example, the resulting natural language description extracted from \Cref{fig:fznExample}, is:
 
+Problem:
+  This is a minimization problem. The objective is to minimize an objective variable with domain [7, 14] (size 8, mean 10.50) and degree 2. The objective function is in the form: minimize a. No explicit search strategy is specified.
 
+Variables:
+The model contains 9 variables (5 integer, 4 Boolean): 8 compiler-introduced and 1 user-introduced.
+Among 5 integer variables with known finite domains, 100.0\% have domain size in [8, 8] (avg size 8.00).
 
+Constraints:
+Bool FlatZinc builtins: 1 type, 2 constraints (avg arity 2.00)\\
+\quad bool\_clause: 2 constraints with average arity 2.00 
+(constrains $\bigvee_i as[i] \lor \bigvee_j \lnot bs[j]$)
+
+Integer FlatZinc builtins: 2 types, 8 constraints (avg arity 2.50)\\
+\quad int\_lin\_le: 4 constraints with average arity 2.00 
+(constrains $\sum$ as[i] * bs[i] $\leq$ c)
+
+\quad int\_lin\_le\_reif: 4 constraints with average arity 3.00 
+(constrains $r \leftrightarrow$ ($\sum$ as[i] * bs[i] $\leq$ c))
+
+\section{Testing and Results}
+To understand the potential of \texttt{fzn2nl}, we tested the LLM while giving only the generated natural language report, and the report combined with solver description, as described in \Cref{sec:sDesc}. The two configurations were then tested over the significative solver set, with all the different sampling temperatures defined in \Cref{sec:sampTemp}, results are displayed in \Cref{tab:combinedFznTemp}
+
+\begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{lllll}
+        \hline
+            Variant & Temperature & Single Score & Parallel Score & Closed Gap \\ \hline
+            fzn2nl & 0.7 & 52.843 & 73.601 & -0.318 \\ 
+            fzn2nl & 0.2 & 52.002 & 75.143 & -0.354 \\ 
+            fzn2nl + Solver Description & 0.7 & 51.305 & 73.374 & -0.384 \\ 
+            fzn2nl & 0.0 & 50.761 & 72.702 & -0.407 \\ 
+            fzn2nl + Solver Description & 0.3 & 50.576 & 73.893 & -0.415 \\ 
+            fzn2nl + Solver Description & 0.8 & 49.826 & 73.545 & -0.447 \\ 
+            fzn2nl & 0.8 & 48.582 & 74.979 & -0.500 \\ 
+            fzn2nl & 0.3 & 49.423 & 71.380 & -0.464 \\ 
+            fzn2nl + Solver Description & 0.0 & 49.098 & 72.374 & -0.478 \\ 
+            fzn2nl + Solver Description & 0.2 & 49.076 & 73.624 & -0.479 \\ \hline
+        \end{tabular}
+    }
+    \caption{Sampling-temperature sweep on the variants including \texttt{fzn2nl} output, using \texttt{gpt-oss-120b}. Score columns are calculated as in \Cref{tab:combinedAllLLM}.}
+    \label{tab:combinedFznTemp}
+\end{table}
+
+\dots discussione risultati \dots
+
+\subsection{Performance with GPT-5.2}
+To reach further understanding on the tool potential, and on LLMs in general, we also tried testing with a state of the art LLM chatbot: GPT-5.2\cite{gpt52}.
+A model claimed to set a new state of the art across many benchmarks, including GDPval~\cite{GDPval}, where it outperforms industry professionals at well-specified knowledge work tasks spanning 44 occupations.
+
+Overall, GPT-5.2 is said to bring significant improvements in general intelligence, long-context understanding, agentic tool-calling, and vision, making it better at executing complex, real-world tasks end-to-end than any previous model.
+
+The need for (even partial) testing on a current state-of-the-art LLM, is to understand how big of an impact, the use of limited free-tier LLMs, is making in our testing.
+
+However, testing on this model requires the use of a chatbot~\cite{chatGPT}, where we manually insert requests, and retrieve the answers, other than that the use of this model has usage limitations~\cite{gpt52Limits}, putting a cap to the number of requests that could be performed over a day.
+
+Given those limits to the LLM usage, we opted for a limited testing setup: instead of prompting all of the instances reports, we only used one for problem, extracting from an arbitrary instance. Then we used the the suggestion as if it was given for all the instances of that given problem.
+
+\dots tabella \dots
+
+As displayed in \dots, the usage of GPT-5.2 in this limited setup, hasn't displayed any significative improvement in ``Single Score'', and consequently ``Closed Gap''. The calculated score is lower then 3 of the previously tested variants, displayed in \Cref{tab:combinedFznTemp}, and, consequently, behind the SBS score.
 \end{document}

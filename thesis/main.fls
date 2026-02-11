@@ -417,6 +417,18 @@ INPUT ./images/tempHMcg.png
 INPUT images/tempHMcg.png
 INPUT ./images/tempHMcg.png
 INPUT ./images/tempHMcg.png
+INPUT ./sections/parserDesc/parserDesc.tex
+INPUT sections/parserDesc/parserDesc.tex
+INPUT ./sections/parserDesc/parserDesc.tex
+INPUT sections/parserDesc/parserDesc.tex
+INPUT ./images/IndirectProbing.png
+INPUT images/IndirectProbing.png
+INPUT ./images/IndirectProbing.png
+INPUT ./images/IndirectProbing.png
+INPUT ./images/fznExample.png
+INPUT images/fznExample.png
+INPUT ./images/fznExample.png
+INPUT ./images/fznExample.png
 INPUT ./sections/appendix/appendix.tex
 INPUT sections/appendix/appendix.tex
 INPUT ./sections/appendix/appendix.tex
@@ -471,6 +483,7 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pf
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb

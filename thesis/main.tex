@@ -60,14 +60,17 @@
 }
 \lstdefinestyle{minizincstyle}{
     language=MiniZinc,
-    basicstyle=\ttfamily\color{black},
+    % Prefer shrinking the code block over automatic line wrapping.
+    % (Listings can't auto-scale per-line; we use a smaller font and disable breaklines.)
+    basicstyle=\ttfamily\scriptsize\color{black},
     keywordstyle=\bfseries\color{blue!70!black},
     commentstyle=\itshape\color{gray!70!black},
     stringstyle=\color{darkred},
     showstringspaces=false,
-    columns=fullflexible,
+    columns=fixed,
+    basewidth=0.5em,
     keepspaces=true,
-    breaklines=true
+    breaklines=false
 }
 \lstset{
     breaklines=true,
@@ -174,11 +177,11 @@ or nothing at all \ldots
 \lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
 \subfile{sections/experiments/experiments.tex}
 
-% \chapter{A FlatZinc Parser: fzn2nl}
-% \label{chap:parser}
-% \rhead[\fancyplain{}{\bfseries FLATZINC PARSER}]{\fancyplain{}{\bfseries\thepage}}
-% \lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
-% \subfile{sections/parserDesc/parserDesc.tex}
+\chapter{A FlatZinc Parser: fzn2nl}
+\label{chap:parser}
+\rhead[\fancyplain{}{\bfseries FLATZINC PARSER}]{\fancyplain{}{\bfseries\thepage}}
+\lhead[\fancyplain{}{\bfseries\thepage}]{\fancyplain{}{\bfseries\rightmark}}
+\subfile{sections/parserDesc/parserDesc.tex}
 
 \chapter*{Appendix}
 \rhead[\fancyplain{}{\bfseries APPENDIX}]{\fancyplain{}{\bfseries\thepage}}
@@ -258,6 +261,10 @@ or nothing at all \ldots
 \bibitem{MiniZincwFunctions} P. J. Stuckey and G. Tack, ``MiniZinc with Functions'', Lecture Notes in Computer Science, pp. 268-283, 2013, doi: https://doi.org/10.1007/978-3-642-38171-3\_18.
 \bibitem{Gurobi} ``Gurobi Optimizer'', Gurobi Optimization. https://www.gurobi.com/solutions/gurobi-optimizer/
 \bibitem{CPvsMILPsolvers} R. M. e S. de Oliveira and M. S. F. O. de C. Ribeiro, ``Comparing Mixed \& Integer Programming vs. Constraint Programming by solving Job-Shop Scheduling Problems'', Independent Journal of Management \& Production, vol. 6, no. 1, Mar. 2015, doi: https://doi.org/10.14807/ijmp.v6i1.262.
+\bibitem{gpt52} ``Introducing GPT-5.2'', Openai.com, Dec. 11, 2025. https://openai.com/index/introducing-gpt-5-2/
+\bibitem{GDPval} T. Patwardhan et al., ``GDPval: Evaluating AI Model Performance on Real-World Economically Valuable Tasks'', arXiv (Cornell University), Oct. 2025, doi: https://doi.org/10.48550/arxiv.2510.04374.
+\bibitem{chatGPT} OpenAI, ``ChatGPT'', ChatGPT, 2025. https://chatgpt.com/
+\bibitem{gpt52Limits} ``GPT-5.2 in ChatGPT  OpenAI Help Center,'' OpenAI Help Center, 2026. https://help.openai.com/en/articles/11909943-gpt-52-in-chatgpt\#h\_1fadb43e65 (accessed Feb. 11, 2026).
 \end{thebibliography}
 
 \clearpage{\pagestyle{empty}\cleardoublepage}

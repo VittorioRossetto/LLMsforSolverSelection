@@ -279,8 +279,7 @@ The CG of $S$ with respect to $m$ on that scenario is
 
 \noindent
 
-The assumption $m_{\mathrm{VBS}} > m_{\mathrm{SBS}}$ is required, i.e., no single-solver can be the $\mathrm{VBS}$ (otherwise, no algorithm selection would be needed, given that its objective is to reach the $\mathrm{VBS}$). Unlike other scores, CG is designed specifically for meta-solvers. Applying it to individual solvers would
-assign~0 to the $\mathrm{SBS}$ and a negative score to the remaining solvers,
+The assumption $m_{\mathrm{VBS}} > m_{\mathrm{SBS}}$ is required, i.e., no single-solver can be the $\mathrm{VBS}$ (otherwise, no algorithm selection would be needed, given that its objective is to reach the $\mathrm{VBS}$). Unlike other scores, CG is designed specifically for meta-solvers. Applying it to individual solvers would assign~0 to the $\mathrm{SBS}$ and a negative score to the remaining solvers,
 proportional to their performance difference with respect to the $\mathrm{SBS}$ and
 the gap $m_{\mathrm{SBS}} - m_{\mathrm{VBS}}$, which makes little sense for
 individual solvers, as it wouldn't reflect their actual performance overall. 
