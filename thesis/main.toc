@@ -44,23 +44,23 @@
 \contentsline {section}{\numberline {3.5}Sampling Temperature Tuning}{30}{section.3.5}%
 \contentsline {subsection}{\numberline {3.5.1}Choosing Sampling Temperatures}{31}{subsection.3.5.1}%
 \contentsline {subsection}{\numberline {3.5.2}Testing and Results}{32}{subsection.3.5.2}%
-\contentsline {section}{\numberline {3.6}Significative Solver Set}{33}{section.3.6}%
-\contentsline {chapter}{\numberline {4}A FlatZinc Parser: fzn2nl}{35}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Motivation}{35}{section.4.1}%
-\contentsline {section}{\numberline {4.2}FlatZinc Compiler}{36}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}FlatZinc Limitation}{37}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Custom Compiler}{37}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}System Functioning}{38}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Parser}{38}{subsection.4.3.1}%
-\contentsline {subsubsection}{Core Data Structures}{38}{section*.27}%
-\contentsline {subsubsection}{Parsing Strategy}{39}{section*.28}%
-\contentsline {subsubsection}{Example of Parser Execution on a FlatZinc Instance}{40}{section*.29}%
-\contentsline {subsection}{\numberline {4.3.2}Mapping to Natural Language}{42}{subsection.4.3.2}%
-\contentsline {paragraph}{Constraint descriptions and categorization}{42}{section*.30}%
-\contentsline {paragraph}{Search-annotation mapping}{42}{section*.31}%
-\contentsline {paragraph}{Objective-function reconstruction and abstraction}{43}{section*.32}%
-\contentsline {paragraph}{Variable statistics}{43}{section*.33}%
-\contentsline {section}{\numberline {4.4}Testing and Results}{44}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Performance with GPT-5.2}{44}{subsection.4.4.1}%
-\contentsline {chapter}{Appendix}{47}{chapter*.35}%
-\contentsline {chapter}{Bibliography}{65}{chapter*.63}%
+\contentsline {section}{\numberline {3.6}Restricted Solver Portfolio}{33}{section.3.6}%
+\contentsline {chapter}{\numberline {4}A FlatZinc Parser: fzn2nl}{37}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Motivation}{37}{section.4.1}%
+\contentsline {section}{\numberline {4.2}FlatZinc Compiler}{38}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}FlatZinc Limitation}{39}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Custom Compiler}{39}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}System Functioning}{40}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Parser}{40}{subsection.4.3.1}%
+\contentsline {subsubsection}{Core Data Structures}{41}{section*.29}%
+\contentsline {subsubsection}{Parsing Strategy}{41}{section*.30}%
+\contentsline {subsubsection}{Example of Parser Execution on a FlatZinc Instance}{42}{section*.31}%
+\contentsline {subsection}{\numberline {4.3.2}Mapping to Natural Language}{44}{subsection.4.3.2}%
+\contentsline {paragraph}{Constraint descriptions and categorization}{44}{section*.32}%
+\contentsline {paragraph}{Search-annotation mapping}{45}{section*.33}%
+\contentsline {paragraph}{Objective-function reconstruction and abstraction}{45}{section*.34}%
+\contentsline {paragraph}{Variable statistics}{45}{section*.35}%
+\contentsline {section}{\numberline {4.4}Testing and Results}{46}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Performance with GPT-5.2}{46}{subsection.4.4.1}%
+\contentsline {chapter}{Appendix}{49}{chapter*.38}%
+\contentsline {chapter}{Bibliography}{67}{chapter*.67}%

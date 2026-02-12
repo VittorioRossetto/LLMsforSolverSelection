@@ -256,7 +256,7 @@ Each configuration was further extended by incrementally adding the \texttt{.mzn
             Features + .mzn + Instance Data + Solver Description + Problem Description & 54.188182 & 59.410873 & -1.892398 \\ \hline
         \end{tabular}
     }
-    \caption{Test with all the possible combinations involving features extracted using \texttt{mzn2feat, mzn2feat}, all the tests have been made using \texttt{gpt-oss-120b} as it's the only model that produced a positive closed gap until this point. Columns are calculated as in \Cref{tab:combinedAllLLM}.}
+    \caption{Test with all the possible combinations involving features extracted using \texttt{mzn2feat}~\cite{mzn2feat}, all the tests have been made using \texttt{gpt-oss-120b} as it's the only model that produced a positive closed gap until this point. Columns are calculated as in \Cref{tab:combinedAllLLM}.}
     \label{tab:combinedFeatVars}
 \end{table}
 
@@ -314,6 +314,7 @@ As anticipated, the tests were all made only using \texttt{gpt-oss-120b} for LLM
     \item Features extracted through \texttt{mzn2feat} and text description for problems.
     \item \texttt{.mzn} scripts and instance data
 \end{enumerate}
+
 \begin{table}[ht]
     \centering
     \resizebox{\textwidth}{!}{
@@ -362,9 +363,114 @@ As displayed in \Cref{tab:combinedFeatVarsTemp} and in \Cref{fig:hmTempPar}, in 
 
 In the single-solver evaluation (\Cref{fig:hmTempSin}), temperature has a more pronounced effect. Configurations based on raw scripts show limited sensitivity to temperature, with only marginal improvements with configuration 5, and a decrease in scores for configuration 1. In contrast, feature-based configurations exhibit clearer trends: temperatures in the range 0.2-0.3 are associated with improved single-solver scores. Notably, configuration 3 achieves positive closed-gap values at $\tau$=0.3 and $\tau$=0.7, displayed in \Cref{fig:hmTempCg}, indicating performance above the SBS baseline under those settings, displaying highest scores yet.
 
-\section{Significative Solver Set}
-Throughout the course of these experiments, we manage to surpass the SBS by 1.07, reaching a closed gap of 0.08, as displayed in \Cref{tab:combinedFeatVarsTemp}.
-Still, the improvement is marginal, that's because the SBS, namely \texttt{or-tools\_cp-sat-free} is widely dominant, to the point that always suggesting it wouldn't be a limiting strategy in terms of performance, as shown in \Cref{tab:combinedSdesc}. 
+% \section{Limited Solver Set}
+% \label{sec:selectedSolvers}
+% Throughout the course of previous experiments, we managed to surpass the SBS by 1.07, reaching a closed gap of 0.08, as displayed in \Cref{tab:combinedFeatVarsTemp}.
+% Still, the improvement is marginal, that's because the SBS, namely \texttt{or-tools\_cp-sat-free} is widely dominant, to the point that always suggesting it wouldn't be a limiting strategy in terms of performance, as shown in \Cref{tab:combinedSdesc}. 
 
+% For that reason, we decided to try testing the best variants over a set of solvers with no outstandingly better models, with the aim to make the decision process for LLM as nuanced as possible, trying to understand if it actually understands the differences in problems or if it just gives as an answer what are known to be the best solvers, with a mostly arbitrary decision process.
+
+% To understand which solvers would be the best for suited for that process, we calculated the number of optimal solutions found by each of the solvers (results displayed in \Cref{tab:solverOptCount})
+
+% Given the results, we decided to only keep the solvers with a count of optimal solutions in between 40 and 10, removing both dominant solvers that would make the solver selection too easy, and solvers with significantly bad performance that would just distract the LLM, this selection leaves us with the solvers displayed in \Cref{tab:selectedSolvers}.
+
+% \begin{table}[ht]
+%     \centering
+%     \resizebox{.75\textwidth}{!}{
+%         \begin{tabular}{lll}
+%         \hline
+%             Solver & Score & Optimal Count \\ \hline 
+%             gurobi-free & 55.384518 & 38 \\ 
+%             pumpkin-free & 58.543229 & 33 \\ 
+%             choco-solver\_\_cp-sat\_-free & 60.808176 & 32 \\ 
+%             cplex-free & 48.514529 & 30 \\ 
+%             choco-solver\_\_cp\_-free & 58.404323 & 29 \\ 
+%             cp\_optimizer-free & 50.992682 & 26 \\ 
+%             izplus-free & 58.672093 & 25 \\ 
+%             jacop-free & 44.549443 & 25 \\ 
+%             sicstus\_prolog-free & 44.592608 & 24 \\ 
+%             scip-free & 36.902766 & 20 \\ 
+%             highs-free & 34.418506 & 18 \\ 
+%             cbc-free & 22.615259 & 11 \\ 
+%         \end{tabular}
+%     }
+%     \caption{Table displaying all the remaining solvers from free category, after the selection process, ordered by the number of optimal solutions they reach, intended as the number of instances where the given solver scores 1, following the scoring in \Cref{sec:metrics}.}
+%     \label{tab:selectedSolvers}
+% \end{table}
+
+% Finally, we tested the 3 best performing instances, the ones with a positive closed gap, over this portfolio of solvers. As displayed in \Cref{tab:CombinedSelSolversTop}, results on ``Single Score'' evaluation, as also shown for closed gap, are significantly lower than the SBS of this new solver set, namely \texttt{choco-solver\_\_cp-sat\_-free}, with a score of 60.808.
+
+% \begin{table}[ht]
+%     \centering
+%     \resizebox{\textwidth}{!}{
+%         \begin{tabular}{lllll}
+%         \hline
+%             Variant & Single Score & Parallel Score & Closed Gap & Temperature \\ \hline
+%             Features + Solvers Description & 55.843 & 73.042 & -0.190 & 0.7 \\ 
+%             Features + Solvers Description & 54.339 & 72.662 & -0.254 & 0.3 \\ 
+%             Scripts + Problem Description + Solvers Description & 49.776 & 74.736 & -0.449 & nan \\ \hline
+%         \end{tabular}
+%     }
+%     \caption{Test with the best performing variants, using \texttt{gpt-oss-120b}, over the selected solvers from \Cref{tab:selectedSolvers}. Columns are calculated as in \Cref{tab:combinedAllLLM}.}
+%     \label{tab:CombinedSelSolversTop}
+% \end{table}
+
+% Interestingly, a largely limiting factor on LLM score is due to the tendency to suggest \texttt{cp\_optimizer-free} as best solver for most of the instances, while it is proven to not even be one of the 5 best performing solvers in this set.
+
+% Concerning parallel score, it wouldn't make sense to confront the result with \texttt{or-tools\_cp-sat-par}, as its score (88.11) surpasses the one of the VBS in the current solver set, which is 83.85; hence, even with perfect algorithm selection, it wouldn't be reachable. Nonetheless, if we confront the LLM variants parallel score, with the solvers having a reachable score,  all three variants, are still behind the performance of the second best performing solver in open category, namely \texttt{chuffed-free}, with a score of 74.81.
+
+\section{Restricted Solver Portfolio}
+\label{sec:selectedSolvers}
+
+In the previous experimental setting, the best-performing configuration achieved a closed gap of 0.08, corresponding to a marginal improvement over the single best solver (SBS), namely \texttt{or-tools\_cp-sat-free} (cf. \Cref{tab:combinedFeatVarsTemp}). However, this improvement must be interpreted in light of the strong dominance of the SBS across the benchmark set. In practice, consistently selecting \texttt{or-tools\_cp-sat-free} constitutes a highly competitive strategy, as shown in \Cref{tab:combinedSdesc}. This dominance reduces the effective difficulty of the solver selection task.
+
+To obtain a more discriminative evaluation setting, we constructed a restricted solver portfolio excluding both highly dominant solvers and clearly underperforming ones. The objective was to create a scenario in which solver selection requires finer-grained differentiation among comparably performing systems, thereby allowing a more meaningful assessment of the LLMs' decision process.
+
+To guide this selection, we computed, for each solver, the number of instances for which it achieved an optimal score (i.e., score equal to 1 according to the metric defined in \Cref{sec:metrics}). The complete counts are reported in \Cref{tab:solverOptCount}. Based on these results, we retained only solvers whose number of optimal solutions lies between 10 and 40. This filtering removes both outliers at the top end, which would trivialize selection, and solvers with consistently weak performance, which would introduce noise without contributing meaningful alternatives. The resulting portfolio is reported in \Cref{tab:selectedSolvers}.
+
+\begin{table}[ht]
+    \centering
+    \resizebox{.75\textwidth}{!}{
+        \begin{tabular}{lll}
+        \hline
+            Solver & Score & Optimal Count \\ \hline 
+            gurobi-free & 55.384518 & 38 \\ 
+            pumpkin-free & 58.543229 & 33 \\ 
+            choco-solver\_\_cp-sat\_-free & 60.808176 & 32 \\ 
+            cplex-free & 48.514529 & 30 \\ 
+            choco-solver\_\_cp\_-free & 58.404323 & 29 \\ 
+            cp\_optimizer-free & 50.992682 & 26 \\ 
+            izplus-free & 58.672093 & 25 \\ 
+            jacop-free & 44.549443 & 25 \\ 
+            sicstus\_prolog-free & 44.592608 & 24 \\ 
+            scip-free & 36.902766 & 20 \\ 
+            highs-free & 34.418506 & 18 \\ 
+            cbc-free & 22.615259 & 11 \\ 
+        \end{tabular}
+    }
+    \caption{Solvers retained after portfolio restriction, ordered by the number of optimal solutions (score equal to 1 as defined in \Cref{sec:metrics}).}
+    \label{tab:selectedSolvers}
+\end{table}
+
+We then evaluated the three previously best-performing LLM configurations (i.e., those achieving a positive closed gap in the full portfolio setting) on this restricted solver set. Results are reported in \Cref{tab:CombinedSelSolversTop}. In the ``Single Score'' evaluation, all configurations perform below the SBS of the restricted portfolio, which is now \texttt{choco-solver\_\_cp-sat\_-free} with a score of 60.808. The corresponding closed gaps are strictly negative.
+
+\begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{lllll}
+        \hline
+            Variant & Temperature & Single Score & Parallel Score & Closed Gap \\ \hline
+            Features + Solvers Description & 0.7 & 55.843 & 73.042 & -0.190 \\ 
+            Features + Solvers Description & 0.3 & 54.339 & 72.662 & -0.254 \\ 
+            Scripts + Problem Description + Solvers Description & default & 49.776 & 74.736 & -0.449 \\ \hline
+        \end{tabular}
+    }
+    \caption{Performance of the best LLM configurations on the restricted solver portfolio. Columns are computed as in \Cref{tab:combinedAllLLM}.}
+    \label{tab:CombinedSelSolversTop}
+\end{table}
+
+A significant portion of the performance degradation is attributable to a systematic tendency of the LLM to select \texttt{cp\_optimizer-free} for a large fraction of instances, despite its mid-range performance, placing itself as sixth within this restricted portfolio.
+
+Regarding the ``Parallel Score'', comparison with \texttt{or-tools\_cp-sat-par} is no longer meaningful, as its score (88.11) exceeds the virtual best solver (VBS) score achievable within the restricted portfolio (83.85). Therefore, even perfect selection over the reduced set would not reach that value. When compared against solvers whose performance is attainable within the restricted portfolio, the LLM-based variants remain below the second-best solver in the open category, \texttt{chuffed-free}, which achieves a score of 74.81.
 
 \end{document}

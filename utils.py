@@ -61,7 +61,7 @@ FREE_SOLVERS = [
 ]
 
 SIGNIFICATIVE_SOLVERS = [
-    "cbc-free", "choco-solver__cp_-free", "choco-solver__cp_-par", "choco-solver__cp-sat_-free",
+    "cbc-free", "choco-solver__cp_-free", "choco-solver__cp-sat_-free",
     "cp_optimizer-free", "cplex-free","gurobi-free", "highs-free", "izplus-free", "jacop-free",  
     "pumpkin-free", "scip-free", "sicstus_prolog-free"
 ]

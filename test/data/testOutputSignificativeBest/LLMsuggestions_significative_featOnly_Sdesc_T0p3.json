@@ -21,7 +21,7 @@
         "instance1_0p05": {
           "top3": [
             "choco-solver__cp_-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "jacop-free"
           ],
           "time_seconds": null
@@ -37,7 +37,7 @@
         "instance4_0p15": {
           "top3": [
             "choco-solver__cp_-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "jacop-free"
           ],
           "time_seconds": null
@@ -104,7 +104,7 @@
         },
         "cc_rnd_4_4": {
           "top3": [
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "cp_optimizer-free",
             "choco-solver__cp-sat_-free"
           ],
@@ -112,7 +112,7 @@
         },
         "cc_rnd_8_1": {
           "top3": [
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "cp_optimizer-free",
             "choco-solver__cp-sat_-free"
           ],
@@ -120,7 +120,7 @@
         },
         "cc_rnd_8_2": {
           "top3": [
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "cp_optimizer-free",
             "choco-solver__cp-sat_-free"
           ],
@@ -147,7 +147,7 @@
         "cgt_3_h39_r0.05_s1_3": {
           "top3": [
             "choco-solver__cp-sat_-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "pumpkin-free"
           ],
           "time_seconds": null
@@ -155,7 +155,7 @@
         "cgt_5_h27_r0.05_s0.8_0": {
           "top3": [
             "choco-solver__cp-sat_-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "pumpkin-free"
           ],
           "time_seconds": null
@@ -163,7 +163,7 @@
         "cgt_8_h16_r0.05_s0.5_3": {
           "top3": [
             "choco-solver__cp-sat_-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "pumpkin-free"
           ],
           "time_seconds": null
@@ -188,7 +188,7 @@
         },
         "14-10-0-2_1": {
           "top3": [
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "cp_optimizer-free",
             "jacop-free"
           ],
@@ -196,7 +196,7 @@
         },
         "14-10-0-2_3": {
           "top3": [
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "cp_optimizer-free",
             "jacop-free"
           ],
@@ -204,7 +204,7 @@
         },
         "15-15-0-1_3": {
           "top3": [
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "cp_optimizer-free",
             "jacop-free"
           ],
@@ -232,7 +232,7 @@
           "top3": [
             "choco-solver__cp-sat_-free",
             "cp_optimizer-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         },
@@ -240,7 +240,7 @@
           "top3": [
             "choco-solver__cp-sat_-free",
             "cp_optimizer-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         },
@@ -248,7 +248,7 @@
           "top3": [
             "choco-solver__cp-sat_-free",
             "cp_optimizer-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         }
@@ -316,7 +316,7 @@
           "top3": [
             "jacop-free",
             "sicstus_prolog-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         },
@@ -324,7 +324,7 @@
           "top3": [
             "jacop-free",
             "sicstus_prolog-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         },
@@ -332,7 +332,7 @@
           "top3": [
             "jacop-free",
             "sicstus_prolog-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         }
@@ -341,7 +341,7 @@
         "h11-1": {
           "top3": [
             "choco-solver__cp-sat_-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "scip-free"
           ],
           "time_seconds": null
@@ -349,7 +349,7 @@
         "h14-1": {
           "top3": [
             "choco-solver__cp-sat_-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "scip-free"
           ],
           "time_seconds": null
@@ -425,7 +425,7 @@
         "i01": {
           "top3": [
             "cp_optimizer-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "sicstus_prolog-free"
           ],
           "time_seconds": null
@@ -433,14 +433,14 @@
         "i03": {
           "top3": [
             "cp_optimizer-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "sicstus_prolog-free"
           ],
           "time_seconds": null
         },
         "i06": {
           "top3": [
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "choco-solver__cp-sat_-free",
             "jacop-free"
           ],
@@ -448,7 +448,7 @@
         },
         "i11": {
           "top3": [
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "choco-solver__cp-sat_-free",
             "jacop-free"
           ],
@@ -456,7 +456,7 @@
         },
         "i14": {
           "top3": [
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "choco-solver__cp-sat_-free",
             "jacop-free"
           ],
@@ -483,7 +483,7 @@
         "BnMUR3YMRk": {
           "top3": [
             "cp_optimizer-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "scip-free"
           ],
           "time_seconds": null
@@ -491,7 +491,7 @@
         "avdoaYnfXq": {
           "top3": [
             "cp_optimizer-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "scip-free"
           ],
           "time_seconds": null
@@ -499,7 +499,7 @@
         "vWQp9idqMs": {
           "top3": [
             "cp_optimizer-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "scip-free"
           ],
           "time_seconds": null
@@ -509,7 +509,7 @@
         "10-10-6": {
           "top3": [
             "choco-solver__cp-sat_-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "pumpkin-free"
           ],
           "time_seconds": null
@@ -517,7 +517,7 @@
         "12-12-8": {
           "top3": [
             "choco-solver__cp-sat_-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "pumpkin-free"
           ],
           "time_seconds": null
@@ -525,7 +525,7 @@
         "14-14-8": {
           "top3": [
             "cp_optimizer-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "scip-free"
           ],
           "time_seconds": null
@@ -533,7 +533,7 @@
         "20-18-9": {
           "top3": [
             "cp_optimizer-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "scip-free"
           ],
           "time_seconds": null
@@ -541,7 +541,7 @@
         "8-8-4": {
           "top3": [
             "cp_optimizer-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "scip-free"
           ],
           "time_seconds": null
@@ -608,7 +608,7 @@
         },
         "1UBI.13p.19aa.usingEref_self": {
           "top3": [
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "cp_optimizer-free",
             "jacop-free"
           ],
@@ -616,7 +616,7 @@
         },
         "1UBI.13p.9aa.usingEref_self_x": {
           "top3": [
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "cp_optimizer-free",
             "jacop-free"
           ],
@@ -624,7 +624,7 @@
         },
         "2TRX.11p.8aa.usingEref_self_x": {
           "top3": [
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "cp_optimizer-free",
             "jacop-free"
           ],
@@ -636,7 +636,7 @@
           "top3": [
             "cp_optimizer-free",
             "choco-solver__cp-sat_-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         },
@@ -644,7 +644,7 @@
           "top3": [
             "cp_optimizer-free",
             "choco-solver__cp-sat_-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         },
@@ -652,7 +652,7 @@
           "top3": [
             "cp_optimizer-free",
             "choco-solver__cp-sat_-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         },
@@ -660,7 +660,7 @@
           "top3": [
             "cp_optimizer-free",
             "choco-solver__cp-sat_-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         },
@@ -668,7 +668,7 @@
           "top3": [
             "cp_optimizer-free",
             "choco-solver__cp-sat_-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         }
@@ -718,7 +718,7 @@
       "tower": {
         "tower_050_050_10_050-03": {
           "top3": [
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "cp_optimizer-free",
             "jacop-free"
           ],
@@ -726,7 +726,7 @@
         },
         "tower_070_070_15_070-02": {
           "top3": [
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "cp_optimizer-free",
             "jacop-free"
           ],
@@ -734,7 +734,7 @@
         },
         "tower_070_070_15_070-08": {
           "top3": [
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "choco-solver__cp_-free",
             "cp_optimizer-free"
           ],
@@ -742,7 +742,7 @@
         },
         "tower_070_070_30_100-02": {
           "top3": [
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "choco-solver__cp_-free",
             "cp_optimizer-free"
           ],
@@ -750,7 +750,7 @@
         },
         "tower_500_500_50_300-05": {
           "top3": [
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "choco-solver__cp_-free",
             "cp_optimizer-free"
           ],
@@ -762,7 +762,7 @@
           "top3": [
             "cp_optimizer-free",
             "scip-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         },
@@ -770,7 +770,7 @@
           "top3": [
             "cp_optimizer-free",
             "scip-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         },
@@ -778,7 +778,7 @@
           "top3": [
             "cp_optimizer-free",
             "scip-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         },
@@ -786,7 +786,7 @@
           "top3": [
             "cp_optimizer-free",
             "scip-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         },
@@ -794,7 +794,7 @@
           "top3": [
             "cp_optimizer-free",
             "scip-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         }
@@ -802,7 +802,7 @@
       "work-task-variation": {
         "generated-seed-1-length-16-open-14-workers-12-block-15": {
           "top3": [
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "cp_optimizer-free",
             "jacop-free"
           ],
@@ -810,7 +810,7 @@
         },
         "generated-seed-10-length-12-open-10-workers-12-block-5": {
           "top3": [
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "cp_optimizer-free",
             "jacop-free"
           ],
@@ -819,7 +819,7 @@
         "generated-seed-3-length-10-open-8-workers-12-block-15": {
           "top3": [
             "choco-solver__cp-sat_-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "choco-solver__cp_-free"
           ],
           "time_seconds": null
@@ -827,7 +827,7 @@
         "generated-seed-4-length-14-open-12-workers-12-block-15": {
           "top3": [
             "choco-solver__cp-sat_-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "choco-solver__cp_-free"
           ],
           "time_seconds": null
@@ -835,7 +835,7 @@
         "generated-seed-8-length-12-open-10-workers-10-block-15": {
           "top3": [
             "choco-solver__cp-sat_-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "choco-solver__cp_-free"
           ],
           "time_seconds": null

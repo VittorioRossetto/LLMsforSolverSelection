@@ -21,7 +21,7 @@
         "instance1_0p05": {
           "top3": [
             "choco-solver__cp_-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "choco-solver__cp-sat_-free"
           ],
           "time_seconds": null
@@ -56,7 +56,7 @@
           "top3": [
             "cp_optimizer-free",
             "jacop-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         },
@@ -147,7 +147,7 @@
         "cgt_3_h39_r0.05_s1_3": {
           "top3": [
             "cp_optimizer-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "jacop-free"
           ],
           "time_seconds": null
@@ -174,7 +174,7 @@
           "top3": [
             "cp_optimizer-free",
             "choco-solver__cp-sat_-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         },
@@ -215,7 +215,7 @@
         "FBDk04": {
           "top3": [
             "choco-solver__cp-sat_-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "jacop-free"
           ],
           "time_seconds": null
@@ -232,7 +232,7 @@
           "top3": [
             "cp_optimizer-free",
             "choco-solver__cp_-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         },
@@ -258,7 +258,7 @@
           "top3": [
             "cp_optimizer-free",
             "choco-solver__cp-sat_-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         },
@@ -400,7 +400,7 @@
           "top3": [
             "cp_optimizer-free",
             "choco-solver__cp-sat_-free",
-            "choco-solver__cp_-par"
+            "choco-solver__cp_-free"
           ],
           "time_seconds": null
         },
@@ -415,7 +415,7 @@
         "test05": {
           "top3": [
             "cp_optimizer-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "izplus-free"
           ],
           "time_seconds": null
@@ -609,7 +609,7 @@
         "1UBI.13p.19aa.usingEref_self": {
           "top3": [
             "cp_optimizer-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "sicstus_prolog-free"
           ],
           "time_seconds": null
@@ -677,7 +677,7 @@
         "stripboard_w10_h10_l12_c4_n24": {
           "top3": [
             "cp_optimizer-free",
-            "choco-solver__cp_-par",
+            "choco-solver__cp_-free",
             "choco-solver__cp_-free"
           ],
           "time_seconds": null

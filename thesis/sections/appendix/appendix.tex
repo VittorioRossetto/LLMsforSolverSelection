@@ -590,4 +590,35 @@ v_sum_domdeg_vars    368586                 Sum of the ratio variables domain/de
     \label{fig:hmTempSin}
 \end{figure}
 
+\begin{table}[ht]
+    \centering
+    \resizebox{.75\textwidth}{!}{
+        \begin{tabular}{lll}
+        \hline
+            Solver & Score & Optimal Count \\ \hline
+            or-tools\_cp-sat-free & 76.964375 & 55 \\ 
+            picatsat-free & 70.933307 & 53 \\ 
+            chuffed-free & 74.456334 & 52 \\ 
+            huub-free & 68.497987 & 48 \\ 
+            gurobi-free & 55.384518 & 38 \\ 
+            pumpkin-free & 58.543229 & 33 \\ 
+            choco-solver\_\_cp-sat\_-free & 60.808176 & 32 \\ 
+            cplex-free & 48.514529 & 30 \\ 
+            choco-solver\_\_cp\_-free & 58.404323 & 29 \\ 
+            cp\_optimizer-free & 50.992682 & 26 \\ 
+            izplus-free & 58.672093 & 25 \\ 
+            jacop-free & 44.549443 & 25 \\ 
+            sicstus\_prolog-free & 44.592608 & 24 \\ 
+            scip-free & 36.902766 & 20 \\ 
+            highs-free & 34.418506 & 18 \\ 
+            cbc-free & 22.615259 & 11 \\ 
+            or-tools\_cp-sat\_ls-free & 43.222031 & 7 \\ 
+            yuck-free & 34.715515 & 4 \\ 
+            atlantis-free & 1.500000 & 0 \\ \hline
+        \end{tabular}
+    }
+    \caption{Table displaying all the solvers from free catecory ordered by the number of optimal solutions they reach, intended as the number of instances where the given solver scores 1, following the scoring in \Cref{sec:metrics}.}
+    \label{tab:solverOptCount}
+\end{table}
+
 \end{document}

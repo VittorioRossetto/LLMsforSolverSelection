@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1770784739.4629 "/home/vro5/Coding/AgenticSolvers/thesis/main.tex" "main.pdf" "main" 1770784742.46115 0
+["pdflatex"] 1770874596.15872 "/home/vro5/Coding/AgenticSolvers/thesis/main.tex" "main.pdf" "main" 1770874600.72537 0
   "/home/vro5/Coding/AgenticSolvers/thesis/main.tex" 1770783603.87439 18516 0cc61e37641f407a7586d2e8f3509874 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
@@ -237,18 +237,18 @@
   "images/tempHM1.png" 1769998198.07209 43383 0695075842ac6151d357b578dca84527 ""
   "images/tempHM3.png" 1769998139.36394 52788 ace407f5cbe3f68bc5c30ba338b6c642 ""
   "images/tempHMcg.png" 1769998221.77876 49567 57e8105fdd2181791bb7347cce849eb4 ""
-  "main.aux" 1770784742.29189 47554 9ebfc700a60c3c85fceebe31d0263e7f "pdflatex"
-  "main.out" 1770784742.29589 8001 da49df17dbc36eabf2da9ac6a653d919 "pdflatex"
+  "main.aux" 1770874600.47621 50095 5b08047bcd6a3513ce715a292d211396 "pdflatex"
+  "main.out" 1770874600.48321 8016 328e7d60e0ed1a2fecb3264cdedd5194 "pdflatex"
   "main.tex" 1770783603.87439 18516 0cc61e37641f407a7586d2e8f3509874 ""
-  "main.toc" 1770784742.29689 5296 c0943ede2ddd2d0b84d10e10fc022c8b "pdflatex"
+  "main.toc" 1770874600.48321 5299 a1b49e7e618dea2919c18c05c444516c "pdflatex"
   "sections/Intro/intro.tex" 1770698309.25592 4544 a7386e96d6428c48be3f6f556d775b08 ""
-  "sections/appendix/appendix.tex" 1770697125.16117 35054 a1f1e8b1ec544c8cb6bd5eac1ae039a7 ""
+  "sections/appendix/appendix.tex" 1770861967.92298 36448 769fd6bf98a0cc7a2bcbf21d3bea5067 ""
   "sections/background/background.tex" 1770693292.59492 21129 e2cff61b2c6c1e360e7ebd32f1f89c3a ""
   "sections/c1/c1.tex" 1770770881.97878 22954 ef1eb1ef153700483ab004041840428f ""
-  "sections/experiments/experiments.tex" 1770784734.82895 35673 1711dd01f67f3cb0aeed0dff0ad53e37 ""
+  "sections/experiments/experiments.tex" 1770873876.93088 44388 076cb7f0622fbb5fd6e628b483be4acd ""
   "sections/frontPage/frontespizio.tex" 1770273710.76824 1321 acbcb7ebe5b8c6e83308503e0d66ab68 ""
   "sections/frontPage/marchio-di-ateneo.png" 1770273131.64906 52302 55c4449555c1fc9b0566a3c791625973 ""
-  "sections/parserDesc/parserDesc.tex" 1770783529.43707 27407 2ca5412c42572f421e4b5370182589ef ""
+  "sections/parserDesc/parserDesc.tex" 1770874586.10794 28550 d10f870c92474477ef97017a90bed17c ""
   (generated)
   "main.aux"
   "main.log"
