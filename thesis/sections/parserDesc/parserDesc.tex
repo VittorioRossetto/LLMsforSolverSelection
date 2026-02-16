@@ -1,6 +1,18 @@
 \documentclass[../../main]{subfiles}
 \begin{document}
 
+This chapter describes the rationale and development of \texttt{fzn2nl}~\cite{fzn2nl}, a tool designed to generate a deterministic natural language description of a constraint problem starting from its FlatZinc representation.
+
+The first section outlines the motivations that led to the development of \texttt{fzn2nl}. The tool was conceived both as a supporting component of the present research and as an independent contribution. In particular, we discuss the limitations of raw FlatZinc code as input for LLM prompting, and motivate the need for a structured textual abstraction that preserves semantic content while improving interpretability.
+
+The second section provides a concise overview of the MiniZinc compiler, with emphasis on the FlatZinc intermediate representation. We then describe the modifications introduced to the compiler infrastructure in order to avoid indirect suggestions for an LLM, in accordance with the design objectives presented earlier.
+
+The third section details the internal architecture of \texttt{fzn2nl}. We describe the core data structures, the parsing procedure, and the mapping strategy used to translate variables, domains, constraints, and objective components into natural language. The exposition follows a running example to illustrate each transformation step and to clarify the correspondence between FlatZinc constructs and their textual representation.
+
+The final section reports the experimental evaluation of LLM performance when prompted with the generated natural language descriptions. In order to assess the effectiveness of the textual abstraction introduced by \texttt{fzn2nl}.
+
+\section{Motivation}
+
 From the study explained in the course of \Cref{chap:expEval} some important insights emerged. First and foremost, the limitation over token per request and over token per context window is a problem that we only managed to work around with the techniques explained in \Cref{sec:expSetup}, before adding the use of a feature extractor (\Cref{sec:features}).
 
 Another limitation in LLMs, as briefly explained in \Cref{sec:LLM}, is that they work only with statistic prediction, based on their previous knowledge, this approach clearly creates gaps when the LLM is questioned with a completely new problem. To surpass this limitation, we needed a way to standardize all the problems so that an LLM can evaluate directly based on the problem characteristics.
@@ -8,10 +20,6 @@ Another limitation in LLMs, as briefly explained in \Cref{sec:LLM}, is that they
 The use of structured input, extracted from the problem scripts, proved to be a viable solution to these problems, showing the highest score yet. But while the results obtained with \texttt{mzn2feat} proved to be consistent, we still believed there could be a better way to formalize MiniZinc problems for an LLM given the portrayed limitations when confronting the LLM with a selected set of solver (\Cref{sec:selectedSolvers}).
 
 The development of \texttt{fzn2nl}~\cite{fzn2nl}, was born from the idea to create a \texttt{FlatZinc} parser, that taken a file as input, produces a deterministic natural language description of the problem, exposing its main characteristics, in a way that is best suitable for an LLM. 
-
-\dots Descrizione per sezione \dots
-
-\section{Motivation}
 
 Large language models (LLMs) encode vast amounts of pre-trained knowledge in their parameters, but updating them as real-world information evolves remains a challenge. 
 Parametric knowledge of LLMs remains mostly static~\cite{FTLLMallucination} after the pre-training stage, whereas knowledge in the world continues to change. 
@@ -85,7 +93,7 @@ For the sake of explanation, we'll use the job shop problem as an example, as de
     \label{fig:fznExample}
 \end{figure}
 
-\section{System Functioning}
+\section{Tool Functioning}
 \label{sec:fzn2nlArch}
 The production of a viable natural language description with \texttt{fzn2nl} is made through a single-pass pipeline: first of all, the program takes a FlatZinc file as input, then this file is parsed, in order to extract variables, arrays, constraints, solve directive, and search annotations (when present) into an internal model object. The program then computes descriptive statistics on both variables and constraints, and reconstruct the objective structure. All of the parsed artifacts are mapped into readable sentences and grouped summaries. Finally, the system produces a report as output, consisting of problem description, variables description and constraint description.
 
@@ -241,7 +249,7 @@ When the \texttt{solve} item includes an explicit search annotation, the parser 
 
 When the internal model object is available, \texttt{fzn2nl} enrich search descriptions, mentioning a domain range and providing simple structural context such as whether the target is a scalar or an array and how many elements are involved.
 
-\paragraph{Objective-function reconstruction and abstraction}
+\paragraph{Objective-function reconstruction}
 FlatZinc explicitly specifies only the optimization direction (minimize or maximize) and an objective variable. The high-level expression for that variable is typically not present as a single expression, but it can be reconstructed in a best-effort way using compilation annotations such as \texttt{defines\_var}. \texttt{fzn2nl} builds a shallow expression tree by following the chain of defining constraints for the objective variable and rendering common arithmetic constructs (e.g., \texttt{int\_plus}, \texttt{int\_minus}, \dots). If reconstruction is not possible, the report falls back to describing the objective variable alone.
 
 The objective expression is additionally rewritten into an abstract form, by replacing variable names with placeholders (e.g., $a,b,c,\dots$). This preserves the algebraic structure of the objective while hiding FlatZinc-specific naming patterns (such as \texttt{X\_INTRODUCED\_k\_}). The abstract expression is also length-limited to ensure the report remains concise.

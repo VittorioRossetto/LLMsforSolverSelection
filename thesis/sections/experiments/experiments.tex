@@ -7,7 +7,9 @@ The first section reports results obtained with the most basic configuration, us
 
 The third section investigates multi-turn experiments, where prompts are enriched with solver descriptions and combined problem-solver descriptions. This setup leverages conversational state to reduce redundancy and mitigate rate-limit constraints inherent to single-request configurations. From this stage onward, experiments are conducted only with the best-performing model.
 
-The fourth section evaluates the use of structured contextual representations derived from a feature extraction tool~\cite{mzn2feat}, in combination with the prompt strategies developed earlier. Finally, the fifth section analyzes the effect of sampling temperature tuning~\cite{ContextualTemp} by testing multiple temperature values on the five most effective configuration variants identified across the study.
+The fourth section evaluates the use of structured contextual representations derived from a feature extraction tool~\cite{mzn2feat}, in combination with the prompt strategies developed earlier. The fifth section analyzes the effect of sampling temperature tuning~\cite{ContextualTemp} by testing multiple temperature values on the five most effective configuration variants identified across the study.
+
+Finally, the sixth section analyzes LLM performance whe tested on a restricted set of solvers to choose from, avoiding the best performing, dominant solvers and the worst performing ones. To assess how deeply the LLM understands each of the problems.
 
 \section{Preliminary tests}
 \label{sec:initTests}
