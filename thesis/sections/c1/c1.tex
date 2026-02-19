@@ -3,7 +3,7 @@
 
 In this chapter, we outline the decisions for an initial benchmark, which serves as the basis for refining subsequent experiments and assessing both the current capabilities and future potential of the solver.
 
-The chapter is structured into four sections, each addressing a key preliminary choice. The first section discusses the selection of LLMs used for testing. The second details the initial prompt-engineering strategy needed to define a clean, consistent prompt format for evaluation. The third presents the rationale behind the selection of benchmark problems used to test model performance. The fifth explains the metrics adopted to evaluate the testing results. The final section explains the pre-processing methods adopted the make automatic testing possible.
+The chapter is structured into six sections, each addressing a key preliminary choice. The first section discusses the provider selection. The second describes the selection of large language models used for testing. The third details the initial prompt-engineering strategy needed to define a clean, consistent prompt format for evaluation. The fourth presents the rationale behind the selection of benchmark problems used to test model performance. The fifth explains the metrics adopted to evaluate the testing results. The sixth describes the experiment setup and the pre-processing methods adopted to make automatic testing possible.
 
 \section{Provider Choice}
 First of all, we needed to understand which LLMs we could use for the algorithm selection. Given the limited computational resources available during the testing phase, we had to rely on externally hosted LLMs accessed through usage-based APIs. The selection prioritized generous free tiers, permissive rate limits, and straightforward integration. This led to the choice of the following providers:
@@ -27,25 +27,25 @@ From the leftmost column of the table, there are: Model containing the names of 
         \toprule
         Model & RPM & RPD & TPM & TPD \\
         \midrule
-        allam-2-7b & 30 & 7000 & 6000 & 500000 \\
-        deepseek-r1-distill-llama-70b & 30 & 1000 & 6000 & 100000 \\
-        gemma2-9b-it & 30 & 14400 & 15000 & 500000 \\
-        groq/compound & 30 & 250 & 70000 & -- \\
-        groq/compound-mini & 30 & 250 & 70000 & -- \\
-        llama-3.1-8b-instant & 30 & 14400 & 6000 & 500000 \\
-        llama-3.3-70b-versatile & 30 & 1000 & 12000 & 100000 \\
-        meta-llama/llama-4-maverick-17b-128e-instruct & 30 & 1000 & 6000 & 500000 \\
-        meta-llama/llama-4-scout-17b-16e-instruct & 30 & 1000 & 30000 & 500000 \\
-        meta-llama/llama-guard-4-12b & 30 & 14400 & 15000 & 500000 \\
-        meta-llama/llama-prompt-guard-2-22m & 30 & 14400 & 15000 & 500000 \\
-        meta-llama/llama-prompt-guard-2-86m & 30 & 14400 & 15000 & 500000 \\
-        moonshotai/kimi-k2-instruct & 60 & 1000 & 10000 & 300000 \\
-        moonshotai/kimi-k2-instruct-0905 & 60 & 1000 & 10000 & 300000 \\
-        openai/gpt-oss-120b & 30 & 1000 & 8000 & 200000 \\
-        openai/gpt-oss-20b & 30 & 1000 & 8000 & 200000 \\
-        playai-tts & 10 & 100 & 1200 & 3600 \\
-        playai-tts-arabic & 10 & 100 & 1200 & 3600 \\
-        qwen/qwen3-32b & 60 & 1000 & 6000 & 500000 \\
+        \texttt{allam-2-7b} & 30 & 7000 & 6000 & 500000 \\
+        \texttt{deepseek-r1-distill-llama-70b} & 30 & 1000 & 6000 & 100000 \\
+        \texttt{gemma2-9b-it} & 30 & 14400 & 15000 & 500000 \\
+        \texttt{groq/compound} & 30 & 250 & 70000 & -- \\
+        \texttt{groq/compound-mini} & 30 & 250 & 70000 & -- \\
+        \texttt{llama-3.1-8b-instant} & 30 & 14400 & 6000 & 500000 \\
+        \texttt{llama-3.3-70b-versatile} & 30 & 1000 & 12000 & 100000 \\
+        \texttt{meta-llama/llama-4-maverick-17b-128e-instruct} & 30 & 1000 & 6000 & 500000 \\
+        \texttt{meta-llama/llama-4-scout-17b-16e-instruct} & 30 & 1000 & 30000 & 500000 \\
+        \texttt{meta-llama/llama-guard-4-12b} & 30 & 14400 & 15000 & 500000 \\
+        \texttt{meta-llama/llama-prompt-guard-2-22m} & 30 & 14400 & 15000 & 500000 \\
+        \texttt{meta-llama/llama-prompt-guard-2-86m} & 30 & 14400 & 15000 & 500000 \\
+        \texttt{moonshotai/kimi-k2-instruct} & 60 & 1000 & 10000 & 300000 \\
+        \texttt{moonshotai/kimi-k2-instruct-0905} & 60 & 1000 & 10000 & 300000 \\
+        \texttt{openai/gpt-oss-120b} & 30 & 1000 & 8000 & 200000 \\
+        \texttt{openai/gpt-oss-20b} & 30 & 1000 & 8000 & 200000 \\
+        \texttt{playai-tts} & 10 & 100 & 1200 & 3600 \\
+        \texttt{playai-tts-arabic} & 10 & 100 & 1200 & 3600 \\
+        \texttt{qwen/qwen3-32b} & 60 & 1000 & 6000 & 500000 \\
         \bottomrule
     \end{tabular}
     \caption{Rate limits - Groq models~\cite{GroqRL}: \\This table shows all the offered models from Groq API, in leftmost column and each relative rate limit.}
@@ -59,11 +59,11 @@ From the leftmost column of the table, there are: Model containing the names of 
         \toprule
         Model & RPM & RPD & TPM & TPD \\
         \midrule
-        gemini-2.5-pro & 5 & 100 & 250000 & -- \\
-        gemini-2.5-flash & 10 & 250 & 250000 & -- \\
-        gemini-2.5-flash-lite & 15 & 1000 & 250000 & -- \\
-        gemini-2.0-flash & 15 & 200 & 1000000 & -- \\
-        gemini-2.0-flash-lite & 30 & 200 & 1000000 & -- \\
+        \texttt{gemini-2.5-pro} & 5 & 100 & 250000 & -- \\
+        \texttt{gemini-2.5-flash} & 10 & 250 & 250000 & -- \\
+        \texttt{gemini-2.5-flash-lite} & 15 & 1000 & 250000 & -- \\
+        \texttt{gemini-2.0-flash} & 15 & 200 & 1000000 & -- \\
+        \texttt{gemini-2.0-flash-lite} & 30 & 200 & 1000000 & -- \\
         \bottomrule
     \end{tabular}
     \caption{Rate limits - Gemini models~\cite{GeminiRL}\\This table shows all the offered models from Gemini API, in leftmost column and each relative rate limit.}
@@ -114,14 +114,35 @@ Selecting the top three solvers enables two forms of evaluation:
 \end{itemize}
 The metrics used for these evaluations will be detailed in section~\ref{sec:metrics}.
 
-After all of this considerations, the resulting prompt structure is the one displayed in \Cref{fig:promptEx} 
+After all of this considerations, the resulting prompt structure is the following:
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\linewidth]{PromptExample.png}
-    \caption{Example of prompt}
-    \label{fig:promptEx}
-\end{figure}
+\begin{definition}{Prompt Structure}
+    MiniZinc model:\\
+    \ldots \texttt{MiniZinc problem model (\texttt{.mzn} content)} \ldots
+
+    \vspace{0.5em}
+    MiniZinc data:\\
+    \ldots \texttt{Instance relative data (\texttt{.dzn} or \texttt{.json} content)} \ldots
+
+    \vspace{0.5em}
+    The goal is to determine which constraint programming solver would be best suited for this problem, considering the following options:
+
+        - $s_1$,\\
+        - $s_2$,\\
+        - \ldots\\
+        - $s_n$
+    where $s_1 \ldots s_n \in SolverList$.
+
+    Answer only with the name of the 3 best solvers inside square brackets separated by comma and nothing else.
+\end{definition}
+
+
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[width=\linewidth]{PromptExample.png}
+%     \caption{Example of prompt}
+%     \label{fig:promptEx}
+% \end{figure}
 
 \section{Problem Selection}
 \label{sec:probSelection}
@@ -156,11 +177,12 @@ For example, for decision problems, the outcome may be simply ``yes'' or ``no'' 
 
 An evaluation metric is often not just defined by the output of the solver. Indeed, it can be influenced by other actors, such as the computational resources available, the problems on which we evaluate the solver, and the other solvers involved in the evaluation. For example, it is often unavoidable to set a \texttt{timeout} \(\tau\) on the solver's execution when there is no guarantee of termination in a reasonable amount of time (e.g. NP-hard problems). Timeouts make the evaluation feasible but inevitably couple the evaluation metric to the execution context. For this reason, the evaluation of a meta-solver should also consider the scenario that encompasses the solvers to evaluate, the instances used for the validation, and the timeout. Formally, at least for the purposes of this paper, we can define a scenario as a triple (\(\mathcal{I}, \mathcal{S},\tau\)), where: \(\mathcal{I}\) is a set of problem instances, \(\mathcal{S}\) is a set of individual solvers, \(\tau \in (0,+\infty) \) is a timeout such that the outcome of solvers \(s \in \mathcal{S}\) Solver instance \(i \in \mathcal{I}\) is always measured in the time interval [\(0,\tau\)].
 
-Evaluating meta-solvers over heterogeneous scenarios (\(\mathcal{I}_1, \mathcal{S}_1,\tau_1\)), (\(\mathcal{I}_2, \mathcal{S}_2,\tau_2\)), \dots, is complicated by the fact that the sets of instances \(\mathcal{I}_k\), the sets of solvers \(\mathcal{S}_k\) and the timeouts \(\tau_k\) can be very different. And things could get even more complicated in scenarios including optimization problems.
+Evaluating meta-solvers over heterogeneous scenarios (\(\mathcal{I}_1, \mathcal{S}_1,\tau_1\)), (\(\mathcal{I}_2, \mathcal{S}_2,\tau_2\)), \dots, is complicated by the fact that the sets of instances \(\mathcal{I}_k\), the sets of solvers \(\mathcal{S}_k\) and the timeouts \(\tau_k\) can be very different. Scenarios that involve optimization problems may even present additional complexities.
 
-For those objectives two separate metrics were chosen
+For those objectives two separate metrics were chosen.
 
 \subsection{Metric for Solver Score}
+\label{sec:scoreMetric}
 
 \begin{figure}[h]
     \centering
@@ -169,8 +191,8 @@ For those objectives two separate metrics were chosen
     \label{fig:solverperformaceex}
 \end{figure}
 
-We are now ready to associate to every instance $i$ and solver $s$ a weight that
-quantitatively represents how good is $s$ when solving $i$ over time $T$. We
+We can now proceed to associate, for each instance $i$ and solver $s$, a weight that
+quantitatively represents how well $s$ performs on instance $i$ within time $T$. We
 define the scoring value of $s$ (shortly, score) on the instance $i$ at a
 given time $t$ as a function $\mathrm{score}_{\alpha,\beta}$~\cite{evaluationMetaSolvers, PortfolioAproaches} defined as follows:
 
@@ -286,8 +308,8 @@ individual solvers, as it wouldn't reflect their actual performance overall.
 
 \section{Experiment Setup}
 \label{sec:expSetup}
-We have defined both the structure of the queries posed to the LLMs (\Cref{sec:probSelection}) and the way in which these queries are formulated (\Cref{sec:promptStruct}). The remaining challenge is to evaluate them automatically over the full set of selected instances.
-To this end, we designed an automated testing pipeline that parallelizes execution by assigning one thread per LLM. For each model, requests are issued sequentially, with five requests per problem, each containing a MiniZinc model and a single instance encoded as shown in \Cref{fig:promptEx}.
+We have defined both the structure of the queries posed to the LLMs (\Cref{sec:probSelection}) and the way in which these queries are formulated (\Cref{sec:promptStruct}). The aim now is to evaluate them automatically over the full set of selected instances.
+To this end, we designed an automated testing pipeline that parallelizes execution by assigning one thread per LLM. For each model, requests are issued sequentially, with five requests per problem, each containing a MiniZinc model and a single instance. %encoded as shown in \Cref{fig:promptEx}
 
 Despite preliminary prompt engineering and model filtering, several MiniZinc models, particularly their associated data files, still exceed the providers' rate limits. Given this limitation, additional mechanisms were required to prevent limit violations while still allowing evaluation over the complete instance set.
 

@@ -441,11 +441,24 @@ def process_model_chat(provider, model_id, model_label, query_func, args):
         # when sending only features, do not include the verbose solver description
         solver_desc_text = ''
     else:
-        if getattr(args, 'include_solver_desc', False):
-            solver_desc_map = load_solver_descriptions(args.solver_desc_file if hasattr(args, 'solver_desc_file') else None)
-            solver_desc_text = build_solver_description_text(solver_list, solver_desc_map)
-        else:
-            solver_desc_text = ''
+            if getattr(args, 'include_solver_desc', False):
+                # If the special 'swapped' solver set is selected, load the mapping
+                # from test/data/swappedFreeSolversDesc.json (it contains a top-level
+                # "mapping" dict). Otherwise fall back to the usual loader.
+                if getattr(args, 'solver_set', '') == 'swapped':
+                    sw_path = os.path.join(repo_root, 'test', 'data', 'swappedFreeSolversDesc.json')
+                    try:
+                        with open(sw_path, 'r') as sf:
+                            sw = json.load(sf)
+                        solver_desc_map = sw.get('mapping', {}) if isinstance(sw, dict) else {}
+                    except Exception:
+                        logger.exception(f"Failed to load swapped solver descriptions from {sw_path}")
+                        solver_desc_map = {}
+                else:
+                    solver_desc_map = load_solver_descriptions(args.solver_desc_file if hasattr(args, 'solver_desc_file') else None)
+                solver_desc_text = build_solver_description_text(solver_list, solver_desc_map)
+            else:
+                solver_desc_text = ''
     if getattr(args, 'use_fzn_parser_outputs', False):
         # In fzn-parser mode we send one instance per chat; allow optional explanation after bracket list.
         common_instruction = ""
@@ -664,12 +677,16 @@ def get_solver_list(setname):
         return MINIZINC_SOLVERS
     if setname == 'significative':
         return SIGNIFICATIVE_SOLVERS
+    if setname == 'swapped':
+        # Use the significative solver set when 'swapped' is selected,
+        # but load swapped descriptions separately when requested.
+        return SIGNIFICATIVE_SOLVERS
     return FREE_SOLVERS
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description='Chat-batching benchmark runner')
-    parser.add_argument('--solver-set', choices=['minizinc', 'all', 'free', 'significative'], default='free')
+    parser.add_argument('--solver-set', choices=['minizinc', 'all', 'free', 'significative', 'swapped'], default='free')
     parser.add_argument('--significative-only', action='store_true', default=False,
                         help='Deprecated: use --solver-set significative')
     parser.add_argument('--script-version', choices=['uncommented', 'commented'], default='uncommented')

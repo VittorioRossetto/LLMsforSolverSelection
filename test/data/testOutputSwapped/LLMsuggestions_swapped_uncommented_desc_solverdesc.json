@@ -1,0 +1,846 @@
+{
+  "groq": {
+    "openai/gpt-oss-120b": {
+      "atsp": {
+        "instance14_0p25": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "scip-free"
+          ],
+          "time_seconds": 1.432
+        },
+        "instance11_0p25": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "scip-free"
+          ],
+          "time_seconds": 0.923
+        },
+        "instance1_0p05": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 0.601
+        },
+        "instance4_0p15": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 7.65
+        },
+        "instance20_0p35": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "atlantis-free"
+          ],
+          "time_seconds": 10.726
+        }
+      },
+      "black-hole": {
+        "layout_14": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 11.815
+        },
+        "layout_27": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 11.875
+        },
+        "layout_17": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 10.754
+        },
+        "layout_25": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "yuck-free"
+          ],
+          "time_seconds": 10.971
+        },
+        "layout_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 11.868
+        }
+      },
+      "carpet-cutting": {
+        "cc_rnd_8_1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 28.97
+        },
+        "cc_rnd_12_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "atlantis-free"
+          ],
+          "time_seconds": 29.714
+        },
+        "cc_rnd_16_1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 30.695
+        },
+        "cc_rnd_4_4": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "atlantis-free"
+          ],
+          "time_seconds": 12.759
+        },
+        "cc_rnd_8_2": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 13.891
+        }
+      },
+      "cgt": {
+        "cgt_5_h27_r0.05_s0.8_0": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "scip-free"
+          ],
+          "time_seconds": 0.613
+        },
+        "cgt_3_h39_r0.05_s1_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 11.879
+        },
+        "cgt_12_h27_r0.05_s0.5_3": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 15.048
+        },
+        "cgt_8_h16_r0.05_s0.5_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "scip-free"
+          ],
+          "time_seconds": 11.766
+        },
+        "cgt_3_h39_r0.05_s0.5_0": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "atlantis-free"
+          ],
+          "time_seconds": 9.926
+        }
+      },
+      "EchoSched": {
+        "15-15-0-1_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "atlantis-free"
+          ],
+          "time_seconds": 9.01
+        },
+        "12-12-0-1_7": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 13.92
+        },
+        "13-14-0-2_6": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "atlantis-free"
+          ],
+          "time_seconds": 12.637
+        },
+        "14-10-0-2_1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 14.587
+        },
+        "14-10-0-2_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "atlantis-free"
+          ],
+          "time_seconds": 13.102
+        }
+      },
+      "fbd1": {
+        "FBDk04": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 9.727
+        },
+        "FBDk06": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 11.875
+        },
+        "FBDk08": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 11.773
+        },
+        "FBDk07": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "yuck-free"
+          ],
+          "time_seconds": 10.853
+        },
+        "FBDk09": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 11.706
+        }
+      },
+      "groupsplitter": {
+        "u12g2pref0": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "atlantis-free"
+          ],
+          "time_seconds": 26.892
+        },
+        "u12g2pref2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "atlantis-free"
+          ],
+          "time_seconds": 28.668
+        },
+        "u15g5pref1": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 28.871
+        },
+        "u15g1pref2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "scip-free"
+          ],
+          "time_seconds": 15.768
+        },
+        "u15g3pref0": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 15.979
+        }
+      },
+      "gt-sort": {
+        "n9_ub10_50.0_BEST": {
+          "top3": [
+            "chuffed-free",
+            "cp_optimizer-free",
+            "scip-free"
+          ],
+          "time_seconds": 1.127
+        },
+        "n13_ub20_50.0_BEST": {
+          "top3": [
+            "atlantis-free",
+            "chuffed-free",
+            "choco-solver__cp-sat_-free"
+          ],
+          "time_seconds": 13.929
+        },
+        "n7_ub20_75.0_BEST": {
+          "top3": [
+            "chuffed-free",
+            "scip-free",
+            "choco-solver__cp_-free"
+          ],
+          "time_seconds": 14.748
+        },
+        "n9_ub10_75.0_BEST": {
+          "top3": [
+            "chuffed-free",
+            "yuck-free",
+            "scip-free"
+          ],
+          "time_seconds": 13.113
+        },
+        "n9_ub30_35.0_BEST": {
+          "top3": [
+            "chuffed-free",
+            "choco-solver__cp_-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 12.394
+        }
+      },
+      "hitori": {
+        "h11-1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 17.21
+        },
+        "h5-1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 18.839
+        },
+        "h15-1": {
+          "top3": [
+            "chuffed-free",
+            "scip-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 20.076
+        },
+        "h20-2": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 10.958
+        },
+        "h14-1": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 10.958
+        }
+      },
+      "ihtc-2024-kletzander": {
+        "test05": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 13.825
+        },
+        "test03": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "cp_optimizer-free"
+          ],
+          "time_seconds": 24.166
+        },
+        "i09": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 18.54
+        },
+        "i02": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "scip-free"
+          ],
+          "time_seconds": 23.856
+        },
+        "i07": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 25.091
+        }
+      },
+      "ihtc-2024-marte": {
+        "i14": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "scip-free"
+          ],
+          "time_seconds": 44.957
+        },
+        "i06": {
+          "top3": [
+            "atlantis-free",
+            "chuffed-free",
+            "or-tools_cp-sat-free"
+          ],
+          "time_seconds": 51.914
+        },
+        "i01": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "scip-free"
+          ],
+          "time_seconds": 13.724
+        },
+        "i11": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 13.163
+        },
+        "i03": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 51.755
+        }
+      },
+      "is": {
+        "BnMUR3YMRk": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 1.969
+        },
+        "avdoaYnfXq": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "atlantis-free"
+          ],
+          "time_seconds": 41.038
+        },
+        "1vERFuvviS": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 39.929
+        },
+        "9aGFgDaHX7": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 16.908
+        },
+        "vWQp9idqMs": {
+          "top3": [
+            "atlantis-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 18.83
+        }
+      },
+      "mondoku": {
+        "12-12-8": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "atlantis-free"
+          ],
+          "time_seconds": 0.723
+        },
+        "20-18-9": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "yuck-free"
+          ],
+          "time_seconds": 2.913
+        },
+        "14-14-8": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 12.752
+        },
+        "8-8-4": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 8.807
+        },
+        "10-10-6": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "yuck-free"
+          ],
+          "time_seconds": 8.908
+        }
+      },
+      "products-and-shelves": {
+        "ps-25-03": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 12.699
+        },
+        "ps-25-01": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 15.666
+        },
+        "ps-50-06": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "yuck-free"
+          ],
+          "time_seconds": 10.954
+        },
+        "ps-50-09": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 10.751
+        },
+        "toy": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 10.036
+        }
+      },
+      "proteindesign12": {
+        "1HZ5.12p.19aa.usingEref_self": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "scip-free"
+          ],
+          "time_seconds": 18.941
+        },
+        "2TRX.11p.8aa.usingEref_self_x": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 19.25
+        },
+        "1UBI.13p.9aa.usingEref_self_x": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 14.848
+        },
+        "1UBI.13p.19aa.usingEref_self": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "scip-free"
+          ],
+          "time_seconds": 18.943
+        },
+        "1HZ5.12p.9aa.usingEref_self": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "picatsat-free"
+          ],
+          "time_seconds": 14.849
+        }
+      },
+      "skill-allocation": {
+        "skill_allocation_mzn_3m_3": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "atlantis-free"
+          ],
+          "time_seconds": 12.592
+        },
+        "skill_allocation_mzn_2w_2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "scip-free"
+          ],
+          "time_seconds": 16.997
+        },
+        "skill_allocation_mzn_5d_1": {
+          "top3": [
+            "atlantis-free",
+            "or-tools_cp-sat-free",
+            "chuffed-free"
+          ],
+          "time_seconds": 17.102
+        },
+        "skill_allocation_mzn_2m_2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 12.799
+        },
+        "skill_allocation_mzn_1m_2": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "scip-free"
+          ],
+          "time_seconds": 11.877
+        }
+      },
+      "stripboard": {
+        "stripboard_w20_h15_l12_c6_n12": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 19.863
+        },
+        "stripboard_w15_h10_l12_c6_n12": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "atlantis-free"
+          ],
+          "time_seconds": 24.984
+        },
+        "stripboard_w20_h15_l7_c6_n24": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 25.909
+        },
+        "stripboard_w10_h10_l12_c4_n24": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 12.814
+        },
+        "stripboard_w20_h15_l4_c4_n24": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 12.377
+        }
+      },
+      "tower": {
+        "tower_070_070_30_100-02": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 9.915
+        },
+        "tower_070_070_15_070-08": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "yuck-free"
+          ],
+          "time_seconds": 17.832
+        },
+        "tower_070_070_15_070-02": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "atlantis-free"
+          ],
+          "time_seconds": 13.723
+        },
+        "tower_500_500_50_300-05": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "atlantis-free"
+          ],
+          "time_seconds": 23.955
+        },
+        "tower_050_050_10_050-03": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 12.868
+        }
+      },
+      "tsptw": {
+        "n20w140.005": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 29.703
+        },
+        "n20w180.004": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "scip-free"
+          ],
+          "time_seconds": 22.174
+        },
+        "n100w120.003": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "atlantis-free"
+          ],
+          "time_seconds": 24.782
+        },
+        "n80w180.003": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 19.72
+        },
+        "n20w160.001": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "atlantis-free"
+          ],
+          "time_seconds": 23.846
+        }
+      },
+      "work-task-variation": {
+        "generated-seed-10-length-12-open-10-workers-12-block-5": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "yuck-free"
+          ],
+          "time_seconds": 42.808
+        },
+        "generated-seed-1-length-16-open-14-workers-12-block-15": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "atlantis-free"
+          ],
+          "time_seconds": 35.483
+        },
+        "generated-seed-4-length-14-open-12-workers-12-block-15": {
+          "top3": [
+            "or-tools_cp-sat-free",
+            "chuffed-free",
+            "scip-free"
+          ],
+          "time_seconds": 34.719
+        },
+        "generated-seed-8-length-12-open-10-workers-10-block-15": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "yuck-free"
+          ],
+          "time_seconds": 34.752
+        },
+        "generated-seed-3-length-10-open-8-workers-12-block-15": {
+          "top3": [
+            "chuffed-free",
+            "or-tools_cp-sat-free",
+            "scip-free"
+          ],
+          "time_seconds": 23.958
+        }
+      }
+    }
+  }
+}

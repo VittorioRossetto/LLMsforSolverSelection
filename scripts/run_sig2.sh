@@ -23,9 +23,12 @@ fi
 # name | args | temperature
 # temperature = "default" means do not pass --temperature
 declare -a CONFIGS=(
-  # "base_Pdesc_Sdesc|--include-problem-desc --include-solver-desc --solver-set significative|default"
-  # "featOnly_Sdesc|--features-only --include-features --include-solver-desc --solver-set significative|0.3"
-  "featOnly_Sdesc|--features-only --include-features --include-solver-desc --solver-set significative|0.7"
+  # "base_Pdesc_Sdesc|--include-problem-desc --include-solver-desc --solver-set swapped|default"
+  # "featOnly_Sdesc|--features-only --include-features --include-solver-desc --solver-set swapped|0.3"
+  # "featOnly_Sdesc|--features-only --include-features --include-solver-desc --solver-set swapped|0.7"
+  "fznSig_Sdesc|--solver-set swapped --use-fzn-parser-outputs --include-solver-desc|0.7"
+  "fznSig_Sdesc|--solver-set swapped --use-fzn-parser-outputs --include-solver-desc|0.2"
+
 )
 
 echo "Run started at $(date -u)" | tee -a "$SUMMARY_LOG"

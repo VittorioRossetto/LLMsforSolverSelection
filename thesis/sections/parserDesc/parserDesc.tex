@@ -21,7 +21,7 @@ The use of structured input, extracted from the problem scripts, proved to be a 
 
 The development of \texttt{fzn2nl}~\cite{fzn2nl}, was born from the idea to create a \texttt{FlatZinc} parser, that taken a file as input, produces a deterministic natural language description of the problem, exposing its main characteristics, in a way that is best suitable for an LLM. 
 
-Large language models (LLMs) encode vast amounts of pre-trained knowledge in their parameters, but updating them as real-world information evolves remains a challenge. 
+LLMs encode vast amounts of pre-trained knowledge in their parameters, but updating them as real-world information evolves remains a challenge. 
 Parametric knowledge of LLMs remains mostly static~\cite{FTLLMallucination} after the pre-training stage, whereas knowledge in the world continues to change. 
 
 Even within the pre-training data, knowledge from recent years can conflict earlier knowledge. But, the auto-regressive training objective biases LLMs toward surfacing more frequent but not necessarily recent knowledge~\cite{knowledgeCutoffsLLM}. This problem surfaces primarily when the LLM is confronted with more indirect questions, given that updates in real world lead to nuanced and complex changings in model knowledge (\Cref{fig:indirectProbing})~\cite{MemorizationVSReasoning}.
@@ -56,7 +56,7 @@ The translation algorithm generates a flat model equivalent to the original mode
 \label{sec:fznLimits}
 As previously stated, Flatzinc is solver-specific, which is a clear limitation in our use case. FlatZinc solvers specify the set of global constraints they handle through dedicated propagators. When a given global constraint (e.g., \texttt{alldifferent} or \texttt{circuit}) is supported natively by the target solver, it is preserved in the compiled FlatZinc model and processed using the solver's specialized filtering algorithms. Otherwise, the MiniZinc compiler replaces the global constraint with an equivalent decomposition into more primitive constraints expressed in the solver's supported constraint language.
 
-As a consequence, constraint programming solvers such as Gecode~\cite{Gecode} typically retain many global constraints in their high-level form, exploiting dedicated propagation mechanisms. In contrast, solvers based on alternative paradigms, such as linear programming or mixed-integer linear programming (e.g., Gurobi~\cite{Gurobi}), require these constraints to be reformulated as sets of linear constraints, thereby losing the original global structure in favor of a representation compatible with their underlying solving technology~\cite{CPvsMILPsolvers}.
+As a consequence, CP solvers such as Gecode~\cite{Gecode} typically retain many global constraints in their high-level form, exploiting dedicated propagation mechanisms. In contrast, solvers based on alternative paradigms, such as linear programming or mixed-integer linear programming (e.g., Gurobi~\cite{Gurobi}), require these constraints to be reformulated as sets of linear constraints, thereby losing the original global structure in favor of a representation compatible with their underlying solving technology~\cite{CPvsMILPsolvers}.
 
 Given that, by translating a FlatZinc file with a specific solver, and serving its analysis to an LLM, we are indirectly pushing the LLM towards the solver used for translation, or one of the same category, therefore invalidating the reasoning process.
 
@@ -259,24 +259,32 @@ Finally, \texttt{fzn2nl} maps variables and arrays into summary statistics. The 
 
 Following the example, the resulting natural language description extracted from \Cref{fig:fznExample}, is:
 
-Problem:
-  This is a minimization problem. The objective is to minimize an objective variable with domain [7, 14] (size 8, mean 10.50) and degree 2. The objective function is in the form: minimize a. No explicit search strategy is specified.
+\begin{definition}{Example output from \texttt{fzn2nl} with \Cref{fig:fznExample} as input.}
+Problem: 
+
+This is a minimization problem. The objective is to minimize an objective variable with domain [7, 14] (size 8, mean 10.50) and degree 2. The objective function is in the form: minimize a. No explicit search strategy is specified.\\
 
 Variables:
+
 The model contains 9 variables (5 integer, 4 Boolean): 8 compiler-introduced and 1 user-introduced.
-Among 5 integer variables with known finite domains, 100.0\% have domain size in [8, 8] (avg size 8.00).
+Among 5 integer variables with known finite domains, 100.0\% have domain size in [8, 8] (avg size 8.00).\\
 
 Constraints:
+
 Bool FlatZinc builtins: 1 type, 2 constraints (avg arity 2.00)\\
 \quad bool\_clause: 2 constraints with average arity 2.00 
 (constrains $\bigvee_i as[i] \lor \bigvee_j \lnot bs[j]$)
 
 Integer FlatZinc builtins: 2 types, 8 constraints (avg arity 2.50)\\
-\quad int\_lin\_le: 4 constraints with average arity 2.00 
+int\_lin\_le: 4 constraints with average arity 2.00 
 (constrains $\sum$ as[i] * bs[i] $\leq$ c)
 
-\quad int\_lin\_le\_reif: 4 constraints with average arity 3.00 
+int\_lin\_le\_reif: 4 constraints with average arity 3.00 
 (constrains $r \leftrightarrow$ ($\sum$ as[i] * bs[i] $\leq$ c))
+\end{definition}
+
+The constraints definition are written in \LaTeX, in order to include mathematical expressions. In the example output we are showing the compiled version for better understanding.
+
 
 \section{Testing and Results}
 
@@ -308,7 +316,7 @@ As shown in \Cref{tab:combinedFznTemp}, all configurations based on \texttt{fzn2
 
 \subsection{Performance with GPT-5.2}
 
-To further assess the impact of model capacity on solver selection, we conducted additional experiments using GPT-5.2~\cite{gpt52}, a recent large-scale LLM reported to achieve state-of-the-art performance across multiple evaluation benchmarks, including GDPval~\cite{GDPval}. The model is designed to support extended context handling, agentic tool use, and improved reasoning capabilities.
+To further assess the impact of model capacity on solver selection, we conducted additional experiments using \texttt{GPT-5.2}~\cite{gpt52}, a recent large-scale LLM reported to achieve state-of-the-art performance across multiple evaluation benchmarks, including GDPval~\cite{GDPval}. The model is designed to support extended context handling, agentic tool use, and improved reasoning capabilities.
 
 Testing was conducted by hand, through the official chatbot interface~\cite{chatGPT}, which imposes daily usage limits~\cite{gpt52Limits}. Due to these constraints, a reduced evaluation protocol was adopted. Instead of prompting the model on all instances of each problem, a single representative instance per problem was selected. The solver recommendation obtained for that instance was then applied uniformly to all instances of the corresponding problem for scoring purposes.
 
@@ -317,15 +325,15 @@ Testing was conducted by hand, through the official chatbot interface~\cite{chat
     \begin{tabular}{llll}
         \hline
             Model & Single Score & Parallel Score & Closed Gap \\ \hline
-            GPT-5.2 & 51.539453 & 76.630968 & -0.373799 \\ \hline
+            \texttt{GPT-5.2} & 51.539 & 76.630 & -0.373 \\ \hline
         \end{tabular}
-    \caption{Evaluation of GPT-5.2 under the reduced protocol (one instance per problem). Columns are computed as in \Cref{tab:combinedAllLLM}.}
+    \caption{Evaluation of \texttt{GPT-5.2} under the reduced protocol (one instance per problem). Columns are computed as in \Cref{tab:combinedAllLLM}.}
     \label{tab:combinedgpt52}
 \end{table}
 
-As reported in \Cref{tab:combinedgpt52}, GPT-5.2 does not improve the ``Single Score'' relative to the strongest previously tested configurations, and the resulting closed gap remains negative. The obtained value is lower than 3 of the \texttt{fzn2nl}-based variants reported in \Cref{tab:combinedFznTemp}, as well as below the 2 best-performing configurations evaluated on the restricted portfolio (\Cref{tab:CombinedSelSolversTop}).
+As reported in \Cref{tab:combinedgpt52}, \texttt{GPT-5.2} does not improve the ``Single Score'' relative to the strongest previously tested configurations, and the resulting closed gap remains negative. The obtained value is lower than 3 of the \texttt{fzn2nl}-based variants reported in \Cref{tab:combinedFznTemp}, as well as below the 2 best-performing configurations evaluated on the restricted portfolio (\Cref{tab:CombinedSelSolversTop}).
 
-In contrast, the ``Parallel Score'' achieved by GPT-5.2 under this limited setup is the highest observed within the restricted solver set. Although the evaluation protocol differs from the full-instance experiments, this result indicates that increased model capacity may positively affect parallel-selection performance. A systematic evaluation under uniform experimental conditions would be required to quantify this effect more precisely.
+In contrast, the ``Parallel Score'' achieved by \texttt{GPT-5.2} under this limited setup is the highest observed within the restricted solver set. Although the evaluation protocol differs from the full-instance experiments, this result indicates that increased model capacity may positively affect parallel-selection performance. A systematic evaluation under uniform experimental conditions would be required to quantify this effect more precisely.
 
 
 \end{document}

@@ -40,8 +40,8 @@ BEST = 'openai/gpt-oss-120b'
 
 # --- Argument parsing ---
 parser = argparse.ArgumentParser(description="Benchmark LLM solver recommendations on MiniZinc problems.")
-parser.add_argument('--solver-set', choices=['minizinc', 'all', 'free', 'significative'], default='free',
-                    help="Solver set: 'minizinc', 'all', 'free' (default), or 'significative'.")
+parser.add_argument('--solver-set', choices=['minizinc', 'all', 'free', 'significative', 'swapped'], default='free',
+                    help="Solver set: 'minizinc', 'all', 'free' (default), 'significative', or 'swapped'.")
 parser.add_argument('--significative-only', action='store_true', default=False,
                     help="Deprecated: use --solver-set significative. If set, restrict solver selection to SIGNIFICATIVE_SOLVERS.")
 parser.add_argument('--script-version', choices=['uncommented', 'commented'], default='uncommented',
@@ -88,16 +88,20 @@ if getattr(args, 'significative_only', False):
 if args.solver_set == 'significative':
     solver_list = SIGNIFICATIVE_SOLVERS
     print("Using SIGNIFICATIVE_SOLVERS set.")
+elif args.solver_set == 'all':
+    solver_list = ALL_SOLVERS
+    print("Using ALL_SOLVERS set.")
+elif args.solver_set == 'free':
+    solver_list = FREE_SOLVERS
+    print("Using FREE_SOLVERS set.")
+elif args.solver_set == 'swapped':
+    # The 'swapped' option should use the SIGNIFICATIVE_SOLVERS list
+    # but with swapped solver descriptions when --include-solver-desc is set.
+    solver_list = SIGNIFICATIVE_SOLVERS
+    print("Using SIGNIFICATIVE_SOLVERS set (swapped descriptions).")
 else:
-    if args.solver_set == 'all':
-        solver_list = ALL_SOLVERS
-        print("Using ALL_SOLVERS set.")
-    elif args.solver_set == 'free':
-        solver_list = FREE_SOLVERS
-        print("Using FREE_SOLVERS set.")
-    else:
-        solver_list = MINIZINC_SOLVERS
-        print("Using MINIZINC_SOLVERS set.")
+    solver_list = MINIZINC_SOLVERS
+    print("Using MINIZINC_SOLVERS set.")
 
 print(f"Script version: {args.script_version}")
 print(f"Parallel model workers: {args.max_workers_models}")
@@ -147,7 +151,21 @@ def build_solver_description_text(solver_list, solver_desc_map=None) -> str:
     return "Solvers and descriptions:\n" + "\n".join(lines) + "\n"
 
 
-SOLVER_DESC_MAP = load_solver_descriptions(args.solver_desc_file) if args.include_solver_desc else None
+if args.include_solver_desc:
+    if getattr(args, 'solver_set', '') == 'swapped':
+        sw_path = os.path.join(repo_root, 'test', 'data', 'swappedFreeSolversDesc.json')
+        try:
+            with open(sw_path, 'r') as sf:
+                sw = json.load(sf)
+            SOLVER_DESC_MAP = sw.get('mapping', {}) if isinstance(sw, dict) else None
+        except Exception:
+            logger.exception(f"Failed to load swapped solver descriptions from {sw_path}")
+            SOLVER_DESC_MAP = None
+    else:
+        SOLVER_DESC_MAP = load_solver_descriptions(args.solver_desc_file)
+else:
+    SOLVER_DESC_MAP = None
+
 if args.include_solver_desc and not SOLVER_DESC_MAP:
     print("Warning: --include-solver-desc was set but no solver description map was loaded; continuing without descriptions.")
 

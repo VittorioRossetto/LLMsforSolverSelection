@@ -7,26 +7,26 @@
         \begin{tabular}{lllll}
         \hline
             Model & Total Score & Instances Covered & Average Score \\ \hline
-            gemini-2.0-flash & 53.748 & 67 & 0.802 \\ 
-            gemini-2.5-flash & 69.426 & 86 & 0.807 \\ 
-            gemini-2.5-flash-lite & 69.040 & 85 & 0.812 \\ 
-            gemini-2.5-pro & 41.594 & 51 & 0.815 \\ 
-            allam-2-7b & 0.0 & 10 & 0.0 \\ 
-            groq/compound & 8.246 & 9 & 0.916 \\ 
-            groq/compound-mini & 29.623 & 35 & 0.846 \\ 
-            llama-3.1-8b-instant & 56.228 & 72 & 0.780 \\ 
-            llama-3.3-70b-versatile & 9.496 & 10 & 0.949 \\ 
-            meta-llama/llama-4-maverick-17b-128e-instruct & 63.548 & 72 & 0.882 \\ 
-            meta-llama/llama-4-scout-17b-16e-instruct & 57.814 & 69 & 0.837 \\ 
-            meta-llama/llama-guard-4-12b & 0.0 & 77 & 0.0 \\ 
-            moonshotai/kimi-k2-instruct & 65.816 & 75 & 0.877 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 66.186 & 75 & 0.882 \\ 
-            openai/gpt-oss-120b & 64.508 & 74 & 0.871 \\ 
-            openai/gpt-oss-20b & 63.328 & 75 & 0.844 \\ 
-            qwen/qwen3-32b & 48.018 & 65 & 0.738 \\ \hline
+            \texttt{gemini-2.0-flash} & 53.748 & 67 & 0.802 \\ 
+            \texttt{gemini-2.5-flash} & 69.426 & 86 & 0.807 \\ 
+            \texttt{gemini-2.5-flash-lite} & 69.040 & 85 & 0.812 \\ 
+            \texttt{gemini-2.5-pro} & 41.594 & 51 & 0.815 \\ 
+            \texttt{allam-2-7b} & 0.0 & 10 & 0.0 \\ 
+            \texttt{groq/compound} & 8.246 & 9 & 0.916 \\ 
+            \texttt{groq/compound-mini} & 29.623 & 35 & 0.846 \\ 
+            \texttt{llama-3.1-8b-instant} & 56.228 & 72 & 0.780 \\ 
+            \texttt{llama-3.3-70b-versatile} & 9.496 & 10 & 0.949 \\ 
+            \texttt{meta-llama/llama-4-maverick-17b-128e-instruct} & 63.548 & 72 & 0.882 \\ 
+            \texttt{meta-llama/llama-4-scout-17b-16e-instruct} & 57.814 & 69 & 0.837 \\ 
+            \texttt{meta-llama/llama-guard-4-12b} & 0.0 & 77 & 0.0 \\ 
+            \texttt{moonshotai/kimi-k2-instruct} & 65.816 & 75 & 0.877 \\ 
+            \texttt{moonshotai/kimi-k2-instruct-0905} & 66.186 & 75 & 0.882 \\ 
+            \texttt{openai/gpt-oss-120b} & 64.508 & 74 & 0.871 \\ 
+            \texttt{openai/gpt-oss-20b} & 63.328 & 75 & 0.844 \\ 
+            \texttt{qwen/qwen3-32b} & 48.018 & 65 & 0.738 \\ \hline
         \end{tabular}
     }
-    \caption{Initial tests giving plain scripts to all the LLMs, In this table: column "Model" contains the names of each tested LLM, `` Total Score'' ris the equivalent of ``Parallel Score'' as explained in \Cref{tab:combinedAllLLM}, ``Instances Covered'' contains the amount of instances that gave a viable result so the ones that did not exceed the token limitations portrayed in \Cref{tab:rate_limits_groq} and \Cref{tab:rate_limits_gemini}, ``Average Score'' represents $\frac{Total Score}{Instances Covered}$ to show the solver performance in the evaluated instances. }
+    \caption{Initial tests giving plain scripts to all the LLMs, In this table: column "Model" contains the names of each tested LLM, ``Total Score'' is the equivalent of ``Parallel Score'' as explained in \Cref{tab:combinedAllLLM}, ``Instances Covered'' contains the amount of instances that gave a viable result so the ones that did not exceed the token limitations portrayed in \Cref{tab:rate_limits_groq} and \Cref{tab:rate_limits_gemini}, ``Average Score'' represents $\frac{Total Score}{Instances Covered}$ to show the solver performance in the evaluated instances. }
     \label{tab:allLLM3}
 \end{table}
 
@@ -36,22 +36,22 @@
         \begin{tabular}{lllll}
         \hline
             Model & Total Score & Instances Covered & Average Score \\ \hline
-            gemini-2.5-flash-lite & 64.363 & 85 & 0.794 \\ 
-            gemini-2.5-flash & 60.962 & 85 & 0.734 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 59.680 & 75 & 0.817 \\
-            moonshotai/kimi-k2-instruct & 58.609 & 75 & 0.837 \\ 
-            openai/gpt-oss-120b & 58.166 & 74 & 0.796 \\
-            openai/gpt-oss-20b & 57.154 & 75 & 0.828 \\
-            meta-llama/llama-4-maverick-17b-128e-instruct & 56.297 & 72 & 0.804 \\
-            meta-llama/llama-4-scout-17b-16e-instruct & 54.305 & 69 & 0.798 \\
-            gemini-2.0-flash & 43.412 & 67 & 0.700 \\
-            qwen/qwen3-32b & 42.116 & 65 & 0.779 \\
-            gemini-2.5-pro & 37.640 & 51 & 0.738 \\
-            llama-3.1-8b-instant & 36.082 & 72 & 0.546 \\ 
-            groq/compound-mini & 25.422 & 35 & 0.726 \\
-            llama-3.3-70b-versatile & 7.454 & 10 & 0.745 \\
-            groq/compound & 5.197 & 9 & 0.577 \\ 
-            allam-2-7b & 0.0 & 4 & 0.0 \\ \hline
+            \texttt{gemini-2.5-flash-lite} & 64.363 & 85 & 0.794 \\
+            \texttt{gemini-2.5-flash} & 60.962 & 85 & 0.734 \\
+            \texttt{moonshotai/kimi-k2-instruct-0905} & 59.680 & 75 & 0.817 \\
+            \texttt{moonshotai/kimi-k2-instruct} & 58.609 & 75 & 0.837 \\
+            \texttt{openai/gpt-oss-120b} & 58.166 & 74 & 0.796 \\
+            \texttt{openai/gpt-oss-20b} & 57.154 & 75 & 0.828 \\
+            \texttt{meta-llama/llama-4-maverick-17b-128e-instruct} & 56.297 & 72 & 0.804 \\
+            \texttt{meta-llama/llama-4-scout-17b-16e-instruct} & 54.305 & 69 & 0.798 \\
+            \texttt{gemini-2.0-flash} & 43.412 & 67 & 0.700 \\
+            \texttt{qwen/qwen3-32b} & 42.116 & 65 & 0.779 \\
+            \texttt{gemini-2.5-pro} & 37.640 & 51 & 0.738 \\
+            \texttt{llama-3.1-8b-instant} & 36.082 & 72 & 0.546 \\
+            \texttt{groq/compound-mini} & 25.422 & 35 & 0.726 \\
+            \texttt{llama-3.3-70b-versatile} & 7.454 & 10 & 0.745 \\
+            \texttt{groq/compound} & 5.197 & 9 & 0.577 \\
+            \texttt{allam-2-7b} & 0.0 & 4 & 0.0 \\\hline
         \end{tabular}%
     }
     \caption{Initial tests giving plain scripts to all the LLMs, in this table ``Total Score'' is the equivalent of ``Single Score'' as explained in \Cref{tab:combinedAllLLM}. ``Instances Covered'' and ``Average Score'' are calculated the same way as in \Cref{tab:allLLM3}}
@@ -64,21 +64,21 @@
         \begin{tabular}{llllll}
         \hline
             model & InstancesCovered & AS & SBS & VBS & ClosedGap \\ \hline
-            gemini-2.5-flash-lite & 85 & 64.363 & 76.964 & 89.000 & -1.047 \\ 
-            gemini-2.5-flash & 85 & 60.962 & 76.964 & 89.000 & -1.330 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 75 & 59.680 & 76.964 & 89.000 & -1.436 \\ 
-            moonshotai/kimi-k2-instruct & 75 & 58.609 & 76.964 & 89.000 & -1.525 \\ 
-            openai/gpt-oss-120b & 74 & 58.166 & 76.964 & 89.000 & -1.562 \\ 
-            openai/gpt-oss-20b & 75 & 57.154 & 76.964 & 89.000 & -1.646 \\ 
-            meta-llama/llama-4-maverick-17b-128e-instruct & 72 & 56.297 & 76.964 & 89.000 & -1.717 \\ 
-            meta-llama/llama-4-scout-17b-16e-instruct & 69 & 54.305 & 76.964 & 89.000 & -1.883 \\ 
-            gemini-2.0-flash & 67 & 43.413 & 76.964 & 89.000 & -2.788 \\ 
-            qwen/qwen3-32b & 65 & 42.117 & 76.964 & 89.000 & -2.895 \\ 
-            gemini-2.5-pro & 51 & 37.641 & 76.964 & 89.000 & -3.267 \\ 
-            llama-3.1-8b-instant & 72 & 36.082 & 76.964 & 89.000 & -3.397 \\ 
-            groq/compound-mini & 35 & 25.423 & 76.964 & 89.000 & -4.282 \\ 
-            llama-3.3-70b-versatile & 10 & 7.455 & 76.964 & 89.000 & -5.775 \\ 
-            groq/compound & 9 & 5.197 & 76.964 & 89.000 & -5.963 \\ \hline
+            \texttt{gemini-2.5-flash-lite} & 85 & 64.363 & 76.964 & 89.000 & -1.047 \\ 
+            \texttt{gemini-2.5-flash} & 85 & 60.962 & 76.964 & 89.000 & -1.330 \\ 
+            \texttt{moonshotai/kimi-k2-instruct-0905} & 75 & 59.680 & 76.964 & 89.000 & -1.436 \\ 
+            \texttt{moonshotai/kimi-k2-instruct} & 75 & 58.609 & 76.964 & 89.000 & -1.525 \\ 
+            \texttt{openai/gpt-oss-120b} & 74 & 58.166 & 76.964 & 89.000 & -1.562 \\ 
+            \texttt{openai/gpt-oss-20b} & 75 & 57.154 & 76.964 & 89.000 & -1.646 \\ 
+            \texttt{meta-llama/llama-4-maverick-17b-128e-instruct} & 72 & 56.297 & 76.964 & 89.000 & -1.717 \\ 
+            \texttt{meta-llama/llama-4-scout-17b-16e-instruct} & 69 & 54.305 & 76.964 & 89.000 & -1.883 \\ 
+            \texttt{gemini-2.0-flash} & 67 & 43.413 & 76.964 & 89.000 & -2.788 \\ 
+            \texttt{qwen/qwen3-32b} & 65 & 42.117 & 76.964 & 89.000 & -2.895 \\ 
+            \texttt{gemini-2.5-pro} & 51 & 37.641 & 76.964 & 89.000 & -3.267 \\ 
+            \texttt{llama-3.1-8b-instant} & 72 & 36.082 & 76.964 & 89.000 & -3.397 \\ 
+            \texttt{groq/compound-mini} & 35 & 25.423 & 76.964 & 89.000 & -4.282 \\ 
+            \texttt{llama-3.3-70b-versatile} & 10 & 7.455 & 76.964 & 89.000 & -5.775 \\ 
+            \texttt{groq/compound} & 9 & 5.197 & 76.964 & 89.000 & -5.963 \\ \hline
         \end{tabular}
     }
     \caption{Initial tests giving plain scripts to all the LLMs, in this table: ``Instances Covered'' is the same as in \Cref{tab:allLLM3}, ``AS'' is the same as the ``Single Score'' explained in \Cref{tab:combinedAllLLM}, ``SBS'' displays the sum of all the scores obtained by the single best solver (namely, \texttt{or-tools\_cp-sat-free}) in every instance, and ``VBS'' displays the score obtained with the use of an ipothetical virtual best solver, giving the maximum obtainable score on every instance. Finally, ``Closed Gap'' is calculated as in \Cref{tab:combinedAllLLM}}
@@ -94,7 +94,7 @@
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{allLLMsingle.png}
-    \caption{Scores obtained by all of the considered LLM from single-solver evaluation, `` Total Score'' ris the equivalent of ``Parallel Score'' as explained in \Cref{tab:combinedAllLLM}}   
+    \caption{Scores obtained by all of the considered LLM from single-solver evaluation, ``Total Score'' is the equivalent of ``Parallel Score'' as explained in \Cref{tab:combinedAllLLM}}   
 \end{figure}
 
 \begin{table}[ht]
@@ -103,11 +103,11 @@
         \begin{tabular}{lllll}
         \hline
             Model & Total Score & Instances Covered & Average Score \\ \hline
-            gemini-2.5-flash & 79.105 & 100 & 0.791 \\ 
-            gemini-2.5-flash-lite & 80.740 & 100 & 0.807 \\ 
-            moonshotai/kimi-k2-instruct & 83.268 & 100 & 0.832 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 82.656 & 100 & 0.826 \\ 
-            openai/gpt-oss-120b & 82.226 & 100 & 0.822 \\ \hline
+            \texttt{gemini-2.5-flash} & 79.105 & 100 & 0.791 \\ 
+            \texttt{gemini-2.5-flash-lite} & 80.740 & 100 & 0.807 \\ 
+            \texttt{moonshotai/kimi-k2-instruct} & 83.268 & 100 & 0.832 \\ 
+            \texttt{moonshotai/kimi-k2-instruct-0905} & 82.656 & 100 & 0.826 \\ 
+            \texttt{openai/gpt-oss-120b} & 82.226 & 100 & 0.822 \\ \hline
         \end{tabular}%
     }
     \caption{Tests on sanitized scripts given to the 5 best performing LLMs, parallel-solver evaluation. Columns are calculated as in \Cref{tab:allLLM3}}
@@ -120,11 +120,11 @@
         \begin{tabular}{lllll}
         \hline
             Model & Total Score & Instances Covered & Average Score \\ \hline
-            openai/gpt-oss-120b & 74.488 & 100 & 0.744 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 71.622 & 100 & 0.753 \\ 
-            moonshotai/kimi-k2-instruct & 70.939 & 100 & 0.723 \\ 
-            gemini-2.5-flash-lite & 70.145 & 100 & 0.738 \\ 
-            gemini-2.5-flash & 69.763 & 98 & 0.742 \\ \hline
+            \texttt{openai/gpt-oss-120b} & 74.488 & 100 & 0.744 \\ 
+            \texttt{moonshotai/kimi-k2-instruct-0905} & 71.622 & 100 & 0.753 \\ 
+            \texttt{moonshotai/kimi-k2-instruct} & 70.939 & 100 & 0.723 \\ 
+            \texttt{gemini-2.5-flash-lite} & 70.145 & 100 & 0.738 \\ 
+            \texttt{gemini-2.5-flash} & 69.763 & 98 & 0.742 \\ \hline
         \end{tabular}
     }
     \caption{Tests on sanitized scripts given to the 5 best performing LLMs, single-solver evaluation. Columns are calculated as in \Cref{tab:allLLM1}}
@@ -137,11 +137,11 @@
         \begin{tabular}{lllllll}
         \hline
             Model & Instances Covered & AS & SBS & VBS & Closed Gap \\ \hline
-            openai/gpt-oss-120b & 100 & 74.488 & 76.964 & 89.0 & -0.205 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 100 & 71.622 & 76.964 & 89.0 & -0.443 \\ 
-            moonshotai/kimi-k2-instruct & 100 & 70.939 & 76.964 & 89.0 & -0.500 \\ 
-            gemini-2.5-flash-lite & 100 & 70.145 & 76.964 & 89.0 & -0.566 \\ 
-            gemini-2.5-flash & 98 & 69.763 & 76.964 & 89.0 & -0.598 \\ \hline
+            \texttt{openai/gpt-oss-120b} & 100 & 74.488 & 76.964 & 89.0 & -0.205 \\ 
+            \texttt{moonshotai/kimi-k2-instruct-0905} & 100 & 71.622 & 76.964 & 89.0 & -0.443 \\ 
+            \texttt{moonshotai/kimi-k2-instruct} & 100 & 70.939 & 76.964 & 89.0 & -0.500 \\ 
+            \texttt{gemini-2.5-flash-lite} & 100 & 70.145 & 76.964 & 89.0 & -0.566 \\ 
+            \texttt{gemini-2.5-flash} & 98 & 69.763 & 76.964 & 89.0 & -0.598 \\ \hline
         \end{tabular}
     }
     \caption{Tests on sanitized scripts given to the 5 best performing LLMs, closed gap. Columns are calculated as in \Cref{tab:allLLMcg}}
@@ -154,11 +154,11 @@
         \begin{tabular}{lllll}
         \hline
             Model & Total Score & Instances Covered & Average Score \\ \hline
-            gemini-2.5-flash & 59.154 & 75 & 0.788 \\ 
-            gemini-2.5-flash-lite & 82.620 & 100 & 0.826 \\ 
-            moonshotai/kimi-k2-instruct & 81.889 & 100 & 0.818 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 83.182 & 100 & 0.831 \\ 
-            openai/gpt-oss-120b & 83.249 & 100 & 0.832 \\ \hline
+            \texttt{gemini-2.5-flash} & 59.154 & 75 & 0.788 \\ 
+            \texttt{gemini-2.5-flash-lite} & 82.620 & 100 & 0.826 \\ 
+            \texttt{moonshotai/kimi-k2-instruct} & 81.889 & 100 & 0.818 \\ 
+            \texttt{moonshotai/kimi-k2-instruct-0905} & 83.182 & 100 & 0.831 \\ 
+            \texttt{openai/gpt-oss-120b} & 83.249 & 100 & 0.832 \\ \hline
         \end{tabular}
     }
     \caption{Test on sanitized scripts combined with textual problem description, parallel-solver evaluation. Columns are calculated as in \Cref{tab:allLLM3}}
@@ -171,11 +171,11 @@
         \begin{tabular}{lllll}
         \hline
             Model & Total Score & Instances Covered & Average Score \\ \hline
-            moonshotai/kimi-k2-instruct-0905 & 72.605 & 100 & 0.748 \\ 
-            openai/gpt-oss-120b & 70.740 & 100 & 0.721 \\ 
-            gemini-2.5-flash-lite & 69.042 & 100 & 0.719 \\ 
-            moonshotai/kimi-k2-instruct & 67.554 & 100 & 0.718 \\ 
-            gemini-2.5-flash & 49.896 & 73 & 0.723 \\ \hline
+            \texttt{moonshotai/kimi-k2-instruct-0905} & 72.605 & 100 & 0.748 \\ 
+            \texttt{openai/gpt-oss-120b} & 70.740 & 100 & 0.721 \\ 
+            \texttt{gemini-2.5-flash-lite} & 69.042 & 100 & 0.719 \\ 
+            \texttt{moonshotai/kimi-k2-instruct} & 67.554 & 100 & 0.718 \\ 
+            \texttt{gemini-2.5-flash} & 49.896 & 73 & 0.723 \\ \hline
         \end{tabular}
     }
     \caption{Test on sanitized scripts combined with textual problem description, single-solver evaluation. Columns are calculated as in \Cref{tab:allLLM1}}
@@ -188,11 +188,11 @@
         \begin{tabular}{lllllll}
         \hline
             Model & Instances Covered & AS & SBS & VBS & Closed Gap \\ \hline
-            moonshotai/kimi-k2-instruct-0905 & 100 & 72.605 & 76.964 & 89.0 & -0.362 \\ 
-            openai/gpt-oss-120b & 100 & 70.740 & 76.964 & 89.0 & -0.517 \\ 
-            gemini-2.5-flash-lite & 100 & 69.042 & 76.964 & 89.0 & -0.658 \\ 
-            moonshotai/kimi-k2-instruct & 100 & 67.554 & 76.964 & 89.0 & -0.781 \\ 
-            gemini-2.5-flash & 73 & 49.896 & 76.964 & 89.0 & -2.248 \\ \hline
+            \texttt{moonshotai/kimi-k2-instruct-0905} & 100 & 72.605 & 76.964 & 89.0 & -0.362 \\ 
+            \texttt{openai/gpt-oss-120b} & 100 & 70.740 & 76.964 & 89.0 & -0.517 \\ 
+            \texttt{gemini-2.5-flash-lite} & 100 & 69.042 & 76.964 & 89.0 & -0.658 \\ 
+            \texttt{moonshotai/kimi-k2-instruct} & 100 & 67.554 & 76.964 & 89.0 & -0.781 \\ 
+            \texttt{gemini-2.5-flash} & 73 & 49.896 & 76.964 & 89.0 & -2.248 \\ \hline
         \end{tabular}
     }
     \caption{Test on sanitized scripts combined with textual problem description, closed gap. Columns are calculated as in \Cref{tab:allLLMcg}}
@@ -204,8 +204,8 @@
     \begin{tabular}{@{}l p{0.85\textwidth}@{}}
     \hline
         Solver & Description \\ \hline
-        chuffed-free & A free, high-performance CP solver leveraging Lazy Clause Generation to combine SAT-like learning with traditional CP techniques, especially suited for rich scheduling and routing tasks. \\
-        cbc-free & COIN-OR Branch-and-Cut (CBC) is an open-source MILP solver specializing in integer and linear optimization, widely used as a robust and lightweight alternative to commercial engines. \\ \hline
+        \texttt{chuffed-free} & A free, high-performance CP solver leveraging Lazy Clause Generation to combine SAT-like learning with traditional CP techniques, especially suited for rich scheduling and routing tasks. \\
+        \texttt{cbc-free} & COIN-OR Branch-and-Cut (CBC) is an open-source MILP solver specializing in integer and linear optimization, widely used as a robust and lightweight alternative to commercial engines. \\ \hline
     \end{tabular}
     \caption{Examples of solver description for two solvers, namely COIN-OR Branch-and-Cut (CBC)~\cite{cbc}, and Chuffed~\cite{chuffed}.}
     \label{tab:sDescEx}
@@ -217,11 +217,11 @@
         \begin{tabular}{lllll}
         \hline
             Model & Total Score & Instances Covered & Average Score \\ \hline
-            gemini-2.5-flash & 83.137 & 100 & 0.831 \\ 
-            gemini-2.5-flash-lite & 77.746 & 100 & 0.777 \\ 
-            moonshotai/kimi-k2-instruct & 82.236 & 100 & 0.822 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 82.488 & 100 & 0.824 \\ 
-            openai/gpt-oss-120b & 78.799 & 100 & 0.787 \\ \hline
+            \texttt{gemini-2.5-flash} & 83.137 & 100 & 0.831 \\ 
+            \texttt{gemini-2.5-flash-lite} & 77.746 & 100 & 0.777 \\ 
+            \texttt{moonshotai/kimi-k2-instruct} & 82.236 & 100 & 0.822 \\ 
+            \texttt{moonshotai/kimi-k2-instruct-0905} & 82.488 & 100 & 0.824 \\ 
+            \texttt{openai/gpt-oss-120b} & 78.799 & 100 & 0.787 \\ \hline
         \end{tabular}
     }
     \caption{Test with sanitized scripts combined with solvers description in a multi turn setup, parallel-solver evaluation. Columns are calculated as in \Cref{tab:allLLM3}}
@@ -234,11 +234,11 @@
         \begin{tabular}{lllll}
         \hline
             Model & Total Score & Instances Covered & Average Score \\ \hline
-            moonshotai/kimi-k2-instruct & 76.964 & 100 & 0.769 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 76.964 & 100 & 0.769 \\ 
-            gemni & gemini-2.5-flash & 71.686 & 100 & 0.716 \\ 
-            openai/gpt-oss-120b & 70.974 & 100 & 0.716 \\ 
-            gemni & gemini-2.5-flash-lite & 54.713 & 100 & 0.552 \\ \hline
+            \texttt{moonshotai/kimi-k2-instruct} & 76.964 & 100 & 0.769 \\ 
+            \texttt{moonshotai/kimi-k2-instruct-0905} & 76.964 & 100 & 0.769 \\ 
+            \texttt{gemini-2.5-flash} & 71.686 & 100 & 0.716 \\ 
+            \texttt{openai/gpt-oss-120b} & 70.974 & 100 & 0.716 \\ 
+            \texttt{gemini-2.5-flash-lite} & 54.713 & 100 & 0.552 \\ \hline
         \end{tabular}
     }
     \caption{Test with sanitized scripts combined with solvers description in a multi turn setup, single-solver evaluation. Columns are calculated as in \Cref{tab:allLLM1}}
@@ -251,11 +251,11 @@
         \begin{tabular}{lllllll}
         \hline
             Model & Instances Covered & AS & SBS & VBS & Closed Gap \\ \hline
-            moonshotai/kimi-k2-instruct & 100 & 76.964 & 76.964 & 89.0 & 0.0 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 100 & 76.964 & 76.964 & 89.0 & 0.0 \\ 
-            gemini-2.5-flash & 100 & 71.686 & 76.964 & 89.0 & -0.438 \\ 
-            openai/gpt-oss-120b & 100 & 70.974 & 76.964 & 89.0 & -0.497 \\ 
-            gemini-2.5-flash-lite & 100 & 54.713 & 76.964 & 89.0 & -1.848 \\ \hline
+            \texttt{moonshotai/kimi-k2-instruct} & 100 & 76.964 & 76.964 & 89.0 & 0.0 \\ 
+            \texttt{moonshotai/kimi-k2-instruct-0905} & 100 & 76.964 & 76.964 & 89.0 & 0.0 \\ 
+            \texttt{gemini-2.5-flash} & 100 & 71.686 & 76.964 & 89.0 & -0.438 \\ 
+            \texttt{openai/gpt-oss-120b} & 100 & 70.974 & 76.964 & 89.0 & -0.497 \\ 
+            \texttt{gemini-2.5-flash-lite} & 100 & 54.713 & 76.964 & 89.0 & -1.848 \\ \hline
         \end{tabular}
     }
     \caption{Test with sanitized scripts combined with solvers description in a multi turn setup, closed gap. Columns are calculated as in \Cref{tab:allLLMcg}}
@@ -268,11 +268,11 @@
         \begin{tabular}{lllll}
         \hline
             Model & Total Score & Instances Covered & Average Score \\ \hline
-            gemini-2.5-flash & 83.650 & 100 & 0.836 \\ 
-            gemini-2.5-flash-lite & 78.147 & 100 & 0.781 \\ 
-            moonshotai/kimi-k2-instruct & 80.417 & 99 & 0.812 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 82.218 & 100 & 0.822 \\ 
-            openai/gpt-oss-120b & 80.295 & 100 & 0.802 \\ \hline
+            \texttt{gemini-2.5-flash} & 83.650 & 100 & 0.836 \\ 
+            \texttt{gemini-2.5-flash-lite} & 78.147 & 100 & 0.781 \\ 
+            \texttt{moonshotai/kimi-k2-instruct} & 80.417 & 99 & 0.812 \\ 
+            \texttt{moonshotai/kimi-k2-instruct-0905} & 82.218 & 100 & 0.822 \\ 
+            \texttt{openai/gpt-oss-120b} & 80.295 & 100 & 0.802 \\ \hline
         \end{tabular}
     }
     \caption{Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, parallel-solver evaluation. Columns are calculated as in \Cref{tab:allLLM3}}
@@ -285,11 +285,11 @@
         \begin{tabular}{lllll}
         \hline
             Model & Total Score & Instances Covered & Average Score \\ \hline
-            openai/gpt-oss-120b & 77.260 & 100 & 0.780 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 76.964 & 100 & 0.769 \\ 
-            moonshotai/kimi-k2-instruct & 74.464 & 99 & 0.752 \\ 
-            gemini-2.5-flash & 73.551 & 100 & 0.750 \\ 
-            gemini-2.5-flash-lite & 63.062 & 100 & 0.630 \\ \hline
+            \texttt{openai/gpt-oss-120b} & 77.260 & 100 & 0.780 \\ 
+            \texttt{moonshotai/kimi-k2-instruct-0905} & 76.964 & 100 & 0.769 \\ 
+            \texttt{moonshotai/kimi-k2-instruct} & 74.464 & 99 & 0.752 \\ 
+            \texttt{gemini-2.5-flash} & 73.551 & 100 & 0.750 \\ 
+            \texttt{gemini-2.5-flash-lite} & 63.062 & 100 & 0.630 \\ \hline
         \end{tabular}
     }
     \caption{Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, single-solver evaluation. Columns are calculated as in \Cref{tab:allLLM1}}
@@ -302,11 +302,11 @@
         \begin{tabular}{lllllll}
         \hline
             Model & Instances Covered & AS & SBS & VBS & Closed Gap \\ \hline
-            openai/gpt-oss-120b & 100 & 77.260 & 76.964 & 89.0 & 0.024 \\ 
-            moonshotai/kimi-k2-instruct-0905 & 100 & 76.964 & 76.964 & 89.0 & 0.0 \\ 
-            moonshotai/kimi-k2-instruct & 99 & 74.464 & 76.964 & 89.0 & -0.207 \\ 
-            gemini-2.5-flash & 100 & 73.551 & 76.964 & 89.0 & -0.283 \\ 
-            gemini-2.5-flash-lite & 100 & 63.062 & 76.964 & 89.0 & -1.155 \\ \hline
+            \texttt{openai/gpt-oss-120b} & 100 & 77.260 & 76.964 & 89.0 & 0.024 \\ 
+            \texttt{moonshotai/kimi-k2-instruct-0905} & 100 & 76.964 & 76.964 & 89.0 & 0.0 \\ 
+            \texttt{moonshotai/kimi-k2-instruct} & 99 & 74.464 & 76.964 & 89.0 & -0.207 \\ 
+            \texttt{gemini-2.5-flash} & 100 & 73.551 & 76.964 & 89.0 & -0.283 \\ 
+            \texttt{gemini-2.5-flash-lite} & 100 & 63.062 & 76.964 & 89.0 & -1.155 \\ \hline
         \end{tabular}
     }
     \caption{Test with sanitized scripts combined with both solvers description, and problem description in a multi turn setup, closed gap. Columns are calculated as in \Cref{tab:allLLMcg}}
@@ -319,45 +319,45 @@
         \begin{tabular}{lll}
         \hline
             Type & Solver & Total Score \\ \hline
-            Solver & or-tools\_cp-sat-par & 88.117 \\ 
-            LLM  Variant & gemini-2.5-flash (Solvers Description + Problem Description) & 83.650 \\ 
-            LLM  Variant & moonshotai/kimi-k2-instruct & 83.268 \\ 
-            LLM  Variant & openai/gpt-oss-120b (Problem Description) & 83.249 \\ 
-            LLM  Variant & moonshotai/kimi-k2-instruct-0905 (Problem Description) & 83.182 \\ 
-            LLM  Variant & gemini-2.5-flash (Solvers Description) & 83.137 \\ 
-            LLM  Variant & moonshotai/kimi-k2-instruct-0905 & 82.656 \\ 
-            LLM  Variant & gemini-2.5-flash-lite (Problem Description) & 82.620 \\ 
-            LLM  Variant & moonshotai/kimi-k2-instruct-0905 (Solvers Description) & 82.488 \\ 
-            LLM  Variant & moonshotai/kimi-k2-instruct (Solvers Description) & 82.236 \\ 
-            LLM  Variant & openai/gpt-oss-120b & 82.226 \\ 
-            LLM  Variant & moonshotai/kimi-k2-instruct-0905 (Solvers Description + Problem Description) & 82.218 \\ 
-            LLM  Variant & moonshotai/kimi-k2-instruct (Problem Description) & 81.889 \\ 
-            LLM  Variant & gemini-2.5-flash-lite & 80.740 \\ 
-            LLM  Variant & openai/gpt-oss-120b (Solvers Description + Problem Description) & 80.295 \\ 
-            LLM  Variant & gemini-2.5-flash & 79.105 \\ 
-            LLM  Variant & openai/gpt-oss-120b (Solvers Description) & 78.799 \\ 
-            LLM  Variant & gemini-2.5-flash-lite (Solvers Description + Problem Description) & 78.147 \\ 
-            LLM  Variant & gemini-2.5-flash-lite (Solvers Description) & 77.746 \\ 
-            Solver & chuffed-free & 74.819 \\ 
-            Solver & picatsat-free & 70.647 \\ 
-            Solver & huub-free & 68.784 \\ 
-            Solver & gurobi-par & 61.081 \\ 
-            Solver & cplex-par & 60.301 \\ 
-            Solver & choco-solver\_\_cp\_-par & 59.365 \\ 
-            Solver & izplus-par & 58.216 \\ 
-            Solver & pumpkin-free & 57.681 \\ 
-            Solver & choco-solver\_\_cp-sat\_-par & 56.896 \\ 
-            Solver & gecode-par & 54.283 \\ 
-            Solver & cp\_optimizer-par & 53.877 \\ 
-            Solver & gecode\_dexter-open & 47.304 \\ 
-            Solver & or-tools\_cp-sat\_ls-par & 46.292 \\ 
-            Solver & jacop-free & 44.373 \\ 
-            Solver & sicstus\_prolog-free & 43.548 \\ 
-            Solver & yuck-par & 38.321 \\ 
-            Solver & scip-par & 36.675 \\ 
-            Solver & highs-par & 33.598 \\ 
-            Solver & cbc-par & 26.334 \\ 
-            Solver & atlantis-free & 1.555 \\ \hline
+            Solver & \texttt{or-tools\_cp-sat-par} & 88.117 \\ 
+            LLM  Variant & \texttt{gemini-2.5-flash (Solvers Description + Problem Description)} & 83.650 \\ 
+            LLM  Variant & \texttt{moonshotai/kimi-k2-instruct} & 83.268 \\ 
+            LLM  Variant & \texttt{openai/gpt-oss-120b (Problem Description)} & 83.249 \\ 
+            LLM  Variant & \texttt{moonshotai/kimi-k2-instruct-0905 (Problem Description)} & 83.182 \\ 
+            LLM  Variant & \texttt{gemini-2.5-flash (Solvers Description)} & 83.137 \\ 
+            LLM  Variant & \texttt{moonshotai/kimi-k2-instruct-0905} & 82.656 \\ 
+            LLM  Variant & \texttt{gemini-2.5-flash-lite (Problem Description)} & 82.620 \\ 
+            LLM  Variant & \texttt{moonshotai/kimi-k2-instruct-0905 (Solvers Description)} & 82.488 \\ 
+            LLM  Variant & \texttt{moonshotai/kimi-k2-instruct (Solvers Description)} & 82.236 \\ 
+            LLM  Variant & \texttt{openai/gpt-oss-120b} & 82.226 \\ 
+            LLM  Variant & \texttt{moonshotai/kimi-k2-instruct-0905 (Solvers Description + Problem Description)} & 82.218 \\ 
+            LLM  Variant & \texttt{moonshotai/kimi-k2-instruct (Problem Description)} & 81.889 \\ 
+            LLM  Variant & \texttt{gemini-2.5-flash-lite} & 80.740 \\ 
+            LLM  Variant & \texttt{openai/gpt-oss-120b (Solvers Description + Problem Description)} & 80.295 \\ 
+            LLM  Variant & \texttt{gemini-2.5-flash} & 79.105 \\ 
+            LLM  Variant & \texttt{openai/gpt-oss-120b (Solvers Description)} & 78.799 \\ 
+            LLM  Variant & \texttt{gemini-2.5-flash-lite (Solvers Description + Problem Description)} & 78.147 \\ 
+            LLM  Variant & \texttt{gemini-2.5-flash-lite (Solvers Description)} & 77.746 \\ 
+            Solver & \texttt{chuffed-free} & 74.819 \\ 
+            Solver & \texttt{picatsat-free} & 70.647 \\ 
+            Solver & \texttt{huub-free} & 68.784 \\ 
+            Solver & \texttt{gurobi-par} & 61.081 \\ 
+            Solver & \texttt{cplex-par} & 60.301 \\ 
+            Solver & \texttt{choco-solver\_\_cp\_-par} & 59.365 \\ 
+            Solver & \texttt{izplus-par} & 58.216 \\ 
+            Solver & \texttt{pumpkin-free} & 57.681 \\ 
+            Solver & \texttt{choco-solver\_\_cp-sat\_-par} & 56.896 \\ 
+            Solver & \texttt{gecode-par} & 54.283 \\ 
+            Solver & \texttt{cp\_optimizer-par} & 53.877 \\ 
+            Solver & \texttt{gecode\_dexter-open} & 47.304 \\ 
+            Solver & \texttt{or-tools\_cp-sat\_ls-par} & 46.292 \\ 
+            Solver & \texttt{jacop-free} & 44.373 \\ 
+            Solver & \texttt{sicstus\_prolog-free} & 43.548 \\ 
+            Solver & \texttt{yuck-par} & 38.321 \\ 
+            Solver & \texttt{scip-par} & 36.675 \\ 
+            Solver & \texttt{highs-par} & 33.598 \\ 
+            Solver & \texttt{cbc-par} & 26.334 \\ 
+            Solver & \texttt{atlantis-free} & 1.555 \\ \hline
         \end{tabular}
         }
     \caption{Table displaying all the different LLM variants results from parallel-solver evaluation, ``Total Score'' is calculated as ``Parallel Score'' in \Cref{tab:combinedAllLLM}, and compared to all of the single solvers in open category of the MiniZinc Challenge~\cite{MznResults25}}
@@ -370,46 +370,46 @@
         \begin{tabular}{lll}
         \hline
             Type & Solver & TotalScore \\ \hline
-            \textbf{LLM Variant} & \textbf{openai/gpt-oss-120b (Solvers Description + Problem Description)} & \textbf{77.260} \\ 
-            LLM Variant & moonshotai/kimi-k2-instruct-0905 (Solvers Description + Problem Description) & 76.964 \\ 
-            LLM Variant & moonshotai/kimi-k2-instruct-0905 (Solvers Description) & 76.964 \\ 
-            LLM Variant & moonshotai/kimi-k2-instruct (Solvers Description) & 76.964 \\ 
-            Solver & or-tools\_cp-sat-free & 76.964 \\ 
-            LLM Variant & openai/gpt-oss-120b (Simple) & 74.488 \\ 
-            LLM Variant & moonshotai/kimi-k2-instruct (Solvers Description + Problem Description) & 74.464 \\ 
-            Solver & chuffed-free & 74.456 \\ 
-            LLM Variant & gemini-2.5-flash (Solvers Description + Problem Description) & 73.551 \\ 
-            LLM Variant & moonshotai/kimi-k2-instruct-0905 (Problem Description) & 72.605 \\ 
-            LLM Variant & gemini-2.5-flash (Solvers Description) & 71.686 \\ 
-            LLM Variant & moonshotai/kimi-k2-instruct-0905 (Simple) & 71.622 \\ 
-            LLM Variant & openai/gpt-oss-120b (Solvers Description) & 70.974 \\ 
-            LLM Variant & moonshotai/kimi-k2-instruct (Simple) & 70.939 \\ 
-            Solver & picatsat-free & 70.933 \\ 
-            LLM Variant & openai/gpt-oss-120b (Problem Description) & 70.740 \\ 
-            LLM Variant & gemini-2.5-flash-lite (Simple) & 70.145 \\ 
-            LLM Variant & gemini-2.5-flash (Simple) & 69.763 \\ 
-            LLM Variant & gemini-2.5-flash-lite (Problem Description) & 69.042 \\ 
-            Solver & huub-free & 68.497 \\ 
-            LLM Variant & moonshotai/kimi-k2-instruct (Problem Description) & 67.554 \\ 
-            LLM Variant & gemini-2.5-flash-lite (Solvers Description + Problem Description) & 63.062 \\ 
-            Solver & choco-solver\_\_cp-sat\_-free & 60.808 \\ 
-            Solver & izplus-free & 58.672 \\ 
-            Solver & pumpkin-free & 58.543 \\ 
-            Solver & choco-solver\_\_cp\_-free & 58.404 \\ 
-            Solver & gurobi-free & 55.384 \\ 
-            LLM Variant & gemini-2.5-flash-lite (Solvers Description) & 54.713 \\ 
-            Solver & cp\_optimizer-free & 50.992 \\ 
-            Solver & gecode-fd & 50.073 \\ 
-            LLM Variant & gemini-2.5-flash (Problem Description) & 49.896 \\ 
-            Solver & cplex-free & 48.514 \\ 
-            Solver & sicstus\_prolog-free & 44.592 \\ 
-            Solver & jacop-free & 44.549 \\ 
-            Solver & or-tools\_cp-sat\_ls-free & 43.222 \\ 
-            Solver & scip-free & 36.902 \\ 
-            Solver & yuck-free & 34.715 \\ 
-            Solver & highs-free & 34.418 \\ 
-            Solver & cbc-free & 22.615 \\ 
-            Solver & atlantis-free & 1.5 \\ \hline
+            \textbf{LLM Variant} & \textbf{\texttt{openai/gpt-oss-120b (Solvers Description + Problem Description)}} & \textbf{77.260} \\
+            LLM Variant & \texttt{moonshotai/kimi-k2-instruct-0905 (Solvers Description + Problem Description)} & 76.964 \\
+            LLM Variant & \texttt{moonshotai/kimi-k2-instruct-0905 (Solvers Description)} & 76.964 \\
+            LLM Variant & \texttt{moonshotai/kimi-k2-instruct (Solvers Description)} & 76.964 \\
+            Solver & \texttt{or-tools\_cp-sat-free} & 76.964 \\
+            LLM Variant & \texttt{openai/gpt-oss-120b (Simple)} & 74.488 \\
+            LLM Variant & \texttt{moonshotai/kimi-k2-instruct (Solvers Description + Problem Description)} & 74.464 \\
+            Solver & \texttt{chuffed-free} & 74.456 \\
+            LLM Variant & \texttt{gemini-2.5-flash (Solvers Description + Problem Description)} & 73.551 \\
+            LLM Variant & \texttt{moonshotai/kimi-k2-instruct-0905 (Problem Description)} & 72.605 \\
+            LLM Variant & \texttt{gemini-2.5-flash (Solvers Description)} & 71.686 \\
+            LLM Variant & \texttt{moonshotai/kimi-k2-instruct-0905 (Simple)} & 71.622 \\
+            LLM Variant & \texttt{openai/gpt-oss-120b (Solvers Description)} & 70.974 \\
+            LLM Variant & \texttt{moonshotai/kimi-k2-instruct (Simple)} & 70.939 \\
+            Solver & \texttt{picatsat-free} & 70.933 \\
+            LLM Variant & \texttt{openai/gpt-oss-120b (Problem Description)} & 70.740 \\
+            LLM Variant & \texttt{gemini-2.5-flash-lite (Simple)} & 70.145 \\
+            LLM Variant & \texttt{gemini-2.5-flash (Simple)} & 69.763 \\
+            LLM Variant & \texttt{gemini-2.5-flash-lite (Problem Description)} & 69.042 \\
+            Solver & \texttt{huub-free} & 68.497 \\
+            LLM Variant & \texttt{moonshotai/kimi-k2-instruct (Problem Description)} & 67.554 \\
+            LLM Variant & \texttt{gemini-2.5-flash-lite (Solvers Description + Problem Description)} & 63.062 \\
+            Solver & \texttt{choco-solver\_\_cp-sat\_-free} & 60.808 \\
+            Solver & \texttt{izplus-free} & 58.672 \\
+            Solver & \texttt{pumpkin-free} & 58.543 \\
+            Solver & \texttt{choco-solver\_\_cp\_-free} & 58.404 \\
+            Solver & \texttt{gurobi-free} & 55.384 \\
+            LLM Variant & \texttt{gemini-2.5-flash-lite (Solvers Description)} & 54.713 \\
+            Solver & \texttt{cp\_optimizer-free} & 50.992 \\
+            Solver & \texttt{gecode-fd} & 50.073 \\
+            LLM Variant & \texttt{gemini-2.5-flash (Problem Description)} & 49.896 \\
+            Solver & \texttt{cplex-free} & 48.514 \\
+            Solver & \texttt{sicstus\_prolog-free} & 44.592 \\
+            Solver & \texttt{jacop-free} & 44.549 \\
+            Solver & \texttt{or-tools\_cp-sat\_ls-free} & 43.222 \\
+            Solver & \texttt{scip-free} & 36.902 \\
+            Solver & \texttt{yuck-free} & 34.715 \\
+            Solver & \texttt{highs-free} & 34.418 \\
+            Solver & \texttt{cbc-free} & 22.615 \\
+            Solver & \texttt{atlantis-free} & 1.5 \\\hline
         \end{tabular}
     }
     \caption{Table displaying all the first LLM variants results given single-solver evaluation, ``Total Score'' is calculated as ``Single Score'' in \Cref{tab:combinedAllLLM}, and compared to all of the single solvers in free category of the MiniZinc Challenge~\cite{MznResults25}}
@@ -426,7 +426,7 @@
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{allVarSin.png}
-    \caption{Histogram displaying the performances of all the solver variants in ``Single Score''evaluation, ``Parallel Score'' evaluation and ``Closed Gap'' evaluation, as calculated in \Cref{tab:combinedAllLLM}.}
+    \caption{Histogram displaying the performances of all the solver variants in ``Single Score'' evaluation, ``Parallel Score'' evaluation and ``Closed Gap'' evaluation, as calculated in \Cref{tab:combinedAllLLM}.}
     \label{fig:histoVarSin}
 \end{figure}
 
@@ -465,7 +465,7 @@
             \hline
         \end{tabular}
     }
-    \caption{The table shows a quick explanation of the features that can be extracted using the tool mzn2feat~\cite{mzn2feat}, divided per category, and counted.}
+    \caption{The table shows a quick explanation of the features that can be extracted using the tool \texttt{mzn2feat}~\cite{mzn2feat}, divided per category, and counted.}
     \label{tab:FeatDescriptions}
 \end{table}
 
@@ -596,25 +596,25 @@ v_sum_domdeg_vars    368586                 Sum of the ratio variables domain/de
         \begin{tabular}{lll}
         \hline
             Solver & Score & Optimal Count \\ \hline
-            or-tools\_cp-sat-free & 76.964375 & 55 \\ 
-            picatsat-free & 70.933307 & 53 \\ 
-            chuffed-free & 74.456334 & 52 \\ 
-            huub-free & 68.497987 & 48 \\ 
-            gurobi-free & 55.384518 & 38 \\ 
-            pumpkin-free & 58.543229 & 33 \\ 
-            choco-solver\_\_cp-sat\_-free & 60.808176 & 32 \\ 
-            cplex-free & 48.514529 & 30 \\ 
-            choco-solver\_\_cp\_-free & 58.404323 & 29 \\ 
-            cp\_optimizer-free & 50.992682 & 26 \\ 
-            izplus-free & 58.672093 & 25 \\ 
-            jacop-free & 44.549443 & 25 \\ 
-            sicstus\_prolog-free & 44.592608 & 24 \\ 
-            scip-free & 36.902766 & 20 \\ 
-            highs-free & 34.418506 & 18 \\ 
-            cbc-free & 22.615259 & 11 \\ 
-            or-tools\_cp-sat\_ls-free & 43.222031 & 7 \\ 
-            yuck-free & 34.715515 & 4 \\ 
-            atlantis-free & 1.500000 & 0 \\ \hline
+            \texttt{or-tools\_cp-sat-free} & 76.964375 & 55 \\ 
+            \texttt{picatsat-free} & 70.933307 & 53 \\ 
+            \texttt{chuffed-free} & 74.456334 & 52 \\ 
+            \texttt{huub-free} & 68.497987 & 48 \\ 
+            \texttt{gurobi-free} & 55.384518 & 38 \\ 
+            \texttt{pumpkin-free} & 58.543229 & 33 \\ 
+            \texttt{choco-solver\_\_cp-sat\_-free} & 60.808176 & 32 \\ 
+            \texttt{cplex-free} & 48.514529 & 30 \\ 
+            \texttt{choco-solver\_\_cp\_-free} & 58.404323 & 29 \\ 
+            \texttt{cp\_optimizer-free} & 50.992682 & 26 \\ 
+            \texttt{izplus-free} & 58.672093 & 25 \\ 
+            \texttt{jacop-free} & 44.549443 & 25 \\ 
+            \texttt{sicstus\_prolog-free} & 44.592608 & 24 \\ 
+            \texttt{scip-free} & 36.902766 & 20 \\ 
+            \texttt{highs-free} & 34.418506 & 18 \\ 
+            \texttt{cbc-free} & 22.615259 & 11 \\ 
+            \texttt{or-tools\_cp-sat\_ls-free} & 43.222031 & 7 \\ 
+            \texttt{yuck-free} & 34.715515 & 4 \\ 
+            \texttt{atlantis-free} & 1.500000 & 0 \\ \hline
         \end{tabular}
     }
     \caption{Table displaying all the solvers from free catecory ordered by the number of optimal solutions they reach, intended as the number of instances where the given solver scores 1, following the scoring in \Cref{sec:metrics}.}

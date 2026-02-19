@@ -21,7 +21,7 @@
 \contentsline {section}{\numberline {2.2}Large Language Models Selection}{12}{section.2.2}%
 \contentsline {section}{\numberline {2.3}Prompt General Structure}{13}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Output Structure}{13}{subsection.2.3.1}%
-\contentsline {section}{\numberline {2.4}Problem Selection}{15}{section.2.4}%
+\contentsline {section}{\numberline {2.4}Problem Selection}{14}{section.2.4}%
 \contentsline {section}{\numberline {2.5}Test Metrics}{15}{section.2.5}%
 \contentsline {subsection}{\numberline {2.5.1}Metric for Solver Score}{16}{subsection.2.5.1}%
 \contentsline {subsection}{\numberline {2.5.2}Closed Gap}{17}{subsection.2.5.2}%
@@ -52,15 +52,15 @@
 \contentsline {subsection}{\numberline {4.2.2}Custom Compiler}{40}{subsection.4.2.2}%
 \contentsline {section}{\numberline {4.3}Tool Functioning}{40}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}Parser}{41}{subsection.4.3.1}%
-\contentsline {subsubsection}{Core Data Structures}{41}{section*.29}%
-\contentsline {subsubsection}{Parsing Strategy}{41}{section*.30}%
-\contentsline {subsubsection}{Example of Parser Execution on a FlatZinc Instance}{43}{section*.31}%
+\contentsline {subsubsection}{Core Data Structures}{41}{section*.28}%
+\contentsline {subsubsection}{Parsing Strategy}{41}{section*.29}%
+\contentsline {subsubsection}{Example of Parser Execution on a FlatZinc Instance}{43}{section*.30}%
 \contentsline {subsection}{\numberline {4.3.2}Mapping to Natural Language}{45}{subsection.4.3.2}%
-\contentsline {paragraph}{Constraint descriptions and categorization}{45}{section*.32}%
-\contentsline {paragraph}{Search-annotation mapping}{45}{section*.33}%
-\contentsline {paragraph}{Objective-function reconstruction}{45}{section*.34}%
-\contentsline {paragraph}{Variable statistics}{46}{section*.35}%
+\contentsline {paragraph}{Constraint descriptions and categorization}{45}{section*.31}%
+\contentsline {paragraph}{Search-annotation mapping}{45}{section*.32}%
+\contentsline {paragraph}{Objective-function reconstruction}{45}{section*.33}%
+\contentsline {paragraph}{Variable statistics}{46}{section*.34}%
 \contentsline {section}{\numberline {4.4}Testing and Results}{46}{section.4.4}%
 \contentsline {subsection}{\numberline {4.4.1}Performance with GPT-5.2}{47}{subsection.4.4.1}%
-\contentsline {chapter}{Appendix}{49}{chapter*.38}%
-\contentsline {chapter}{Bibliography}{67}{chapter*.67}%
+\contentsline {chapter}{Appendix}{49}{chapter*.37}%
+\contentsline {chapter}{Bibliography}{67}{chapter*.66}%

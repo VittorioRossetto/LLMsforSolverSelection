@@ -72,12 +72,12 @@ Solving combinatorial search problems is hard, and there exist nowadays plenty o
 
 Algorithm portfolios~\cite{AlgPortfolio} can be seen as instances of the more general Algorithm Selection problem~\cite{AlgSelProb} where, as reported in~\cite{AlgSelCSP}, the algorithm selection is performed case-by-case for each problem to solve. Within the context of constraint solving, a portfolio approach enables to combine a number $m > 1$ of different constituent solvers $s_1, \dots, s_m$ in order to create a globally better constraint solver, dubbed a portfolio solver. When a new, unseen problem $p$ comes, the portfolio solver tries to predict the best constituent solver(s) $s_{i_1}, \dots, s_{i_k}$ (with $1 \leq i_j \leq m$ for $j = 1, \dots, k$) for solving $p$ and then runs them on $p$. Properly selecting and scheduling the solvers is a crucial step for the performance of a portfolio solver, and it is usually performed by exploiting Machine Learning techniques based on features extracted from the problem $p$ to solve.
 
-In the course of this research thesis, starting from the idea behind portfolio solvers, we will try to evaluate the performances of a pre-trained large language model to understand if this could be a viable solution to the algorithm selection problem~\cite{AlgSelProb}, avoiding the cost of training for portfolio solvers, following the new paradigm proposed in~\cite{fromPFStoAS}.
+In the course of this research thesis, starting from the idea behind portfolio solvers, we will try to evaluate the performances of a pre-trained LLM to understand if this could be a viable solution to the algorithm selection problem~\cite{AlgSelProb}, avoiding the cost of training for portfolio solvers, following the new paradigm proposed in~\cite{fromPFStoAS}.
 
 \subsection{MiniZinc}
 MiniZinc is a simple but expressive CP modelling language which is suitable for modelling problems for a range of solvers and a reasonable compromise between many design possibilities.
 
-Born from the necessity of a standard modelling language for constraint programming problems also making solver benchmarking simpler~\cite{MiniZinc}.
+It was born from the necessity of a standard modelling language for constraint programming problems, it is also making solver benchmarking simpler~\cite{MiniZinc}.
 
 For these reasons all of the problems employed for testing in the course of this research paper were written using MiniZinc.
 
@@ -128,9 +128,9 @@ Hence, every year since 2008 the MiniZinc Challenge has been comparing different
 
 The aim of the challenge is to compare various constraint solving technology on the same problems sets. The focus is on finite domain propagation solvers. An auxiliary aim is to build up a library of interesting problem models, which can be used to compare solvers and solving technologies.
 
-Challenge participants provide a FlatZinc or MiniZinc solver and global constraint definitions specialized for their solver. Each solver is run on 100 MiniZinc model instances. For FlatZinc solvers, the minizinc compiler runs on the MiniZinc model and instance using the provided global constraint definitions to create a FlatZinc file. The resultant FlatZinc file is then given as input to the provided FlatZinc solver. For MiniZinc solvers, the MiniZinc model and data are input to the provided solver. Points are awarded for solving problems, speed of solution, and goodness of solutions (for optimization problems)~\cite{PhilMznChallenge}.
+Challenge participants provide a FlatZinc or MiniZinc solver and global constraint definitions specialized for their solver. Each solver is run on 100 MiniZinc model instances. For FlatZinc solvers, the MiniZinc compiler runs on the MiniZinc model and instance using the provided global constraint definitions to create a FlatZinc file. The resultant FlatZinc file is then given as input to the provided FlatZinc solver. For MiniZinc solvers, the MiniZinc model and data are input to the provided solver. 
 
-However, the MiniZinc challenge scoring system is not actually utilized in this specific research.
+Points are awarded for solving problems, speed of solution, and goodness of solutions (for optimization problems)~\cite{PhilMznChallenge}, however, the MiniZinc challenge scoring system is not actually utilized in this specific research, since it is comparative scoring system, while an absolute one would be best suited for this specific research.
 
 \section{Large Language Models}
 \label{sec:LLM}
@@ -146,7 +146,7 @@ and text generation proceeds autoregressively by repeatedly sampling from this d
 
 Training is typically divided into a large-scale pretraining phase followed by alignment stages. During pretraining, the model learns general linguistic and semantic representations through self-supervised objectives. Alignment techniques, such as supervised fine-tuning and reinforcement learning from feedback, adapt the model to follow instructions, respect constraints, and produce outputs that better match user expectations~\cite{LLMsIBM}.
 
-To better explain the concept, we can say Large Language Models (LLMs) are, at their core, autoregressive statistical models that generate text by iteratively predicting the most probable subsequent token in a sequence, based on patterns learned from their training data.
+To better explain the concept, we can say LLMs are, at their core, autoregressive statistical models that generate text by iteratively predicting the most probable subsequent token in a sequence, based on patterns learned from their training data.
 
 \subsection{Inference and Decoding}
 
@@ -164,7 +164,7 @@ A central practical constraint is the context window, which limits the total num
 
 LLMs are typically controlled through prompting, where task instructions and contextual data are encoded in the input. 
 
-Prompt engineering has emerged as an indispensable technique for extending the capabilities of large language models (LLMs) and vision-language models (VLMs). This approach leverages task-specific instructions, known as prompts, to enhance model efficacy without modifying the core model parameters. Rather than updating the model parameters, prompts allow seamless integration of pre-trained models into downstream tasks by eliciting desired model behaviors solely based on the given prompt. 
+Prompt engineering has emerged as an indispensable technique for extending the capabilities of LLMs. This approach leverages task-specific instructions, known as prompts, to enhance model efficacy without modifying the core model parameters. Rather than updating the model parameters, prompts allow seamless integration of pre-trained models into downstream tasks by eliciting desired model behaviors solely based on the given prompt. 
 
 Prompts can be natural language instructions that provide context to guide the model or learned vector representations that activate relevant knowledge.
 This rapidly growing field has enabled success across various applications, from question-answering to common sense reasoning~\cite{prompting}. 
