@@ -3,6 +3,7 @@ old/
 __pycache__/
 .venv/
 .vscode/
+thesis/
 *.log
 papers/
 logs/
