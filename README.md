@@ -1,7 +1,7 @@
-# AgenticSolvers
+# Large Language Models For Solver Selection
 The idea of this research is based on a novel paradigm for solving complex, NP-hard problems (e.g., schedul- ing, routing) by leveraging Large Language Models (LLMs) as dynamic orchestrators in Agentic solvers, as proposed in a position Paper by professor Roberto Amadini and Simone Gazza.
 
-This repository contains the experimental code for the associated thesis, *"Large Language Models for Solver Selection: A Preliminary Study"* (see `thesis/`), which investigates whether general-purpose LLMs can select an appropriate constraint solver for a MiniZinc model without task-specific fine-tuning.
+This repository contains the experimental code for the associated thesis, *"Large Language Models for Solver Selection: A Preliminary Study"* (see `Large Language Models for Solver Selection_ A Preliminary Study.pdf`), which investigates whether general-purpose LLMs can select an appropriate constraint solver for a MiniZinc model without task-specific fine-tuning.
 
 ## Results
 
@@ -45,3 +45,8 @@ This app provides an interface to get solver recommendations for various MiniZin
    ```
 4. Open your browser and go to `http://127.0.0.1:5000/`.
 5. Select a problem, provider/model, and prompt type, then view the LLM's recommendation and reasoning.
+
+## Author
+### Vittorio Rossetto
+ - [GitHub](https://github.com/VittorioRossetto)
+ - [Linkedin](https://www.linkedin.com/in/vittorio-rossetto-508086333/)
